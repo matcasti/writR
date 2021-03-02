@@ -1,0 +1,25 @@
+Package: Report
+Title: Report statistical tests in APA style
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Matías",
+           family = "Castillo-Aguilar",
+           role = c("aut", "cre"),
+           email = "matcasti@umag.cl",
+           comment = c(ORCID = "0000-0001-7291-247X"))
+Description: Perform and run hypothesis testing for group differences in APA style for articles writings in Markdown or plain text format.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    ipmisc,
+    nortest,
+    effectsize,
+    janitor,
+    car,
+    afex,
+    purrr,
+    PMCMRplus,
+    WRS2
