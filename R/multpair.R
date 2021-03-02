@@ -1,0 +1,206 @@
+# Función: Pruebas de tres o más grupos relacionados
+multpair <- function(data
+                      , variable
+                      , by
+                      , type = 'auto'
+                      , trim = 0.1
+                      , sphericity = 'GG'
+                      , pairwise.comp = FALSE
+                      , p.adjust = 'none'
+                      , markdown = TRUE
+                      , ...) {
+
+  data <- rcl(data, {{variable}}, {{by}}, paired = TRUE); result <- list()
+
+    if(type == 'auto') {
+      # Prueba de normalidad ----
+      n.test <- all( tapply(
+        X = data[[variable]],
+        INDEX = list(data[[by]]),
+        FUN = function(x) if(length(x) < 50) {
+          stats::shapiro.test(x)$p.value } else {
+          nortest::lillie.test(x)$p.value } ) > 0.05 )
+      # Tipo de test
+      type <- if(n.test) { 'check' } else { 'np' }
+    }
+    if(type %in% c('p','check')) {
+      # ANOVA, medidas repetidas ----
+      model <- afex::aov_ez(id = 'rowid', {{variable}}, data, within = {{by}})
+      eta <- effectsize::eta_squared(model, ci = 0.95)
+      spher.test <- suppressWarnings(expr = { afex::test_sphericity(model) })
+
+      if(pairwise.comp) {
+        # Post-Hoc: T-Student ----
+          result[['post-hoc']] <- suppressWarnings(expr = { stats::pairwise.t.test(
+            x = data[[variable]]
+            , g = data[[by]]
+            , p.adjust.method = p.adjust
+            , paired = T) })
+      }
+
+      sphericity <- if(type == 'check') {
+        # Comprobación de esfericidad ----
+        if( purrr::is_empty(spher.test) || spher.test[[2]] > 0.05 ) {
+          TRUE } else { ges <- model$anova_table$ges <= 0.75
+          if(ges) { 'GG' } else { 'HF' } }
+        } else if(purrr::is_empty(spher.test)) { TRUE } else { sphericity }
+
+      if(isTRUE(sphericity)) {
+        # ANOVA de Fisher, medidas repetidas ----
+        suppressWarnings(expr = {output <- anova(model, correction = 'none')})
+
+        if(markdown) {
+            result[['report']] <- paste0(
+              '*F* ~Fisher~ (', janitor::round_half_up(output[["num Df"]],1)
+              , ', ', janitor::round_half_up(output[["den Df"]],1)
+              , ') = ', janitor::round_half_up(output[["F"]],3)
+              , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
+                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
+              , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2_partial,3)
+            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
+            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+          } else {
+            result[['report']] <- paste0(
+              'F(', janitor::round_half_up(output[["num Df"]],1)
+              , ', ', janitor::round_half_up(output[["den Df"]],1)
+              , ') = ', janitor::round_half_up(output[["F"]],3)
+              , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
+                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
+              , ', eta^ = ', janitor::round_half_up(eta$Eta2_partial,3)
+            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
+            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+          }
+
+        result[['method']] <- 'ANOVA de medidas repetidas de Fisher'
+        result
+      } else if(sphericity == 'GG') {
+        # ANOVA de Greenhouse-Geisser, medidas repetidas ----
+        suppressWarnings(expr = {output <- anova(model, correction = 'GG')})
+
+        if(markdown) {
+            result[['report']] <- paste0(
+              '*F* ~Greenhouse-Geisser~ (', janitor::round_half_up(output[["num Df"]],1)
+              , ', ', janitor::round_half_up(output[["den Df"]],1)
+              , ') = ', janitor::round_half_up(output[["F"]],3)
+              , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
+                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
+              , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2_partial,3)
+            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
+            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+          } else {
+            result[['report']] <- paste0(
+              'F(', janitor::round_half_up(output[["num Df"]],1)
+              , ', ', janitor::round_half_up(output[["den Df"]],1)
+              , ') = ', janitor::round_half_up(output[["F"]],3)
+              , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
+                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
+              , ', eta^ = ', janitor::round_half_up(eta$Eta2_partial,3)
+            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
+            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+          }
+
+        result[['method']] <- 'ANOVA de medidas repetidas de Greenhouse-Geisser'
+        result
+      } else {
+        # ANOVA de Huynh-Feldt, medidas repetidas ----
+        suppressWarnings(expr = {output <- anova(model, correction = 'HF')})
+
+        if(markdown) {
+            result[['report']] <- paste0(
+              '*F* ~Huynh-Feldt~ (', janitor::round_half_up(output[["num Df"]],1)
+              , ', ', janitor::round_half_up(output[["den Df"]],1)
+              , ') = ', janitor::round_half_up(output[["F"]],3)
+              , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
+                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
+              , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2_partial,3)
+            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
+            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+          } else {
+            result[['report']] <- paste0(
+              'F(', janitor::round_half_up(output[["num Df"]],1)
+              , ', ', janitor::round_half_up(output[["den Df"]],1)
+              , ') = ', janitor::round_half_up(output[["F"]],3)
+              , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
+                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
+              , ', eta^ = ', janitor::round_half_up(eta$Eta2_partial,3)
+            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
+            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+          }
+
+        result[['method']] <- 'ANOVA de medidas repetidas de Huynh-Feldt'
+        result
+      }
+    } else if(type == 'r') {
+      # ANOVA de medias recortadas, medidas repetidas ----
+      output <- WRS2::rmanova(y = data[[variable]],
+                              groups = data[[by]],
+                              blocks = data[['rowid']],
+                              tr = trim)
+
+      # Tamaño de efecto no disponible para RMANOVA
+      # r <- effectsize::kendalls_w({{variable}}, {{by}}, 'rowid', data)
+
+      if(pairwise.comp) {
+        # Post-Hoc ----
+        result[['post-hoc']] <- suppressWarnings(
+          expr = { WRS2::rmmcp(y = data[[variable]],
+            groups = data[[by]],
+            blocks = data[['rowid']],
+            tr = trim) })
+      }
+      if(markdown) {
+          result[['report']] <- paste0(
+            '*F* ~Medias-recortadas~ (', janitor::round_half_up(output$df1,1)
+            ,', ', janitor::round_half_up(output$df2,1)
+            , ') = ',janitor::round_half_up(output$test,3)
+            , ', *p* ',ifelse(output$p.value < 0.001, '< 0.001', paste(
+              '=',  janitor::round_half_up(output$p.value, 3) ) ) )
+          } else {
+            result[['report']] <- paste0(
+            'F(', janitor::round_half_up(output$df1,1)
+            ,', ', janitor::round_half_up(output$df2,1)
+            , ') = ',janitor::round_half_up(output$test,3)
+            , ', p ',ifelse(output$p.value < 0.001, '< 0.001', paste(
+              '=',  janitor::round_half_up(output$p.value, 3) ) ) )
+          }
+
+      result[['method']] <- 'ANOVA de medias recortadas de un factor para medidas repetidas'
+      result
+    } else {
+      # Suma de rangos de Friedman, medidas repetidas ----
+      output <- stats::friedman.test(y = data[[variable]], groups = data[[by]], blocks = data[['rowid']])
+      kendall <- effectsize::kendalls_w({{variable}}, {{by}}, 'rowid', data)
+
+      if(pairwise.comp) {
+        # Post-Hoc: Durbin test ----
+        result[['post-hoc']] <- suppressWarnings(
+          expr = { PMCMRplus::durbinAllPairsTest(
+          y = data[[variable]]
+          , groups = data[[by]]
+          , blocks = data[['rowid']]
+          , p.adjust.method = p.adjust) })
+      }
+      if(markdown) {
+          result[['report']] <- paste0(
+            '$\\chi$^2^ ~Friedman~ (', janitor::round_half_up(output$parameter,1)
+            , ') = ',janitor::round_half_up(output$statistic,3)
+            , ', *p* ',ifelse(output$p.value < 0.001, '< 0.001', paste(
+              '=',  janitor::round_half_up(output$p.value, 3) ) )
+            , ', *W* ~Kendall~ = ', janitor::round_half_up(kendall$Kendalls_W, 2)
+            , ", IC~95%~[", janitor::round_half_up(kendall$CI_low,2)
+            , ', ', janitor::round_half_up(kendall$CI_high,2), ']')
+          } else {
+            result[['report']] <- paste0(
+              'X^2(',janitor::round_half_up(output$parameter,1)
+              , ') = ', janitor::round_half_up(output$statistic,3)
+              , ', p ', ifelse(output$p.value < 0.001, '< 0.001', paste(
+                '=', janitor::round_half_up(output$p.value, 3) ) )
+              , ', W = ', janitor::round_half_up(kendall$Kendalls_W, 2)
+            , ", IC95% [", janitor::round_half_up(kendall$CI_low,2)
+            , ', ', janitor::round_half_up(kendall$CI_high,2), ']')
+          }
+
+      result[['method']] <- 'Suma de rangos de Friedman para muestras relacionadas'
+      result
+    }
+}
