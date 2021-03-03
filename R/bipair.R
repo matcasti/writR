@@ -12,7 +12,7 @@
 #' @keywords bipair
 #' @return A list of length 2 with `$report` of statistical test and `$method` used.
 #' @export
-#'
+
 bipair <- function(data
                    , variable
                    , by

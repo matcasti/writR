@@ -17,7 +17,6 @@
 #' @keywords report
 #' @return A list of length 2 with `$report` of statistical test and `$method` used, or length 3 if `pairwise.comp = TRUE`.
 #' @export
-#'
 
 report <- function(data
                     , variable
