@@ -1,4 +1,19 @@
-# Función: Pruebas de tres o más grupos independientes
+#' Independet K samples testing
+#'
+#' This is function let you perform automated inferential testing based on certain assumptions, some of which are tested automatically, then the propper test is perform, giving you an APA formated output with your statistical results.
+#' @param data Your dataset in long format, can have some missing values.
+#' @param variable Response variable, numeric.
+#' @param by Grouping variable, a factor. It can have more than two levels.
+#' @param type Whether you want to manually specify a parametric test (type = 'p'), a non-parametric test (type = 'np') or a robust test (type = 'r').
+#' @param var.equal If `TRUE`, then Welch correction is applied to the degrees of freedom, only when `type = 'p'`.
+#' @param trim Trim level for the mean (available only for robust test).
+#' @param pairwise.comp Logical. For pairwise comparisons (i.e. post-hoc; default is FALSE).
+#' @param p.adjust see `p.adjust.methods`.
+#' @param markdown Whether you want the `$report` output formated for inline RMarkdown or as plain text.
+#' @param ... Currently not used.
+#' @keywords multgroup
+#' @return A list of length 2 with `$report` of statistical test and `$method` used, or length 3 if `pairwise.comp = TRUE`.
+#' @export
 multgroup <- function(data
                        , variable
                        , by
@@ -106,7 +121,7 @@ multgroup <- function(data
     } else if(type == 'r') {
       # ANOVA de medias recortadas, muestras independientes ----
       test <- WRS2::t1way(
-        formula = as.formula(paste0(variable,' ~ ',by))
+        formula = stats::as.formula(paste0(variable,' ~ ',by))
         , data = data
         , tr = trim)
 
@@ -114,7 +129,7 @@ multgroup <- function(data
         # Post-Hoc ----
           result[['post-hoc']] <- suppressWarnings(
             expr = { WRS2::lincon(
-              formula = as.formula(paste0(variable,' ~ ',by))
+              formula = stats::as.formula(paste0(variable,' ~ ',by))
               , data = data
               , tr = trim) })
       }

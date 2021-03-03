@@ -1,4 +1,20 @@
-# Función: Pruebas de tres o más grupos relacionados
+#' Dependent K samples testing
+#'
+#' This is function let you perform automated inferential testing based on certain assumptions, some of which are tested automatically, then the propper test is perform, giving you an APA formated output with your statistical results.
+#' @param data Your dataset in long format, can have some missing values.
+#' @param variable Response variable, numeric.
+#' @param by Grouping variable, a factor. It can have more than two levels.
+#' @param type Whether you want to manually specify a parametric test (type = 'p'), a non-parametric test (type = 'np') or a robust test (type = 'r').
+#' @param trim Trim level for the mean (available only for robust test).
+#' @param sphericity If `TRUE`, then sphericity assumption is assumed to be met in paired designs, only when `type = 'p'`. "GG": applies Greenhouse-Geisser correction. "HF": applies Hyunh-Feldt correction.
+#' @param pairwise.comp Logical. For pairwise comparisons (i.e. post-hoc; default is FALSE).
+#' @param p.adjust see `p.adjust.methods`.
+#' @param markdown Whether you want the `$report` output formated for inline RMarkdown or as plain text.
+#' @param ... Currently not used.
+#' @keywords multpair
+#' @return A list of length 2 with `$report` of statistical test and `$method` used, or length 3 if `pairwise.comp = TRUE`.
+#' @export
+#'
 multpair <- function(data
                       , variable
                       , by
@@ -47,7 +63,7 @@ multpair <- function(data
 
       if(isTRUE(sphericity)) {
         # ANOVA de Fisher, medidas repetidas ----
-        suppressWarnings(expr = {output <- anova(model, correction = 'none')})
+        suppressWarnings(expr = {output <- stats::anova(model, correction = 'none')})
 
         if(markdown) {
             result[['report']] <- paste0(
@@ -75,7 +91,7 @@ multpair <- function(data
         result
       } else if(sphericity == 'GG') {
         # ANOVA de Greenhouse-Geisser, medidas repetidas ----
-        suppressWarnings(expr = {output <- anova(model, correction = 'GG')})
+        suppressWarnings(expr = {output <- stats::anova(model, correction = 'GG')})
 
         if(markdown) {
             result[['report']] <- paste0(
@@ -103,7 +119,7 @@ multpair <- function(data
         result
       } else {
         # ANOVA de Huynh-Feldt, medidas repetidas ----
-        suppressWarnings(expr = {output <- anova(model, correction = 'HF')})
+        suppressWarnings(expr = {output <- stats::anova(model, correction = 'HF')})
 
         if(markdown) {
             result[['report']] <- paste0(
