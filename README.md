@@ -24,6 +24,19 @@ devtools::install_github('matcasti/Report')
 
 and then restart your R session.
 
+#### To cite package 'Report' in publications use:
+
+Matías Castillo Aguilar (2021). Report: Statistical tests output in APA style. R package version 0.0.1.
+
+#### A BibTeX entry for LaTeX users is
+
+\@Manual{,   
+title = {Report: Statistical tests output in APA style},   
+author = {Matías {Castillo Aguilar}},   
+year = {2021},   
+note = {R package version 0.0.1},   
+}
+
 ## Contact
 
 For issues with the package you can send me an email with your question at:

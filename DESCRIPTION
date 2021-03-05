@@ -1,9 +1,10 @@
 Package: Report
-Title: Report statistical tests in APA style
+Title: Statistical tests output in APA style
 Version: 0.0.1
+Date: 2021-03-05
 Authors@R: 
     person(given = "Matías",
-           family = "Castillo-Aguilar",
+           family = "Castillo Aguilar",
            role = c("aut", "cre"),
            email = "matcasti@umag.cl",
            comment = c(ORCID = "0000-0001-7291-247X"))
