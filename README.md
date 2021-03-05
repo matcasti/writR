@@ -2,21 +2,25 @@
 
 For automated and basic inferential testing, lets you perform:
 
--   Independent samples t-test (equal or unequal variances)
--   Mann-Whitney U
--   Paired samples t-test
--   Wilcoxon test of signed ranks
--   Fisher's Analysis of Varience (ANOVA) for independet samples
--   Welch's ANOVA
--   Kruskal Wallis test of rank sums for independent samples
--   Repeated Measures ANOVA (with adjustments for sphericity violations if specified)
--   Friedman test of rank sums for paired samples
+-   Student's or Welch's *t*-test
+-   Mann–Whitney *U* test
+-   Yuen's test for trimmed means
+-   Fisher's or Welch's one-way ANOVA
+-   Kruskal–Wallis one-way ANOVA
+-   Heteroscedastic one-way ANOVA for trimmed means
+-   Wilcoxon signed-rank test
+-   Yuen's test on trimmed means for dependent samples
+-   One-way repeated measures ANOVA
+-   Friedman rank sum test
+-   Heteroscedastic one-way repeated measures ANOVA for trimmed means
 
 And robust variations of above mentioned test.
 
 For installation run:
 
-    devtools::install_github('matcasti/Report')
+``` r
+devtools::install_github('matcasti/Report')
+```
 
 and then restart your R session.
 
