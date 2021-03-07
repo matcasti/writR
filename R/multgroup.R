@@ -80,7 +80,7 @@ multgroup <- function(data
             , ', ', janitor::round_half_up(eta$CI_high,2), ']')
         }
 
-        result[['method']] <- 'ANOVA de un factor de Fisher'
+        result[['method']] <- "Fisher's ANOVA for independent samples"
         result
       } else {
         # ANOVA de Welch, muestras independientes ----
@@ -116,7 +116,7 @@ multgroup <- function(data
             , ', ', janitor::round_half_up(eta$CI_high,2), ']')
         }
 
-        result[['method']] <- 'ANOVA de un factor de Welch'
+        result[['method']] <- "Welch's ANOVA for independent samples"
         result
       }
     } else if(type == 'r') {
@@ -156,7 +156,7 @@ multgroup <- function(data
             , ', ', janitor::round_half_up(test$effsize_ci[2],2), ']')
         }
 
-      result[['method']] <- 'ANOVA de medias recortadas de un factor para muestras independientes'
+      result[['method']] <- 'Heteroscedastic one way ANOVA for trimmed means'
       result
     } else {
       # Suma de rangos de Kruskal-Wallis, muestras independientes ----
@@ -191,7 +191,7 @@ multgroup <- function(data
             , ', ', janitor::round_half_up(epsilon$CI_high,2), ']')
         }
 
-      result[['method']] <- 'Suma de rangos de Kruskal-Wallis para muestras independientes'
+      result[['method']] <- 'Kruskal Wallis one way ANOVA'
       result
     }
 }

@@ -60,7 +60,7 @@ bipair <- function(data
           , ', ', janitor::round_half_up(d$CI_high, 2), ']')
       }
 
-      result[['method']] <- 't de Student para muestras relacionadas'
+      result[['method']] <- "Student's t-test for dependent samples"
       result
     } else if(type == 'r') {
       # Prueba de Yuen de medias recortadas, muestras dependientes ----
@@ -94,7 +94,7 @@ bipair <- function(data
           , ', ', janitor::round_half_up(r[['ci.up']], 2), ']')
       }
 
-      result[['method']] <- 'Prueba de Yuen de medias recortadas para muestras relacionadas'
+      result[['method']] <- "Yuen's test for trimmed means for dependent samples"
       result
     } else {
       # Prueba de rangos con signo de Wilcoxon ----
@@ -120,7 +120,7 @@ bipair <- function(data
           , ', ', janitor::round_half_up(r$CI_high, 2), ']')
       }
 
-      result[['method']] <- 'Rangos con signo de Wilcoxon para muestras relacionadas'
+      result[['method']] <- 'Wilcoxon signed-rank test for dependent samples'
       result
     }
 }

@@ -87,7 +87,7 @@ multpair <- function(data
             , ', ', janitor::round_half_up(eta$CI_high,2), ']')
           }
 
-        result[['method']] <- 'ANOVA de medidas repetidas de Fisher'
+        result[['method']] <- 'One-way repeated measures ANOVA'
         result
       } else if(sphericity == 'GG') {
         # ANOVA de Greenhouse-Geisser, medidas repetidas ----
@@ -115,7 +115,7 @@ multpair <- function(data
             , ', ', janitor::round_half_up(eta$CI_high,2), ']')
           }
 
-        result[['method']] <- 'ANOVA de medidas repetidas de Greenhouse-Geisser'
+        result[['method']] <- 'One-way repeated measures ANOVA with Greenhouse-Geisser correction'
         result
       } else {
         # ANOVA de Huynh-Feldt, medidas repetidas ----
@@ -143,7 +143,7 @@ multpair <- function(data
             , ', ', janitor::round_half_up(eta$CI_high,2), ']')
           }
 
-        result[['method']] <- 'ANOVA de medidas repetidas de Huynh-Feldt'
+        result[['method']] <- 'One-way repeated measures ANOVA with Huynh-Feldt correction'
         result
       }
     } else if(type == 'r') {
@@ -180,7 +180,7 @@ multpair <- function(data
               '=',  janitor::round_half_up(output$p.value, 3) ) ) )
           }
 
-      result[['method']] <- 'ANOVA de medias recortadas de un factor para medidas repetidas'
+      result[['method']] <- 'Heteroscedastic one-way repeated measures ANOVA for trimmed means'
       result
     } else {
       # Suma de rangos de Friedman, medidas repetidas ----
@@ -216,7 +216,7 @@ multpair <- function(data
             , ', ', janitor::round_half_up(kendall$CI_high,2), ']')
           }
 
-      result[['method']] <- 'Suma de rangos de Friedman para muestras relacionadas'
+      result[['method']] <- 'Friedman rank sum test'
       result
     }
 }

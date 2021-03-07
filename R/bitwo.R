@@ -68,7 +68,7 @@ bitwo <- function(data
           , ', ', janitor::round_half_up(d$CI_high, 2), ']')
         }
 
-        result[['method']] <- 't de Student para muestras independientes';
+        result[['method']] <- "Student's t-test for independent samples";
         result
 
       } else {
@@ -97,7 +97,7 @@ bitwo <- function(data
           , ', ', janitor::round_half_up(d$CI_high, 2), ']')
       }
 
-        result[['method']] <- 't de Welch para muestras independientes'
+        result[['method']] <- "Welch's t-test for independent samples"
         result
 
       }
@@ -133,7 +133,7 @@ bitwo <- function(data
           , ', ', janitor::round_half_up(r$CI[2L], 2), ']')
       }
 
-      result[['method']] <- 'Prueba de Yuen de medias recortadas para muestras independientes'
+      result[['method']] <- "Yuen's test for trimmed means for independent samples"
       result
     } else {
       # U de Mann-Whitney ----
@@ -159,7 +159,7 @@ bitwo <- function(data
           , ', ', janitor::round_half_up(r$CI_high, 2), ']')
       }
 
-      result[['method']] <- 'Suma de rangos de Wilcoxon para muestras independientes'
+      result[['method']] <- 'Mann Whitney U test for independent samples'
       result
 
     }
