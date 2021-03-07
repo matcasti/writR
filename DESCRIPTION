@@ -1,5 +1,5 @@
-Package: Report
-Title: Statistical tests output in APA style
+Package: APAstats
+Title: Inferential statistics and reporting in APA style
 Version: 0.0.1
 Date: 2021-03-05
 Authors@R: 
@@ -8,7 +8,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "matcasti@umag.cl",
            comment = c(ORCID = "0000-0001-7291-247X"))
-Description: Perform and run hypothesis testing for group differences in APA style for articles writings in Markdown or plain text format.
+Description: Perform and report basic inferential tests for group differences in APA style for articles writings in Markdown or plain text format.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
