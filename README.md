@@ -1,9 +1,3 @@
----
-output: 
-  html_document: 
-    self_contained: yes
-    keep_md: yes
----
 
 # APAstats
 
