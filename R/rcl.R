@@ -8,7 +8,6 @@
 #' @param spread TRUE will give you wide format output, otherwise long format (default FALSE).
 #' @keywords rcl
 #' @return A dataframe with NAs removed.
-#' @export
 
 rcl <- function(data
                , variable
