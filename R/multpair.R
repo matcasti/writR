@@ -70,24 +70,24 @@ multpair <- function(data
 
         if(markdown) {
             result[['report']] <- paste0(
-              '*F* ~Fisher~ (', janitor::round_half_up(output[["num Df"]],1)
-              , ', ', janitor::round_half_up(output[["den Df"]],1)
-              , ') = ', janitor::round_half_up(output[["F"]],3)
+              '*F* ~Fisher~ (', round(output[["num Df"]],1)
+              , ', ', round(output[["den Df"]],1)
+              , ') = ', round(output[["F"]],3)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
-              , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2_partial,3)
-            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) )
+              , ', $\\eta$^2^ = ', round(eta$Eta2_partial,3)
+            , ', IC~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
           } else {
             result[['report']] <- paste0(
-              'F(', janitor::round_half_up(output[["num Df"]],1)
-              , ', ', janitor::round_half_up(output[["den Df"]],1)
-              , ') = ', janitor::round_half_up(output[["F"]],3)
+              'F(', round(output[["num Df"]],1)
+              , ', ', round(output[["den Df"]],1)
+              , ') = ', round(output[["F"]],3)
               , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
-              , ', eta^ = ', janitor::round_half_up(eta$Eta2_partial,3)
-            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) )
+              , ', eta^ = ', round(eta$Eta2_partial,3)
+            , ', IC95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
           }
 
         result[['method']] <- 'One-way repeated measures ANOVA'
@@ -98,24 +98,24 @@ multpair <- function(data
 
         if(markdown) {
             result[['report']] <- paste0(
-              '*F* ~Greenhouse-Geisser~ (', janitor::round_half_up(output[["num Df"]],1)
-              , ', ', janitor::round_half_up(output[["den Df"]],1)
-              , ') = ', janitor::round_half_up(output[["F"]],3)
+              '*F* ~Greenhouse-Geisser~ (', round(output[["num Df"]],1)
+              , ', ', round(output[["den Df"]],1)
+              , ') = ', round(output[["F"]],3)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
-              , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2_partial,3)
-            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) )
+              , ', $\\eta$^2^ = ', round(eta$Eta2_partial,3)
+            , ', IC~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
           } else {
             result[['report']] <- paste0(
-              'F(', janitor::round_half_up(output[["num Df"]],1)
-              , ', ', janitor::round_half_up(output[["den Df"]],1)
-              , ') = ', janitor::round_half_up(output[["F"]],3)
+              'F(', round(output[["num Df"]],1)
+              , ', ', round(output[["den Df"]],1)
+              , ') = ', round(output[["F"]],3)
               , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
-              , ', eta^ = ', janitor::round_half_up(eta$Eta2_partial,3)
-            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) )
+              , ', eta^ = ', round(eta$Eta2_partial,3)
+            , ', IC95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
           }
 
         result[['method']] <- 'One-way repeated measures ANOVA with Greenhouse-Geisser correction'
@@ -126,24 +126,24 @@ multpair <- function(data
 
         if(markdown) {
             result[['report']] <- paste0(
-              '*F* ~Huynh-Feldt~ (', janitor::round_half_up(output[["num Df"]],1)
-              , ', ', janitor::round_half_up(output[["den Df"]],1)
-              , ') = ', janitor::round_half_up(output[["F"]],3)
+              '*F* ~Huynh-Feldt~ (', round(output[["num Df"]],1)
+              , ', ', round(output[["den Df"]],1)
+              , ') = ', round(output[["F"]],3)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
-              , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2_partial,3)
-            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) )
+              , ', $\\eta$^2^ = ', round(eta$Eta2_partial,3)
+            , ', IC~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
           } else {
             result[['report']] <- paste0(
-              'F(', janitor::round_half_up(output[["num Df"]],1)
-              , ', ', janitor::round_half_up(output[["den Df"]],1)
-              , ') = ', janitor::round_half_up(output[["F"]],3)
+              'F(', round(output[["num Df"]],1)
+              , ', ', round(output[["den Df"]],1)
+              , ') = ', round(output[["F"]],3)
               , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', janitor::round_half_up(output[["Pr(>F)"]], 3) ) )
-              , ', eta^ = ', janitor::round_half_up(eta$Eta2_partial,3)
-            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) )
+              , ', eta^ = ', round(eta$Eta2_partial,3)
+            , ', IC95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
           }
 
         result[['method']] <- 'One-way repeated measures ANOVA with Huynh-Feldt correction'
@@ -169,18 +169,18 @@ multpair <- function(data
       }
       if(markdown) {
           result[['report']] <- paste0(
-            '*F* ~Medias-recortadas~ (', janitor::round_half_up(output$df1,1)
-            ,', ', janitor::round_half_up(output$df2,1)
-            , ') = ',janitor::round_half_up(output$test,3)
+            '*F* ~Medias-recortadas~ (', round(output$df1,1)
+            ,', ', round(output$df2,1)
+            , ') = ',round(output$test,3)
             , ', *p* ',ifelse(output$p.value < 0.001, '< 0.001', paste(
-              '=',  janitor::round_half_up(output$p.value, 3) ) ) )
+              '=',  round(output$p.value, 3) ) ) )
           } else {
             result[['report']] <- paste0(
-            'F(', janitor::round_half_up(output$df1,1)
-            ,', ', janitor::round_half_up(output$df2,1)
-            , ') = ',janitor::round_half_up(output$test,3)
+            'F(', round(output$df1,1)
+            ,', ', round(output$df2,1)
+            , ') = ',round(output$test,3)
             , ', p ',ifelse(output$p.value < 0.001, '< 0.001', paste(
-              '=',  janitor::round_half_up(output$p.value, 3) ) ) )
+              '=',  round(output$p.value, 3) ) ) )
           }
 
       result[['method']] <- 'Heteroscedastic one-way repeated measures ANOVA for trimmed means'
@@ -201,22 +201,22 @@ multpair <- function(data
       }
       if(markdown) {
           result[['report']] <- paste0(
-            '$\\chi$^2^ ~Friedman~ (', janitor::round_half_up(output$parameter,1)
-            , ') = ',janitor::round_half_up(output$statistic,3)
+            '$\\chi$^2^ ~Friedman~ (', round(output$parameter,1)
+            , ') = ',round(output$statistic,3)
             , ', *p* ',ifelse(output$p.value < 0.001, '< 0.001', paste(
-              '=',  janitor::round_half_up(output$p.value, 3) ) )
-            , ', *W* ~Kendall~ = ', janitor::round_half_up(kendall$Kendalls_W, 2)
-            , ", IC~95%~[", janitor::round_half_up(kendall$CI_low,2)
-            , ', ', janitor::round_half_up(kendall$CI_high,2), ']')
+              '=',  round(output$p.value, 3) ) )
+            , ', *W* ~Kendall~ = ', round(kendall$Kendalls_W, 2)
+            , ", IC~95%~[", round(kendall$CI_low,2)
+            , ', ', round(kendall$CI_high,2), ']')
           } else {
             result[['report']] <- paste0(
-              'X^2(',janitor::round_half_up(output$parameter,1)
-              , ') = ', janitor::round_half_up(output$statistic,3)
+              'X^2(',round(output$parameter,1)
+              , ') = ', round(output$statistic,3)
               , ', p ', ifelse(output$p.value < 0.001, '< 0.001', paste(
-                '=', janitor::round_half_up(output$p.value, 3) ) )
-              , ', W = ', janitor::round_half_up(kendall$Kendalls_W, 2)
-            , ", IC95% [", janitor::round_half_up(kendall$CI_low,2)
-            , ', ', janitor::round_half_up(kendall$CI_high,2), ']')
+                '=', round(output$p.value, 3) ) )
+              , ', W = ', round(kendall$Kendalls_W, 2)
+            , ", IC95% [", round(kendall$CI_low,2)
+            , ', ', round(kendall$CI_high,2), ']')
           }
 
       result[['method']] <- 'Friedman rank sum test'

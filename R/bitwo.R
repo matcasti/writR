@@ -50,22 +50,22 @@ bitwo <- function(data
         if(markdown) {
 
         result[['report']] <- paste0(
-          '*t* ~Student~ (', janitor::round_half_up(test$parameter,1)
-          , ') = ', janitor::round_half_up(test$statistic,3)
+          '*t* ~Student~ (', round(test$parameter,1)
+          , ') = ', round(test$statistic,3)
           , ', *p* ',  ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ", *Cohen's d* = ", janitor::round_half_up(d$d,2)
-          , ', IC~95%~[', janitor::round_half_up(d$CI_low,2)
-          , ', ', janitor::round_half_up(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ", *Cohen's d* = ", round(d$d,2)
+          , ', IC~95%~[', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']')
         } else {
         result[['report']] <- paste0(
-          't(', janitor::round_half_up(test$parameter,1)
-          , ') = ', janitor::round_half_up(test$statistic,3)
+          't(', round(test$parameter,1)
+          , ') = ', round(test$statistic,3)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001' , paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ", d = ", janitor::round_half_up(d$d,2)
-          , ', IC95% [', janitor::round_half_up(d$CI_low,2)
-          , ', ', janitor::round_half_up(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ", d = ", round(d$d,2)
+          , ', IC95% [', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']')
         }
 
         result[['method']] <- "Student's t-test for independent samples";
@@ -79,22 +79,22 @@ bitwo <- function(data
         if(markdown) {
 
         result[['report']] <- paste0(
-          '*t* ~Welch~ (', janitor::round_half_up(test$parameter,1)
-          , ') = ', janitor::round_half_up(test$statistic,3)
+          '*t* ~Welch~ (', round(test$parameter,1)
+          , ') = ', round(test$statistic,3)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ", *Cohen's d* = ",janitor::round_half_up(d$d,2)
-          , ', IC~95%~[', janitor::round_half_up(d$CI_low,2)
-          , ', ', janitor::round_half_up(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ", *Cohen's d* = ",round(d$d,2)
+          , ', IC~95%~[', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']')
       } else {
         result[['report']] <- paste0(
-          't(', janitor::round_half_up(test$parameter,1)
-          , ') = ', janitor::round_half_up(test$statistic,3)
+          't(', round(test$parameter,1)
+          , ') = ', round(test$statistic,3)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ", d = ",janitor::round_half_up(d$d,2)
-          , ', IC95% [', janitor::round_half_up(d$CI_low,2)
-          , ', ', janitor::round_half_up(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ", d = ",round(d$d,2)
+          , ', IC95% [', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']')
       }
 
         result[['method']] <- "Welch's t-test for independent samples"
@@ -115,22 +115,22 @@ bitwo <- function(data
 
       if(markdown) {
         result[['report']] <- paste0(
-          '*t* ~Yuen~ (', janitor::round_half_up(test$df, 2)
-          , ') = ', janitor::round_half_up(test$test,2)
+          '*t* ~Yuen~ (', round(test$df, 2)
+          , ') = ', round(test$test,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', $\\xi$ = ', janitor::round_half_up(r$effsize,2)
-          , ', IC~95%~[', janitor::round_half_up(r$CI[1L],2)
-          , ', ', janitor::round_half_up(r$CI[2L], 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', $\\xi$ = ', round(r$effsize,2)
+          , ', IC~95%~[', round(r$CI[1L],2)
+          , ', ', round(r$CI[2L], 2), ']')
       } else {
         result[['report']] <- paste0(
-          't(', janitor::round_half_up(test$df, 2)
-          , ') = ', janitor::round_half_up(test$test,2)
+          't(', round(test$df, 2)
+          , ') = ', round(test$test,2)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', xi = ', janitor::round_half_up(r$effsize,2)
-          , ', IC95% [', janitor::round_half_up(r$CI[1L],2)
-          , ', ', janitor::round_half_up(r$CI[2L], 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', xi = ', round(r$effsize,2)
+          , ', IC95% [', round(r$CI[1L],2)
+          , ', ', round(r$CI[2L], 2), ']')
       }
 
       result[['method']] <- "Yuen's test for trimmed means for independent samples"
@@ -143,20 +143,20 @@ bitwo <- function(data
       if(markdown) {
 
         result[['report']] <-  paste0(
-          '*W* = ', janitor::round_half_up(test$statistic,3)
+          '*W* = ', round(test$statistic,3)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', *r* ~biserial~ = ', janitor::round_half_up(r$r_rank_biserial,2)
-          , ', IC~95%~[', janitor::round_half_up(r$CI_low,2)
-          , ', ', janitor::round_half_up(r$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', *r* ~biserial~ = ', round(r$r_rank_biserial,2)
+          , ', IC~95%~[', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']')
       } else {
         result[['report']] <- paste0(
-          'W = ', janitor::round_half_up(test$statistic,3)
+          'W = ', round(test$statistic,3)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', r = ', janitor::round_half_up(r$r_rank_biserial,2)
-          , ', IC95% [', janitor::round_half_up(r$CI_low,2)
-          , ', ', janitor::round_half_up(r$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', r = ', round(r$r_rank_biserial,2)
+          , ', IC95% [', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']')
       }
 
       result[['method']] <- 'Mann Whitney U test for independent samples'

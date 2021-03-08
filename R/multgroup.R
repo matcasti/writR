@@ -60,24 +60,24 @@ multgroup <- function(data
         }
         if(markdown) {
           result[['report']] <- paste0(
-            '*F* ~Fisher~ (', janitor::round_half_up(test$parameter[1],1)
-            ,', ', janitor::round_half_up(test$parameter[2],1)
-            , ') = ', janitor::round_half_up(test$statistic,3)
+            '*F* ~Fisher~ (', round(test$parameter[1],1)
+            ,', ', round(test$parameter[2],1)
+            , ') = ', round(test$statistic,3)
             , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2,2)
-            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', $\\eta$^2^ = ', round(eta$Eta2,2)
+            , ', IC~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
         } else {
           result[['report']] <- paste0(
-            'F(', janitor::round_half_up(test$parameter[1],1)
-            , ', ', janitor::round_half_up(test$parameter[2],1)
-            , ') = ', janitor::round_half_up(test$statistic,3)
+            'F(', round(test$parameter[1],1)
+            , ', ', round(test$parameter[2],1)
+            , ') = ', round(test$statistic,3)
             , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', eta^2 = ', janitor::round_half_up(eta$Eta2,2)
-            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', eta^2 = ', round(eta$Eta2,2)
+            , ', IC95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
         }
 
         result[['method']] <- "Fisher's ANOVA for independent samples"
@@ -97,24 +97,24 @@ multgroup <- function(data
         }
         if(markdown)  {
           result[['report']] <- paste0(
-            '*F* ~Welch~ (', janitor::round_half_up(test$parameter[1],1)
-            , ', ', janitor::round_half_up(test$parameter[2],1)
-            , ') = ', janitor::round_half_up(test$statistic,3)
+            '*F* ~Welch~ (', round(test$parameter[1],1)
+            , ', ', round(test$parameter[2],1)
+            , ') = ', round(test$statistic,3)
             , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', $\\eta$^2^ = ', janitor::round_half_up(eta$Eta2,2)
-            , ', IC~95%~[', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', $\\eta$^2^ = ', round(eta$Eta2,2)
+            , ', IC~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
         } else {
           result[['report']] <- paste0(
-            'F(',janitor::round_half_up(test$parameter[1],1)
-            , ', ', janitor::round_half_up(test$parameter[2],1)
-            , ') = ', janitor::round_half_up(test$statistic,3)
+            'F(',round(test$parameter[1],1)
+            , ', ', round(test$parameter[2],1)
+            , ') = ', round(test$statistic,3)
             , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', eta^2 = ', janitor::round_half_up(eta$Eta2,2)
-            , ', IC95% [', janitor::round_half_up(eta$CI_low,2)
-            , ', ', janitor::round_half_up(eta$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', eta^2 = ', round(eta$Eta2,2)
+            , ', IC95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']')
         }
 
         result[['method']] <- "Welch's ANOVA for independent samples"
@@ -138,24 +138,24 @@ multgroup <- function(data
       }
       if(markdown) {
           result[['report']] <- paste0(
-            '*F* ~Medias-recortadas~ (', janitor::round_half_up(test$df1,1)
-            ,', ', janitor::round_half_up(test$df2,1)
-            , ') = ', janitor::round_half_up(test$test,3)
+            '*F* ~Medias-recortadas~ (', round(test$df1,1)
+            ,', ', round(test$df2,1)
+            , ') = ', round(test$test,3)
             , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', $\\xi$ = ', janitor::round_half_up(test$effsize,2)
-            , ', IC~95%~[', janitor::round_half_up(test$effsize_ci[1],2)
-            , ', ', janitor::round_half_up(test$effsize_ci[2],2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', $\\xi$ = ', round(test$effsize,2)
+            , ', IC~95%~[', round(test$effsize_ci[1],2)
+            , ', ', round(test$effsize_ci[2],2), ']')
         } else {
           result[['report']] <- paste0(
-            'F(', janitor::round_half_up(test$df1,1)
-            ,', ', janitor::round_half_up(test$df2,1)
-            , ') = ', janitor::round_half_up(test$test,3)
+            'F(', round(test$df1,1)
+            ,', ', round(test$df2,1)
+            , ') = ', round(test$test,3)
             , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', xi = ', janitor::round_half_up(test$effsize,2)
-            , ', IC95% [', janitor::round_half_up(test$effsize_ci[1],2)
-            , ', ', janitor::round_half_up(test$effsize_ci[2],2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', xi = ', round(test$effsize,2)
+            , ', IC95% [', round(test$effsize_ci[1],2)
+            , ', ', round(test$effsize_ci[2],2), ']')
         }
 
       result[['method']] <- 'Heteroscedastic one way ANOVA for trimmed means'
@@ -176,22 +176,22 @@ multgroup <- function(data
       }
       if(markdown) {
           result[['report']] <- paste0(
-            '$\\chi$^2^ ~Kruskal-Wallis ~(', janitor::round_half_up(test$parameter,1)
-            , ') = ', janitor::round_half_up(test$statistic,3)
+            '$\\chi$^2^ ~Kruskal-Wallis ~(', round(test$parameter,1)
+            , ') = ', round(test$statistic,3)
             , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', $\\epsilon$^2^ = ', janitor::round_half_up(epsilon$rank_epsilon_squared,2)
-            , ', IC~95%~[', janitor::round_half_up(epsilon$CI_low,2)
-            , ', ', janitor::round_half_up(epsilon$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', $\\epsilon$^2^ = ', round(epsilon$rank_epsilon_squared,2)
+            , ', IC~95%~[', round(epsilon$CI_low,2)
+            , ', ', round(epsilon$CI_high,2), ']')
         } else {
           result[['report']] <- paste0(
-            'X^2(', janitor::round_half_up(test$parameter,1)
-            , ') = ', janitor::round_half_up(test$statistic,3)
+            'X^2(', round(test$parameter,1)
+            , ') = ', round(test$statistic,3)
             , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', janitor::round_half_up(test$p.value, 3) ) )
-            , ', epsilon^2 = ', janitor::round_half_up(epsilon$rank_epsilon_squared,2)
-            , ', IC95% [', janitor::round_half_up(epsilon$CI_low,2)
-            , ', ', janitor::round_half_up(epsilon$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) )
+            , ', epsilon^2 = ', round(epsilon$rank_epsilon_squared,2)
+            , ', IC95% [', round(epsilon$CI_low,2)
+            , ', ', round(epsilon$CI_high,2), ']')
         }
 
       result[['method']] <- 'Kruskal Wallis one way ANOVA'

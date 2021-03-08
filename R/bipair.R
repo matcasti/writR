@@ -41,22 +41,22 @@ bipair <- function(data
 
       if(markdown) {
         result[['report']] <- paste0(
-          '*t* ~Student~ (',janitor::round_half_up(test$parameter,1)
-          , ') = ', janitor::round_half_up(test$statistic,3)
+          '*t* ~Student~ (',round(test$parameter,1)
+          , ') = ', round(test$statistic,3)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=',janitor::round_half_up(test$p.value,3) ) )
-          , ", *Cohen's d* = ", janitor::round_half_up(d$d,2)
-          , ', IC~95%~[', janitor::round_half_up(d$CI_low,2)
-          , ', ', janitor::round_half_up(d$CI_high, 2), ']')
+            '=',round(test$p.value,3) ) )
+          , ", *Cohen's d* = ", round(d$d,2)
+          , ', IC~95%~[', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']')
       } else {
         result[['report']] <- paste0(
-          't(', janitor::round_half_up(test$parameter,1)
-          , ') = ', janitor::round_half_up(test$statistic,3)
+          't(', round(test$parameter,1)
+          , ') = ', round(test$statistic,3)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ", d = ",janitor::round_half_up(d$d,2)
-          , ', IC95% [', janitor::round_half_up(d$CI_low,2)
-          , ', ', janitor::round_half_up(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ", d = ",round(d$d,2)
+          , ', IC95% [', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']')
       }
 
       result[['method']] <- "Student's t-test for dependent samples"
@@ -75,22 +75,22 @@ bipair <- function(data
 
       if(markdown) {
         result[['report']] <- paste0(
-          '*t* ~Yuen~ (', janitor::round_half_up(test$df, 3)
-          , ') = ', janitor::round_half_up(test$test,3)
+          '*t* ~Yuen~ (', round(test$df, 3)
+          , ') = ', round(test$test,3)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', $\\delta_R^{AKP}$ = ', janitor::round_half_up(r[['Est']],2)
-          , ', IC~95%~[', janitor::round_half_up(r[['ci.low']],2)
-          , ', ', janitor::round_half_up(r[['ci.up']], 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', $\\delta_R^{AKP}$ = ', round(r[['Est']],2)
+          , ', IC~95%~[', round(r[['ci.low']],2)
+          , ', ', round(r[['ci.up']], 2), ']')
       } else {
         result[['report']] <- paste0(
-          't(', janitor::round_half_up(test$df, 3)
-          , ') = ', janitor::round_half_up(test$test,3)
+          't(', round(test$df, 3)
+          , ') = ', round(test$test,3)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', delta = ', janitor::round_half_up(r[['Est']],2)
-          , ', IC95% [', janitor::round_half_up(r[['ci.low']],2)
-          , ', ', janitor::round_half_up(r[['ci.up']], 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', delta = ', round(r[['Est']],2)
+          , ', IC95% [', round(r[['ci.low']],2)
+          , ', ', round(r[['ci.up']], 2), ']')
       }
 
       result[['method']] <- "Yuen's test for trimmed means for dependent samples"
@@ -103,20 +103,20 @@ bipair <- function(data
 
       if(markdown) {
         result[['report']] <- paste0(
-          '*V* = ', janitor::round_half_up(test$statistic,3)
+          '*V* = ', round(test$statistic,3)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', *r* ~biserial~ = ', janitor::round_half_up(r$r_rank_biserial,2)
-          , ', IC~95%~[', janitor::round_half_up(r$CI_low,2)
-          , ', ', janitor::round_half_up(r$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', *r* ~biserial~ = ', round(r$r_rank_biserial,2)
+          , ', IC~95%~[', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']')
       } else {
         result[['report']] <- paste0(
-          'V = ', janitor::round_half_up(test$statistic,3)
+          'V = ', round(test$statistic,3)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', janitor::round_half_up(test$p.value,3) ) )
-          , ', r = ', janitor::round_half_up(r$r_rank_biserial, 2)
-          , ', IC95% [', janitor::round_half_up(r$CI_low,2)
-          , ', ', janitor::round_half_up(r$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) )
+          , ', r = ', round(r$r_rank_biserial, 2)
+          , ', IC95% [', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']')
       }
 
       result[['method']] <- 'Wilcoxon signed-rank test for dependent samples'
