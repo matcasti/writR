@@ -4,7 +4,7 @@
 \alias{rcl}
 \title{Reshape data from long format}
 \usage{
-rcl(data, variable, by, paired = FALSE, spread = FALSE)
+rcl(data, variable, by, subject.id = NULL, paired = TRUE, spread = FALSE)
 }
 \arguments{
 \item{data}{Your dataset in long format, can have missing values.}
@@ -12,6 +12,8 @@ rcl(data, variable, by, paired = FALSE, spread = FALSE)
 \item{variable}{Response variable, numeric.}
 
 \item{by}{Grouping variable, a factor. It can have more than two levels.}
+
+\item{subject.id}{Ignored.}
 
 \item{paired}{If the design is for paired groups, eliminates missing values at subject level (default FALSE).}
 

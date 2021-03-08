@@ -25,7 +25,13 @@ multpair <- function(data
                       , markdown = TRUE
                       , ...) {
 
-  data <- rcl(data, {{variable}}, {{by}}, paired = TRUE); result <- list()
+  data <- rcl(data = data
+              , variable = {{variable}}
+              , by = {{by}}
+              , paired = TRUE
+              , spread = FALSE)
+
+  result <- list()
 
     if(type == 'auto') {
       # Prueba de normalidad ----

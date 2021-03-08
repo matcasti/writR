@@ -23,7 +23,13 @@ bitwo <- function(data
                    , markdown = TRUE
                    , ...) {
 
-  data <- rcl(data, {{variable}}, {{by}}, paired = FALSE); result <- list()
+  data <- rcl(data = data
+              , variable = {{variable}}
+              , by = {{by}}
+              , paired = FALSE
+              , spread = FALSE)
+
+  result <- list()
 
     if(type == 'auto') {
       # Prueba de normalidad ----

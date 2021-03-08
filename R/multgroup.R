@@ -25,7 +25,13 @@ multgroup <- function(data
                        , markdown = TRUE
                        , ...) {
 
-  data <- rcl(data, {{variable}}, {{by}}, paired = FALSE); result <- list()
+  data <- rcl(data = data
+              , variable = {{variable}}
+              , by = {{by}}
+              , paired = FALSE
+              , spread = FALSE)
+
+  result <- list()
 
     if(type == 'auto') {
       # Prueba de normalidad ----
@@ -36,7 +42,7 @@ multgroup <- function(data
           stats::shapiro.test(x)$p.value } else {
           nortest::lillie.test(x)$p.value } ) > 0.05 )
       # Tipo de test
-      type <- if(n.test) { c('check') } else { 'np' }
+      type <- if(n.test) { 'check' } else { 'np' }
     }
     if(type %in% c('p','check')) {
       if(type == 'check') {
