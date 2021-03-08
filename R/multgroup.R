@@ -25,6 +25,8 @@ multgroup <- function(data
                        , markdown = TRUE
                        , ...) {
 
+  result <- list()
+
     if(type == 'auto') {
       # Prueba de normalidad ----
       n.test <- all( tapply(

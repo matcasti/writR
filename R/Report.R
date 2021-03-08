@@ -33,7 +33,7 @@ report <- function(data
                     , ...) {
 
   zeallot::`%<-%`(c(by, variable),c(rlang::ensym(by), rlang::ensym(variable)))
-  data <- rcl(data, {{variable}}, {{by}}, paired = paired); result <- list()
+  data <- rcl(data, {{variable}}, {{by}}, paired = paired)
 
   if(nlevels(data[[by]]) >= 3) {
     mult(
