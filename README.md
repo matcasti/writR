@@ -67,7 +67,7 @@ The analysis of the effects of the treatment shows an statistically significant 
 
 translates into this:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, *F* \~Fisher\~ (2, 27) = 4.846, *p* = 0.016, $\\eta$^2^ = 0.26, IC\~95%\~[0.01, 0.49], evaluated through Fisher's ANOVA for independent samples.
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, *F* (2, 27) = 4.846, *p* = 0.016, 𝜂² = 0.26, IC 95% [0.01, 0.49], evaluated through Fisher's ANOVA for independent samples.
 
 ## Citation
 
