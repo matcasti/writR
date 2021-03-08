@@ -1,0 +1,88 @@
+---
+output: 
+  html_document: 
+    self_contained: yes
+    keep_md: yes
+---
+
+# APAstats
+
+For automated and basic inferential testing, lets you perform:
+
+-   Student's or Welch's *t*-test
+-   Mann–Whitney *U* test
+-   Yuen's test for trimmed means
+-   Fisher's or Welch's one-way ANOVA
+-   Kruskal–Wallis one-way ANOVA
+-   Heteroscedastic one-way ANOVA for trimmed means
+-   Wilcoxon signed-rank test
+-   Yuen's test on trimmed means for dependent samples
+-   One-way repeated measures ANOVA
+-   Friedman rank sum test
+-   Heteroscedastic one-way repeated measures ANOVA for trimmed means
+
+## Installation
+
+For installation of developmental version run in your R console:
+
+``` r
+install.packages("devtools")
+devtools::install_github('matcasti/APAstats')
+```
+
+and then restart your R session.
+
+## Automated testing
+
+By default, `report` function, checks automatically the assumptions of the test based on the parameters of the data entered
+
+```{r echo=TRUE}
+library(APAstats) # Load the APAstats package
+
+plant <- datasets::PlantGrowth # Let's use the PlantGrowth package
+                               # (installed by default in R)
+
+result <- report(
+  data = plant,
+  variable = 'weight', # dependent variable
+  by = 'group', # independent variable
+  pairwise.comp = TRUE, # for pairwise comparisons in case of n groups > 2
+  markdown = TRUE # output in Markdown format (for inline text)? otherwise plain text.
+)
+
+result
+```
+
+## Inline results in APA style
+
+The core function `report` by default return a list of length two in Markdown format (as seen before), for inline results. An example using same data as before:
+
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, `result$report`, evaluated through `result$method`.
+
+translates into this:
+
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, `r result$report`, evaluated through `r result$method`.
+
+
+## Citation
+
+To cite package 'APAstats' in publications run the following code in your `R` console:
+
+```{r}
+citation('APAstats')
+```
+
+## Dependencies
+
+The package APAstats is standing on the shoulders of giants:
+
+```{r fig.height=10, fig.width=10}
+library(deepdep)
+plot_dependencies('APAstats', local = TRUE, depth = 3)
+```
+
+## Contact
+
+For issues or collaborations on the package you can send me an email at:
+
+-   matcasti\@umag.cl
