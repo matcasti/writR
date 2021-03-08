@@ -1,5 +1,3 @@
-
-
 # APAstats
 
 For automated and basic inferential testing, lets you perform:
@@ -82,26 +80,29 @@ The analysis of the effects of the treatment shows an statistically significant 
 
 ## Citation
 
-#### To cite package 'APAstats' in publications use:
+To cite package 'APAstats' in publications run the following code in your `R` console:
 
-Matías Castillo Aguilar (2021). APAstats: Inferential statistics and reporting in APA style. R package version 0.0.1.
 
-#### A BibTeX entry for LaTeX users is
-
-\@Manual{,  
-title = {APAstats: Inferential statistics and reporting in APA style},  
-author = {Matías {Castillo Aguilar}},  
-year = {2021},  
-note = {R package version 0.0.1},  
-}
-
-or run:
-
-``` r
-utils::citation('APAstats')
+```r
+citation('APAstats')
 ```
 
-to get the the same text output in your R console.
+```
+## 
+## To cite package 'APAstats' in publications use:
+## 
+##   Matías Castillo Aguilar (2021). APAstats: Inferential statistics and
+##   reporting in APA style. R package version 0.0.1.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Manual{,
+##     title = {APAstats: Inferential statistics and reporting in APA style},
+##     author = {Matías {Castillo Aguilar}},
+##     year = {2021},
+##     note = {R package version 0.0.1},
+##   }
+```
 
 ## Dependencies
 
@@ -113,8 +114,7 @@ library(deepdep)
 plot_dependencies('APAstats', local = TRUE, depth = 3)
 ```
 
-![](README_files/figure-html/unnamed-chunk-2-1.pdf)<!-- -->
-
+![](README_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
 ## Contact
 
