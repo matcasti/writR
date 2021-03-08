@@ -76,7 +76,7 @@ citation('APAstats')
 
 The package APAstats is standing on the shoulders of giants:
 
-```{r fig.height=10, fig.width=10}
+```{r fig.height=10, fig.width=10, dev='pdf'}
 library(deepdep)
 plot_dependencies('APAstats', local = TRUE, depth = 3)
 ```
