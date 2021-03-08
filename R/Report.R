@@ -32,10 +32,9 @@ report <- function(data
                     , markdown = TRUE
                     , ...) {
 
-  zeallot::`%<-%`(c(by, variable),c(rlang::ensym(by), rlang::ensym(variable)))
-  data <- rcl(data, {{variable}}, {{by}}, paired = paired)
+  by <- rlang::ensym(by); variable <- rlang::ensym(variable)
 
-  if(nlevels(data[[by]]) >= 3) {
+  if(nlevels(factor(data[[by]])) >= 3) {
     mult(
       data = data
       , variable = {{variable}}

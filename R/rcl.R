@@ -15,7 +15,7 @@ rcl <- function(data
                , paired = FALSE
                , spread = FALSE) {
 
-    ipmisc::long_to_wide_converter(
+  ipmisc::long_to_wide_converter(
         data = data,
         x = {{by}},
         y = {{variable}},

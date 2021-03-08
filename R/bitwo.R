@@ -23,7 +23,7 @@ bitwo <- function(data
                    , markdown = TRUE
                    , ...) {
 
-  result <- list()
+  data <- rcl(data, {{variable}}, {{by}}, paired = FALSE); result <- list()
 
     if(type == 'auto') {
       # Prueba de normalidad ----
@@ -73,7 +73,7 @@ bitwo <- function(data
 
       } else {
         # T-Welch, muestras independientes ----
-        test <- stats::t.test(stats::as.formula(paste(variable, by, sep = '~')), var.equal = FALSE)
+        test <- stats::t.test(stats::as.formula(paste(variable, by, sep = '~')), data, var.equal = FALSE)
         d <- effectsize::effectsize(test, verbose = F)
 
         if(markdown) {

@@ -25,7 +25,7 @@ multgroup <- function(data
                        , markdown = TRUE
                        , ...) {
 
-  result <- list()
+  data <- rcl(data, {{variable}}, {{by}}, paired = FALSE); result <- list()
 
     if(type == 'auto') {
       # Prueba de normalidad ----
