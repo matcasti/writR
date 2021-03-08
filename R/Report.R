@@ -32,6 +32,8 @@ report <- function(data
                     , markdown = TRUE
                     , ...) {
 
+  zeallot::`%<-%`(c(by, variable),c(rlang::ensym(by), rlang::ensym(variable)))
+
   if(nlevels(data[[by]]) >= 3) {
     mult(
       data = data

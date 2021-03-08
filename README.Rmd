@@ -5,7 +5,7 @@ output:
     keep_md: yes
 ---
 
-# APAstats
+# writR
 
 For automated and basic inferential testing, lets you perform:
 
@@ -27,7 +27,7 @@ For installation of developmental version run in your R console:
 
 ``` r
 install.packages("devtools")
-devtools::install_github('matcasti/APAstats')
+devtools::install_github('matcasti/writR')
 ```
 
 and then restart your R session.
@@ -37,15 +37,15 @@ and then restart your R session.
 By default, `report` function, checks automatically the assumptions of the test based on the parameters of the data entered
 
 ```{r echo=TRUE}
-library(APAstats) # Load the APAstats package
+library(writR) # Load the writR package
 
 plant <- datasets::PlantGrowth # Let's use the PlantGrowth package
                                # (installed by default in R)
 
 result <- report(
   data = plant,
-  variable = 'weight', # dependent variable
-  by = 'group', # independent variable
+  variable = weight, # dependent variable
+  by = group, # independent variable
   pairwise.comp = TRUE, # for pairwise comparisons in case of n groups > 2
   markdown = TRUE # output in Markdown format (for inline text)? otherwise plain text.
 )
@@ -66,19 +66,19 @@ The analysis of the effects of the treatment shows an statistically significant 
 
 ## Citation
 
-To cite package 'APAstats' in publications run the following code in your `R` console:
+To cite package 'writR' in publications run the following code in your `R` console:
 
 ```{r}
-citation('APAstats')
+citation('writR')
 ```
 
 ## Dependencies
 
-The package APAstats is standing on the shoulders of giants:
+The package writR is standing on the shoulders of giants:
 
 ```{r fig.height=10, fig.width=10, dev='svg'}
 library(deepdep)
-plot_dependencies('APAstats', local = TRUE, depth = 3)
+plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
 ## Contact

@@ -21,7 +21,6 @@ bipair <- function(data
                    , markdown = TRUE
                    , ...) {
 
-  c(by, variable) %<-% c(rlang::ensym(by), rlang::ensym(variable))
   data <- rcl(data, {{variable}}, {{by}}, paired = TRUE); result <- list()
 
     if(type == 'auto') {

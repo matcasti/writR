@@ -22,7 +22,7 @@ bitwo <- function(data
                    , nboot = 100
                    , markdown = TRUE
                    , ...) {
-  c(by, variable) %<-% c(rlang::ensym(by), rlang::ensym(variable))
+
   data <- rcl(data, {{variable}}, {{by}}, paired = FALSE); result <- list()
 
     if(type == 'auto') {
