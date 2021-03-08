@@ -113,7 +113,7 @@ library(deepdep)
 plot_dependencies('APAstats', local = TRUE, depth = 3)
 ```
 
-![](README_files/figure-html/unnamed-chunk-2-1.svg)<!-- -->
+![](README_files/figure-html/unnamed-chunk-2-1.pdf)<!-- -->
 
 
 ## Contact
