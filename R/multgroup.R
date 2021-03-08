@@ -25,6 +25,7 @@ multgroup <- function(data
                        , markdown = TRUE
                        , ...) {
 
+  c(by, variable) %<-% c(rlang::ensym(by), rlang::ensym(variable))
   data <- rcl(data, {{variable}}, {{by}}, paired = TRUE); result <- list()
 
     if(type == 'auto') {
@@ -46,16 +47,17 @@ multgroup <- function(data
       }
       if(var.equal) {
         # ANOVA de Fisher, muestras independientes ----
-        test <- stats::oneway.test(data[[variable]] ~ data[[by]], var.equal = TRUE)
+        test <- stats::oneway.test(stats::as.formula(paste(variable, by, sep = '~')), data, var.equal = TRUE)
         eta <- effectsize::effectsize(test, verbose = FALSE, ci = 0.95)
 
         if(pairwise.comp) {
           # Post-Hoc: T-Student ----
-          result[['post-hoc']] <- suppressWarnings(expr = { stats::pairwise.t.test(
+          result[['post-hoc']] <- suppressWarnings(expr = { parameters::parameters(
+            stats::pairwise.t.test(
             x = data[[variable]]
             , g = data[[by]]
             , p.adjust.method = p.adjust
-            , paired = F) })
+            , paired = F)) })
         }
         if(markdown) {
           result[['report']] <- paste0(
@@ -83,15 +85,16 @@ multgroup <- function(data
         result
       } else {
         # ANOVA de Welch, muestras independientes ----
-        test <- stats::oneway.test(data[[variable]] ~ data[[by]], var.equal = FALSE)
+        test <- stats::oneway.test(stats::as.formula(paste(variable, by, sep = '~')), data, var.equal = FALSE)
         eta <- effectsize::effectsize(test, verbose = FALSE, ci = 0.95)
 
         if(pairwise.comp) {
           # Post-Hoc: Games Howell ----
           result[['post-hoc']] <- suppressWarnings(
-            expr = { PMCMRplus::gamesHowellTest(
+            expr = { parameters::parameters(
+              PMCMRplus::gamesHowellTest(
               x = data[[variable]]
-              , g = data[[by]]) })
+              , g = data[[by]])) })
         }
         if(markdown)  {
           result[['report']] <- paste0(
@@ -128,10 +131,11 @@ multgroup <- function(data
       if(pairwise.comp) {
         # Post-Hoc ----
           result[['post-hoc']] <- suppressWarnings(
-            expr = { WRS2::lincon(
+            expr = { parameters::parameters(
+              WRS2::lincon(
               formula = stats::as.formula(paste0(variable,' ~ ',by))
               , data = data
-              , tr = trim) })
+              , tr = trim)) })
       }
       if(markdown) {
           result[['report']] <- paste0(
@@ -159,16 +163,17 @@ multgroup <- function(data
       result
     } else {
       # Suma de rangos de Kruskal-Wallis, muestras independientes ----
-      test <- stats::kruskal.test(data[[variable]] ~ data[[by]])
+      test <- stats::kruskal.test(stats::as.formula(paste(variable, by, sep = '~')), data)
       epsilon <- effectsize::rank_epsilon_squared(data[[variable]] ~ data[[by]], data)
 
       if(pairwise.comp) {
         # Post-Hoc: Dunn test ----
           result[['post-hoc']] <- suppressWarnings(
-            expr = { PMCMRplus::kwAllPairsDunnTest(
+            expr = { parameters::parameters(
+              PMCMRplus::kwAllPairsDunnTest(
               x = data[[variable]]
               , g = data[[by]]
-              , p.adjust.method = p.adjust) })
+              , p.adjust.method = p.adjust)) })
       }
       if(markdown) {
           result[['report']] <- paste0(

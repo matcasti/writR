@@ -25,6 +25,7 @@ multpair <- function(data
                       , markdown = TRUE
                       , ...) {
 
+  c(by, variable) %<-% c(rlang::ensym(by), rlang::ensym(variable))
   data <- rcl(data, {{variable}}, {{by}}, paired = TRUE); result <- list()
 
     if(type == 'auto') {
@@ -40,17 +41,21 @@ multpair <- function(data
     }
     if(type %in% c('p','check')) {
       # ANOVA, medidas repetidas ----
-      model <- afex::aov_ez(id = 'rowid', {{variable}}, data, within = {{by}})
+      model <- afex::aov_ez(id = 'rowid',
+                            dv = as.character(variable),
+                            data = data,
+                            within = as.character(by))
       eta <- effectsize::eta_squared(model, ci = 0.95)
       spher.test <- suppressWarnings(expr = { afex::test_sphericity(model) })
 
       if(pairwise.comp) {
         # Post-Hoc: T-Student ----
-          result[['post-hoc']] <- suppressWarnings(expr = { stats::pairwise.t.test(
+          result[['post-hoc']] <- suppressWarnings(expr = { parameters::parameters(
+            stats::pairwise.t.test(
             x = data[[variable]]
             , g = data[[by]]
             , p.adjust.method = p.adjust
-            , paired = T) })
+            , paired = T)) })
       }
 
       sphericity <- if(type == 'check') {
@@ -153,15 +158,15 @@ multpair <- function(data
                               tr = trim)
 
       # Tamaño de efecto no disponible para RMANOVA
-      # r <- effectsize::kendalls_w({{variable}}, {{by}}, 'rowid', data)
 
       if(pairwise.comp) {
         # Post-Hoc ----
         result[['post-hoc']] <- suppressWarnings(
-          expr = { WRS2::rmmcp(y = data[[variable]],
+          expr = { parameters::parameters(
+            WRS2::rmmcp(y = data[[variable]],
             groups = data[[by]],
             blocks = data[['rowid']],
-            tr = trim) })
+            tr = trim)) })
       }
       if(markdown) {
           result[['report']] <- paste0(
@@ -183,17 +188,17 @@ multpair <- function(data
       result
     } else {
       # Suma de rangos de Friedman, medidas repetidas ----
-      output <- stats::friedman.test(y = data[[variable]], groups = data[[by]], blocks = data[['rowid']])
-      kendall <- effectsize::kendalls_w({{variable}}, {{by}}, 'rowid', data)
+      output <- stats::friedman.test(stats::as.formula(paste(paste(variable, by, sep = '~'),'| rowid')), data)
+      kendall <- effectsize::kendalls_w(as.character(variable), as.character(by), 'rowid', data)
 
       if(pairwise.comp) {
         # Post-Hoc: Durbin test ----
         result[['post-hoc']] <- suppressWarnings(
-          expr = { PMCMRplus::durbinAllPairsTest(
+          expr = { parameters::parameters(PMCMRplus::durbinAllPairsTest(
           y = data[[variable]]
           , groups = data[[by]]
           , blocks = data[['rowid']]
-          , p.adjust.method = p.adjust) })
+          , p.adjust.method = p.adjust)) })
       }
       if(markdown) {
           result[['report']] <- paste0(

@@ -22,6 +22,7 @@ bitwo <- function(data
                    , nboot = 100
                    , markdown = TRUE
                    , ...) {
+  c(by, variable) %<-% c(rlang::ensym(by), rlang::ensym(variable))
   data <- rcl(data, {{variable}}, {{by}}, paired = FALSE); result <- list()
 
     if(type == 'auto') {
@@ -43,7 +44,7 @@ bitwo <- function(data
       }
       if(var.equal) {
         # T-Student, muestras independientes ----
-        test <- stats::t.test(data[[variable]] ~ data[[by]], var.equal = TRUE)
+        test <- stats::t.test(stats::as.formula(paste(variable, by, sep = "~")), data, var.equal = TRUE)
         d <- effectsize::effectsize(test, verbose = F)
 
         if(markdown) {
@@ -72,7 +73,7 @@ bitwo <- function(data
 
       } else {
         # T-Welch, muestras independientes ----
-        test <- stats::t.test(data[[variable]] ~ data[[by]], var.equal = FALSE)
+        test <- stats::t.test(stats::as.formula(paste(variable, by, sep = '~')), var.equal = FALSE)
         d <- effectsize::effectsize(test, verbose = F)
 
         if(markdown) {
@@ -136,7 +137,7 @@ bitwo <- function(data
       result
     } else {
       # U de Mann-Whitney ----
-      test <- stats::wilcox.test(data[[variable]] ~ data[[by]], correct = T, exact = F, paired = F)
+      test <- stats::wilcox.test(stats::as.formula(paste(variable, by, sep = "~")), data, correct = T, exact = F, paired = F)
       r <- effectsize::rank_biserial(data[[variable]] ~ data[[by]], data = data)
 
       if(markdown) {

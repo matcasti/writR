@@ -1,4 +1,4 @@
-# APAstats
+# writR
 
 For automated and basic inferential testing, lets you perform:
 
@@ -20,7 +20,7 @@ For installation of developmental version run in your R console:
 
 ``` r
 install.packages("devtools")
-devtools::install_github('matcasti/APAstats')
+devtools::install_github('matcasti/writR')
 ```
 
 and then restart your R session.
@@ -30,7 +30,7 @@ and then restart your R session.
 By default, `report` function, checks automatically the assumptions of the test based on the parameters of the data entered
 
 ``` r
-library(APAstats) # Load the APAstats package
+library(writR) # Load the writR package
 
 plant <- datasets::PlantGrowth # Let's use the PlantGrowth package
                                # (installed by default in R)
@@ -79,19 +79,19 @@ The analysis of the effects of the treatment shows an statistically significant 
 To cite package 'APAstats' in publications run the following code in your `R` console:
 
 ``` r
-citation('APAstats')
+citation('writR')
 ```
 
     ## 
-    ## To cite package 'APAstats' in publications use:
+    ## To cite package 'writR' in publications use:
     ## 
-    ##   Matías Castillo Aguilar (2021). APAstats: Inferential statistics and
+    ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
     ##   reporting in APA style. R package version 0.0.1.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
-    ##     title = {APAstats: Inferential statistics and reporting in APA style},
+    ##     title = {writR: Inferential statistics and reporting in APA style},
     ##     author = {Matías {Castillo Aguilar}},
     ##     year = {2021},
     ##     note = {R package version 0.0.1},
@@ -99,11 +99,11 @@ citation('APAstats')
 
 ## Dependencies
 
-The package APAstats is standing on the shoulders of giants:
+The package writR is standing on the shoulders of giants:
 
 ``` r
 library(deepdep)
-plot_dependencies('APAstats', local = TRUE, depth = 3)
+plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-3-1.svg)<!-- -->

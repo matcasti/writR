@@ -21,6 +21,7 @@ bipair <- function(data
                    , markdown = TRUE
                    , ...) {
 
+  c(by, variable) %<-% c(rlang::ensym(by), rlang::ensym(variable))
   data <- rcl(data, {{variable}}, {{by}}, paired = TRUE); result <- list()
 
     if(type == 'auto') {
@@ -36,7 +37,7 @@ bipair <- function(data
     }
     if(type == 'p') {
       # T-Student, muestras relacionadas ----
-      test <- stats::t.test(data[[variable]] ~ data[[by]], paired = T)
+      test <- stats::t.test(stats::as.formula(paste(variable, by, sep = '~')), data, paired = T)
       d <- effectsize::effectsize(test, verbose = F)
 
       if(markdown) {
@@ -97,7 +98,7 @@ bipair <- function(data
       result
     } else {
       # Prueba de rangos con signo de Wilcoxon ----
-      test <- stats::wilcox.test(data[[variable]] ~ data[[by]], correct = T, exact = F, paired = T)
+      test <- stats::wilcox.test(stats::as.formula(paste(variable, by, sep = '~')), data, correct = T, exact = F, paired = T)
       r <- effectsize::rank_biserial(data[[variable]] ~ data[[by]], data = data,
                                      paired = TRUE, verbose = FALSE)
 

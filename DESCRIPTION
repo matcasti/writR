@@ -1,4 +1,4 @@
-Package: APAstats
+Package: writR
 Title: Inferential statistics and reporting in APA style
 Version: 0.0.1
 Date: 2021-03-05
@@ -9,13 +9,16 @@ Authors@R:
            email = "matcasti@umag.cl",
            comment = c(ORCID = "0000-0001-7291-247X"))
 Description: Perform and report basic inferential tests for group differences in APA style for articles writings in Markdown or plain text format.
-License: MIT + file LICENSE
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
     ipmisc,
+    rlang,
+    parameters,
+    zeallot,
     nortest,
     effectsize,
     janitor,
