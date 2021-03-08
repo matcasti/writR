@@ -1,3 +1,5 @@
+
+
 # APAstats
 
 For automated and basic inferential testing, lets you perform:
@@ -29,7 +31,8 @@ and then restart your R session.
 
 By default, `report` function, checks automatically the assumptions of the test based on the parameters of the data entered
 
-``` r
+
+```r
 library(APAstats) # Load the APAstats package
 
 plant <- datasets::PlantGrowth # Let's use the PlantGrowth package
@@ -46,23 +49,25 @@ result <- report(
 result
 ```
 
-    ## $`post-hoc`
-    ## 
-    ##  Pairwise comparisons using t tests with pooled SD 
-    ## 
-    ## data:  data[[variable]] and data[[by]] 
-    ## 
-    ##      ctrl   trt1  
-    ## trt1 0.1944 -     
-    ## trt2 0.0877 0.0045
-    ## 
-    ## P value adjustment method: none 
-    ## 
-    ## $report
-    ## [1] "*F* ~Fisher~ (2, 27) = 4.846, *p* = 0.016, $\\eta$^2^ = 0.26, IC~95%~[0.01, 0.49]"
-    ## 
-    ## $method
-    ## [1] "Fisher's ANOVA for independent samples"
+```
+## $`post-hoc`
+## 
+## 	Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  data[[variable]] and data[[by]] 
+## 
+##      ctrl   trt1  
+## trt1 0.1944 -     
+## trt2 0.0877 0.0045
+## 
+## P value adjustment method: none 
+## 
+## $report
+## [1] "*F* ~Fisher~ (2, 27) = 4.846, *p* = 0.016, $\\eta$^2^ = 0.26, IC~95%~[0.01, 0.49]"
+## 
+## $method
+## [1] "Fisher's ANOVA for independent samples"
+```
 
 ## Inline results in APA style
 
@@ -72,7 +77,8 @@ The analysis of the effects of the treatment shows an statistically significant 
 
 translates into this:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, *F* \~Fisher\~ (2, 27) = 4.846, *p* = 0.016, $\\eta$^2^ = 0.26, IC\~95%\~[0.01, 0.49], evaluated through Fisher's ANOVA for independent samples.
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, *F* ~Fisher~ (2, 27) = 4.846, *p* = 0.016, $\eta$^2^ = 0.26, IC~95%~[0.01, 0.49], evaluated through Fisher's ANOVA for independent samples.
+
 
 ## Citation
 
@@ -96,6 +102,19 @@ utils::citation('APAstats')
 ```
 
 to get the the same text output in your R console.
+
+## Dependencies
+
+The package APAstats is standing on the shoulders of giants:
+
+
+```r
+library(deepdep)
+plot_dependencies('APAstats', local = TRUE, depth = 3)
+```
+
+![](README_files/figure-html/unnamed-chunk-2-1.svg)<!-- -->
+
 
 ## Contact
 
