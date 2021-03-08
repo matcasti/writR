@@ -12,7 +12,6 @@
 #' @param ... Currently not used.
 #' @keywords bitwo
 #' @return A list of length 2 with `$report` of statistical test and `$method` used.
-#' @export
 
 bitwo <- function(data
                    , variable
