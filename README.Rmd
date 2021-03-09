@@ -249,8 +249,12 @@ library(deepdep)
 plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
+## Acknowledgments
+
+I would like to thank Indrajeet Patil for being an inspiration for this package, as an extension of `statsExpressions`. Naturally this package is in its first steps, but I hope that future collaborative work can expand the potential of this package.
+
 ## Contact
 
-For issues or collaborations on the package you can send me an email at:
+For any issues or collaborations you can send me an email at:
 
 -   matcasti\@umag.cl
