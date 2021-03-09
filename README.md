@@ -27,6 +27,7 @@ citation('writR')
 ## 
 ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
 ##   reporting in APA style. R package version 0.0.1.
+##   https://github.com/matcasti/writR
 ## 
 ## A BibTeX entry for LaTeX users is
 ## 
@@ -35,6 +36,7 @@ citation('writR')
 ##     author = {Matías {Castillo Aguilar}},
 ##     year = {2021},
 ##     note = {R package version 0.0.1},
+##     url = {https://github.com/matcasti/writR},
 ##   }
 ```
 
