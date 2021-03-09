@@ -7,7 +7,24 @@ output:
 
 # writR: Inferential statistics and reporting in APA style
 
-For automated and basic inferential testing, lets you perform:
+For automated and basic inferential testing.
+
+### Installation
+
+For installation of developmental version run in your R console:
+
+``` r
+install.packages("remotes")
+remotes::install_github("matcasti/writR")
+```
+
+### Citation
+
+To cite package 'writR' in publications run the following code in your `R` console:
+
+```{r}
+citation('writR')
+```
 
 ## Summary of available tests
 
@@ -49,16 +66,6 @@ For automated and basic inferential testing, lets you perform:
 | Independent | `type = 'np'`: non-parametric. | Dunn's non-parametric all-pairs comparison test. | `PMCMRplus::kwAllPairsDunnTest` |
 | Independent | `type = 'r'`: robust. | Pairwise trimmed mean differences (see [Mair and Wilcox](https://rdrr.io/rforge/WRS2/f/inst/doc/WRS2.pdf)). | `WRS2::lincon` |
 
-## Installation
-
-For installation of developmental version run in your R console:
-
-``` r
-install.packages("devtools")
-devtools::install_github('matcasti/writR')
-```
-
-and then restart your R session.
 
 # Automated testing
 
@@ -93,7 +100,7 @@ The analysis of the effects of the treatment shows an statistically significant 
 
 translates into this:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, `r result$report`, evaluated through `r result$method`.
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *Cohen's d* = 0.51, IC<sub>95%</sub> [0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 ## Paired samples design
 
@@ -232,13 +239,6 @@ You can specify your own parameters for the selection of the test as well:
 | Mann–Whitney *U* test                    | `paired = FALSE` + `type = 'np'`                      |
 | Yuen's test on trimmed means             | `paired = FALSE` + `type = 'r'`                       |
 
-## Citation
-
-To cite package 'writR' in publications run the following code in your `R` console:
-
-```{r}
-citation('writR')
-```
 
 ## Dependencies
 

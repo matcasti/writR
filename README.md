@@ -1,7 +1,42 @@
 
 # writR: Inferential statistics and reporting in APA style
 
-For automated and basic inferential testing, lets you perform:
+For automated and basic inferential testing.
+
+### Installation
+
+For installation of developmental version run in your R console:
+
+``` r
+install.packages("remotes")
+remotes::install_github("matcasti/writR")
+```
+
+### Citation
+
+To cite package 'writR' in publications run the following code in your `R` console:
+
+
+```r
+citation('writR')
+```
+
+```
+## 
+## To cite package 'writR' in publications use:
+## 
+##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
+##   reporting in APA style. R package version 0.0.1.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Manual{,
+##     title = {writR: Inferential statistics and reporting in APA style},
+##     author = {Matías {Castillo Aguilar}},
+##     year = {2021},
+##     note = {R package version 0.0.1},
+##   }
+```
 
 ## Summary of available tests
 
@@ -43,16 +78,6 @@ For automated and basic inferential testing, lets you perform:
 | Independent | `type = 'np'`: non-parametric. | Dunn's non-parametric all-pairs comparison test. | `PMCMRplus::kwAllPairsDunnTest` |
 | Independent | `type = 'r'`: robust. | Pairwise trimmed mean differences (see [Mair and Wilcox](https://rdrr.io/rforge/WRS2/f/inst/doc/WRS2.pdf)). | `WRS2::lincon` |
 
-## Installation
-
-For installation of developmental version run in your R console:
-
-``` r
-install.packages("devtools")
-devtools::install_github('matcasti/writR')
-```
-
-and then restart your R session.
 
 # Automated testing
 
@@ -127,6 +152,15 @@ report(
   , paired = TRUE
   , markdown = FALSE
   )
+```
+
+```
+## Registered S3 methods overwritten by 'lme4':
+##   method                          from
+##   cooks.distance.influence.merMod car 
+##   influence.merMod                car 
+##   dfbeta.influence.merMod         car 
+##   dfbetas.influence.merMod        car
 ```
 
 ```
@@ -271,31 +305,6 @@ You can specify your own parameters for the selection of the test as well:
 | Mann–Whitney *U* test                    | `paired = FALSE` + `type = 'np'`                      |
 | Yuen's test on trimmed means             | `paired = FALSE` + `type = 'r'`                       |
 
-## Citation
-
-To cite package 'writR' in publications run the following code in your `R` console:
-
-
-```r
-citation('writR')
-```
-
-```
-## 
-## To cite package 'writR' in publications use:
-## 
-##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-##   reporting in APA style. R package version 0.0.1.
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Manual{,
-##     title = {writR: Inferential statistics and reporting in APA style},
-##     author = {Matías {Castillo Aguilar}},
-##     year = {2021},
-##     note = {R package version 0.0.1},
-##   }
-```
 
 ## Dependencies
 
