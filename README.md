@@ -96,7 +96,7 @@ The analysis of the effects of the treatment shows an statistically significant 
 
 translates into this:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* ~Student~ (98) = 2.509, *p* = 0.014, *Cohen's d* = 0.51, IC~95%~[0.1, 0.91], evaluated through Student's t-test for independent samples.
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *Cohen's d* = 0.51, IC<sub>95%</sub> [0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 ## Paired samples design
 
