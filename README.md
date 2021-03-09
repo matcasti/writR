@@ -157,15 +157,6 @@ report(
 ```
 
 ```
-## Registered S3 methods overwritten by 'lme4':
-##   method                          from
-##   cooks.distance.influence.merMod car 
-##   influence.merMod                car 
-##   dfbeta.influence.merMod         car 
-##   dfbetas.influence.merMod        car
-```
-
-```
 ## $report
 ## [1] "F(2, 98) = 3.766, p = 0.027, eta^ = 0.071, IC95% [0, 0.18]"
 ## 
