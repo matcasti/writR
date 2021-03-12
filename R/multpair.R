@@ -55,12 +55,14 @@ multpair <- function(data
 
       if(pairwise.comp) {
         # Post-Hoc: T-Student ----
-          result[['post-hoc']] <- suppressWarnings(expr = { parameters::parameters(
+          result[['pwc.method']] <- "Student's t-test for dependent samples"
+          result[['pwc.table']] <- suppressWarnings(expr = {
+            broomExtra::tidy_parameters(
             stats::pairwise.t.test(
             x = data[[variable]]
             , g = data[[by]]
             , p.adjust.method = p.adjust
-            , paired = T)) })
+            , paired = TRUE)) })
       }
 
       sphericity <- if(type == 'check') {
@@ -75,25 +77,32 @@ multpair <- function(data
         suppressWarnings(expr = {output <- stats::anova(model, correction = 'none')})
 
         if(markdown) {
-            result[['report']] <- paste0(
-              '*F* ~Fisher~ (', round(output[["num Df"]],1)
+            result[['full']] <- paste0(
+              stats <- paste0('*F* ~Fisher~ (', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
-              , ') = ', round(output[["F"]],3)
+              , ') = ', round(output[["F"]],2)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', round(output[["Pr(>F)"]], 3) ) )
-              , ', $\\eta$^2^ = ', round(eta$Eta2_partial,3)
-            , ', IC~95%~[', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) ) ),', '
+              , es <- paste0('$\\eta$^2^ = ', round(eta$Eta2_partial,2)
+            , ', CI~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+            result[['stats']] <- stats
+            result[['es']] <- es
+
           } else {
-            result[['report']] <- paste0(
-              'F(', round(output[["num Df"]],1)
+            result[['full']] <- paste0(
+              stats <- paste0('F(', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
-              , ') = ', round(output[["F"]],3)
+              , ') = ', round(output[["F"]],2)
               , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', round(output[["Pr(>F)"]], 3) ) )
-              , ', eta^ = ', round(eta$Eta2_partial,3)
-            , ', IC95% [', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) ) ),', '
+              , es <- paste0('eta^2 = ', round(eta$Eta2_partial,2)
+            , ', CI95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+            result[['stats']] <- stats
+            result[['es']] <- es
           }
 
         result[['method']] <- 'One-way repeated measures ANOVA'
@@ -103,25 +112,31 @@ multpair <- function(data
         suppressWarnings(expr = {output <- stats::anova(model, correction = 'GG')})
 
         if(markdown) {
-            result[['report']] <- paste0(
-              '*F* ~Greenhouse-Geisser~ (', round(output[["num Df"]],1)
+            result[['full']] <- paste0(
+              stats <- paste0('*F* ~Greenhouse-Geisser~ (', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
-              , ') = ', round(output[["F"]],3)
+              , ') = ', round(output[["F"]],2)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', round(output[["Pr(>F)"]], 3) ) )
-              , ', $\\eta$^2^ = ', round(eta$Eta2_partial,3)
-            , ', IC~95%~[', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) ) ),', '
+              , es <- paste0('$\\eta$^2^ = ', round(eta$Eta2_partial,2)
+            , ', CI~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+            result[["stats"]] <- stats
+            result[["es"]] <- es
           } else {
-            result[['report']] <- paste0(
-              'F(', round(output[["num Df"]],1)
+            result[["full"]] <- paste0(
+              stats <- paste0('F(', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
-              , ') = ', round(output[["F"]],3)
+              , ') = ', round(output[["F"]],2)
               , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', round(output[["Pr(>F)"]], 3) ) )
-              , ', eta^ = ', round(eta$Eta2_partial,3)
-            , ', IC95% [', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) ) ),', '
+              , es <- paste0('eta^2 = ', round(eta$Eta2_partial,2)
+            , ', CI95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+            result[["stats"]] <- stats
+            result[["es"]] <- es
           }
 
         result[['method']] <- 'One-way repeated measures ANOVA with Greenhouse-Geisser correction'
@@ -131,25 +146,31 @@ multpair <- function(data
         suppressWarnings(expr = {output <- stats::anova(model, correction = 'HF')})
 
         if(markdown) {
-            result[['report']] <- paste0(
-              '*F* ~Huynh-Feldt~ (', round(output[["num Df"]],1)
+            result[['full']] <- paste0(
+              stats <- paste0('*F* ~Huynh-Feldt~ (', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
-              , ') = ', round(output[["F"]],3)
+              , ') = ', round(output[["F"]],2)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', round(output[["Pr(>F)"]], 3) ) )
-              , ', $\\eta$^2^ = ', round(eta$Eta2_partial,3)
-            , ', IC~95%~[', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) ) ),', '
+              , es <- paste0('$\\eta$^2^ = ', round(eta$Eta2_partial,2)
+            , ', CI~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+            result[["stats"]] <- stats
+            result[["es"]] <- es
           } else {
-            result[['report']] <- paste0(
-              'F(', round(output[["num Df"]],1)
+            result[['full']] <- paste0(
+              stats <- paste0('F(', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
-              , ') = ', round(output[["F"]],3)
+              , ') = ', round(output[["F"]],2)
               , ', p ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
-                '=', round(output[["Pr(>F)"]], 3) ) )
-              , ', eta^ = ', round(eta$Eta2_partial,3)
-            , ', IC95% [', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+                '=', round(output[["Pr(>F)"]], 3) ) ) ),', '
+              , es <- paste0('eta^2 = ', round(eta$Eta2_partial,2)
+            , ', CI95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+            result[["stats"]] <- stats
+            result[["es"]] <- es
           }
 
         result[['method']] <- 'One-way repeated measures ANOVA with Huynh-Feldt correction'
@@ -166,27 +187,34 @@ multpair <- function(data
 
       if(pairwise.comp) {
         # Post-Hoc ----
-        result[['post-hoc']] <- suppressWarnings(
-          expr = { parameters::parameters(
+          result[['pwc.method']] <- "Yuen's test on trimmed means"
+          result[['pwc.table']] <- suppressWarnings(
+          expr = { broomExtra::tidy_parameters(
             WRS2::rmmcp(y = data[[variable]],
             groups = data[[by]],
             blocks = data[['rowid']],
-            tr = trim)) })
+            tr = trim))[,c(1,2,7)] })
       }
       if(markdown) {
-          result[['report']] <- paste0(
-            '*F* ~Medias-recortadas~ (', round(output$df1,1)
+          result[['full']] <- paste0(
+            stats <- paste0('*F* ~trimmed-means~ (', round(output$df1,1)
             ,', ', round(output$df2,1)
-            , ') = ',round(output$test,3)
+            , ') = ',round(output$test,2)
             , ', *p* ',ifelse(output$p.value < 0.001, '< 0.001', paste(
-              '=',  round(output$p.value, 3) ) ) )
+              '=',  round(output$p.value, 3) ) ) ) )
+
+          result[["stats"]] <- stats
+          result[["es"]] <- 'Not available'
           } else {
-            result[['report']] <- paste0(
-            'F(', round(output$df1,1)
+            result[['full']] <- paste0(
+            stats <- paste0('F(', round(output$df1,1)
             ,', ', round(output$df2,1)
-            , ') = ',round(output$test,3)
+            , ') = ',round(output$test,2)
             , ', p ',ifelse(output$p.value < 0.001, '< 0.001', paste(
-              '=',  round(output$p.value, 3) ) ) )
+              '=',  round(output$p.value, 3) ) ) ) )
+
+            result[["stats"]] <- stats
+            result[["es"]] <- 'Not available'
           }
 
       result[['method']] <- 'Heteroscedastic one-way repeated measures ANOVA for trimmed means'
@@ -198,31 +226,39 @@ multpair <- function(data
 
       if(pairwise.comp) {
         # Post-Hoc: Durbin test ----
-        result[['post-hoc']] <- suppressWarnings(
-          expr = { parameters::parameters(PMCMRplus::durbinAllPairsTest(
+          result[['pwc.method']] <- "Durbin-Conover test"
+          result[['pwc.table']] <- suppressWarnings(
+          expr = { broomExtra::tidy_parameters(
+            PMCMRplus::durbinAllPairsTest(
           y = data[[variable]]
           , groups = data[[by]]
           , blocks = data[['rowid']]
-          , p.adjust.method = p.adjust)) })
+          , p.adjust.method = p.adjust))[,c(1,2,4)] })
       }
       if(markdown) {
-          result[['report']] <- paste0(
-            '$\\chi$^2^ ~Friedman~ (', round(output$parameter,1)
-            , ') = ',round(output$statistic,3)
+          result[['full']] <- paste0(
+            stats <- paste0('$\\chi$^2^ ~Friedman~ (', round(output$parameter,1)
+            , ') = ',round(output$statistic,2)
             , ', *p* ',ifelse(output$p.value < 0.001, '< 0.001', paste(
-              '=',  round(output$p.value, 3) ) )
-            , ', *W* ~Kendall~ = ', round(kendall$Kendalls_W, 2)
-            , ", IC~95%~[", round(kendall$CI_low,2)
-            , ', ', round(kendall$CI_high,2), ']')
+              '=',  round(output$p.value, 3) ) ) ),', '
+            , es <- paste0('*W* ~Kendall~ = ', round(kendall$Kendalls_W, 2)
+            , ", CI~95%~[", round(kendall$CI_low,2)
+            , ', ', round(kendall$CI_high,2), ']') )
+
+          result[["stats"]] <- stats
+          result[["es"]] <- es
           } else {
-            result[['report']] <- paste0(
-              'X^2(',round(output$parameter,1)
-              , ') = ', round(output$statistic,3)
+            result[['full']] <- paste0(
+              stats <- paste0('X^2(',round(output$parameter,1)
+              , ') = ', round(output$statistic,2)
               , ', p ', ifelse(output$p.value < 0.001, '< 0.001', paste(
-                '=', round(output$p.value, 3) ) )
-              , ', W = ', round(kendall$Kendalls_W, 2)
-            , ", IC95% [", round(kendall$CI_low,2)
-            , ', ', round(kendall$CI_high,2), ']')
+                '=', round(output$p.value, 3) ) ) ),', '
+              , es <- paste0('W = ', round(kendall$Kendalls_W, 2)
+            , ", CI95% [", round(kendall$CI_low,2)
+            , ', ', round(kendall$CI_high,2), ']') )
+
+            result[["stats"]] <- stats
+            result[["es"]] <- es
           }
 
       result[['method']] <- 'Friedman rank sum test'

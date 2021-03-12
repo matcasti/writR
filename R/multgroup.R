@@ -57,33 +57,43 @@ multgroup <- function(data
 
         if(pairwise.comp) {
           # Post-Hoc: T-Student ----
-          result[['post-hoc']] <- suppressWarnings(expr = { parameters::parameters(
+          result[['pwc.method']] <- "Student's t-test for independent samples"
+          result[['pwc.table']] <- suppressWarnings(expr = {
+            broomExtra::tidy_parameters(
             stats::pairwise.t.test(
             x = data[[variable]]
             , g = data[[by]]
+            , pool.sd = FALSE
+            , var.equal = TRUE
             , p.adjust.method = p.adjust
-            , paired = F)) })
+            , paired = FALSE)) })
         }
         if(markdown) {
-          result[['report']] <- paste0(
-            '*F* ~Fisher~ (', round(test$parameter[1],1)
+          result[['full']] <- paste0(
+            stats <- paste0('*F* ~Fisher~ (', round(test$parameter[1],1)
             ,', ', round(test$parameter[2],1)
-            , ') = ', round(test$statistic,3)
+            , ') = ', round(test$statistic,2)
             , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', $\\eta$^2^ = ', round(eta$Eta2,2)
-            , ', IC~95%~[', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) ) ), ', '
+            , es <- paste0('$\\eta$^2^ = ', round(eta$Eta2,2)
+            , ', CI~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+          result[['stats']] <- stats
+          result[['es']] <- es
         } else {
-          result[['report']] <- paste0(
-            'F(', round(test$parameter[1],1)
+          result[['full']] <- paste0(
+            stats <- paste0('F(', round(test$parameter[1],1)
             , ', ', round(test$parameter[2],1)
-            , ') = ', round(test$statistic,3)
+            , ') = ', round(test$statistic,2)
             , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', eta^2 = ', round(eta$Eta2,2)
-            , ', IC95% [', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) ) ), ', '
+            , es <- paste0('eta^2 = ', round(eta$Eta2,2)
+            , ', CI95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+          result[['stats']] <- stats
+          result[['es']] <- es
         }
 
         result[['method']] <- "Fisher's ANOVA for independent samples"
@@ -95,32 +105,40 @@ multgroup <- function(data
 
         if(pairwise.comp) {
           # Post-Hoc: Games Howell ----
-          result[['post-hoc']] <- suppressWarnings(
-            expr = { parameters::parameters(
+          result[['pwc.method']] <- 'Games Howell test'
+          result[['pwc.table']] <- suppressWarnings(
+            expr = {
+              broomExtra::tidy_parameters(
               PMCMRplus::gamesHowellTest(
               x = data[[variable]]
-              , g = data[[by]])) })
+              , g = data[[by]]))[,c(1,2,4)] })
         }
         if(markdown)  {
-          result[['report']] <- paste0(
-            '*F* ~Welch~ (', round(test$parameter[1],1)
+          result[['full']] <- paste0(
+            stats <- paste0('*F* ~Welch~ (', round(test$parameter[1],1)
             , ', ', round(test$parameter[2],1)
-            , ') = ', round(test$statistic,3)
-            , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', $\\eta$^2^ = ', round(eta$Eta2,2)
-            , ', IC~95%~[', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+            , ') = ', round(test$statistic,2)
+            , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
+              '=', round(test$p.value, 3) ) ) ),', '
+            , es <- paste0('$\\eta$^2^ = ', round(eta$Eta2,2)
+            , ', CI~95%~[', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+          result[['stats']] <- stats
+          result[['es']] <- es
         } else {
-          result[['report']] <- paste0(
-            'F(',round(test$parameter[1],1)
+          result[['full']] <- paste0(
+            stats <- paste0('F(',round(test$parameter[1],1)
             , ', ', round(test$parameter[2],1)
-            , ') = ', round(test$statistic,3)
+            , ') = ', round(test$statistic,2)
             , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', eta^2 = ', round(eta$Eta2,2)
-            , ', IC95% [', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) ) ), ', '
+            , es <- paste0('eta^2 = ', round(eta$Eta2,2)
+            , ', CI95% [', round(eta$CI_low,2)
+            , ', ', round(eta$CI_high,2), ']') )
+
+          result[['stats']] <- stats
+          result[['es']] <- es
         }
 
         result[['method']] <- "Welch's ANOVA for independent samples"
@@ -135,33 +153,42 @@ multgroup <- function(data
 
       if(pairwise.comp) {
         # Post-Hoc ----
-          result[['post-hoc']] <- suppressWarnings(
-            expr = { parameters::parameters(
+          result[['pwc.method']] <- "Yuen's test on trimmed means"
+          result[['pwc.table']] <- suppressWarnings(
+            expr = {
+              broomExtra::tidy_parameters(
               WRS2::lincon(
               formula = stats::as.formula(paste0(variable,' ~ ',by))
               , data = data
-              , tr = trim)) })
+              , tr = trim))[,c(1,2,7)] })
       }
       if(markdown) {
-          result[['report']] <- paste0(
-            '*F* ~Medias-recortadas~ (', round(test$df1,1)
+          result[['full']] <- paste0(
+            stats <- paste0('*F* ~trimed-means~ (', round(test$df1,1)
             ,', ', round(test$df2,1)
-            , ') = ', round(test$test,3)
+            , ') = ', round(test$test,2)
             , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', $\\xi$ = ', round(test$effsize,2)
-            , ', IC~95%~[', round(test$effsize_ci[1],2)
-            , ', ', round(test$effsize_ci[2],2), ']')
+              '=', round(test$p.value, 3) ) ) ), ', '
+            , es <- paste0('$\\xi$ = ', round(test$effsize,2)
+            , ', CI~95%~[', round(test$effsize_ci[1],2)
+            , ', ', round(test$effsize_ci[2],2), ']') )
+
+          result[['stats']] <- stats
+          result[['es']] <- es
+
         } else {
-          result[['report']] <- paste0(
-            'F(', round(test$df1,1)
+          result[['full']] <- paste0(
+            stats <- paste0('F(', round(test$df1,1)
             ,', ', round(test$df2,1)
-            , ') = ', round(test$test,3)
+            , ') = ', round(test$test,2)
             , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', xi = ', round(test$effsize,2)
-            , ', IC95% [', round(test$effsize_ci[1],2)
-            , ', ', round(test$effsize_ci[2],2), ']')
+              '=', round(test$p.value, 3) ) ) ), ', '
+            , es <- paste0('xi = ', round(test$effsize,2)
+            , ', CI95% [', round(test$effsize_ci[1],2)
+            , ', ', round(test$effsize_ci[2],2), ']') )
+
+          result[['stats']] <- stats
+          result[['es']] <- es
         }
 
       result[['method']] <- 'Heteroscedastic one way ANOVA for trimmed means'
@@ -173,31 +200,39 @@ multgroup <- function(data
 
       if(pairwise.comp) {
         # Post-Hoc: Dunn test ----
-          result[['post-hoc']] <- suppressWarnings(
-            expr = { parameters::parameters(
+          result[['pwc.method']] <- "Dunn test"
+          result[['pwc.table']] <- suppressWarnings(
+            expr = {
+              broomExtra::tidy_parameters(
               PMCMRplus::kwAllPairsDunnTest(
               x = data[[variable]]
               , g = data[[by]]
-              , p.adjust.method = p.adjust)) })
+              , p.adjust.method = p.adjust))[,c(1,2,4)] })
       }
       if(markdown) {
-          result[['report']] <- paste0(
-            '$\\chi$^2^ ~Kruskal-Wallis ~(', round(test$parameter,1)
-            , ') = ', round(test$statistic,3)
+          result[['full']] <- paste0(
+            stats <- paste0('$\\chi$^2^ ~Kruskal-Wallis ~(', round(test$parameter,1)
+            , ') = ', round(test$statistic,2)
             , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', $\\epsilon$^2^ = ', round(epsilon$rank_epsilon_squared,2)
-            , ', IC~95%~[', round(epsilon$CI_low,2)
-            , ', ', round(epsilon$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) ) ),', '
+            , es <- paste0('$\\epsilon$^2^ = ', round(epsilon$rank_epsilon_squared,2)
+            , ', CI~95%~[', round(epsilon$CI_low,2)
+            , ', ', round(epsilon$CI_high,2), ']') )
+
+          result[["stats"]] <- stats
+          result[["es"]] <- es
         } else {
-          result[['report']] <- paste0(
-            'X^2(', round(test$parameter,1)
-            , ') = ', round(test$statistic,3)
+          result[['full']] <- paste0(
+            stats <- paste0('X^2(', round(test$parameter,1)
+            , ') = ', round(test$statistic,2)
             , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) )
-            , ', epsilon^2 = ', round(epsilon$rank_epsilon_squared,2)
-            , ', IC95% [', round(epsilon$CI_low,2)
-            , ', ', round(epsilon$CI_high,2), ']')
+              '=', round(test$p.value, 3) ) ) ),', '
+            , es <- paste0('epsilon^2 = ', round(epsilon$rank_epsilon_squared,2)
+            , ', CI95% [', round(epsilon$CI_low,2)
+            , ', ', round(epsilon$CI_high,2), ']') )
+
+          result[["stats"]] <- stats
+          result[["es"]] <- es
         }
 
       result[['method']] <- 'Kruskal Wallis one way ANOVA'

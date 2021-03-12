@@ -1,4 +1,3 @@
-
 # writR: Inferential statistics and reporting in APA style
 
 For automated and basic inferential testing.
@@ -44,42 +43,41 @@ citation('writR')
 
 #### For paired samples designs
 
-| Nº of groups |  Type  | Test  | Function in `R` |
-|:-:|---|---|---|
-| 2 | `type = 'p'`: parametric. | Student's t-test. | `stats::t.test` |
-| 2 | `type = 'r'`: robust. | Yuen's test for trimmed means. | `WRS2::yuend` |
-| 2 | `type = 'np'`: non-parametric. | Wilcoxon signed-rank test. | `stats::wilcox.test` |
-| \> 2 | `type = 'p'`: parametric. | One-way repeated measures ANOVA (rmANOVA). | `afex::aov_ez` |
-| \> 2 | `type = 'p'`: parametric. | rmANOVA with Greenhouse-Geisser correction. | `afex::aov_ez` |
-| \> 2 | `type = 'p'`: parametric. | rmANOVA with Huynh-Feldt correction. | `afex::aov_ez` |
-| \> 2 | `type = 'r'`: robust. | Heteroscedastic rmANOVA for trimmed means. | `WRS2::rmanova` |
-| \> 2 | `type = 'np'`: non-parametric. | Friedman rank sum test. | `stats::friedman.test` |
+| Nº of groups | Type                           | Test                                        | Function in `R`        |
+|:------------:|--------------------------------|---------------------------------------------|------------------------|
+|      2       | `type = 'p'`: parametric.      | Student's t-test.                           | `stats::t.test`        |
+|      2       | `type = 'r'`: robust.          | Yuen's test for trimmed means.              | `WRS2::yuend`          |
+|      2       | `type = 'np'`: non-parametric. | Wilcoxon signed-rank test.                  | `stats::wilcox.test`   |
+|     \> 2     | `type = 'p'`: parametric.      | One-way repeated measures ANOVA (rmANOVA).  | `afex::aov_ez`         |
+|     \> 2     | `type = 'p'`: parametric.      | rmANOVA with Greenhouse-Geisser correction. | `afex::aov_ez`         |
+|     \> 2     | `type = 'p'`: parametric.      | rmANOVA with Huynh-Feldt correction.        | `afex::aov_ez`         |
+|     \> 2     | `type = 'r'`: robust.          | Heteroscedastic rmANOVA for trimmed means.  | `WRS2::rmanova`        |
+|     \> 2     | `type = 'np'`: non-parametric. | Friedman rank sum test.                     | `stats::friedman.test` |
 
 #### For independent samples design
 
-| Nº of groups | Type | Test | Function in `R` |
-|:-:|---|---|---|
-| 2 | `type = 'p'`: parametric. | Student's t-test. | `stats::t.test` |
-| 2 | `type = 'p'`: parametric. | Welch's t-test. | `stats::t.test` |
-| 2 | `type = 'r'`: robust. | Yuen's test for trimmed means. | `WRS2::yuen` |
-| 2 | `type = 'np'`: non-parametric. | Mann-Whitney *U* test. | `stats::wilcox.test` |
-| \> 2 | `type = 'p'`: parametric. | Fisher's One-way ANOVA. | `stats::oneway.test` |
-| \> 2 | `type = 'p'`: parametric. | Welch's One-way ANOVA. | `stats::oneway.test` |
-| \> 2 | `type = 'p'`: parametric. | Kruskal-Wallis one-way ANOVA. | `stats::kruskal.test` |
-| \> 2 | `type = 'r'`: robust. | Heteroscedastic one-way ANOVA for trimmed means. | `WRS2::t1way` |
+| Nº of groups | Type                           | Test                                             | Function in `R`       |
+|:------------:|--------------------------------|--------------------------------------------------|-----------------------|
+|      2       | `type = 'p'`: parametric.      | Student's t-test.                                | `stats::t.test`       |
+|      2       | `type = 'p'`: parametric.      | Welch's t-test.                                  | `stats::t.test`       |
+|      2       | `type = 'r'`: robust.          | Yuen's test for trimmed means.                   | `WRS2::yuen`          |
+|      2       | `type = 'np'`: non-parametric. | Mann-Whitney *U* test.                           | `stats::wilcox.test`  |
+|     \> 2     | `type = 'p'`: parametric.      | Fisher's One-way ANOVA.                          | `stats::oneway.test`  |
+|     \> 2     | `type = 'p'`: parametric.      | Welch's One-way ANOVA.                           | `stats::oneway.test`  |
+|     \> 2     | `type = 'np'`: non-parametric. | Kruskal-Wallis one-way ANOVA.                    | `stats::kruskal.test` |
+|     \> 2     | `type = 'r'`: robust.          | Heteroscedastic one-way ANOVA for trimmed means. | `WRS2::t1way`         |
 
 #### Corresponding Post-Hoc tests for Nº groups \> 2
 
-| Design | Type | Test | Function in `R` |
-|:-:|---|---|---|
-| Paired    | `type = 'p'`: parametric. | Pairwise Student's t-test. | `stats::pairwise.t.test`  |
-| Paired    | `type = 'np'`: non-parametric. | Conover-Iman all-pairs comparison test for a balanced incomplete block design. | `PMCMRplus::durbinAllPairsTest` |
-| Paired    | `type = 'r'`: robust. | Yuen's test for trimmed means and Rom's method for controlling FWE. (see [Wilcox, 2012](http://mqala.co.za/veed/Introduction%20to%20Robust%20Estimation%20and%20Hypothesis%20Testing.pdf), p. 385). | `WRS2::rmmcp` |
-| Independent | `type = 'p'`: parametric + `var.equal = TRUE`. | Pairwise Student's t-test. | `stats::pairwise.t.test` |
-| Independent | `type = 'p'`: parametric + `var.equal = FALSE`. | Games-Howell all-pairs comparison test. | `PMCMRplus::gamesHowellTest` |
-| Independent | `type = 'np'`: non-parametric. | Dunn's non-parametric all-pairs comparison test. | `PMCMRplus::kwAllPairsDunnTest` |
-| Independent | `type = 'r'`: robust. | Pairwise trimmed mean differences (see [Mair and Wilcox](https://rdrr.io/rforge/WRS2/f/inst/doc/WRS2.pdf)). | `WRS2::lincon` |
-
+|   Design    | Type                                            | Test                                                                                                                                                          | Function in `R`                 |
+|:-----------:|-------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+|   Paired    | `type = 'p'`: parametric.                       | Student's t-test.                                                                                                                                             | `stats::pairwise.t.test`        |
+|   Paired    | `type = 'np'`: non-parametric.                  | Conover-Iman all-pairs comparison test.                                                                                                                       | `PMCMRplus::durbinAllPairsTest` |
+|   Paired    | `type = 'r'`: robust.                           | Yuen's test for trimmed means (see [Wilcox, 2012](http://mqala.co.za/veed/Introduction%20to%20Robust%20Estimation%20and%20Hypothesis%20Testing.pdf), p. 385). | `WRS2::rmmcp`                   |
+| Independent | `type = 'p'`: parametric + `var.equal = TRUE`.  | Student's t-test.                                                                                                                                             | `stats::pairwise.t.test`        |
+| Independent | `type = 'p'`: parametric + `var.equal = FALSE`. | Games-Howell test.                                                                                                                                            | `PMCMRplus::gamesHowellTest`    |
+| Independent | `type = 'np'`: non-parametric.                  | Dunn's test.                                                                                                                                                  | `PMCMRplus::kwAllPairsDunnTest` |
+| Independent | `type = 'r'`: robust.                           | Yuen's test for trimmed means (see [Mair and Wilcox](https://rdrr.io/rforge/WRS2/f/inst/doc/WRS2.pdf)).                                                       | `WRS2::lincon`                  |
 
 # Automated testing
 
@@ -100,7 +98,6 @@ result <- report(
   variable = weight, # dependent variable
   by = diet, # independent variable
   type = 'auto', # default
-  pairwise.comp = TRUE, # for pairwise comparisons in case of n groups > 2
   markdown = TRUE # output in Markdown format (for inline text)? otherwise plain text.
 )
 
@@ -108,8 +105,14 @@ result
 ```
 
 ```
-## $report
-## [1] "*t* ~Student~ (98) = 2.509, *p* = 0.014, *Cohen's d* = 0.51, IC~95%~[0.1, 0.91]"
+## $full
+## [1] "*t* ~Student~ (98) = 2.51, *p* = 0.014, *d* ~Cohen's~ = 0.51, CI~95%~[0.1, 0.91]"
+## 
+## $stats
+## [1] "*t* ~Student~ (98) = 2.51, *p* = 0.014"
+## 
+## $es
+## [1] "*d* ~Cohen's~ = 0.51, CI~95%~[0.1, 0.91]"
 ## 
 ## $method
 ## [1] "Student's t-test for independent samples"
@@ -119,11 +122,11 @@ result
 
 The core function: `report` by default return a list of length two in Markdown format (as seen before) for inline results. An example using same data as before:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, `result$report`, evaluated through `result$method`.
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
 
 translates into this:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *Cohen's d* = 0.51, IC<sub>95%</sub> [0.1, 0.91], evaluated through Student's t-test for independent samples.
+The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, IC<sub>95%</sub> [0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 ## Paired samples design
 
@@ -133,18 +136,18 @@ For paired designs you need to set `paired = TRUE`, and then, based on the numbe
 
 When `type = 'auto'` the next assumptions will be checked for \> 2 paired samples:
 
-| Assumption checked | How is tested | If met | If not |
-|----------|------------------------|------------------------|------------------------|
-| Normality | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Sphericity check. | Friedman rank sum test |
-| Sphericity | `afex::test_sphericity(model)`  | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser or Huynh-Feldt correction is applied |
+| Assumption checked | How is tested                                                            | If met                                    | If not                                                  |
+|--------------------|--------------------------------------------------------------------------|-------------------------------------------|---------------------------------------------------------|
+| Normality          | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Sphericity check.                         | Friedman rank sum test                                  |
+| Sphericity         | `afex::test_sphericity(model)`                                           | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser or Huynh-Feldt correction is applied |
 
 
 ```r
 set.seed(123)
 Cancer <- data.frame(
-    cells = round(c(rnorm(n = 150/3, mean = 100, sd = 10)   # Basal
+    cells = round(c(rnorm(n = 150/3, mean = 100, sd = 15)   # Basal
            , rnorm(n = 150/3, mean = 98, sd = 10)   # Time-1
-           , rnorm(n = 150/3, mean = 98, sd = 10) )) # Time-2
+           , rnorm(n = 150/3, mean = 98, sd = 5) )) # Time-2
   , period = gl(n = 3, k = 150/3, labels = c('Basal', 'Time-1', 'Time-2') ) )
 
 report(
@@ -152,22 +155,40 @@ report(
   , variable = cells
   , by = period
   , paired = TRUE
+  , pairwise.comp = TRUE # set to TRUE for pairwise comparisons
   , markdown = FALSE
   )
 ```
 
 ```
-## $report
-## [1] "F(2, 98) = 3.766, p = 0.027, eta^ = 0.071, IC95% [0, 0.18]"
+## $pwc.method
+## [1] "Student's t-test for dependent samples"
+## 
+## $pwc.table
+## # A tibble: 3 x 3
+##   group1 group2 p.value
+##   <chr>  <chr>    <dbl>
+## 1 Time-1 Basal   0.657 
+## 2 Time-2 Basal   0.0757
+## 3 Time-2 Time-1  0.0894
+## 
+## $full
+## [1] "F(1.7, 81) = 1.82, p = 0.175, eta^2 = 0.04, CI95% [0, 0.12]"
+## 
+## $stats
+## [1] "F(1.7, 81) = 1.82, p = 0.175"
+## 
+## $es
+## [1] "eta^2 = 0.04, CI95% [0, 0.12]"
 ## 
 ## $method
-## [1] "One-way repeated measures ANOVA"
+## [1] "One-way repeated measures ANOVA with Greenhouse-Geisser correction"
 ```
 
 However, you can specify your own parameters for the selection of the test:
 
-| Test | Parameters |
-|-------------------------------|-------------------------------|
+| Test                                       | Parameters                                           |
+|--------------------------------------------|------------------------------------------------------|
 | One-way repeated measures ANOVA (rmANOVA)  | `paired = TRUE` + `type = 'p'` + `sphericity = TRUE` |
 | rmANOVA with Greenhouse-Geisser correction | `paired = TRUE` + `type = 'p'` + `sphericity = 'GG'` |
 | rmANOVA with Huynh-Feldt correction        | `paired = TRUE` + `type = 'p'` + `sphericity = 'HF'` |
@@ -178,8 +199,8 @@ However, you can specify your own parameters for the selection of the test:
 
 Similar as before, if `type = 'auto'` assumptions will be checked for 2 paired samples:
 
-| Assumption checked | How is tested | If met | If not |
-|----------|------------------------|------------------------|------------------------|
+| Assumption checked | How is tested                                                            | If met           | If not                    |
+|--------------------|--------------------------------------------------------------------------|------------------|---------------------------|
 | Normality          | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Student's t-test | Wilcoxon signed-rank test |
 
 
@@ -196,8 +217,14 @@ report(
 ```
 
 ```
-## $report
-## [1] "t(49) = 2.015, p = 0.049, d = 0.29, IC95% [0, 0.57]"
+## $full
+## [1] "t(49) = 1.73, p = 0.089, d = 0.25, CI95% [-0.04, 0.53]"
+## 
+## $stats
+## [1] "t(49) = 1.73, p = 0.089"
+## 
+## $es
+## [1] "d = 0.25, CI95% [-0.04, 0.53]"
 ## 
 ## $method
 ## [1] "Student's t-test for dependent samples"
@@ -205,8 +232,8 @@ report(
 
 Same as above, you can specify your own parameters for the selection of the test:
 
-| Test | Parameters |
-|-------------------------------|-------------------------------|
+| Test                                               | Parameters                      |
+|----------------------------------------------------|---------------------------------|
 | Student's t-test for paired samples                | `paired = TRUE` + `type = 'p'`  |
 | Wilcoxon signed-rank test                          | `paired = TRUE` + `type = 'np'` |
 | Yuen's test on trimmed means for dependent samples | `paired = TRUE` + `type = 'r'`  |
@@ -219,41 +246,59 @@ For independent samples you need to set `paired = FALSE`, and then, based on the
 
 When `type = 'auto'` the next assumptions will be checked for \> 2 independent samples:
 
-| Assumption checked | How is tested | If met | If not |
-|----------|------------------------|------------------------|------------------------|
+| Assumption checked       | How is tested                                                            | If met                          | If not               |
+|--------------------------|--------------------------------------------------------------------------|---------------------------------|----------------------|
 | Normality                | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Homogeneity of variances check. | Kruskal-Wallis ANOVA |
-| Homogeneity of variances | `car::leveneTest` | Fisher's ANOVA | Welch's ANOVA |
+| Homogeneity of variances | `car::leveneTest`                                                        | Fisher's ANOVA                  | Welch's ANOVA        |
 
 
 ```r
 set.seed(123)
 Cancer <- data.frame(
-    cells = round(c(rnorm(n = 150/3, mean = 100, sd = 10)   # Basal
-           , rnorm(n = 150/3, mean = 95, sd = 10)   # Time-1
-           , rnorm(n = 150/3, mean = 90, sd = 10) )) # Time-2
-  , period = gl(n = 3, k = 150/3, labels = c('Basal', 'Time-1', 'Time-2') ) )
+    cells = round(c(rnorm(n = 90/3, mean = 100, sd = 20)   # Control
+           , rnorm(n = 90/3, mean = 95, sd = 12)   # Drug A
+           , rnorm(n = 90/3, mean = 90, sd = 15) )) # Drug B
+  , group = gl(n = 3, k = 90/3, labels = c('Control', 'Drug A', 'Drug B') ) )
 
 report(
   data = Cancer
   , variable = cells
-  , by = period
-  , paired = TRUE
+  , by = group
+  , paired = FALSE
+  , pairwise.comp = TRUE
   , markdown = FALSE
   )
 ```
 
 ```
-## $report
-## [1] "F(2, 98) = 23.734, p < 0.001, eta^ = 0.326, IC95% [0.18, 0.45]"
+## $pwc.method
+## [1] "Games Howell test"
+## 
+## $pwc.table
+## # A tibble: 3 x 3
+##   group1 group2  p.value
+##   <chr>  <chr>     <dbl>
+## 1 Drug A Control  0.881 
+## 2 Drug B Control  0.125 
+## 3 Drug B Drug A   0.0790
+## 
+## $full
+## [1] "F(2, 54.7) = 3.04, p = 0.056, eta^2 = 0.1, CI95% [0, 0.25]"
+## 
+## $stats
+## [1] "F(2, 54.7) = 3.04, p = 0.056"
+## 
+## $es
+## [1] "eta^2 = 0.1, CI95% [0, 0.25]"
 ## 
 ## $method
-## [1] "One-way repeated measures ANOVA"
+## [1] "Welch's ANOVA for independent samples"
 ```
 
 However, you can specify your own parameters for the selection of the test:
 
-| Test | Parameters |
-|-------------------------------|-------------------------------|
+| Test                                            | Parameters                                            |
+|-------------------------------------------------|-------------------------------------------------------|
 | Fisher's One-way ANOVA                          | `paired = FALSE` + `type = 'p'` + `var.equal = TRUE`  |
 | Welch's One-way ANOVA                           | `paired = FALSE` + `type = 'p'` + `var.equal = FALSE` |
 | Kruskal–Wallis one-way ANOVA                    | `paired = FALSE` + `type = 'np'`                      |
@@ -263,41 +308,45 @@ However, you can specify your own parameters for the selection of the test:
 
 Just like above, if `type = 'auto'` assumptions will be checked for 2 independent samples:
 
-| Assumption checked | How is tested | If met | If not |
-|----------|------------------------|------------------------|------------------------|
+| Assumption checked       | How is tested                                                            | If met                          | If not                |
+|--------------------------|--------------------------------------------------------------------------|---------------------------------|-----------------------|
 | Normality                | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Homogeneity of variances check. | Mann-Whitney *U* test |
-| Homogeneity of variances | `car::leveneTest` | Student's t-test | Welch's t-test |
+| Homogeneity of variances | `car::leveneTest`                                                        | Student's t-test                | Welch's t-test        |
 
 
 ```r
-CancerTwo <- Cancer[Cancer$period %in% c('Basal','Time-1'),]
-  
 report(
-  data = CancerTwo
+  data = Cancer[Cancer$group %in% c('Drug A','Drug B'),]
   , variable = cells
-  , by = period
-  , paired = TRUE
+  , by = group
+  , var.equal = F
+  , paired = FALSE
   , markdown = FALSE
   )
 ```
 
 ```
-## $report
-## [1] "t(49) = 2.065, p = 0.044, d = 0.29, IC95% [0.01, 0.58]"
+## $full
+## [1] "t(58) = 2.21, p = 0.031, d = 0.58, CI95% [0.05, 1.1]"
+## 
+## $stats
+## [1] "t(58) = 2.21, p = 0.031"
+## 
+## $es
+## [1] "d = 0.58, CI95% [0.05, 1.1]"
 ## 
 ## $method
-## [1] "Student's t-test for dependent samples"
+## [1] "Student's t-test for independent samples"
 ```
 
 You can specify your own parameters for the selection of the test as well:
 
-| Test | Parameters |
-|-------------------------------|-------------------------------|
+| Test                                     | Parameters                                            |
+|------------------------------------------|-------------------------------------------------------|
 | Student's t-test for independent samples | `paired = FALSE` + `type = 'p'` + `var.equal = TRUE`  |
 | Welch's t-test for independent samples   | `paired = FALSE` + `type = 'p'` + `var.equal = FALSE` |
 | Mann–Whitney *U* test                    | `paired = FALSE` + `type = 'np'`                      |
 | Yuen's test on trimmed means             | `paired = FALSE` + `type = 'r'`                       |
-
 
 ## Dependencies
 

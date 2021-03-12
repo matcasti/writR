@@ -55,23 +55,29 @@ bitwo <- function(data
 
         if(markdown) {
 
-        result[['report']] <- paste0(
-          '*t* ~Student~ (', round(test$parameter,1)
-          , ') = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('*t* ~Student~ (', round(test$parameter,1)
+          , ') = ', round(test$statistic,2)
           , ', *p* ',  ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', round(test$p.value,3) ) )
-          , ", *Cohen's d* = ", round(d$d,2)
-          , ', IC~95%~[', round(d$CI_low,2)
-          , ', ', round(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0("*d* ~Cohen's~ = ", round(d$d,2)
+          , ', CI~95%~[', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
         } else {
-        result[['report']] <- paste0(
-          't(', round(test$parameter,1)
-          , ') = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('t(', round(test$parameter,1)
+          , ') = ', round(test$statistic,2)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001' , paste(
-            '=', round(test$p.value,3) ) )
-          , ", d = ", round(d$d,2)
-          , ', IC95% [', round(d$CI_low,2)
-          , ', ', round(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0("d = ", round(d$d,2)
+          , ', CI95% [', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
         }
 
         result[['method']] <- "Student's t-test for independent samples";
@@ -83,24 +89,29 @@ bitwo <- function(data
         d <- effectsize::effectsize(test, verbose = F)
 
         if(markdown) {
-
-        result[['report']] <- paste0(
-          '*t* ~Welch~ (', round(test$parameter,1)
-          , ') = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('*t* ~Welch~ (', round(test$parameter,1)
+          , ') = ', round(test$statistic,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', round(test$p.value,3) ) )
-          , ", *Cohen's d* = ",round(d$d,2)
-          , ', IC~95%~[', round(d$CI_low,2)
-          , ', ', round(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0("*d* ~Cohen's~ = ",round(d$d,2)
+          , ', CI~95%~[', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       } else {
-        result[['report']] <- paste0(
-          't(', round(test$parameter,1)
-          , ') = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('t(', round(test$parameter,1)
+          , ') = ', round(test$statistic,2)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', round(test$p.value,3) ) )
-          , ", d = ",round(d$d,2)
-          , ', IC95% [', round(d$CI_low,2)
-          , ', ', round(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0("d = ",round(d$d,2)
+          , ', CI95% [', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       }
 
         result[['method']] <- "Welch's t-test for independent samples"
@@ -120,23 +131,29 @@ bitwo <- function(data
         , nboot = nboot)
 
       if(markdown) {
-        result[['report']] <- paste0(
-          '*t* ~Yuen~ (', round(test$df, 2)
+        result[['full']] <- paste0(
+          stats <- paste0('*t* ~Yuen~ (', round(test$df, 2)
           , ') = ', round(test$test,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) )
-          , ', $\\xi$ = ', round(r$effsize,2)
-          , ', IC~95%~[', round(r$CI[1L],2)
-          , ', ', round(r$CI[2L], 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('$\\xi$ = ', round(r$effsize,2)
+          , ', CI~95%~[', round(r$CI[1L],2)
+          , ', ', round(r$CI[2L], 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       } else {
-        result[['report']] <- paste0(
-          't(', round(test$df, 2)
+        result[['full']] <- paste0(
+          stats <- paste0('t(', round(test$df, 2)
           , ') = ', round(test$test,2)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) )
-          , ', xi = ', round(r$effsize,2)
-          , ', IC95% [', round(r$CI[1L],2)
-          , ', ', round(r$CI[2L], 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('xi = ', round(r$effsize,2)
+          , ', CI95% [', round(r$CI[1L],2)
+          , ', ', round(r$CI[2L], 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       }
 
       result[['method']] <- "Yuen's test for trimmed means for independent samples"
@@ -148,25 +165,29 @@ bitwo <- function(data
 
       if(markdown) {
 
-        result[['report']] <-  paste0(
-          '*W* = ', round(test$statistic,3)
+        result[['full']] <-  paste0(
+          stats <- paste0('*W* = ', round(test$statistic,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', round(test$p.value,3) ) )
-          , ', *r* ~biserial~ = ', round(r$r_rank_biserial,2)
-          , ', IC~95%~[', round(r$CI_low,2)
-          , ', ', round(r$CI_high, 2), ']')
-      } else {
-        result[['report']] <- paste0(
-          'W = ', round(test$statistic,3)
-          , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=', round(test$p.value,3) ) )
-          , ', r = ', round(r$r_rank_biserial,2)
-          , ', IC95% [', round(r$CI_low,2)
-          , ', ', round(r$CI_high, 2), ']')
-      }
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('*r* ~biserial~ = ', round(r$r_rank_biserial,2)
+          , ', CI~95%~[', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']') )
 
+        result[["stats"]] <- stats
+        result[["es"]] <- es
+      } else {
+        result[['full']] <- paste0(
+          stats <- paste0('W = ', round(test$statistic,2)
+          , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('r = ', round(r$r_rank_biserial,2)
+          , ', CI95% [', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
+      }
       result[['method']] <- 'Mann Whitney U test for independent samples'
       result
-
     }
 }

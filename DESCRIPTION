@@ -19,7 +19,7 @@ Imports:
     dplyr,
     tidyr,
     rlang,
-    parameters,
+    broomExtra,
     nortest,
     effectsize,
     car,

@@ -46,23 +46,29 @@ bipair <- function(data
       d <- effectsize::effectsize(test, verbose = F)
 
       if(markdown) {
-        result[['report']] <- paste0(
-          '*t* ~Student~ (',round(test$parameter,1)
-          , ') = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('*t* ~Student~ (',round(test$parameter,1)
+          , ') = ', round(test$statistic,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-            '=',round(test$p.value,3) ) )
-          , ", *Cohen's d* = ", round(d$d,2)
-          , ', IC~95%~[', round(d$CI_low,2)
-          , ', ', round(d$CI_high, 2), ']')
+            '=',round(test$p.value,3) ) ) ),', '
+          , es <- paste0("*d* ~Cohen's~ = ", round(d$d,2)
+          , ', CI~95%~[', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       } else {
-        result[['report']] <- paste0(
-          't(', round(test$parameter,1)
-          , ') = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('t(', round(test$parameter,1)
+          , ') = ', round(test$statistic,2)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) )
-          , ", d = ",round(d$d,2)
-          , ', IC95% [', round(d$CI_low,2)
-          , ', ', round(d$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0("d = ",round(d$d,2)
+          , ', CI95% [', round(d$CI_low,2)
+          , ', ', round(d$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       }
 
       result[['method']] <- "Student's t-test for dependent samples"
@@ -80,25 +86,30 @@ bipair <- function(data
         , nboot = nboot)['AKP',]
 
       if(markdown) {
-        result[['report']] <- paste0(
-          '*t* ~Yuen~ (', round(test$df, 3)
-          , ') = ', round(test$test,3)
+        result[['full']] <- paste0(
+          stats <- paste0('*t* ~Yuen~ (', round(test$df, 1)
+          , ') = ', round(test$test,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) )
-          , ', $\\delta_R^{AKP}$ = ', round(r[['Est']],2)
-          , ', IC~95%~[', round(r[['ci.low']],2)
-          , ', ', round(r[['ci.up']], 2), ']')
-      } else {
-        result[['report']] <- paste0(
-          't(', round(test$df, 3)
-          , ') = ', round(test$test,3)
-          , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) )
-          , ', delta = ', round(r[['Est']],2)
-          , ', IC95% [', round(r[['ci.low']],2)
-          , ', ', round(r[['ci.up']], 2), ']')
-      }
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('$\\delta_R^{AKP}$ = ', round(r[['Est']],2)
+          , ', CI~95%~[', round(r[['ci.low']],2)
+          , ', ', round(r[['ci.up']], 2), ']') )
 
+        result[["stats"]] <- stats
+        result[["es"]] <- es
+      } else {
+        result[['full']] <- paste0(
+          stats <- paste0('t(', round(test$df, 1)
+          , ') = ', round(test$test,2)
+          , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('delta = ', round(r[['Est']],2)
+          , ', CI95% [', round(r[['ci.low']],2)
+          , ', ', round(r[['ci.up']], 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
+      }
       result[['method']] <- "Yuen's test for trimmed means for dependent samples"
       result
     } else {
@@ -108,21 +119,27 @@ bipair <- function(data
                                      paired = TRUE, verbose = FALSE)
 
       if(markdown) {
-        result[['report']] <- paste0(
-          '*V* = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('*V* = ', round(test$statistic,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) )
-          , ', *r* ~biserial~ = ', round(r$r_rank_biserial,2)
-          , ', IC~95%~[', round(r$CI_low,2)
-          , ', ', round(r$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('*r* ~biserial~ = ', round(r$r_rank_biserial,2)
+          , ', CI~95%~[', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       } else {
-        result[['report']] <- paste0(
-          'V = ', round(test$statistic,3)
+        result[['full']] <- paste0(
+          stats <- paste0('V = ', round(test$statistic,2)
           , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) )
-          , ', r = ', round(r$r_rank_biserial, 2)
-          , ', IC95% [', round(r$CI_low,2)
-          , ', ', round(r$CI_high, 2), ']')
+            '=', round(test$p.value,3) ) ) ),', '
+          , es <- paste0('r = ', round(r$r_rank_biserial, 2)
+          , ', CI95% [', round(r$CI_low,2)
+          , ', ', round(r$CI_high, 2), ']') )
+
+        result[["stats"]] <- stats
+        result[["es"]] <- es
       }
 
       result[['method']] <- 'Wilcoxon signed-rank test for dependent samples'
