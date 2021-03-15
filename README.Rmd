@@ -94,11 +94,62 @@ result
 
 The core function: `report` by default return a list of length two in Markdown format (as seen before) for inline results. An example using same data as before:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
+> The analysis of the effects of the treatment shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
 
 translates into this:
 
-The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, IC<sub>95%</sub> [0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+
+## Mixed effects ANOVA
+
+By using `aov_r` function is possible to get the statistical report of between/within-subject(s) factor(s) for factorial designs using `afex` package under the hood for statistical reporting. Let's see an example
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+# set parameters to simulate data with a between and within subject factor
+within <- 3
+between <- 2
+n <- 400
+
+set.seed(123)
+Stroop <- data.frame(
+  Subject = rep(1:n, within),
+  Gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
+  Time = gl(within, n, length = n*within),
+  Score = rnorm(n*within, mean = 150, sd = 30))
+
+# Manipulate data to generate interaction between Gender and Time
+Stroop <- within(Stroop, {
+  Score[Gender == 'Male' & Time == 1] <- Score[Gender == 'Male' & Time == 1]*1
+  Score[Gender == 'Male' & Time == 2] <- Score[Gender == 'Male' & Time == 2]*1.15
+  Score[Gender == 'Male' & Time == 3] <- Score[Gender == 'Male' & Time == 3]*1.3
+  Score[Gender == 'Female' & Time == 1] <- Score[Gender == 'Female' & Time == 1]*1
+  Score[Gender == 'Female' & Time == 2] <- Score[Gender == 'Female' & Time == 2]*0.85
+  Score[Gender == 'Female' & Time == 3] <- Score[Gender == 'Female' & Time == 3]*0.7
+})
+
+
+r <- aov_r(
+  data = Stroop
+, response = Score
+, between = Gender
+, within = Time
+, id = Subject
+, es = 'omega' # omega squared as our measure of effect size
+, sphericity = 'auto' # check if sphericity is not being violated
+)
+
+r
+```
+
+For inline results with previous data we would do something like this:
+
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( `r$es$Gender` ) on scores when adjusting for each of the time periods, `r$stats$Gender`. In a similar way we find a significant interaction between evaluative time and gender ( `r$stats$Gender_Time` ), indicating unequal responses between males and females over time, `r$es$Gender_Time`, however, time alone is not able to explain statistically significantly the variance in scores, `r$full$Time`.
+
+Which will translate into this after evaluation in R Markdown:
+
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( 𝜔<sup>2</sup> = 0.63, CI<sub>95%</sub>[0.58, 0.67] ) on scores when adjusting for each of the time periods, *F* <sub>Fisher</sub> (1, 398) = 682.91, *p* < 0.001. In a similar way we find a significant interaction between evaluative time and gender ( *F* <sub>Fisher</sub> (2, 796) = 223.68, *p* < 0.001 ), indicating unequal responses between males and females over time, 𝜔<sup>2</sup> = 0.27, CI<sub>95%</sub>[0.22, 0.32], however, time alone is not able to explain statistically significantly the variance in scores, *F* <sub>Fisher</sub> (2, 796) = 0.11, *p* = 0.894, 𝜔<sup>2</sup> = 0, CI<sub>95%</sub>[0, 0].
+
+When you have more than 1 factor (between or within subjects) you have to specify them a character vector: `between = c('factor1', 'factor2' ...)`, and the same for `within = c('factor1', 'factor2' ...)`.
 
 ## Paired samples design
 

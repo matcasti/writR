@@ -113,7 +113,7 @@ multpair <- function(data
 
         if(markdown) {
             result[['full']] <- paste0(
-              stats <- paste0('*F* ~Greenhouse-Geisser~ (', round(output[["num Df"]],1)
+              stats <- paste0('*F* ~GG~ (', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
               , ') = ', round(output[["F"]],2)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
@@ -147,7 +147,7 @@ multpair <- function(data
 
         if(markdown) {
             result[['full']] <- paste0(
-              stats <- paste0('*F* ~Huynh-Feldt~ (', round(output[["num Df"]],1)
+              stats <- paste0('*F* ~HF~ (', round(output[["num Df"]],1)
               , ', ', round(output[["den Df"]],1)
               , ') = ', round(output[["F"]],2)
               , ', *p* ',ifelse(output[["Pr(>F)"]] < 0.001, '< 0.001', paste(
