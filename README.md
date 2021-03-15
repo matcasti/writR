@@ -1,5 +1,13 @@
+---
+output: 
+  html_document: 
+    self_contained: yes
+    keep_md: yes
+---
 
-<table style="width:99%;"><colgroup><col style="width: 33%" /><col style="width: 66%" /></colgroup><thead><tr class="header"><th><p>![](README_files/logo.png)</p></th><th><h1>writR: Inferential statistics and reporting in APA style</h1></th></tr></thead><tbody></tbody></table>
+<table style="width:99%;"><colgroup><col style="width: 33%" /><col style="width: 66%" /></colgroup><thead><tr class="header"><th>![](README_files/logo.png)</th><th><h1>writR: Inferential statistics and reporting in APA style</h1></th></tr></thead><tbody></tbody></table>
+
+
 
 [![DOI](https://zenodo.org/badge/343749343.svg)](https://zenodo.org/badge/latestdoi/343749343)
 
