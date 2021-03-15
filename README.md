@@ -8,6 +8,7 @@
   </tr>
 </table>
 </br>
+
 [![DOI](https://zenodo.org/badge/343749343.svg)](https://zenodo.org/badge/latestdoi/343749343)
 
 ### Installation
