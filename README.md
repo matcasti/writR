@@ -1,17 +1,12 @@
----
-output: 
-  html_document: 
-    self_contained: yes
-    keep_md: yes
----
-
-<table style="width:99%;"><colgroup><col style="width: 33%" /><col style="width: 66%" /></colgroup><thead><tr class="header"><th>![](README_files/logo.png)</th><th><h1>writR: Inferential statistics and reporting in APA style</h1></th></tr></thead><tbody></tbody></table>
-
-
-
-[![DOI](https://zenodo.org/badge/343749343.svg)](https://zenodo.org/badge/latestdoi/343749343)
-
-For automated and basic inferential testing.
+<table>
+  <tr>
+    <th> <img src="README_files/logo.png" width="300"/> </br></br>
+         [![DOI](https://zenodo.org/badge/343749343.svg)](https://zenodo.org/badge/latestdoi/343749343) </th>
+    <th width="20"></th>
+    <th> <h1 style="text-align:left;">writR: Inferential statistics and reporting in APA style</h1> </br>
+         <p style="text-align:center;">For automated and basic inferential testing.</p> </th>
+  </tr>
+</table>
 
 ### Installation
 
