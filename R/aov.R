@@ -27,19 +27,28 @@ aov_r <- function(data
                ) {
 
   result <- list()
-  response <- rlang::ensym(response)
-  between <- if(grepl(',', deparse(substitute(between)))) between else rlang::ensym(between)
-  within <- if(grepl(',', deparse(substitute(within)))) within else rlang::ensym(within)
-  id <- rlang::ensym(id)
+
+  response <- as.character(rlang::ensym(response))
+
+  between <- if(grepl(',', deparse(substitute(between)))) {
+    between } else if(grepl("NULL", deparse(substitute(between)) ) ) {
+      NULL } else { as.character(rlang::ensym(between)) }
+
+  within <- if(grepl(',', deparse(substitute(within))) ) {
+    within } else if(grepl("NULL", deparse(substitute(within)) ) ) {
+      NULL } else { as.character(rlang::ensym(within)) }
+
+  id <- as.character(rlang::ensym(id))
 
   suppressMessages(
-    suppressWarnings(model <- afex::aov_ez(id = as.character(id)
-                      , dv =  as.character(response)
+    suppressWarnings(model <- afex::aov_ez(id = id
+                      , dv = response
                       , data = data
-                      , between = as.character(between)
-                      , within = as.character(within)
+                      , between = between
+                      , within = within
                       , type = type) ) )
 
+  if(!is.null(within)) {
   spher.test <- suppressWarnings(expr = { afex::test_sphericity(model) })
   sphericity <- if(sphericity == 'auto') {
     # Comprobación de esfericidad ----
@@ -47,6 +56,7 @@ aov_r <- function(data
       'none' } else { ges <- any(model$anova_table$ges <= 0.75)
       if(ges) { 'GG' } else { 'HF' } }
     } else if(purrr::is_empty(spher.test)) { 'none' } else { sphericity }
+  } else { sphericity <- NULL }
 
   efs <- if(es == 'eta') { effectsize::eta_squared(model, ci = 0.95)
     } else if(es == 'omega') { effectsize::omega_squared(model, ci = 0.95)
