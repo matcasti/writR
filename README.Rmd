@@ -7,6 +7,8 @@ output:
 
 # writR: Inferential statistics and reporting in APA style
 
+[![DOI](https://zenodo.org/badge/343749343.svg)](https://zenodo.org/badge/latestdoi/343749343)
+
 For automated and basic inferential testing.
 
 ### Installation
