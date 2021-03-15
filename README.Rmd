@@ -54,13 +54,14 @@ sticker(p, package="writR",
 
 <table>
   <tr>
-    <th> <img src="README_files/logo.png" width="300"/> </br></br>
-         [![DOI](https://zenodo.org/badge/343749343.svg)](https://zenodo.org/badge/latestdoi/343749343) </th>
+    <th> <img src="README_files/logo.png" width="300"/> </th>
     <th width="20"></th>
     <th> <h1 style="text-align:left;">writR: Inferential statistics and reporting in APA style</h1> </br>
          <p style="text-align:center;">For automated and basic inferential testing.</p> </th>
   </tr>
 </table>
+</br>
+[![DOI](https://zenodo.org/badge/343749343.svg)](https://zenodo.org/badge/latestdoi/343749343)
 
 ### Installation
 
