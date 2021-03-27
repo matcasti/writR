@@ -52,7 +52,7 @@ sticker(p, package="writR",
         u_color = 'white',
         dpi = 600)
 ```
-
+ 
 <table>
   <tr>
     <th> <img src="README_files/logo.png" width="300"/> </th>
