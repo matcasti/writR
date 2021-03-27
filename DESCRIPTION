@@ -9,7 +9,7 @@ Authors@R:
            email = "matcasti@umag.cl",
            comment = c(ORCID = "0000-0001-7291-247X"))
 Description: Perform and report basic inferential tests for group differences in APA style for articles writings in Markdown or plain text format.
-URL: https://github.com/matcasti/writR
+URL: https://doi.org/10.5281/zenodo.4603838
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
