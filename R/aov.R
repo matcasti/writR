@@ -28,15 +28,15 @@ aov_r <- function(data
 
   result <- list()
 
+  between <- if(is.name(substitute(between)))
+    as.character(rlang::ensym(between)) else if(is.null(between))
+      NULL else if(is.character(between)) between else stop('Not valid entry for variable between')
+
+  within <- if(is.name(substitute(within)))
+    as.character(rlang::ensym(within)) else if(is.null(within))
+      NULL else if(is.character(within)) within else stop('Not valid entry for variable between')
+
   response <- as.character(rlang::ensym(response))
-
-  between <- if(grepl(',', deparse(substitute(between)))) {
-    between } else if(grepl("NULL", deparse(substitute(between)) ) ) {
-      NULL } else { as.character(rlang::ensym(between)) }
-
-  within <- if(grepl(',', deparse(substitute(within))) ) {
-    within } else if(grepl("NULL", deparse(substitute(within)) ) ) {
-      NULL } else { as.character(rlang::ensym(within)) }
 
   id <- as.character(rlang::ensym(id))
 
@@ -74,7 +74,7 @@ aov_r <- function(data
   })
 
   efs[,-1] <- round(efs[,-1],2)
-  at$correction <- if(at$correction == 'none') 'Fisher'
+  if(at$correction == 'none' || is.null(at$correction)) { at$correction <- 'Fisher' }
   et <- if(markdown) paste0('$\\',es,'$^2^ = ') else paste0(es,'^2 = ')
 
   if(markdown) {
