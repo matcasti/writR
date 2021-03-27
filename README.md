@@ -1,4 +1,3 @@
-
 <table>
   <tr>
     <th> <img src="README_files/logo.png" width="300"/> </th>
@@ -9,7 +8,7 @@
 </table>
 </br>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4641761)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4603838)
 
 
 ### Installation
