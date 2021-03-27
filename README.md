@@ -1,3 +1,4 @@
+
 <table>
   <tr>
     <th> <img src="README_files/logo.png" width="300"/> </th>
@@ -35,7 +36,7 @@ citation('writR')
 ## 
 ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
 ##   reporting in APA style. R package version 0.1.2.
-##   https://github.com/matcasti/writR
+##   https://doi.org/10.5281/zenodo.4603838
 ## 
 ## A BibTeX entry for LaTeX users is
 ## 
@@ -44,7 +45,7 @@ citation('writR')
 ##     author = {Matías {Castillo Aguilar}},
 ##     year = {2021},
 ##     note = {R package version 0.1.2},
-##     url = {https://github.com/matcasti/writR},
+##     url = {https://doi.org/10.5281/zenodo.4603838},
 ##   }
 ```
 
