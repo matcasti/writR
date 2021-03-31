@@ -45,6 +45,13 @@ multgroup <- function(data
       type <- if(n.test) { 'check' } else { 'np' }
     }
     if(type %in% c('p','check')) {
+
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       if(type == 'check') {
         # Prueba de Levene ----
         hvar.test <- car::leveneTest(data[[variable]], data[[by]] )[1,3] > 0.05
@@ -151,6 +158,12 @@ multgroup <- function(data
         , data = data
         , tr = trim)
 
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       if(pairwise.comp) {
         # Post-Hoc ----
           result[['pwc.method']] <- "Yuen's test on trimmed means"
@@ -197,6 +210,12 @@ multgroup <- function(data
       # Suma de rangos de Kruskal-Wallis, muestras independientes ----
       test <- stats::kruskal.test(stats::as.formula(paste(variable, by, sep = '~')), data)
       epsilon <- effectsize::rank_epsilon_squared(data[[variable]] ~ data[[by]], data)
+
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'Mdn = '
+        , round(median(data[data[[by]] == j,][[variable]], na.rm = T),2), ', IQR = '
+        , round(IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
       if(pairwise.comp) {
         # Post-Hoc: Dunn test ----

@@ -53,10 +53,10 @@ sticker(p, package="writR",
         dpi = 600)
 ```
  
+<img src="README_files/logo.png" width="300"/>
+ 
 <table>
   <tr>
-    <th> <img src="README_files/logo.png" width="300"/> </th>
-    <th width="20"></th>
     <th> <h1 style="text-align:left;">writR: Inferential statistics and reporting in APA style</h1> </br>
          <p style="text-align:center;">For automated and basic inferential testing.</p> </th>
   </tr>
@@ -149,13 +149,13 @@ result
 
 ## Inline results in APA style
 
-The core function: `report` by default return a list of length two in Markdown format (as seen before) for inline results. An example using same data as before:
+The core function: `report` by default return a list of length five in Markdown format (as seen before) for inline results. An example using same data as before:
 
-> The analysis of the effects of the treatment shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
+> The analysis of the effects of the treatment shows that treatment group had greater weight (`result$desc$Treatment`) than the control group (`result$desc$Control`). Further analyses shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
 
 translates into this:
 
-> The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment shows that treatment group had greater weight (`r result$desc$Treatment`) than the control group (`r result$desc$Control`). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 ## Mixed effects ANOVA
 

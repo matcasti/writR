@@ -45,6 +45,12 @@ bipair <- function(data
       test <- stats::t.test(stats::as.formula(paste(variable, by, sep = '~')), data, paired = T)
       d <- effectsize::effectsize(test, verbose = F)
 
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       if(markdown) {
         result[['full']] <- paste0(
           stats <- paste0('*t* ~Student~ (',round(test$parameter,1)
@@ -85,6 +91,12 @@ bipair <- function(data
         , tr = trim
         , nboot = nboot)['AKP',]
 
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       if(markdown) {
         result[['full']] <- paste0(
           stats <- paste0('*t* ~Yuen~ (', round(test$df, 1)
@@ -117,6 +129,12 @@ bipair <- function(data
       test <- stats::wilcox.test(stats::as.formula(paste(variable, by, sep = '~')), data, correct = T, exact = F, paired = T)
       r <- effectsize::rank_biserial(data[[variable]] ~ data[[by]], data = data,
                                      paired = TRUE, verbose = FALSE)
+
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'Mdn = '
+        , round(median(data[data[[by]] == j,][[variable]], na.rm = T),2), ', IQR = '
+        , round(IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
       if(markdown) {
         result[['full']] <- paste0(

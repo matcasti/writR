@@ -43,6 +43,13 @@ bitwo <- function(data
       type <- if(n.test) { c('check') } else { 'np' }
     }
     if(type %in% c('p','check')) {
+
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       if(type == 'check') {
         # Prueba de Levene ----
         hvar.test <- car::leveneTest(data[[variable]], data[[by]] )[1,3] > 0.05
@@ -130,6 +137,12 @@ bitwo <- function(data
         , tr = trim
         , nboot = nboot)
 
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       if(markdown) {
         result[['full']] <- paste0(
           stats <- paste0('*t* ~Yuen~ (', round(test$df, 2)
@@ -163,8 +176,13 @@ bitwo <- function(data
       test <- stats::wilcox.test(stats::as.formula(paste(variable, by, sep = "~")), data, correct = T, exact = F, paired = F)
       r <- effectsize::rank_biserial(data[[variable]] ~ data[[by]], data = data)
 
-      if(markdown) {
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'Mdn = '
+        , round(median(data[data[[by]] == j,][[variable]], na.rm = T),2), ', IQR = '
+        , round(IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
+      if(markdown) {
         result[['full']] <-  paste0(
           stats <- paste0('*W* = ', round(test$statistic,2)
           , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(

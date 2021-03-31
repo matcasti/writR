@@ -45,6 +45,13 @@ multpair <- function(data
       type <- if(n.test) { 'check' } else { 'np' }
     }
     if(type %in% c('p','check')) {
+
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       # ANOVA, medidas repetidas ----
       model <- afex::aov_ez(id = 'rowid',
                             dv = as.character(variable),
@@ -183,6 +190,12 @@ multpair <- function(data
                               blocks = data[['rowid']],
                               tr = trim)
 
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'M = '
+        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim),2), ', SD = '
+        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
       # Tamaño de efecto no disponible para RMANOVA
 
       if(pairwise.comp) {
@@ -223,6 +236,12 @@ multpair <- function(data
       # Suma de rangos de Friedman, medidas repetidas ----
       output <- stats::friedman.test(stats::as.formula(paste(paste(variable, by, sep = '~'),'| rowid')), data)
       kendall <- effectsize::kendalls_w(as.character(variable), as.character(by), 'rowid', data)
+
+      for(j in levels(data[[by]])) {
+      result[['desc']][j] <- list(paste0(
+        'Mdn = '
+        , round(median(data[data[[by]] == j,][[variable]], na.rm = T),2), ', IQR = '
+        , round(IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
       if(pairwise.comp) {
         # Post-Hoc: Durbin test ----

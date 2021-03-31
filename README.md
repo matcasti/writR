@@ -1,8 +1,8 @@
 
+<img src="README_files/logo.png" width="300"/>
+ 
 <table>
   <tr>
-    <th> <img src="README_files/logo.png" width="300"/> </th>
-    <th width="20"></th>
     <th> <h1 style="text-align:left;">writR: Inferential statistics and reporting in APA style</h1> </br>
          <p style="text-align:center;">For automated and basic inferential testing.</p> </th>
   </tr>
@@ -115,6 +115,14 @@ result
 ```
 
 ```
+## $desc
+## $desc$Treatment
+## [1] "M = 70.24, SD = 6.48"
+## 
+## $desc$Control
+## [1] "M = 67.02, SD = 6.34"
+## 
+## 
 ## $full
 ## [1] "*t* ~Student~ (98) = 2.51, *p* = 0.014, *d* ~Cohen's~ = 0.51, CI~95%~[0.1, 0.91]"
 ## 
@@ -130,13 +138,13 @@ result
 
 ## Inline results in APA style
 
-The core function: `report` by default return a list of length two in Markdown format (as seen before) for inline results. An example using same data as before:
+The core function: `report` by default return a list of length five in Markdown format (as seen before) for inline results. An example using same data as before:
 
-> The analysis of the effects of the treatment shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
+> The analysis of the effects of the treatment shows that treatment group had greater weight (`result$desc$Treatment`) than the control group (`result$desc$Control`). Further analyses shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
 
 translates into this:
 
-> The analysis of the effects of the treatment shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment shows that treatment group had greater weight (M = 70.24, SD = 6.48) than the control group (M = 67.02, SD = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 ## Mixed effects ANOVA
 
@@ -257,6 +265,17 @@ report(
 ```
 
 ```
+## $desc
+## $desc$Basal
+## [1] "M = 100.56, SD = 13.83"
+## 
+## $desc$`Time-1`
+## [1] "M = 99.5, SD = 9.01"
+## 
+## $desc$`Time-2`
+## [1] "M = 96.82, SD = 4.99"
+## 
+## 
 ## $pwc.method
 ## [1] "Student's t-test for dependent samples"
 ## 
@@ -313,6 +332,14 @@ report(
 ```
 
 ```
+## $desc
+## $desc$`Time-1`
+## [1] "M = 99.5, SD = 9.01"
+## 
+## $desc$`Time-2`
+## [1] "M = 96.82, SD = 4.99"
+## 
+## 
 ## $full
 ## [1] "t(49) = 1.73, p = 0.089, d = 0.25, CI95% [-0.04, 0.53]"
 ## 
@@ -367,6 +394,17 @@ report(
 ```
 
 ```
+## $desc
+## $desc$Control
+## [1] "M = 99, SD = 19.59"
+## 
+## $desc$`Drug A`
+## [1] "M = 97.07, SD = 10.01"
+## 
+## $desc$`Drug B`
+## [1] "M = 90.43, SD = 13.07"
+## 
+## 
 ## $pwc.method
 ## [1] "Games Howell test"
 ## 
@@ -422,6 +460,14 @@ report(
 ```
 
 ```
+## $desc
+## $desc$`Drug A`
+## [1] "M = 97.07, SD = 10.01"
+## 
+## $desc$`Drug B`
+## [1] "M = 90.43, SD = 13.07"
+## 
+## 
 ## $full
 ## [1] "t(58) = 2.21, p = 0.031, d = 0.58, CI95% [0.05, 1.1]"
 ## 
