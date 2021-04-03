@@ -46,12 +46,6 @@ multgroup <- function(data
     }
     if(type %in% c('p','check')) {
 
-      for(j in levels(data[[by]])) {
-      result[['desc']][j] <- list(paste0(
-        'M = '
-        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T),2), ', SD = '
-        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
-
       if(type == 'check') {
         # Prueba de Levene ----
         hvar.test <- car::leveneTest(data[[variable]], data[[by]] )[1,3] > 0.05
@@ -75,33 +69,30 @@ multgroup <- function(data
             , p.adjust.method = p.adjust
             , paired = FALSE)) })
         }
-        if(markdown) {
+
+        desc <- if(markdown) {
+        list(m = '*M* = ', i = ', *SD* = ', f = '*F* ~Fisher~ (', p = ', *p* '
+             , eta = '$\\eta$^2^ = ', ci = ', CI~95%~[') } else {
+          list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
+               , eta = "eta^2 = ", ci = ', CI95% [') }
+
+        for(j in levels(data[[by]])) {
+          result[['desc']][j] <- list(paste0(
+          desc$m
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
+          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
           result[['full']] <- paste0(
-            stats <- paste0('*F* ~Fisher~ (', round(test$parameter[1],1)
+            stats <- paste0(desc$f, round(test$parameter[1],1)
             ,', ', round(test$parameter[2],1)
             , ') = ', round(test$statistic,2)
-            , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
+            , desc$p,ifelse(test$p.value < 0.001, '< 0.001', paste(
               '=', round(test$p.value, 3) ) ) ), ', '
-            , es <- paste0('$\\eta$^2^ = ', round(eta$Eta2,2)
-            , ', CI~95%~[', round(eta$CI_low,2)
+            , es <- paste0(desc$eta, round(eta$Eta2,2)
+            , desc$ci, round(eta$CI_low,2)
             , ', ', round(eta$CI_high,2), ']') )
-
           result[['stats']] <- stats
           result[['es']] <- es
-        } else {
-          result[['full']] <- paste0(
-            stats <- paste0('F(', round(test$parameter[1],1)
-            , ', ', round(test$parameter[2],1)
-            , ') = ', round(test$statistic,2)
-            , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) ) ), ', '
-            , es <- paste0('eta^2 = ', round(eta$Eta2,2)
-            , ', CI95% [', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']') )
-
-          result[['stats']] <- stats
-          result[['es']] <- es
-        }
 
         result[['method']] <- "Fisher's ANOVA for independent samples"
         result
@@ -120,33 +111,30 @@ multgroup <- function(data
               x = data[[variable]]
               , g = data[[by]]))[,c(1,2,4)] })
         }
-        if(markdown)  {
+
+        desc <- if(markdown) {
+        list(m = '*M* = ', i = ', *SD* = ', f = '*F* ~Welch~ (', p = ', *p* '
+             , eta = '$\\eta$^2^ = ', ci = ', CI~95%~[') } else {
+          list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
+               , eta = "eta^2 = ", ci = ', CI95% [') }
+
+        for(j in levels(data[[by]])) {
+          result[['desc']][j] <- list(paste0(
+          desc$m
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
+          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
           result[['full']] <- paste0(
-            stats <- paste0('*F* ~Welch~ (', round(test$parameter[1],1)
+            stats <- paste0(desc$f, round(test$parameter[1],1)
             , ', ', round(test$parameter[2],1)
             , ') = ', round(test$statistic,2)
-            , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
+            , desc$p, ifelse(test$p.value < 0.001, '< 0.001', paste(
               '=', round(test$p.value, 3) ) ) ),', '
-            , es <- paste0('$\\eta$^2^ = ', round(eta$Eta2,2)
-            , ', CI~95%~[', round(eta$CI_low,2)
+            , es <- paste0(desc$eta, round(eta$Eta2,2)
+            , desc$ci, round(eta$CI_low,2)
             , ', ', round(eta$CI_high,2), ']') )
-
           result[['stats']] <- stats
           result[['es']] <- es
-        } else {
-          result[['full']] <- paste0(
-            stats <- paste0('F(',round(test$parameter[1],1)
-            , ', ', round(test$parameter[2],1)
-            , ') = ', round(test$statistic,2)
-            , ', p ', ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) ) ), ', '
-            , es <- paste0('eta^2 = ', round(eta$Eta2,2)
-            , ', CI95% [', round(eta$CI_low,2)
-            , ', ', round(eta$CI_high,2), ']') )
-
-          result[['stats']] <- stats
-          result[['es']] <- es
-        }
 
         result[['method']] <- "Welch's ANOVA for independent samples"
         result
@@ -157,12 +145,6 @@ multgroup <- function(data
         formula = stats::as.formula(paste0(variable,' ~ ',by))
         , data = data
         , tr = trim)
-
-      for(j in levels(data[[by]])) {
-      result[['desc']][j] <- list(paste0(
-        'M = '
-        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim),2), ', SD = '
-        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
       if(pairwise.comp) {
         # Post-Hoc ----
@@ -175,34 +157,30 @@ multgroup <- function(data
               , data = data
               , tr = trim))[,c(1,2,7)] })
       }
-      if(markdown) {
+
+      desc <- if(markdown) {
+        list(m = '*M* = ', i = ', *SD* = ', f = '*F* ~trimed-means~ (', p = ', *p* '
+             , xi = '$\\xi$ = ', ci = ', CI~95%~[') } else {
+          list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
+               , xi = "xi = ", ci = ', CI95% [') }
+
+        for(j in levels(data[[by]])) {
+          result[['desc']][j] <- list(paste0(
+          desc$m
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim) ), desc$i
+          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
           result[['full']] <- paste0(
-            stats <- paste0('*F* ~trimed-means~ (', round(test$df1,1)
+            stats <- paste0(desc$f, round(test$df1,1)
             ,', ', round(test$df2,1)
             , ') = ', round(test$test,2)
-            , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
+            , desc$p,ifelse(test$p.value < 0.001, '< 0.001', paste(
               '=', round(test$p.value, 3) ) ) ), ', '
-            , es <- paste0('$\\xi$ = ', round(test$effsize,2)
-            , ', CI~95%~[', round(test$effsize_ci[1],2)
+            , es <- paste0(desc$xi, round(test$effsize,2)
+            , desc$ci, round(test$effsize_ci[1],2)
             , ', ', round(test$effsize_ci[2],2), ']') )
-
           result[['stats']] <- stats
           result[['es']] <- es
-
-        } else {
-          result[['full']] <- paste0(
-            stats <- paste0('F(', round(test$df1,1)
-            ,', ', round(test$df2,1)
-            , ') = ', round(test$test,2)
-            , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) ) ), ', '
-            , es <- paste0('xi = ', round(test$effsize,2)
-            , ', CI95% [', round(test$effsize_ci[1],2)
-            , ', ', round(test$effsize_ci[2],2), ']') )
-
-          result[['stats']] <- stats
-          result[['es']] <- es
-        }
 
       result[['method']] <- 'Heteroscedastic one way ANOVA for trimmed means'
       result
@@ -210,12 +188,6 @@ multgroup <- function(data
       # Suma de rangos de Kruskal-Wallis, muestras independientes ----
       test <- stats::kruskal.test(stats::as.formula(paste(variable, by, sep = '~')), data)
       epsilon <- effectsize::rank_epsilon_squared(data[[variable]] ~ data[[by]], data)
-
-      for(j in levels(data[[by]])) {
-      result[['desc']][j] <- list(paste0(
-        'Mdn = '
-        , round(median(data[data[[by]] == j,][[variable]], na.rm = T),2), ', IQR = '
-        , round(IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
       if(pairwise.comp) {
         # Post-Hoc: Dunn test ----
@@ -228,31 +200,29 @@ multgroup <- function(data
               , g = data[[by]]
               , p.adjust.method = p.adjust))[,c(1,2,4)] })
       }
-      if(markdown) {
-          result[['full']] <- paste0(
-            stats <- paste0('$\\chi$^2^ ~Kruskal-Wallis ~(', round(test$parameter,1)
-            , ') = ', round(test$statistic,2)
-            , ', *p* ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) ) ),', '
-            , es <- paste0('$\\epsilon$^2^ = ', round(epsilon$rank_epsilon_squared,2)
-            , ', CI~95%~[', round(epsilon$CI_low,2)
-            , ', ', round(epsilon$CI_high,2), ']') )
 
+      desc <- if(markdown) {
+        list(m = '*Mdn* = ', i = ', *IQR* = ', chi = '$\\chi$^2^ ~Kruskal-Wallis~ (', p = ', *p* '
+             , ep = '$\\epsilon$^2^ = ', ci = ', CI~95%~[') } else {
+          list(m = 'Mdn = ', i = ', IQR = ', chi = 'X^2(', p = ', p '
+               , ep = 'epsilon^2 = ', ci = ', CI95% [') }
+
+      for(j in levels(data[[by]])) {
+        result[['desc']][j] <- list(paste0(
+        desc$m
+        , round(stats::median(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
+        , round(stats::IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+
+          result[['full']] <- paste0(
+            stats <- paste0(desc$chi, round(test$parameter,1)
+            , ') = ', round(test$statistic,2)
+            , desc$p,ifelse(test$p.value < 0.001, '< 0.001', paste(
+              '=', round(test$p.value, 3) ) ) ),', '
+            , es <- paste0(desc$ep, round(epsilon$rank_epsilon_squared,2)
+            , desc$ci, round(epsilon$CI_low,2)
+            , ', ', round(epsilon$CI_high,2), ']') )
           result[["stats"]] <- stats
           result[["es"]] <- es
-        } else {
-          result[['full']] <- paste0(
-            stats <- paste0('X^2(', round(test$parameter,1)
-            , ') = ', round(test$statistic,2)
-            , ', p ',ifelse(test$p.value < 0.001, '< 0.001', paste(
-              '=', round(test$p.value, 3) ) ) ),', '
-            , es <- paste0('epsilon^2 = ', round(epsilon$rank_epsilon_squared,2)
-            , ', CI95% [', round(epsilon$CI_low,2)
-            , ', ', round(epsilon$CI_high,2), ']') )
-
-          result[["stats"]] <- stats
-          result[["es"]] <- es
-        }
 
       result[['method']] <- 'Kruskal Wallis one way ANOVA'
       result

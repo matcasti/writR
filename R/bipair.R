@@ -45,37 +45,29 @@ bipair <- function(data
       test <- stats::t.test(stats::as.formula(paste(variable, by, sep = '~')), data, paired = T)
       d <- effectsize::effectsize(test, verbose = F)
 
+      desc <- if(markdown) {
+        list(m = '*M* = ', i = ', *SD* = ', t = '*t* ~Student~ (', p = ', *p* '
+             , d = "*d* ~Cohen's~ = ", ci = ', CI~95%~[') } else {
+          list(m = 'M = ', i = ', SD = ', t = 't(', p = ', p '
+               , d = "d = ", ci = ', CI95% [') }
+
+
       for(j in levels(data[[by]])) {
       result[['desc']][j] <- list(paste0(
-        'M = '
-        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T),2), ', SD = '
-        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+        desc$m
+        , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
+        , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
-      if(markdown) {
         result[['full']] <- paste0(
-          stats <- paste0('*t* ~Student~ (',round(test$parameter,1)
+          stats <- paste0(desc$t,round(test$parameter,1)
           , ') = ', round(test$statistic,2)
-          , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001', paste(
+          , desc$p, ifelse(test$p.value < 0.001, '< 0.001', paste(
             '=',round(test$p.value,3) ) ) ),', '
-          , es <- paste0("*d* ~Cohen's~ = ", round(d$d,2)
-          , ', CI~95%~[', round(d$CI_low,2)
+          , es <- paste0(desc$d, round(d$d,2)
+          , desc$ci, round(d$CI_low,2)
           , ', ', round(d$CI_high, 2), ']') )
-
         result[["stats"]] <- stats
         result[["es"]] <- es
-      } else {
-        result[['full']] <- paste0(
-          stats <- paste0('t(', round(test$parameter,1)
-          , ') = ', round(test$statistic,2)
-          , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) ) ),', '
-          , es <- paste0("d = ",round(d$d,2)
-          , ', CI95% [', round(d$CI_low,2)
-          , ', ', round(d$CI_high, 2), ']') )
-
-        result[["stats"]] <- stats
-        result[["es"]] <- es
-      }
 
       result[['method']] <- "Student's t-test for dependent samples"
       result
@@ -91,37 +83,29 @@ bipair <- function(data
         , tr = trim
         , nboot = nboot)['AKP',]
 
+      desc <- if(markdown) {
+        list(m = '*M* = ', i = ', *SD* = ', t = '*t* ~Yuen~ (', p = ', *p* '
+             , d = '$\\delta_R^{AKP}$ = ', ci = ', CI~95%~[') } else {
+          list(m = 'M = ', i = ', SD = ', t = 't(', p = ', p '
+               , d = "delta = ", ci = ', CI95% [') }
+
       for(j in levels(data[[by]])) {
       result[['desc']][j] <- list(paste0(
-        'M = '
-        , round(mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim),2), ', SD = '
-        , round(sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+        desc$m
+        , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim),2), desc$i
+        , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
-      if(markdown) {
         result[['full']] <- paste0(
-          stats <- paste0('*t* ~Yuen~ (', round(test$df, 1)
+          stats <- paste0(desc$t, round(test$df, 1)
           , ') = ', round(test$test,2)
-          , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
+          , desc$p, ifelse(test$p.value < 0.001, '< 0.001',paste(
             '=', round(test$p.value,3) ) ) ),', '
-          , es <- paste0('$\\delta_R^{AKP}$ = ', round(r[['Est']],2)
-          , ', CI~95%~[', round(r[['ci.low']],2)
+          , es <- paste0(desc$d, round(r[['Est']],2)
+          , desc$ci, round(r[['ci.low']],2)
           , ', ', round(r[['ci.up']], 2), ']') )
-
         result[["stats"]] <- stats
         result[["es"]] <- es
-      } else {
-        result[['full']] <- paste0(
-          stats <- paste0('t(', round(test$df, 1)
-          , ') = ', round(test$test,2)
-          , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) ) ),', '
-          , es <- paste0('delta = ', round(r[['Est']],2)
-          , ', CI95% [', round(r[['ci.low']],2)
-          , ', ', round(r[['ci.up']], 2), ']') )
 
-        result[["stats"]] <- stats
-        result[["es"]] <- es
-      }
       result[['method']] <- "Yuen's test for trimmed means for dependent samples"
       result
     } else {
@@ -130,35 +114,28 @@ bipair <- function(data
       r <- effectsize::rank_biserial(data[[variable]] ~ data[[by]], data = data,
                                      paired = TRUE, verbose = FALSE)
 
+      desc <- if(markdown) {
+        list(m = '*Mdn* = ', i = ', *IQR* = ', v = '*V* = ', p = ', *p* '
+             , r = '*r* ~biserial~ = ', ci = ', CI~95%~[') } else {
+          list(m = 'Mdn = ', i = ', IQR = ', v = 'V = ', p = ', p '
+               , r = 'r = ', ci = ', CI95% [') }
+
       for(j in levels(data[[by]])) {
       result[['desc']][j] <- list(paste0(
-        'Mdn = '
-        , round(median(data[data[[by]] == j,][[variable]], na.rm = T),2), ', IQR = '
-        , round(IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+        desc$m
+        , round(stats::median(data[data[[by]] == j,][[variable]], na.rm = T),2), desc$i
+        , round(stats::IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
-      if(markdown) {
         result[['full']] <- paste0(
-          stats <- paste0('*V* = ', round(test$statistic,2)
-          , ', *p* ', ifelse(test$p.value < 0.001, '< 0.001',paste(
+          stats <- paste0(desc$v, round(test$statistic,2)
+          , desc$p, ifelse(test$p.value < 0.001, '< 0.001',paste(
             '=', round(test$p.value,3) ) ) ),', '
-          , es <- paste0('*r* ~biserial~ = ', round(r$r_rank_biserial,2)
-          , ', CI~95%~[', round(r$CI_low,2)
+          , es <- paste0(desc$r, round(r$r_rank_biserial,2)
+          , desc$ci, round(r$CI_low,2)
           , ', ', round(r$CI_high, 2), ']') )
-
         result[["stats"]] <- stats
         result[["es"]] <- es
-      } else {
-        result[['full']] <- paste0(
-          stats <- paste0('V = ', round(test$statistic,2)
-          , ', p ', ifelse(test$p.value < 0.001, '< 0.001',paste(
-            '=', round(test$p.value,3) ) ) ),', '
-          , es <- paste0('r = ', round(r$r_rank_biserial, 2)
-          , ', CI95% [', round(r$CI_low,2)
-          , ', ', round(r$CI_high, 2), ']') )
 
-        result[["stats"]] <- stats
-        result[["es"]] <- es
-      }
 
       result[['method']] <- 'Wilcoxon signed-rank test for dependent samples'
       result

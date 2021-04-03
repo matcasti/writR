@@ -35,7 +35,7 @@ citation('writR')
 ## To cite package 'writR' in publications use:
 ## 
 ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-##   reporting in APA style. R package version 0.1.2.
+##   reporting in APA style. R package version 0.1.4.
 ##   https://doi.org/10.5281/zenodo.4603838
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -44,7 +44,7 @@ citation('writR')
 ##     title = {writR: Inferential statistics and reporting in APA style},
 ##     author = {Matías {Castillo Aguilar}},
 ##     year = {2021},
-##     note = {R package version 0.1.2},
+##     note = {R package version 0.1.4},
 ##     url = {https://doi.org/10.5281/zenodo.4603838},
 ##   }
 ```
@@ -117,10 +117,10 @@ result
 ```
 ## $desc
 ## $desc$Treatment
-## [1] "M = 70.24, SD = 6.48"
+## [1] "*M* = 70, *SD* = 6.48"
 ## 
 ## $desc$Control
-## [1] "M = 67.02, SD = 6.34"
+## [1] "*M* = 67, *SD* = 6.34"
 ## 
 ## 
 ## $full
@@ -144,7 +144,7 @@ The core function: `report` by default return a list of length five in Markdown 
 
 translates into this:
 
-> The analysis of the effects of the treatment shows that treatment group had greater weight (M = 70.24, SD = 6.48) than the control group (M = 67.02, SD = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment shows that treatment group had greater weight (*M* = 70, *SD* = 6.48) than the control group (*M* = 67, *SD* = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 ## Mixed effects ANOVA
 
@@ -191,13 +191,13 @@ r
 ```
 ## $full
 ## $full$Gender
-## [1] "*F* ~Fisher~ (1, 398) = 682.91, *p* < 0.001, $\\omega$^2^ = 0.63, CI~95%~[0.58, 0.67]"
+## [1] "*F* ~Fisher~ (1, 398) = 682.91, *p* < 0.001, $\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
 ## 
 ## $full$Time
-## [1] "*F* ~Fisher~ (2, 796) = 0.11, *p* = 0.894, $\\omega$^2^ = 0, CI~95%~[0, 0]"
+## [1] "*F* ~Fisher~ (2, 796) = 0.11, *p* = 0.894, $\\omega^2$ = 0, CI~95%~[0, 0]"
 ## 
 ## $full$Gender_Time
-## [1] "*F* ~Fisher~ (2, 796) = 223.68, *p* < 0.001, $\\omega$^2^ = 0.27, CI~95%~[0.22, 0.32]"
+## [1] "*F* ~Fisher~ (2, 796) = 223.68, *p* < 0.001, $\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
 ## 
 ## 
 ## $stats
@@ -213,13 +213,13 @@ r
 ## 
 ## $es
 ## $es$Gender
-## [1] "$\\omega$^2^ = 0.63, CI~95%~[0.58, 0.67]"
+## [1] "$\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
 ## 
 ## $es$Time
-## [1] "$\\omega$^2^ = 0, CI~95%~[0, 0]"
+## [1] "$\\omega^2$ = 0, CI~95%~[0, 0]"
 ## 
 ## $es$Gender_Time
-## [1] "$\\omega$^2^ = 0.27, CI~95%~[0.22, 0.32]"
+## [1] "$\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
 ```
 
 For inline results with previous data we would do something like this:
@@ -265,17 +265,6 @@ report(
 ```
 
 ```
-## $desc
-## $desc$Basal
-## [1] "M = 100.56, SD = 13.83"
-## 
-## $desc$`Time-1`
-## [1] "M = 99.5, SD = 9.01"
-## 
-## $desc$`Time-2`
-## [1] "M = 96.82, SD = 4.99"
-## 
-## 
 ## $pwc.method
 ## [1] "Student's t-test for dependent samples"
 ## 
@@ -287,17 +276,28 @@ report(
 ## 2 Time-2 Basal   0.0757
 ## 3 Time-2 Time-1  0.0894
 ## 
+## $desc
+## $desc$Basal
+## [1] "M = 101, SD = 13.83"
+## 
+## $desc$`Time-1`
+## [1] "M = 100, SD = 9.01"
+## 
+## $desc$`Time-2`
+## [1] "M = 97, SD = 4.99"
+## 
+## 
 ## $full
-## [1] "F(1.7, 81) = 1.82, p = 0.175, eta^2 = 0.04, CI95% [0, 0.12]"
+## [1] "F(1.7, 83.5) = 1.82, p = 0.174, eta^2 = 0.04, CI95% [0, 0.12]"
 ## 
 ## $stats
-## [1] "F(1.7, 81) = 1.82, p = 0.175"
+## [1] "F(1.7, 83.5) = 1.82, p = 0.174"
 ## 
 ## $es
 ## [1] "eta^2 = 0.04, CI95% [0, 0.12]"
 ## 
 ## $method
-## [1] "One-way repeated measures ANOVA with Greenhouse-Geisser correction"
+## [1] "One-way repeated measures ANOVA with Huynh-Feldt correction"
 ```
 
 However, you can specify your own parameters for the selection of the test:
@@ -334,10 +334,10 @@ report(
 ```
 ## $desc
 ## $desc$`Time-1`
-## [1] "M = 99.5, SD = 9.01"
+## [1] "M = 100, SD = 9.01"
 ## 
 ## $desc$`Time-2`
-## [1] "M = 96.82, SD = 4.99"
+## [1] "M = 97, SD = 4.99"
 ## 
 ## 
 ## $full
@@ -394,17 +394,6 @@ report(
 ```
 
 ```
-## $desc
-## $desc$Control
-## [1] "M = 99, SD = 19.59"
-## 
-## $desc$`Drug A`
-## [1] "M = 97.07, SD = 10.01"
-## 
-## $desc$`Drug B`
-## [1] "M = 90.43, SD = 13.07"
-## 
-## 
 ## $pwc.method
 ## [1] "Games Howell test"
 ## 
@@ -415,6 +404,17 @@ report(
 ## 1 Drug A Control  0.881 
 ## 2 Drug B Control  0.125 
 ## 3 Drug B Drug A   0.0790
+## 
+## $desc
+## $desc$Control
+## [1] "M = 99, SD = 19.59"
+## 
+## $desc$`Drug A`
+## [1] "M = 97, SD = 10.01"
+## 
+## $desc$`Drug B`
+## [1] "M = 90, SD = 13.07"
+## 
 ## 
 ## $full
 ## [1] "F(2, 54.7) = 3.04, p = 0.056, eta^2 = 0.1, CI95% [0, 0.25]"
@@ -462,10 +462,10 @@ report(
 ```
 ## $desc
 ## $desc$`Drug A`
-## [1] "M = 97.07, SD = 10.01"
+## [1] "M = 97, SD = 10.01"
 ## 
 ## $desc$`Drug B`
-## [1] "M = 90.43, SD = 13.07"
+## [1] "M = 90, SD = 13.07"
 ## 
 ## 
 ## $full

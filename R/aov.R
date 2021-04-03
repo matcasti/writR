@@ -9,6 +9,7 @@
 #' @param id Quoted or unquoted variable (of length 1) indicating the subject identifier column in data.
 #' @param type The type of sums of squares for the ANOVA. Possible values are "II", "III", 2, or 3 (default).
 #' @param es The effect size used to estimate the effects of the factors on the response variable. Possible values are 'omega' or 'eta' (default).
+#' @param generalized If TRUE (default), returns generalized Eta Squared, assuming all variables are manipulated (used only when `es = 'eta'`).
 #' @param sphericity If `"none"`, then sphericity assumption is assumed to be met for within-subject(s) factor(s). "GG": applies Greenhouse-Geisser correction. "HF": applies Hyunh-Feldt correction. 'auto' (Default) choose the appropiate correction based on Mauchly test of sphericity (p-value > 0.05)
 #' @param markdown Whether you want the output formated for inline R Markdown or as plain text.
 #' @keywords aov_r
@@ -22,6 +23,7 @@ aov_r <- function(data
                , id
                , type = 3
                , es = 'eta' # 'omega' (default) or 'eta'
+               , generalized = TRUE
                , sphericity = 'auto' # 'auto' (default), 'GG', 'HF' or 'none'
                , markdown = TRUE # FALSE for plain text
                ) {
@@ -53,16 +55,16 @@ aov_r <- function(data
   sphericity <- if(sphericity == 'auto') {
     # Comprobación de esfericidad ----
     if( purrr::is_empty(spher.test) || all(spher.test[,2] > 0.05) ) {
-      'none' } else { ges <- any(model$anova_table$ges <= 0.75)
-      if(ges) { 'GG' } else { 'HF' } }
-    } else if(purrr::is_empty(spher.test)) { 'none' } else { sphericity }
+      'none' } else { ges <- all(summary(model)[['pval.adjustments']][,c('GG eps','HF eps')] > 0.75)
+          if(ges) { 'HF' } else { 'GG' } }
+        } else if(purrr::is_empty(spher.test)) { 'none' } else { sphericity }
   } else { sphericity <- NULL }
 
-  efs <- if(es == 'eta') { effectsize::eta_squared(model, ci = 0.95)
+  efs <- if(es == 'eta') { effectsize::eta_squared(model, ci = 0.95, generalized = generalized)
     } else if(es == 'omega') { effectsize::omega_squared(model, ci = 0.95)
       } else stop('You have to choose between "eta" or "omega"')
 
-  model <- anova(object = model, correction = sphericity)
+  model <- stats::anova(object = model, correction = sphericity)
   at <- attributes(model)
   class(model) <- 'data.frame'
   model <- within(model, {
@@ -75,7 +77,10 @@ aov_r <- function(data
 
   efs[,-1] <- round(efs[,-1],2)
   if(at$correction == 'none' || is.null(at$correction)) { at$correction <- 'Fisher' }
-  et <- if(markdown) paste0('$\\',es,'$^2^ = ') else paste0(es,'^2 = ')
+  et <- if(markdown) paste0('$\\',es,'^2', if(es == 'eta') {
+    if(generalized) {
+      '_G'} else {'_p'}
+    } else {''},'$ = ') else paste0(es,'^2 = ')
 
   if(markdown) {
     # Formato en Markdown para R Markdown ----
@@ -83,7 +88,7 @@ aov_r <- function(data
       rt <- model[i,]
       j <- if (grepl(pattern = ':', i)) gsub(':', '_', i) else i
       result[['full']][[j]] <- paste0(
-        stats <- paste0("*F* ~", at$correction
+        stats <- paste0("*F* ~", if(!is.null(within) && any(grepl(within, i))) at$correction else "Fisher"
                         , "~ (", rt$`num Df`
                         ,", ",rt$`den Df`
                         ,') = ',rt$F

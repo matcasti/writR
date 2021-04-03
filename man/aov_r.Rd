@@ -12,6 +12,7 @@ aov_r(
   id,
   type = 3,
   es = "eta",
+  generalized = TRUE,
   sphericity = "auto",
   markdown = TRUE
 )
@@ -30,6 +31,8 @@ aov_r(
 \item{type}{The type of sums of squares for the ANOVA. Possible values are "II", "III", 2, or 3 (default).}
 
 \item{es}{The effect size used to estimate the effects of the factors on the response variable. Possible values are 'omega' or 'eta' (default).}
+
+\item{generalized}{If TRUE (default), returns generalized Eta Squared, assuming all variables are manipulated (used only when \code{es = 'eta'}).}
 
 \item{sphericity}{If \code{"none"}, then sphericity assumption is assumed to be met for within-subject(s) factor(s). "GG": applies Greenhouse-Geisser correction. "HF": applies Hyunh-Feldt correction. 'auto' (Default) choose the appropiate correction based on Mauchly test of sphericity (p-value > 0.05)}
 
