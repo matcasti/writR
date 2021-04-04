@@ -65,6 +65,7 @@ sticker(p, package="writR",
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4603838)
 
+**writR** is an R package for automated inferential testing (for group differences) and reporting based on parametric assumptions, which are tested automatically for test selection.
 
 ### Installation
 
@@ -83,7 +84,7 @@ To cite package 'writR' in publications run the following code in your `R` conso
 citation('writR')
 ```
 
-## Summary of available tests
+## Summary of available tests using `report` function
 
 #### For paired samples designs
 
@@ -156,6 +157,27 @@ The core function: `report` by default return a list of length five in Markdown 
 translates into this:
 
 > The analysis of the effects of the treatment shows that treatment group had greater weight (`r result$desc$Treatment`) than the control group (`r result$desc$Control`). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+
+It also let you perform centrality and dispersion statistics for inline results by using the `cent_disp()` function. The next example illustrates its usage:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+data <- datasets::ToothGrowth
+
+res <- with(data, tapply(X = len, 
+                         INDEX = list(supp, dose),
+                         FUN = function(var)
+                           cent_disp(x = var,         # These are default values:
+                                     type = 'auto',   # # Automated selection based on normality test
+                                     k = 2,           # # Number of decimal places
+                                     markdown = TRUE))) # # For inline results
+res
+```
+
+> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`res['OJ','2']`) than vitamin C (VC) group (`res['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`res['OJ','0.5']`) than VC group (`res['VC','0.5']`).
+
+translates into this:
+
+> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`r res['OJ','2']`) than vitamin C (VC) group (`r res['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`r res['OJ','0.5']`) than VC group (`r res['VC','0.5']`).
 
 ## Mixed effects ANOVA
 
