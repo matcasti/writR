@@ -36,7 +36,7 @@ citation('writR')
 ## To cite package 'writR' in publications use:
 ## 
 ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-##   reporting in APA style. R package version 0.1.4.
+##   reporting in APA style. R package version 0.2.0.
 ##   https://doi.org/10.5281/zenodo.4603838
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -45,7 +45,7 @@ citation('writR')
 ##     title = {writR: Inferential statistics and reporting in APA style},
 ##     author = {Matías {Castillo Aguilar}},
 ##     year = {2021},
-##     note = {R package version 0.1.4},
+##     note = {R package version 0.2.0},
 ##     url = {https://doi.org/10.5281/zenodo.4603838},
 ##   }
 ```
