@@ -64,8 +64,8 @@ bitwo <- function(data
         for(j in levels(data[[by]])) {
           result[['desc']][j] <- list(paste0(
           desc$m
-          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
-          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T), 2), desc$i
+          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T), 2) ) ) }
 
         result[['full']] <- paste0(
           stats <- paste0(desc$t, round(test$parameter,1)
@@ -95,8 +95,8 @@ bitwo <- function(data
         for(j in levels(data[[by]])) {
           result[['desc']][j] <- list(paste0(
           desc$m
-          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
-          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T), 2), desc$i
+          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T), 2) ) ) }
 
         result[['full']] <- paste0(
           stats <- paste0(desc$t, round(test$parameter,1)
@@ -134,8 +134,8 @@ bitwo <- function(data
         for(j in levels(data[[by]])) {
           result[['desc']][j] <- list(paste0(
           desc$m
-          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim) ), desc$i
-          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim), 2), desc$i
+          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T), 2) ) ) }
 
         result[['full']] <- paste0(
           stats <- paste0(desc$t, round(test$df, 2)
@@ -164,8 +164,8 @@ bitwo <- function(data
         for(j in levels(data[[by]])) {
           result[['desc']][j] <- list(paste0(
           desc$m
-          , round(stats::median(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
-          , round(stats::IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+          , round(stats::median(data[data[[by]] == j,][[variable]], na.rm = T), 2), desc$i
+          , round(stats::IQR(data[data[[by]] == j,][[variable]], na.rm = T), 2) ) ) }
 
         result[['full']] <-  paste0(
           stats <- paste0(desc$w, round(test$statistic,2)

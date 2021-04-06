@@ -79,8 +79,8 @@ multgroup <- function(data
         for(j in levels(data[[by]])) {
           result[['desc']][j] <- list(paste0(
           desc$m
-          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
-          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T), 2), desc$i
+          , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T), 2) ) ) }
 
           result[['full']] <- paste0(
             stats <- paste0(desc$f, round(test$parameter[1],1)
@@ -121,7 +121,7 @@ multgroup <- function(data
         for(j in levels(data[[by]])) {
           result[['desc']][j] <- list(paste0(
           desc$m
-          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T), 2), desc$i
           , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
           result[['full']] <- paste0(
@@ -167,7 +167,7 @@ multgroup <- function(data
         for(j in levels(data[[by]])) {
           result[['desc']][j] <- list(paste0(
           desc$m
-          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim) ), desc$i
+          , round(base::mean(data[data[[by]] == j,][[variable]], na.rm = T, trim = trim), 2), desc$i
           , round(stats::sd(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
           result[['full']] <- paste0(
@@ -210,7 +210,7 @@ multgroup <- function(data
       for(j in levels(data[[by]])) {
         result[['desc']][j] <- list(paste0(
         desc$m
-        , round(stats::median(data[data[[by]] == j,][[variable]], na.rm = T) ), desc$i
+        , round(stats::median(data[data[[by]] == j,][[variable]], na.rm = T), 2), desc$i
         , round(stats::IQR(data[data[[by]] == j,][[variable]], na.rm = T),2) ) ) }
 
           result[['full']] <- paste0(

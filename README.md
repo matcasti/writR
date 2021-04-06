@@ -36,7 +36,7 @@ citation('writR')
 ## To cite package 'writR' in publications use:
 ## 
 ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-##   reporting in APA style. R package version 0.2.0.
+##   reporting in APA style. R package version 0.2.0.1.
 ##   https://doi.org/10.5281/zenodo.4603838
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -45,7 +45,7 @@ citation('writR')
 ##     title = {writR: Inferential statistics and reporting in APA style},
 ##     author = {Matías {Castillo Aguilar}},
 ##     year = {2021},
-##     note = {R package version 0.2.0},
+##     note = {R package version 0.2.0.1},
 ##     url = {https://doi.org/10.5281/zenodo.4603838},
 ##   }
 ```
@@ -118,10 +118,10 @@ result
 ```
 ## $desc
 ## $desc$Treatment
-## [1] "*M* = 70, *SD* = 6.48"
+## [1] "*M* = 70.24, *SD* = 6.48"
 ## 
 ## $desc$Control
-## [1] "*M* = 67, *SD* = 6.34"
+## [1] "*M* = 67.02, *SD* = 6.34"
 ## 
 ## 
 ## $full
@@ -145,7 +145,7 @@ The core function: `report` by default return a list of length five in Markdown 
 
 translates into this:
 
-> The analysis of the effects of the treatment shows that treatment group had greater weight (*M* = 70, *SD* = 6.48) than the control group (*M* = 67, *SD* = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment shows that treatment group had greater weight (*M* = 70.24, *SD* = 6.48) than the control group (*M* = 67.02, *SD* = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 It also let you perform centrality and dispersion statistics for inline results by using the `cent_disp()` function. The next example illustrates its usage:
 
@@ -310,13 +310,13 @@ report(
 ## 
 ## $desc
 ## $desc$Basal
-## [1] "M = 101, SD = 13.83"
+## [1] "M = 100.56, SD = 13.83"
 ## 
 ## $desc$`Time-1`
-## [1] "M = 100, SD = 9.01"
+## [1] "M = 99.5, SD = 9.01"
 ## 
 ## $desc$`Time-2`
-## [1] "M = 97, SD = 4.99"
+## [1] "M = 96.82, SD = 4.99"
 ## 
 ## 
 ## $full
@@ -366,10 +366,10 @@ report(
 ```
 ## $desc
 ## $desc$`Time-1`
-## [1] "M = 100, SD = 9.01"
+## [1] "M = 99.5, SD = 9.01"
 ## 
 ## $desc$`Time-2`
-## [1] "M = 97, SD = 4.99"
+## [1] "M = 96.82, SD = 4.99"
 ## 
 ## 
 ## $full
@@ -442,10 +442,10 @@ report(
 ## [1] "M = 99, SD = 19.59"
 ## 
 ## $desc$`Drug A`
-## [1] "M = 97, SD = 10.01"
+## [1] "M = 97.07, SD = 10.01"
 ## 
 ## $desc$`Drug B`
-## [1] "M = 90, SD = 13.07"
+## [1] "M = 90.43, SD = 13.07"
 ## 
 ## 
 ## $full
@@ -494,10 +494,10 @@ report(
 ```
 ## $desc
 ## $desc$`Drug A`
-## [1] "M = 97, SD = 10.01"
+## [1] "M = 97.07, SD = 10.01"
 ## 
 ## $desc$`Drug B`
-## [1] "M = 90, SD = 13.07"
+## [1] "M = 90.43, SD = 13.07"
 ## 
 ## 
 ## $full
