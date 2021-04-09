@@ -2,4 +2,5 @@
 
 export(aov_r)
 export(cent_disp)
+export(contingency)
 export(report)

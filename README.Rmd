@@ -179,57 +179,6 @@ translates into this:
 
 > The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`r res['OJ','2']`) than vitamin C (VC) group (`r res['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`r res['OJ','0.5']`) than VC group (`r res['VC','0.5']`).
 
-## Mixed effects ANOVA
-
-By using `aov_r` function is possible to get the statistical report of between/within-subject(s) factor(s) for factorial designs using `afex` package under the hood for statistical reporting. Let's see an example
-
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-# set parameters to simulate data with a between and within subject factor
-within <- 3
-between <- 2
-n <- 400
-
-set.seed(123)
-Stroop <- data.frame(
-  Subject = rep(1:n, within),
-  Gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
-  Time = gl(within, n, length = n*within),
-  Score = rnorm(n*within, mean = 150, sd = 30))
-
-# Manipulate data to generate interaction between Gender and Time
-Stroop <- within(Stroop, {
-  Score[Gender == 'Male' & Time == 1] <- Score[Gender == 'Male' & Time == 1]*1
-  Score[Gender == 'Male' & Time == 2] <- Score[Gender == 'Male' & Time == 2]*1.15
-  Score[Gender == 'Male' & Time == 3] <- Score[Gender == 'Male' & Time == 3]*1.3
-  Score[Gender == 'Female' & Time == 1] <- Score[Gender == 'Female' & Time == 1]*1
-  Score[Gender == 'Female' & Time == 2] <- Score[Gender == 'Female' & Time == 2]*0.85
-  Score[Gender == 'Female' & Time == 3] <- Score[Gender == 'Female' & Time == 3]*0.7
-})
-
-
-r <- aov_r(
-  data = Stroop
-, response = Score
-, between = Gender
-, within = Time
-, id = Subject
-, es = 'omega' # omega squared as our measure of effect size
-, sphericity = 'auto' # check if sphericity is not being violated
-)
-
-r
-```
-
-For inline results with previous data we would do something like this:
-
-> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( `r$es$Gender` ) on scores when adjusting for each of the time periods, `r$stats$Gender`. In a similar way we find a significant interaction between evaluative time and gender ( `r$stats$Gender_Time` ), indicating unequal responses between males and females over time, `r$es$Gender_Time`, however, time alone is not able to explain statistically significantly the variance in scores, `r$full$Time`.
-
-Which will translate into this after evaluation in R Markdown:
-
-> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( 𝜔<sup>2</sup> = 0.63, CI<sub>95%</sub>[0.58, 0.67] ) on scores when adjusting for each of the time periods, *F* <sub>Fisher</sub> (1, 398) = 682.91, *p* \< 0.001. In a similar way we find a significant interaction between evaluative time and gender ( *F* <sub>Fisher</sub> (2, 796) = 223.68, *p* \< 0.001 ), indicating unequal responses between males and females over time, 𝜔<sup>2</sup> = 0.27, CI<sub>95%</sub>[0.22, 0.32], however, time alone is not able to explain statistically significantly the variance in scores, *F* <sub>Fisher</sub> (2, 796) = 0.11, *p* = 0.894, 𝜔<sup>2</sup> = 0, CI<sub>95%</sub>[0, 0].
-
-When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: `between = c('factor1', 'factor2' ...)`, and the same for `within = c('factor1', 'factor2' ...)`.
-
 ## Paired samples design
 
 For paired designs you need to set `paired = TRUE`, and then, based on the numbers of groups detected after removing missing values, the test will run depending on the parameters stablished.
@@ -368,6 +317,137 @@ You can specify your own parameters for the selection of the test as well:
 | Mann–Whitney *U* test                    | `paired = FALSE` + `type = 'np'`                      |
 | Yuen's test on trimmed means             | `paired = FALSE` + `type = 'r'`                       |
 
+## Mixed effects ANOVA
+
+By using `aov_r` function is possible to get the statistical report of between/within-subject(s) factor(s) for factorial designs using `afex` package under the hood for statistical reporting. Let's see an example
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+# set parameters to simulate data with a between and within subject factor
+within <- 3
+between <- 2
+n <- 400
+
+set.seed(123)
+Stroop <- data.frame(
+  Subject = rep(1:n, within),
+  Gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
+  Time = gl(within, n, length = n*within),
+  Score = rnorm(n*within, mean = 150, sd = 30))
+
+# Manipulate data to generate interaction between Gender and Time
+Stroop <- within(Stroop, {
+  Score[Gender == 'Male' & Time == 1] <- Score[Gender == 'Male' & Time == 1]*1
+  Score[Gender == 'Male' & Time == 2] <- Score[Gender == 'Male' & Time == 2]*1.15
+  Score[Gender == 'Male' & Time == 3] <- Score[Gender == 'Male' & Time == 3]*1.3
+  Score[Gender == 'Female' & Time == 1] <- Score[Gender == 'Female' & Time == 1]*1
+  Score[Gender == 'Female' & Time == 2] <- Score[Gender == 'Female' & Time == 2]*0.85
+  Score[Gender == 'Female' & Time == 3] <- Score[Gender == 'Female' & Time == 3]*0.7
+})
+
+
+r <- aov_r(
+  data = Stroop
+, response = Score
+, between = Gender
+, within = Time
+, id = Subject
+, es = 'omega' # omega squared as our measure of effect size
+, sphericity = 'auto' # check if sphericity is not being violated
+)
+
+r
+```
+
+For inline results with previous data we would do something like this:
+
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( `r$es$Gender` ) on scores when adjusting for each of the time periods, `r$stats$Gender`. In a similar way we find a significant interaction between evaluative time and gender ( `r$stats$Gender_Time` ), indicating unequal responses between males and females over time, `r$es$Gender_Time`, however, time alone is not able to explain statistically significantly the variance in scores, `r$full$Time`.
+
+Which will translate into this after evaluation in R Markdown:
+
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( 𝜔<sup>2</sup> = 0.63, CI<sub>95%</sub>[0.58, 0.67] ) on scores when adjusting for each of the time periods, *F* <sub>Fisher</sub> (1, 398) = 682.91, *p* \< 0.001. In a similar way we find a significant interaction between evaluative time and gender ( *F* <sub>Fisher</sub> (2, 796) = 223.68, *p* \< 0.001 ), indicating unequal responses between males and females over time, 𝜔<sup>2</sup> = 0.27, CI<sub>95%</sub>[0.22, 0.32], however, time alone is not able to explain statistically significantly the variance in scores, *F* <sub>Fisher</sub> (2, 796) = 0.11, *p* = 0.894, 𝜔<sup>2</sup> = 0, CI<sub>95%</sub>[0, 0].
+
+When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: `between = c('factor1', 'factor2' ...)`, and the same for `within = c('factor1', 'factor2' ...)`.
+
+## Testing categorical data
+
+To test purely categorical data, `contingency()` function is your guy. 
+
+### Goodness-of-fit Chi-squared
+
+By only filling the `data`, and `x` argument, the Goodness-of-fit chi-squared test (χ<sup>2</sup><sub>gof</sub>) 
+
+```{r message=FALSE, error=FALSE, warning=FALSE}
+data <- afex::stroop # Using stroop data from `afex` package
+
+res <- contingency(data = data, 
+  x = acc)
+res
+```
+
+And the inline result would look like this:
+
+> In preliminary analyses, we've seen that the proportion from people who pointed accuratedly in the stroop test was significantly higher than those who don't, `res$full`.
+
+translates into:
+
+> In preliminary analyses, we've seen that the proportion from people who pointed accuratedly in the stroop test was significantly higher than those who don't, χ<sup>2</sup><sub>gof</sub> (1) = 190688.91, *p* < 0.001, *V*<sub>Cramer</sub> = 0.91, CI<sub>95%</sub>[0.95, 0.95].
+
+### Pearson's Chi-squared
+
+By providing `x` and `y` arguments on `contingency()` you get Pearson's Chi-squared test.
+
+```{r}
+## Using same data as before
+res <- contingency(
+  data = data,
+  x = acc,
+  y = condition,
+  markdown = FALSE # Return the output in plain text format
+)
+
+res # Print the output
+```
+
+### Fisher's exact test
+
+Otherwise, you could use Fisher's exact test for count data if you specify `exact = TRUE`.
+
+```{r}
+## Using same data as before
+contingency(
+  data = data,
+  x = acc,
+  y = condition,
+  exact = TRUE, # Set TRUE for Fisher's exact test
+  markdown = FALSE # Return the output in plain text format
+)
+```
+
+### McNemar's Chi-squared Test
+
+If you have a paired design and are using only categorical variables, then McNemar's Chi-squared Test for Count data is your test to go.
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+## Presidential Approval Ratings.
+## Approval of the President's performance in office in two surveys,
+## one month apart, for a random sample of 1600 voting-age Americans.
+
+Performance <- data.frame(
+  ID = rep(1:1600, 2),
+  `1st Survey` = c(rep("Approve", 944), rep("Disapprove", 656)),
+  `2nd Survey` = c(rep("Approve", 794), rep("Disapprove", 150),
+                   rep("Approve", 86), rep("Disapprove", 570)), check.names = F)
+
+contingency(
+  data = Performance,
+  x = `1st Survey`,
+  y = `2nd Survey`,
+  paired = TRUE, # Set TRUE for McNemar test
+  markdown = FALSE # For plain text output
+)
+```
+
+
 ## Dependencies
 
 The package writR is standing on the shoulders of giants. `writR` depends on the following packages:
@@ -386,3 +466,4 @@ I would like to thank Indrajeet Patil for being an inspiration for this package,
 For any issues or collaborations you can send me an email at:
 
 -   matcasti\@umag.cl
+

@@ -16,7 +16,7 @@ cent_disp <- function (x
   if(!is.numeric(x)) stop(paste(deparse(substitute(x)), "is not numeric."))
   if(type == 'auto') {
     .norm <- if(length(x) < 50)
-      shapiro.test(x)$p.value > 0.05 else
+      stats::shapiro.test(x)$p.value > 0.05 else
       nortest::lillie.test(x)$p.value > 0.05
     type <- if(.norm) "p" else "np"
     }
@@ -25,6 +25,6 @@ cent_disp <- function (x
   m <- round(.f$cent(x, na.rm = T), k)
   i <- round(.f$disp(x, na.rm = T), k)
   if(markdown)
-    paste0('*',.f$m,'* = ',m,', *',.f$i,'* = ',i) else
+    paste0('$',.f$m,'$ = ',m,', $',.f$i,'$ = ',i) else
     paste0(.f$m,' = ',m,', ',.f$i,' = ',i)
 }

@@ -36,7 +36,7 @@ citation('writR')
 ## To cite package 'writR' in publications use:
 ## 
 ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-##   reporting in APA style. R package version 0.2.0.1.
+##   reporting in APA style. R package version 0.3.0.
 ##   https://doi.org/10.5281/zenodo.4603838
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -45,7 +45,7 @@ citation('writR')
 ##     title = {writR: Inferential statistics and reporting in APA style},
 ##     author = {Matías {Castillo Aguilar}},
 ##     year = {2021},
-##     note = {R package version 0.2.0.1},
+##     note = {R package version 0.3.0},
 ##     url = {https://doi.org/10.5281/zenodo.4603838},
 ##   }
 ```
@@ -118,20 +118,20 @@ result
 ```
 ## $desc
 ## $desc$Treatment
-## [1] "*M* = 70.24, *SD* = 6.48"
+## [1] "$M$ = 70.24, $SD$ = 6.48"
 ## 
 ## $desc$Control
-## [1] "*M* = 67.02, *SD* = 6.34"
+## [1] "$M$ = 67.02, $SD$ = 6.34"
 ## 
 ## 
 ## $full
-## [1] "*t* ~Student~ (98) = 2.51, *p* = 0.014, *d* ~Cohen's~ = 0.51, CI~95%~[0.1, 0.91]"
+## [1] "$t_{~Student}$ (98) = 2.51, $p$ = 0.014, $d_{~Cohen}$ = 0.51, CI~95%~[0.1, 0.91]"
 ## 
 ## $stats
-## [1] "*t* ~Student~ (98) = 2.51, *p* = 0.014"
+## [1] "$t_{~Student}$ (98) = 2.51, $p$ = 0.014"
 ## 
 ## $es
-## [1] "*d* ~Cohen's~ = 0.51, CI~95%~[0.1, 0.91]"
+## [1] "$d_{~Cohen}$ = 0.51, CI~95%~[0.1, 0.91]"
 ## 
 ## $method
 ## [1] "Student's t-test for independent samples"
@@ -145,7 +145,7 @@ The core function: `report` by default return a list of length five in Markdown 
 
 translates into this:
 
-> The analysis of the effects of the treatment shows that treatment group had greater weight (*M* = 70.24, *SD* = 6.48) than the control group (*M* = 67.02, *SD* = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment shows that treatment group had greater weight ($M$ = 70.24, $SD$ = 6.48) than the control group ($M$ = 67.02, $SD$ = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 It also let you perform centrality and dispersion statistics for inline results by using the `cent_disp()` function. The next example illustrates its usage:
 
@@ -165,104 +165,18 @@ res
 
 ```
 ##    0.5                        1                         
-## OJ "*M* = 13.23, *SD* = 4.46" "*M* = 22.7, *SD* = 3.91" 
-## VC "*M* = 7.98, *SD* = 2.75"  "*M* = 16.77, *SD* = 2.52"
+## OJ "$M$ = 13.23, $SD$ = 4.46" "$M$ = 22.7, $SD$ = 3.91" 
+## VC "$M$ = 7.98, $SD$ = 2.75"  "$M$ = 16.77, $SD$ = 2.52"
 ##    2                         
-## OJ "*M* = 26.06, *SD* = 2.66"
-## VC "*M* = 26.14, *SD* = 4.8"
+## OJ "$M$ = 26.06, $SD$ = 2.66"
+## VC "$M$ = 26.14, $SD$ = 4.8"
 ```
 
 > The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`res['OJ','2']`) than vitamin C (VC) group (`res['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`res['OJ','0.5']`) than VC group (`res['VC','0.5']`).
 
 translates into this:
 
-> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (*M* = 26.06, *SD* = 2.66) than vitamin C (VC) group (*M* = 26.14, *SD* = 4.8) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (*M* = 13.23, *SD* = 4.46) than VC group (*M* = 7.98, *SD* = 2.75).
-
-## Mixed effects ANOVA
-
-By using `aov_r` function is possible to get the statistical report of between/within-subject(s) factor(s) for factorial designs using `afex` package under the hood for statistical reporting. Let's see an example
-
-
-```r
-# set parameters to simulate data with a between and within subject factor
-within <- 3
-between <- 2
-n <- 400
-
-set.seed(123)
-Stroop <- data.frame(
-  Subject = rep(1:n, within),
-  Gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
-  Time = gl(within, n, length = n*within),
-  Score = rnorm(n*within, mean = 150, sd = 30))
-
-# Manipulate data to generate interaction between Gender and Time
-Stroop <- within(Stroop, {
-  Score[Gender == 'Male' & Time == 1] <- Score[Gender == 'Male' & Time == 1]*1
-  Score[Gender == 'Male' & Time == 2] <- Score[Gender == 'Male' & Time == 2]*1.15
-  Score[Gender == 'Male' & Time == 3] <- Score[Gender == 'Male' & Time == 3]*1.3
-  Score[Gender == 'Female' & Time == 1] <- Score[Gender == 'Female' & Time == 1]*1
-  Score[Gender == 'Female' & Time == 2] <- Score[Gender == 'Female' & Time == 2]*0.85
-  Score[Gender == 'Female' & Time == 3] <- Score[Gender == 'Female' & Time == 3]*0.7
-})
-
-
-r <- aov_r(
-  data = Stroop
-, response = Score
-, between = Gender
-, within = Time
-, id = Subject
-, es = 'omega' # omega squared as our measure of effect size
-, sphericity = 'auto' # check if sphericity is not being violated
-)
-
-r
-```
-
-```
-## $full
-## $full$Gender
-## [1] "*F* ~Fisher~ (1, 398) = 682.91, *p* < 0.001, $\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
-## 
-## $full$Time
-## [1] "*F* ~Fisher~ (2, 796) = 0.11, *p* = 0.894, $\\omega^2$ = 0, CI~95%~[0, 0]"
-## 
-## $full$Gender_Time
-## [1] "*F* ~Fisher~ (2, 796) = 223.68, *p* < 0.001, $\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
-## 
-## 
-## $stats
-## $stats$Gender
-## [1] "*F* ~Fisher~ (1, 398) = 682.91, *p* < 0.001"
-## 
-## $stats$Time
-## [1] "*F* ~Fisher~ (2, 796) = 0.11, *p* = 0.894"
-## 
-## $stats$Gender_Time
-## [1] "*F* ~Fisher~ (2, 796) = 223.68, *p* < 0.001"
-## 
-## 
-## $es
-## $es$Gender
-## [1] "$\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
-## 
-## $es$Time
-## [1] "$\\omega^2$ = 0, CI~95%~[0, 0]"
-## 
-## $es$Gender_Time
-## [1] "$\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
-```
-
-For inline results with previous data we would do something like this:
-
-> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( `r$es$Gender` ) on scores when adjusting for each of the time periods, `r$stats$Gender`. In a similar way we find a significant interaction between evaluative time and gender ( `r$stats$Gender_Time` ), indicating unequal responses between males and females over time, `r$es$Gender_Time`, however, time alone is not able to explain statistically significantly the variance in scores, `r$full$Time`.
-
-Which will translate into this after evaluation in R Markdown:
-
-> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( 𝜔<sup>2</sup> = 0.63, CI<sub>95%</sub>[0.58, 0.67] ) on scores when adjusting for each of the time periods, *F* <sub>Fisher</sub> (1, 398) = 682.91, *p* \< 0.001. In a similar way we find a significant interaction between evaluative time and gender ( *F* <sub>Fisher</sub> (2, 796) = 223.68, *p* \< 0.001 ), indicating unequal responses between males and females over time, 𝜔<sup>2</sup> = 0.27, CI<sub>95%</sub>[0.22, 0.32], however, time alone is not able to explain statistically significantly the variance in scores, *F* <sub>Fisher</sub> (2, 796) = 0.11, *p* = 0.894, 𝜔<sup>2</sup> = 0, CI<sub>95%</sub>[0, 0].
-
-When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: `between = c('factor1', 'factor2' ...)`, and the same for `within = c('factor1', 'factor2' ...)`.
+> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values ($M$ = 26.06, $SD$ = 2.66) than vitamin C (VC) group ($M$ = 26.14, $SD$ = 4.8) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL ($M$ = 13.23, $SD$ = 4.46) than VC group ($M$ = 7.98, $SD$ = 2.75).
 
 ## Paired samples design
 
@@ -522,6 +436,232 @@ You can specify your own parameters for the selection of the test as well:
 | Mann–Whitney *U* test                    | `paired = FALSE` + `type = 'np'`                      |
 | Yuen's test on trimmed means             | `paired = FALSE` + `type = 'r'`                       |
 
+## Mixed effects ANOVA
+
+By using `aov_r` function is possible to get the statistical report of between/within-subject(s) factor(s) for factorial designs using `afex` package under the hood for statistical reporting. Let's see an example
+
+
+```r
+# set parameters to simulate data with a between and within subject factor
+within <- 3
+between <- 2
+n <- 400
+
+set.seed(123)
+Stroop <- data.frame(
+  Subject = rep(1:n, within),
+  Gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
+  Time = gl(within, n, length = n*within),
+  Score = rnorm(n*within, mean = 150, sd = 30))
+
+# Manipulate data to generate interaction between Gender and Time
+Stroop <- within(Stroop, {
+  Score[Gender == 'Male' & Time == 1] <- Score[Gender == 'Male' & Time == 1]*1
+  Score[Gender == 'Male' & Time == 2] <- Score[Gender == 'Male' & Time == 2]*1.15
+  Score[Gender == 'Male' & Time == 3] <- Score[Gender == 'Male' & Time == 3]*1.3
+  Score[Gender == 'Female' & Time == 1] <- Score[Gender == 'Female' & Time == 1]*1
+  Score[Gender == 'Female' & Time == 2] <- Score[Gender == 'Female' & Time == 2]*0.85
+  Score[Gender == 'Female' & Time == 3] <- Score[Gender == 'Female' & Time == 3]*0.7
+})
+
+
+r <- aov_r(
+  data = Stroop
+, response = Score
+, between = Gender
+, within = Time
+, id = Subject
+, es = 'omega' # omega squared as our measure of effect size
+, sphericity = 'auto' # check if sphericity is not being violated
+)
+
+r
+```
+
+```
+## $full
+## $full$Gender
+## [1] "*F*~Fisher~ (1, 398) = 682.91, *p* < 0.001, $\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
+## 
+## $full$Time
+## [1] "*F*~Fisher~ (2, 796) = 0.11, *p* = 0.894, $\\omega^2$ = 0, CI~95%~[0, 0]"
+## 
+## $full$Gender_Time
+## [1] "*F*~Fisher~ (2, 796) = 223.68, *p* < 0.001, $\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
+## 
+## 
+## $stats
+## $stats$Gender
+## [1] "*F*~Fisher~ (1, 398) = 682.91, *p* < 0.001"
+## 
+## $stats$Time
+## [1] "*F*~Fisher~ (2, 796) = 0.11, *p* = 0.894"
+## 
+## $stats$Gender_Time
+## [1] "*F*~Fisher~ (2, 796) = 223.68, *p* < 0.001"
+## 
+## 
+## $es
+## $es$Gender
+## [1] "$\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
+## 
+## $es$Time
+## [1] "$\\omega^2$ = 0, CI~95%~[0, 0]"
+## 
+## $es$Gender_Time
+## [1] "$\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
+```
+
+For inline results with previous data we would do something like this:
+
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( `r$es$Gender` ) on scores when adjusting for each of the time periods, `r$stats$Gender`. In a similar way we find a significant interaction between evaluative time and gender ( `r$stats$Gender_Time` ), indicating unequal responses between males and females over time, `r$es$Gender_Time`, however, time alone is not able to explain statistically significantly the variance in scores, `r$full$Time`.
+
+Which will translate into this after evaluation in R Markdown:
+
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( 𝜔<sup>2</sup> = 0.63, CI<sub>95%</sub>[0.58, 0.67] ) on scores when adjusting for each of the time periods, *F* <sub>Fisher</sub> (1, 398) = 682.91, *p* \< 0.001. In a similar way we find a significant interaction between evaluative time and gender ( *F* <sub>Fisher</sub> (2, 796) = 223.68, *p* \< 0.001 ), indicating unequal responses between males and females over time, 𝜔<sup>2</sup> = 0.27, CI<sub>95%</sub>[0.22, 0.32], however, time alone is not able to explain statistically significantly the variance in scores, *F* <sub>Fisher</sub> (2, 796) = 0.11, *p* = 0.894, 𝜔<sup>2</sup> = 0, CI<sub>95%</sub>[0, 0].
+
+When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: `between = c('factor1', 'factor2' ...)`, and the same for `within = c('factor1', 'factor2' ...)`.
+
+## Testing categorical data
+
+To test purely categorical data, `contingency()` function is your guy. 
+
+### Goodness-of-fit Chi-squared
+
+By only filling the `data`, and `x` argument, the Goodness-of-fit chi-squared test (χ<sup>2</sup><sub>gof</sub>) 
+
+
+```r
+data <- afex::stroop # Using stroop data from `afex` package
+
+res <- contingency(data = data, 
+  x = acc)
+res
+```
+
+```
+## $stats
+## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, $p$ < 0.001"
+## 
+## $es
+## [1] "$V_{~Cramer}$ = 0.91, CI~95%~[0.95, 0.95]"
+## 
+## $full
+## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, $p$ < 0.001, $V_{~Cramer}$ = 0.91, CI~95%~[0.95, 0.95]"
+## 
+## $method
+## [1] "Chi-squared test for given probabilities"
+```
+
+And the inline result would look like this:
+
+> In preliminary analyses, we've seen that the proportion from people who pointed accuratedly in the stroop test was significantly higher than those who don't, `res$full`.
+
+translates into:
+
+> In preliminary analyses, we've seen that the proportion from people who pointed accuratedly in the stroop test was significantly higher than those who don't, χ<sup>2</sup><sub>gof</sub> (1) = 190688.91, *p* < 0.001, *V*<sub>Cramer</sub> = 0.91, CI<sub>95%</sub>[0.95, 0.95].
+
+### Pearson's Chi-squared
+
+By providing `x` and `y` arguments on `contingency()` you get Pearson's Chi-squared test.
+
+
+```r
+## Using same data as before
+res <- contingency(
+  data = data,
+  x = acc,
+  y = condition,
+  markdown = FALSE # Return the output in plain text format
+)
+
+res # Print the output
+```
+
+```
+## $stats
+## [1] "X^2 (1) = 31.05, p < 0.001"
+## 
+## $es
+## [1] "V = 0.01, CI95% [0.01, 0.02]"
+## 
+## $full
+## [1] "X^2 (1) = 31.05, p < 0.001, V = 0.01, CI95% [0.01, 0.02]"
+## 
+## $method
+## [1] "Pearson's Chi-squared test"
+```
+
+### Fisher's exact test
+
+Otherwise, you could use Fisher's exact test for count data if you specify `exact = TRUE`.
+
+
+```r
+## Using same data as before
+contingency(
+  data = data,
+  x = acc,
+  y = condition,
+  exact = TRUE, # Set TRUE for Fisher's exact test
+  markdown = FALSE # Return the output in plain text format
+)
+```
+
+```
+## $stats
+## [1] "FET: p < 0.001"
+## 
+## $es
+## [1] "OR = 0.9, CI95% [0.86, 0.93]"
+## 
+## $full
+## [1] "FET: p < 0.001, OR = 0.9, CI95% [0.86, 0.93]"
+## 
+## $method
+## [1] "Fisher's Exact Test for Count Data"
+```
+
+### McNemar's Chi-squared Test
+
+If you have a paired design and are using only categorical variables, then McNemar's Chi-squared Test for Count data is your test to go.
+
+
+```r
+## Presidential Approval Ratings.
+## Approval of the President's performance in office in two surveys,
+## one month apart, for a random sample of 1600 voting-age Americans.
+
+Performance <- data.frame(
+  ID = rep(1:1600, 2),
+  `1st Survey` = c(rep("Approve", 944), rep("Disapprove", 656)),
+  `2nd Survey` = c(rep("Approve", 794), rep("Disapprove", 150),
+                   rep("Approve", 86), rep("Disapprove", 570)), check.names = F)
+
+contingency(
+  data = Performance,
+  x = `1st Survey`,
+  y = `2nd Survey`,
+  paired = TRUE, # Set TRUE for McNemar test
+  markdown = FALSE # For plain text output
+)
+```
+
+```
+## $stats
+## [1] "X^2 (1) = 34.71, p < 0.001"
+## 
+## $es
+## [1] "g = 0.14, CI95% [0.09, 0.18]"
+## 
+## $full
+## [1] "X^2 (1) = 34.71, p < 0.001, g = 0.14, CI95% [0.09, 0.18]"
+## 
+## $method
+## [1] "McNemar's Chi-squared test"
+```
+
+
 ## Dependencies
 
 The package writR is standing on the shoulders of giants. `writR` depends on the following packages:
@@ -532,7 +672,7 @@ library(deepdep)
 plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
-![](README_files/figure-html/unnamed-chunk-9-1.svg)<!-- -->
+![](README_files/figure-html/unnamed-chunk-13-1.svg)<!-- -->
 
 ## Acknowledgments
 
@@ -543,3 +683,4 @@ I would like to thank Indrajeet Patil for being an inspiration for this package,
 For any issues or collaborations you can send me an email at:
 
 -   matcasti\@umag.cl
+

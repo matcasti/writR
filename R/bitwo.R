@@ -56,8 +56,8 @@ bitwo <- function(data
         d <- effectsize::effectsize(test, verbose = F)
 
         desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', t = '*t* ~Student~ (', p = ', *p* '
-             , d = "*d* ~Cohen's~ = ", ci = ', CI~95%~[') } else {
+        list(m = '$M$ = ', i = ', $SD$ = ', t = '$t_{~Student}$ (', p = ', $p$ '
+             , d = "$d_{~Cohen}$ = ", ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', t = 't(', p = ', p '
                , d = "d = ", ci = ', CI95% [') }
 
@@ -87,8 +87,8 @@ bitwo <- function(data
         d <- effectsize::effectsize(test, verbose = F)
 
         desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', t = '*t* ~Welch~ (', p = ', *p* '
-             , d = "*d* ~Cohen's~ = ", ci = ', CI~95%~[') } else {
+        list(m = '$M$ = ', i = ', $SD$ = ', t = '$t_{~Welch}$ (', p = ', $p$ '
+             , d = "$d_{~Cohen}$ = ", ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', t = 't(', p = ', p '
                , d = "d = ", ci = ', CI95% [') }
 
@@ -126,7 +126,7 @@ bitwo <- function(data
         , nboot = nboot)
 
       desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', t = '*t* ~Yuen~ (', p = ', *p* '
+        list(m = '$M$ = ', i = ', $SD$ = ', t = '$t_{~Yuen}$ (', p = ', $p$ '
              , d = '$\\xi$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', t = 't(', p = ', p '
                , d = "xi = ", ci = ', CI95% [') }
@@ -156,8 +156,8 @@ bitwo <- function(data
       r <- effectsize::rank_biserial(data[[variable]] ~ data[[by]], data = data)
 
       desc <- if(markdown) {
-        list(m = '*Mdn* = ', i = ', *IQR* = ', w = '*W* =', p = ', *p* '
-             , r = '*r* ~biserial~ = ', ci = ', CI~95%~[') } else {
+        list(m = '$Mdn$ = ', i = ', $IQR$ = ', w = '$W$ =', p = ', $p$ '
+             , r = '$r_{~biserial}$ = ', ci = ', CI~95%~[') } else {
           list(m = 'Mdn = ', i = ', IQR = ', w = 'W =', p = ', p '
                , r = 'r = ', ci = ', CI95% [') }
 

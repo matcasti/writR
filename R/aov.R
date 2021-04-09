@@ -88,7 +88,7 @@ aov_r <- function(data
       rt <- model[i,]
       j <- if (grepl(pattern = ':', i)) gsub(':', '_', i) else i
       result[['full']][[j]] <- paste0(
-        stats <- paste0("*F* ~", if(!is.null(within) && any(grepl(within, i))) at$correction else "Fisher"
+        stats <- paste0("*F*~", if(!is.null(within) && any(grepl(within, i))) at$correction else "Fisher"
                         , "~ (", rt$`num Df`
                         ,", ",rt$`den Df`
                         ,') = ',rt$F

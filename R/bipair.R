@@ -46,8 +46,8 @@ bipair <- function(data
       d <- effectsize::effectsize(test, verbose = F)
 
       desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', t = '*t* ~Student~ (', p = ', *p* '
-             , d = "*d* ~Cohen's~ = ", ci = ', CI~95%~[') } else {
+        list(m = '$M$ = ', i = ', $SD$ = ', t = '$t_{~Student}$ (', p = ', $p$ '
+             , d = "$d_{~Cohen}$ = ", ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', t = 't(', p = ', p '
                , d = "d = ", ci = ', CI95% [') }
 
@@ -84,7 +84,7 @@ bipair <- function(data
         , nboot = nboot)['AKP',]
 
       desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', t = '*t* ~Yuen~ (', p = ', *p* '
+        list(m = '$M$ = ', i = ', $SD$ = ', t = '$t_{~Yuen}$ (', p = ', $p$ '
              , d = '$\\delta_R^{AKP}$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', t = 't(', p = ', p '
                , d = "delta = ", ci = ', CI95% [') }
@@ -115,8 +115,8 @@ bipair <- function(data
                                      paired = TRUE, verbose = FALSE)
 
       desc <- if(markdown) {
-        list(m = '*Mdn* = ', i = ', *IQR* = ', v = '*V* = ', p = ', *p* '
-             , r = '*r* ~biserial~ = ', ci = ', CI~95%~[') } else {
+        list(m = '$Mdn$ = ', i = ', $IQR$ = ', v = '$V$ = ', p = ', $p$ '
+             , r = '$r_{~biserial}$ = ', ci = ', CI~95%~[') } else {
           list(m = 'Mdn = ', i = ', IQR = ', v = 'V = ', p = ', p '
                , r = 'r = ', ci = ', CI95% [') }
 

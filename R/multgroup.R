@@ -71,8 +71,8 @@ multgroup <- function(data
         }
 
         desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', f = '*F* ~Fisher~ (', p = ', *p* '
-             , eta = '$\\eta$^2^ = ', ci = ', CI~95%~[') } else {
+        list(m = '$M$ = ', i = ', $SD$ = ', f = '$F_{~Fisher}$ (', p = ', $p$ '
+             , eta = '$\\eta^2$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
                , eta = "eta^2 = ", ci = ', CI95% [') }
 
@@ -113,8 +113,8 @@ multgroup <- function(data
         }
 
         desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', f = '*F* ~Welch~ (', p = ', *p* '
-             , eta = '$\\eta$^2^ = ', ci = ', CI~95%~[') } else {
+        list(m = '$M$ = ', i = ', $SD$ = ', f = '$F_{~Welch}$ (', p = ', $p$ '
+             , eta = '$\\eta^2$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
                , eta = "eta^2 = ", ci = ', CI95% [') }
 
@@ -159,7 +159,7 @@ multgroup <- function(data
       }
 
       desc <- if(markdown) {
-        list(m = '*M* = ', i = ', *SD* = ', f = '*F* ~trimed-means~ (', p = ', *p* '
+        list(m = '$M$ = ', i = ', $SD$ = ', f = '$F_{~trimed-means}$ (', p = ', $p$ '
              , xi = '$\\xi$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
                , xi = "xi = ", ci = ', CI95% [') }
@@ -202,8 +202,8 @@ multgroup <- function(data
       }
 
       desc <- if(markdown) {
-        list(m = '*Mdn* = ', i = ', *IQR* = ', chi = '$\\chi$^2^ ~Kruskal-Wallis~ (', p = ', *p* '
-             , ep = '$\\epsilon$^2^ = ', ci = ', CI~95%~[') } else {
+        list(m = '$Mdn$ = ', i = ', $IQR$ = ', chi = '$\\chi^2_{~Kruskal-Wallis}$ (', p = ', $p$ '
+             , ep = '$\\epsilon^2$ = ', ci = ', CI~95%~[') } else {
           list(m = 'Mdn = ', i = ', IQR = ', chi = 'X^2(', p = ', p '
                , ep = 'epsilon^2 = ', ci = ', CI95% [') }
 
