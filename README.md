@@ -176,7 +176,7 @@ res
 
 translates into this:
 
-> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values ($M$ = 26.06, $SD$ = 2.66) than vitamin C (VC) group ($M$ = 26.14, $SD$ = 4.8) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL ($M$ = 13.23, $SD$ = 4.46) than VC group ($M$ = 7.98, $SD$ = 2.75).
+> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (*M* = 26.06, *SD* = 2.66) than vitamin C (VC) group (*M* = 26.14, *SD* = 4.8) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (*M* = 13.23, *SD* = 4.46) than VC group (*M* = 7.98, *SD* = 2.75).
 
 ## Paired samples design
 
