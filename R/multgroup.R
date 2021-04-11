@@ -60,14 +60,15 @@ multgroup <- function(data
           # Post-Hoc: T-Student ----
           result[['pwc.method']] <- "Student's t-test for independent samples"
           result[['pwc.table']] <- suppressWarnings(expr = {
-            broomExtra::tidy_parameters(
+            dplyr::as_tibble(
+            parameters::parameters(
             stats::pairwise.t.test(
             x = data[[variable]]
             , g = data[[by]]
             , pool.sd = FALSE
             , var.equal = TRUE
             , p.adjust.method = p.adjust
-            , paired = FALSE)) })
+            , paired = FALSE))) })
         }
 
         desc <- if(markdown) {
@@ -106,10 +107,11 @@ multgroup <- function(data
           result[['pwc.method']] <- 'Games Howell test'
           result[['pwc.table']] <- suppressWarnings(
             expr = {
-              broomExtra::tidy_parameters(
+              dplyr::as_tibble(
+              parameters::parameters(
               PMCMRplus::gamesHowellTest(
               x = data[[variable]]
-              , g = data[[by]]))[,c(1,2,4)] })
+              , g = data[[by]])))[,c(1,2,4)] })
         }
 
         desc <- if(markdown) {
@@ -151,11 +153,12 @@ multgroup <- function(data
           result[['pwc.method']] <- "Yuen's test on trimmed means"
           result[['pwc.table']] <- suppressWarnings(
             expr = {
-              broomExtra::tidy_parameters(
+              dplyr::as_tibble(
+              parameters::parameters(
               WRS2::lincon(
               formula = stats::as.formula(paste0(variable,' ~ ',by))
               , data = data
-              , tr = trim))[,c(1,2,7)] })
+              , tr = trim)))[,c(1,2,7)] })
       }
 
       desc <- if(markdown) {
@@ -193,12 +196,12 @@ multgroup <- function(data
         # Post-Hoc: Dunn test ----
           result[['pwc.method']] <- "Dunn test"
           result[['pwc.table']] <- suppressWarnings(
-            expr = {
-              broomExtra::tidy_parameters(
+            expr = {dplyr::as_tibble(
+              parameters::parameters(
               PMCMRplus::kwAllPairsDunnTest(
               x = data[[variable]]
               , g = data[[by]]
-              , p.adjust.method = p.adjust))[,c(1,2,4)] })
+              , p.adjust.method = p.adjust)))[,c(1,2,4)] })
       }
 
       desc <- if(markdown) {

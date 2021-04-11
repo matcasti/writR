@@ -58,12 +58,13 @@ multpair <- function(data
         # Post-Hoc: T-Student ----
           result[['pwc.method']] <- "Student's t-test for dependent samples"
           result[['pwc.table']] <- suppressWarnings(expr = {
-            broomExtra::tidy_parameters(
+            dplyr::as_tibble(
+            parameters::parameters(
             stats::pairwise.t.test(
             x = data[[variable]]
             , g = data[[by]]
             , p.adjust.method = p.adjust
-            , paired = TRUE)) })
+            , paired = TRUE))) })
       }
 
       sphericity <- if(type == 'check') {
@@ -177,11 +178,12 @@ multpair <- function(data
         # Post-Hoc ----
           result[['pwc.method']] <- "Yuen's test on trimmed means"
           result[['pwc.table']] <- suppressWarnings(
-          expr = { broomExtra::tidy_parameters(
+          expr = { dplyr::as_tibble(
+            parameters::parameters(
             WRS2::rmmcp(y = data[[variable]],
             groups = data[[by]],
             blocks = data[['rowid']],
-            tr = trim))[,c(1,2,7)] })
+            tr = trim)))[,c(1,2,7)] })
       }
 
       desc <- if(markdown) {
@@ -214,12 +216,13 @@ multpair <- function(data
         # Post-Hoc: Durbin test ----
           result[['pwc.method']] <- "Durbin-Conover test"
           result[['pwc.table']] <- suppressWarnings(
-          expr = { broomExtra::tidy_parameters(
-            PMCMRplus::durbinAllPairsTest(
-          y = data[[variable]]
-          , groups = data[[by]]
-          , blocks = data[['rowid']]
-          , p.adjust.method = p.adjust))[,c(1,2,4)] })
+          expr = { dplyr::as_tibble(
+            parameters::model_parameters(
+              PMCMRplus::durbinAllPairsTest(
+                y = data[[variable]]
+                , groups = data[[by]]
+                , blocks = data[['rowid']]
+                , p.adjust.method = p.adjust)))[,c(1,2,4)] })
       }
 
       desc <- if(markdown) {
