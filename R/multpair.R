@@ -79,7 +79,7 @@ multpair <- function(data
         suppressWarnings(expr = {output <- stats::anova(model, correction = 'none')})
 
         desc <- if(markdown) {
-        list(m = '$M$ = ', i = ', $SD$ = ', f = '$F_{~Fisher}$ (', p = ', $p$ '
+        list(m = '*M* = ', i = ', *SD* = ', f = '$F_{~Fisher}$ (', p = ', *p* '
              , eta = '$\\eta^2$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
                , eta = "eta^2 = ", ci = ', CI95% [') }
@@ -109,7 +109,7 @@ multpair <- function(data
         suppressWarnings(expr = {output <- stats::anova(model, correction = 'GG')})
 
         desc <- if(markdown) {
-        list(m = '$M$ = ', i = ', $SD$ = ', f = '$F_{~GG}$ (', p = ', $p$ '
+        list(m = '*M* = ', i = ', *SD* = ', f = '$F_{~GG}$ (', p = ', *p* '
              , eta = '$\\eta^2$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
                , eta = "eta^2 = ", ci = ', CI95% [') }
@@ -139,7 +139,7 @@ multpair <- function(data
         suppressWarnings(expr = {output <- stats::anova(model, correction = 'HF')})
 
         desc <- if(markdown) {
-        list(m = '$M$ = ', i = ', $SD$ = ', f = '$F_{~HF}$ (', p = ', $p$ '
+        list(m = '*M* = ', i = ', *SD* = ', f = '$F_{~HF}$ (', p = ', *p* '
              , eta = '$\\eta^2$ = ', ci = ', CI~95%~[') } else {
           list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p '
                , eta = "eta^2 = ", ci = ', CI95% [') }
@@ -187,7 +187,7 @@ multpair <- function(data
       }
 
       desc <- if(markdown) {
-        list(m = '$M$ = ', i = ', $SD$ = ', f = '$F_{~trimmed-means}$ (', p = ', $p$ ') } else {
+        list(m = '*M* = ', i = ', *SD* = ', f = '$F_{~trimmed-means}$ (', p = ', *p* ') } else {
           list(m = 'M = ', i = ', SD = ', f = 'F(', p = ', p ') }
 
         for(j in levels(data[[by]])) {
@@ -226,7 +226,7 @@ multpair <- function(data
       }
 
       desc <- if(markdown) {
-        list(m = '$Mdn$ = ', i = ', $IQR$ = ', chi = '$\\chi^2_{~Friedman}$ (', p = ', $p$ '
+        list(m = '*Mdn* = ', i = ', *IQR* = ', chi = '$\\chi^2_{~Friedman}$ (', p = ', *p* '
              , w = '$W_{~Kendall}$ = ', ci = ', CI~95%~[') } else {
           list(m = 'Mdn = ', i = ', IQR = ', chi = 'X^2(', p = ', p '
                , w = 'W = ', ci = ', CI95% [') }

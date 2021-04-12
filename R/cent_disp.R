@@ -25,6 +25,6 @@ cent_disp <- function (x
   m <- round(.f$cent(x, na.rm = T), k)
   i <- round(.f$disp(x, na.rm = T), k)
   if(markdown)
-    paste0('$',.f$m,'$ = ',m,', $',.f$i,'$ = ',i) else
+    paste0('*',.f$m,'* = ',m,', *',.f$i,'* = ',i) else
     paste0(.f$m,' = ',m,', ',.f$i,' = ',i)
 }

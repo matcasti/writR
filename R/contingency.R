@@ -50,7 +50,7 @@ contingency <- function(data
       adjust = FALSE)
     expr <- if(isTRUE(markdown))
       list(a = paste0("$\\chi^2_{~", tab[[2]], "}$ ("),
-           b = ", $p$ ",
+           b = ", *p* ",
            c = "$V_{~Cramer}$ = ",
            d = ', CI~95%~[') else
       list(a = "X^2 (",
@@ -101,7 +101,7 @@ contingency <- function(data
         ) == "try-error"
       if(isTRUE(error)) {
         expr <- if(isTRUE(markdown))
-          list(a = "$p_{~FET}$ ") else
+          list(a = "*p*~FET~ ") else
           list(a = "FET, p ")
         result[['full']] <- paste0(
           result[['stats']] <- paste0(
@@ -121,7 +121,7 @@ contingency <- function(data
         return(result)
       } else {
         expr <- if(isTRUE(markdown))
-          list(a = "$p_{~FET}$ ",
+          list(a = "*p*~FET~ ",
                b = "$OR$ = ",
                c = ', CI~95%~[') else
           list(a = "FET: p ",
@@ -161,7 +161,7 @@ contingency <- function(data
         x = tab)
       expr <- if(isTRUE(markdown))
         list(a = paste0("$\\chi^2_{~McNemar}$ ("),
-             b = ", $p$ ",
+             b = ", *p* ",
              c = "$g_{~Cohen}$ = ",
              d = ', CI~95%~[') else
         list(a = "X^2 (",
