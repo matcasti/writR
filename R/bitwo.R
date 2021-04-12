@@ -156,7 +156,7 @@ bitwo <- function(data
       r <- effectsize::rank_biserial(data[[variable]] ~ data[[by]], data = data)
 
       desc <- if(markdown) {
-        list(m = '*Mdn* = ', i = ', *IQR* = ', w = '$W$ =', p = ', *p* '
+        list(m = '*Mdn* = ', i = ', *IQR* = ', w = '$W$ = ', p = ', *p* '
              , r = '$r_{~biserial}$ = ', ci = ', CI~95%~[') } else {
           list(m = 'Mdn = ', i = ', IQR = ', w = 'W =', p = ', p '
                , r = 'r = ', ci = ', CI95% [') }
