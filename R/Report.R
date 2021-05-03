@@ -18,43 +18,48 @@
 #' @return A list of length 2 with `$report` of statistical test and `$method` used, or length 3 if `pairwise.comp = TRUE`.
 #' @export
 
-report <- function(data
-                    , variable
-                    , by
-                    , paired = FALSE
-                    , type = 'auto'
-                    , var.equal = FALSE
-                    , trim = 0.1
-                    , nboot = 100
-                    , sphericity = 'GG'
-                    , pairwise.comp = FALSE
-                    , p.adjust = 'none'
-                    , markdown = TRUE
-                    , ...) {
+report <- function(data,
+                   variable,
+                   by,
+                   paired = FALSE,
+                   type = "auto",
+                   var.equal = FALSE,
+                   trim = 0.1,
+                   nboot = 100,
+                   sphericity = "GG",
+                   pairwise.comp = FALSE,
+                   p.adjust = "none",
+                   markdown = TRUE,
+                   ...) {
+  .args <- match.call()
 
-  by <- rlang::ensym(by); variable <- rlang::ensym(variable)
+  variable <- if (is.character(.args$variable)) variable else deparse(substitute(variable))
+  by <- if (is.character(.args$by)) by else deparse(substitute(by))
 
-  if(nlevels(factor(data[[by]])) >= 3) {
+  if (nlevels(factor(data[[by]])) >= 3) {
     mult(
-      data = data
-      , variable = {{variable}}
-      , by = {{by}}
-      , paired = paired
-      , type = type
-      , var.equal = var.equal
-      , sphericity = sphericity
-      , pairwise.comp = pairwise.comp
-      , p.adjust = p.adjust
-      , markdown = markdown
-      , ... )
+      data = data,
+      variable = variable,
+      by = by,
+      paired = paired,
+      type = type,
+      var.equal = var.equal,
+      sphericity = sphericity,
+      pairwise.comp = pairwise.comp,
+      p.adjust = p.adjust,
+      markdown = markdown,
+      ...
+    )
   } else {
     bi(
-      data = data
-      , variable = {{variable}}
-      , by = {{by}}
-      , paired = paired
-      , type = type
-      , var.equal = var.equal
-      , markdown = markdown)
+      data = data,
+      variable = variable,
+      by = by,
+      paired = paired,
+      type = type,
+      var.equal = var.equal,
+      markdown = markdown,
+      ...
+    )
   }
 }

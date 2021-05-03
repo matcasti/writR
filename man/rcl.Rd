@@ -4,7 +4,7 @@
 \alias{rcl}
 \title{Reshape data from long format}
 \usage{
-rcl(data, variable, by, subject.id = NULL, paired = TRUE, spread = FALSE)
+rcl(data, variable, by, paired = TRUE)
 }
 \arguments{
 \item{data}{Your dataset in long format, can have missing values.}
@@ -13,16 +13,12 @@ rcl(data, variable, by, subject.id = NULL, paired = TRUE, spread = FALSE)
 
 \item{by}{Grouping variable, a factor. It can have more than two levels.}
 
-\item{subject.id}{Ignored.}
-
 \item{paired}{If the design is for paired groups, eliminates missing values at subject level (default FALSE).}
-
-\item{spread}{TRUE will give you wide format output, otherwise long format (default FALSE).}
 }
 \value{
 A dataframe with NAs removed.
 }
 \description{
-This function allows you to handle missing values and is a wrapper around \code{ipmisc::long_to_wide_converter()}.
+This function allows you to handle missing values.
 }
 \keyword{rcl}

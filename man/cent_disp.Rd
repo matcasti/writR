@@ -4,12 +4,20 @@
 \alias{cent_disp}
 \title{Inline summary descriptives}
 \usage{
-cent_disp(x, type = "auto", k = 2, markdown = TRUE)
+cent_disp(
+  x,
+  type = if (is.null(str.a)) "auto" else "custom",
+  str.a = NULL,
+  k = 2,
+  markdown = TRUE
+)
 }
 \arguments{
 \item{x}{Numeric vector.}
 
-\item{type}{To choose a parametric (\code{type = 'p'}) estimate (i.e. mean and sd) or a non-parametric one (\code{type = 'np'}, median and iqr). Can be choosen automatically with \verb{type = 'auto}}
+\item{type}{To choose a parametric (\code{type = 'p'}) estimate (i.e. mean and sd) or a non-parametric one (\code{type = 'np'}, median and iqr). Can be choosen automatically with \verb{type = 'auto}. It can be set to \code{'custom'} so you can insert your own expresions using glue syntax in \code{str.a} argument.}
+
+\item{str.a}{Works only when \code{type = 'custom'}. Allows you to set your own expresions using glue syntax, e.g. \verb{str.a = "\{median\} (*MAD* = \{mad\}, *IQR* = \{IQR\})}}
 
 \item{k}{Number of decimals.}
 

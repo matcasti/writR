@@ -1,4 +1,12 @@
+---
+output: 
+  html_document: 
+    self_contained: yes
+    keep_md: yes
+---
 
+
+ 
 <img src="README_files/logo.png" width="300"/>
  
 <table>
@@ -99,7 +107,7 @@ By default, `report` function, checks automatically the assumptions of the test 
 library(writR) # Load the writR package
 
 set.seed(123)
-Diets <- data.frame(
+Diets <- data.table(
     weight = c(rnorm(n = 100/2, mean = 70, sd = 7)   # Treatment
              , rnorm(n = 100/2, mean = 66, sd = 7) ) # Control
   , diet = gl(n = 2, k = 100/2, labels = c('Treatment', 'Control') ) )
@@ -118,17 +126,17 @@ result
 ```
 ## $desc
 ## $desc$Treatment
-## [1] "$M$ = 70.24, $SD$ = 6.48"
+## [1] "*M* = 70.24, *SD* = 6.48"
 ## 
 ## $desc$Control
-## [1] "$M$ = 67.02, $SD$ = 6.34"
+## [1] "*M* = 67.02, *SD* = 6.34"
 ## 
 ## 
 ## $full
-## [1] "$t_{~Student}$ (98) = 2.51, $p$ = 0.014, $d_{~Cohen}$ = 0.51, CI~95%~[0.1, 0.91]"
+## [1] "$t_{~Student}$ (98) = 2.51, *p* = 0.014, $d_{~Cohen}$ = 0.51, CI~95%~[0.1, 0.91]"
 ## 
 ## $stats
-## [1] "$t_{~Student}$ (98) = 2.51, $p$ = 0.014"
+## [1] "$t_{~Student}$ (98) = 2.51, *p* = 0.014"
 ## 
 ## $es
 ## [1] "$d_{~Cohen}$ = 0.51, CI~95%~[0.1, 0.91]"
@@ -145,7 +153,7 @@ The core function: `report` by default return a list of length five in Markdown 
 
 translates into this:
 
-> The analysis of the effects of the treatment shows that treatment group had greater weight ($M$ = 70.24, $SD$ = 6.48) than the control group ($M$ = 67.02, $SD$ = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment shows that treatment group had greater weight (*M* = 70.24, *SD* = 6.48) than the control group (*M* = 67.02, *SD* = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
 
 It also let you perform centrality and dispersion statistics for inline results by using the `cent_disp()` function. The next example illustrates its usage:
 
@@ -165,11 +173,11 @@ res
 
 ```
 ##    0.5                        1                         
-## OJ "$M$ = 13.23, $SD$ = 4.46" "$M$ = 22.7, $SD$ = 3.91" 
-## VC "$M$ = 7.98, $SD$ = 2.75"  "$M$ = 16.77, $SD$ = 2.52"
+## OJ "*M* = 13.23, *SD* = 4.46" "*M* = 22.7, *SD* = 3.91" 
+## VC "*M* = 7.98, *SD* = 2.75"  "*M* = 16.77, *SD* = 2.52"
 ##    2                         
-## OJ "$M$ = 26.06, $SD$ = 2.66"
-## VC "$M$ = 26.14, $SD$ = 4.8"
+## OJ "*M* = 26.06, *SD* = 2.66"
+## VC "*M* = 26.14, *SD* = 4.8"
 ```
 
 > The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`res['OJ','2']`) than vitamin C (VC) group (`res['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`res['OJ','0.5']`) than VC group (`res['VC','0.5']`).
@@ -216,11 +224,11 @@ report(
 ## 
 ## $pwc.table
 ## # A tibble: 3 x 3
-##   group1 group2 p.value
-##   <chr>  <chr>    <dbl>
-## 1 Time-1 Basal   0.657 
-## 2 Time-2 Basal   0.0757
-## 3 Time-2 Time-1  0.0894
+##   Group1 Group2      p
+##   <chr>  <chr>   <dbl>
+## 1 Time-1 Basal  0.657 
+## 2 Time-2 Basal  0.0757
+## 3 Time-2 Time-1 0.0894
 ## 
 ## $desc
 ## $desc$Basal
@@ -345,11 +353,11 @@ report(
 ## 
 ## $pwc.table
 ## # A tibble: 3 x 3
-##   group1 group2  p.value
-##   <chr>  <chr>     <dbl>
-## 1 Drug A Control  0.881 
-## 2 Drug B Control  0.125 
-## 3 Drug B Drug A   0.0790
+##   Group1 Group2       p
+##   <chr>  <chr>    <dbl>
+## 1 Drug A Control 0.881 
+## 2 Drug B Control 0.125 
+## 3 Drug B Drug A  0.0790
 ## 
 ## $desc
 ## $desc$Control
@@ -541,13 +549,13 @@ res
 
 ```
 ## $stats
-## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, $p$ < 0.001"
+## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, *p* < 0.001"
 ## 
 ## $es
 ## [1] "$V_{~Cramer}$ = 0.91, CI~95%~[0.95, 0.95]"
 ## 
 ## $full
-## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, $p$ < 0.001, $V_{~Cramer}$ = 0.91, CI~95%~[0.95, 0.95]"
+## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, *p* < 0.001, $V_{~Cramer}$ = 0.91, CI~95%~[0.95, 0.95]"
 ## 
 ## $method
 ## [1] "Chi-squared test for given probabilities"

@@ -26,10 +26,9 @@ multgroup <- function(data
                        , ...) {
 
   data <- rcl(data = data
-              , variable = {{variable}}
-              , by = {{by}}
-              , paired = FALSE
-              , spread = FALSE)
+              , variable = variable
+              , by = by
+              , paired = FALSE)
 
   result <- list()
 

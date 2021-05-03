@@ -28,8 +28,8 @@ bi <- function(data
   if(paired) {
     # Muestras relaciondas ----
     bipair(data = data
-            , variable = {{variable}}
-            , by = {{by}}
+            , variable = variable
+            , by = by
             , type = type
             , trim = trim
             , nboot = nboot
@@ -38,8 +38,8 @@ bi <- function(data
   } else {
     # Muestras independientes ----
     bitwo(data = data
-           , variable = {{variable}}
-           , by = {{by}}
+           , variable = variable
+           , by = by
            , type = type
            , var.equal = var.equal
            , trim = trim

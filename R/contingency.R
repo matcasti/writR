@@ -22,9 +22,7 @@ contingency <- function(data
   .arg <- match.call()
 
   x.var <- data[[.arg$x]]
-  if(is.null(.arg$y)) {
-    way <- "One"
-  } else {
+  if(is.null(.arg$y)) way <- "One"  else {
     y.var <- data[[.arg$y]]
     way <- "Two"
   }

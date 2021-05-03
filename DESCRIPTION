@@ -1,6 +1,6 @@
 Package: writR
 Title: Inferential statistics and reporting in APA style
-Version: 0.3.0
+Version: 0.5.0
 Date: 2021-03-05
 Authors@R: 
     person(given = "Matías",
@@ -15,11 +15,12 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends:
+    data.table
 Imports:
     dplyr,
-    tidyr,
-    rlang,
     parameters,
+    glue,
     nortest,
     effectsize,
     car,

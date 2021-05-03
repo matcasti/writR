@@ -26,10 +26,9 @@ multpair <- function(data
                       , ...) {
 
   data <- rcl(data = data
-              , variable = {{variable}}
-              , by = {{by}}
-              , paired = TRUE
-              , spread = FALSE)
+              , variable = variable
+              , by = by
+              , paired = TRUE)
 
   result <- list()
 

@@ -132,7 +132,7 @@ By default, `report` function, checks automatically the assumptions of the test 
 library(writR) # Load the writR package
 
 set.seed(123)
-Diets <- data.frame(
+Diets <- data.table(
     weight = c(rnorm(n = 100/2, mean = 70, sd = 7)   # Treatment
              , rnorm(n = 100/2, mean = 66, sd = 7) ) # Control
   , diet = gl(n = 2, k = 100/2, labels = c('Treatment', 'Control') ) )

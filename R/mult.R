@@ -32,8 +32,8 @@ mult <- function(data
   if(paired) {
     # Medidas repetidas ----
     multpair(data = data
-              , variable = {{variable}}
-              , by = {{by}}
+              , variable = variable
+              , by = by
               , type = type
               , trim = trim
               , sphericity = sphericity
@@ -44,8 +44,8 @@ mult <- function(data
   } else {
     # Muestras independientes ----
     multgroup(data = data
-               , variable = {{variable}}
-               , by = {{by}}
+               , variable = variable
+               , by = by
                , type = type
                , var.equal = var.equal
                , trim = trim
