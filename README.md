@@ -178,6 +178,39 @@ translates into this:
 
 > The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (*M* = 26.06, *SD* = 2.66) than vitamin C (VC) group (*M* = 26.14, *SD* = 4.8) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (*M* = 13.23, *SD* = 4.46) than VC group (*M* = 7.98, *SD* = 2.75).
 
+You can also set your own custom expressions using glue syntax like this:
+
+
+```r
+cent_disp(
+  x = data$len, 
+  str.a = "The median for length was {median} mm (MAD = {mad}, IQR = {IQR})",
+  k = 1 # For 1 decimal places
+)
+```
+
+```
+## The median for length was 19.2 mm (MAD = 9, IQR = 12.2)
+```
+
+It allows you to use any function available in your global environment or in attached packages, even custom functions:
+
+
+```r
+q25 <- function(i) quantile(i, 0.25)[[1L]]
+q75 <- function(j) quantile(j, 0.75)[[1L]]
+
+cent_disp(
+  x = data$len,
+  str.a = "The median for length was {median} mm (IQR = [{q25}, {q75}])",
+  k = 1
+)
+```
+
+```
+## The median for length was 19.2 mm (IQR = [13.1, 25.3])
+```
+
 ## Paired samples design
 
 For paired designs you need to set `paired = TRUE`, and then, based on the numbers of groups detected after removing missing values, the test will run depending on the parameters stablished.
@@ -672,7 +705,7 @@ library(deepdep)
 plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
-![](README_files/figure-html/unnamed-chunk-13-1.svg)<!-- -->
+![](README_files/figure-html/unnamed-chunk-15-1.svg)<!-- -->
 
 ## Acknowledgments
 
