@@ -14,8 +14,7 @@ rcl <- function(data,
                 paired = TRUE) {
 
   # Data preparation ----
-  dt <- data.table::data.table(variable = data[[variable]], by = data[[by]])
-  data.table::setnames(dt, old = c("variable","by"), c(variable, by))
+  dt <- data.table::as.data.table(data)
 
   # Creating ID if paired data----
   if(paired) { dt[, rowid := factor(seq_len(.N)), by]
@@ -34,6 +33,6 @@ rcl <- function(data,
         variable.name = by)]
   } else {
     # Drop NA's
-    dt[, stats::na.omit(.SD)]
+    dt[, c(..by, ..variable)][, stats::na.omit(.SD)]
   }
 }
