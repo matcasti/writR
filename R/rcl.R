@@ -17,11 +17,8 @@ rcl <- function(data,
   dt <- data.table::data.table(variable = data[[variable]], by = data[[by]])
   data.table::setnames(dt, old = c("variable","by"), c(variable, by))
 
-  # Creating ID ----
-  dt[, rowid := factor(seq_len(.N)), by]
-
-  # Drop NA's if paired = TRUE ----
-  .f <- if(paired) stats::na.omit else function(x) x
+  # Creating ID if paired data----
+  if(paired) { dt[, rowid := factor(seq_len(.N)), by]
 
   # Core computation ----
   data.table::dcast( # Wide format
@@ -29,10 +26,14 @@ rcl <- function(data,
     formula = stats::as.formula(
       object = paste("rowid ~", by)),
     value.var = variable
-    )[, .f(.SD) # Drop rows with NA's if paired
+    )[, stats::na.omit(.SD) # Drop NA's
       ][, data.table::melt( # Stack it back together in long format
         data = .SD,
         id.vars = "rowid",
         value.name = variable,
         variable.name = by)]
+  } else {
+    # Drop NA's
+    dt[, stats::na.omit(.SD)]
+  }
 }
