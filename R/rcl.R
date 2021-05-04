@@ -6,7 +6,7 @@
 #' @param by Grouping variable, a factor. It can have more than two levels.
 #' @param paired If the design is for paired groups, eliminates missing values at subject level (default FALSE).
 #' @keywords rcl
-#' @return A dataframe with NAs removed.
+#' @return A tibble with NAs removed.
 
 rcl <- function(data,
                 variable, # character vector
@@ -15,17 +15,13 @@ rcl <- function(data,
 
   # Data preparation ----
   dt <- data.table::as.data.table(data
-          )[,c(..variable, ..by)
-            ][, na.omit(.SD)
-              ][,(by) := droplevels(get(by))]
-
-  if(nlevels(data[[by]]) > nlevels(dt[[by]])) {
-    drlv <- levels(data[[by]])[!levels(data[[by]]) %in% levels(dt[[by]])]
-    warning("Levels ", paste0(drlv, collapse = ", ")," were removed", immediate. = F)
-  }
+          )[,c(..variable, ..by)]
 
   # Creating ID if paired data----
-  if(paired) { dt[, rowid := factor(seq_len(.N)), by]
+  dt <- if(paired) {
+
+  dt <- dt[, rowid := factor(seq_len(.N)), by
+     ][, na.omit(.SD)][,(by) := droplevels(get(by))]
 
   # Core computation ----
   data.table::dcast( # Wide format
@@ -47,4 +43,11 @@ rcl <- function(data,
        ][, stats::na.omit(.SD)
          ][, dplyr::as_tibble(.SD)]
   }
+
+  if(nlevels(data[[by]]) > nlevels(dt[[by]])) {
+    drlv <- levels(data[[by]])[!levels(data[[by]]) %in% levels(dt[[by]])]
+    warning("Levels ", paste0(drlv, collapse = ", ")," were removed", immediate. = F)
+  }
+
+  return(dt)
 }
