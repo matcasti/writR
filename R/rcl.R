@@ -39,7 +39,8 @@ rcl <- function(data,
         id.vars = "rowid",
         value.name = variable,
         variable.name = by)
-        ][, as.data.frame(.SD)]
+        ][, rowid := droplevels(rowid)
+          ][, dplyr::as_tibble(.SD)]
   } else {
     # Drop NA's
     dt[, c(..by, ..variable)
