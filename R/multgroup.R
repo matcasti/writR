@@ -25,11 +25,6 @@ multgroup <- function(data
                        , markdown = TRUE
                        , ...) {
 
-  data <- rcl(data = data
-              , variable = variable
-              , by = by
-              , paired = FALSE)
-
   result <- list()
 
     if(type == 'auto') {
@@ -39,7 +34,7 @@ multgroup <- function(data
         INDEX = list(data[[by]]),
         FUN = function(x) if(length(x) < 50) {
           stats::shapiro.test(x)$p.value } else {
-          nortest::lillie.test(x)$p.value } ) > 0.05 )
+          nortest::lillie.test(x)$p.value } ) > 0.05)
       # Tipo de test
       type <- if(n.test) { 'check' } else { 'np' }
     }

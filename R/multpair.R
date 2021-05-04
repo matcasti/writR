@@ -25,11 +25,6 @@ multpair <- function(data
                       , markdown = TRUE
                       , ...) {
 
-  data <- rcl(data = data
-              , variable = variable
-              , by = by
-              , paired = TRUE)
-
   result <- list()
 
     if(type == 'auto') {

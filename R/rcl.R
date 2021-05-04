@@ -14,7 +14,15 @@ rcl <- function(data,
                 paired = TRUE) {
 
   # Data preparation ----
-  dt <- data.table::as.data.table(data)
+  dt <- data.table::as.data.table(data
+          )[,c(..variable, ..by)
+            ][, na.omit(.SD)
+              ][,(by) := droplevels(get(by))]
+
+  if(nlevels(data[[by]]) > nlevels(dt[[by]])) {
+    drlv <- levels(data[[by]])[!levels(data[[by]]) %in% levels(dt[[by]])]
+    warning("Levels ", paste0(drlv, collapse = ", ")," were removed", immediate. = F)
+  }
 
   # Creating ID if paired data----
   if(paired) { dt[, rowid := factor(seq_len(.N)), by]
@@ -30,9 +38,12 @@ rcl <- function(data,
         data = .SD,
         id.vars = "rowid",
         value.name = variable,
-        variable.name = by)]
+        variable.name = by)
+        ][, as.data.frame(.SD)]
   } else {
     # Drop NA's
-    dt[, c(..by, ..variable)][, stats::na.omit(.SD)]
+    dt[, c(..by, ..variable)
+       ][, stats::na.omit(.SD)
+         ][, dplyr::as_tibble(.SD)]
   }
 }

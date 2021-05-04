@@ -33,8 +33,15 @@ report <- function(data,
                    ...) {
   .args <- match.call()
 
-  variable <- if (is.character(.args$variable)) variable else deparse(substitute(variable))
-  by <- if (is.character(.args$by)) by else deparse(substitute(by))
+  variable <- if(isTRUE(try(is.character(variable), silent = TRUE)))
+    variable else deparse(substitute(variable))
+  by <- if(isTRUE(try(is.character(by), silent = TRUE)))
+    by else deparse(substitute(by))
+
+  data <- rcl(data = data
+              , variable = variable
+              , by = by
+              , paired = paired)
 
   if (nlevels(factor(data[[by]])) >= 3) {
     mult(
