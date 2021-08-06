@@ -172,7 +172,7 @@ An example using same data as before:
 inline <- lablr(result)
 ```
 
-> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, `r inline$full`.
+> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, `inline$full`.
 
 translates into this:
 
@@ -263,13 +263,13 @@ lablr(result$test)
 
 However, you can specify your own parameters for the selection of the test:
 
-| Test                                       | Parameters                                           |
-|--------------------------------------------|------------------------------------------------------|
+| Test                                       | Parameters                                             |
+|--------------------------------------------|--------------------------------------------------------|
 | One-way repeated measures ANOVA (rmANOVA)  | `paired = TRUE` + `type = 'p'` + `sphericity = 'none'` |
-| rmANOVA with Greenhouse-Geisser correction | `paired = TRUE` + `type = 'p'` + `sphericity = 'GG'` |
-| rmANOVA with Huynh-Feldt correction        | `paired = TRUE` + `type = 'p'` + `sphericity = 'HF'` |
-| Heteroscedastic rmANOVA for trimmed means  | `paired = TRUE` + `type = 'r'`                       |
-| Friedman rank sum test                     | `paired = TRUE` + `type = 'np'`                      |
+| rmANOVA with Greenhouse-Geisser correction | `paired = TRUE` + `type = 'p'` + `sphericity = 'GG'`   |
+| rmANOVA with Huynh-Feldt correction        | `paired = TRUE` + `type = 'p'` + `sphericity = 'HF'`   |
+| Heteroscedastic rmANOVA for trimmed means  | `paired = TRUE` + `type = 'r'`                         |
+| Friedman rank sum test                     | `paired = TRUE` + `type = 'np'`                        |
 
 #### 2 groups
 
