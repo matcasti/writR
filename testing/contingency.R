@@ -16,6 +16,8 @@ contingency(data, "Sexo", paired = TRUE) # Should throw an error
 
 ## Goodness-of-fit Chi-square test
 a <- contingency(data, "Sexo")
+print(a)
+lablr(a)
 
 a. <- table(data$Sexo) |> chisq.test()
 
@@ -25,6 +27,8 @@ a$p.value == a.$p.value # TRUE
 
 ## Fisher's exact test
 b <- contingency(data, "Sexo", "cat_Edad", exact = TRUE)
+print(b)
+lablr(b)
 
 b. <- table(data$Sexo, data$cat_Edad) |> fisher.test()
 
@@ -32,6 +36,8 @@ b$p.value == b.$p.value # TRUE
 
 ## Mcnemar's test
 c <- contingency(data, "Sexo", "cat_Edad", paired = TRUE)
+print(c)
+lablr(c)
 
 c. <- table(data$Sexo, data$cat_Edad) |> mcnemar.test()
 
@@ -39,6 +45,8 @@ c$p.value == c.$p.value # TRUE
 
 ## Person's Chi-square test
 d <- contingency(data, "Sexo", "cat_Edad")
+print(d)
+lablr(d)
 
 d. <- table(data$Sexo, data$cat_Edad) |> chisq.test()
 
@@ -48,6 +56,8 @@ d$p.value == d.$p.value # TRUE
 
 ## Fisher's exact test
 e <- contingency(data, "Periodo", "cat_Edad", exact = TRUE)
+print(e)
+lablr(e)
 
 e. <- table(data$Periodo, data$cat_Edad) |> fisher.test()
 
@@ -58,6 +68,8 @@ contingency(data, "Periodo", "cat_Edad", paired = TRUE) # Should throw an error
 
 ## Person's Chi-square test
 f <- contingency(data, "Periodo", "cat_Edad")
+print(f)
+lablr(f)
 
 f. <- table(data$Periodo, data$cat_Edad) |> chisq.test()
 

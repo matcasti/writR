@@ -38,10 +38,10 @@ aov_r <- function(data,
 
   is.empty <- function(i) length(i) == 0
 
-  data <- droplevels(data[j = .SD, .SDcols = c(rowid, response, between, within)])
   is.null(response) && stop("'response' can't be null", call. = FALSE)
   is.empty(between) && is.empty(within) && stop("Need to specify one of between or within factors", call. = FALSE)
   is.null(rowid) && stop("'rowid' can't be null", call. = FALSE)
+  data <- droplevels(data[j = .SD, .SDcols = c(rowid, response, between, within)])
 
   model <- suppressMessages(
     suppressWarnings(
@@ -99,7 +99,7 @@ aov_r <- function(data,
     method = data.table::fcase(rn %chin% between, "Fisher's ANOVA",
                    rn %chin% within, within_method,
                    utils::combn(within, 1, grepl, T, rn), within_method),
-    alternative = NA,
+    alternative = NA_character_,
     estimate = efs[[2L]],
     conf.level = efs$CI,
     conf.low = efs$CI_low,

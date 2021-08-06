@@ -121,7 +121,7 @@ k_sample <- function(data, x, y,
         } else {
           paste("Repeated measures ANOVA with", sphericity, "correction")
         },
-        alternative = as.character(NA),
+        alternative = NA_character_,
         estimate = es[[2L]],
         conf.level = es[["CI"]],
         conf.low = es[["CI_low"]],
@@ -130,7 +130,13 @@ k_sample <- function(data, x, y,
         n_obs = length(y_var) / length(x_lvl)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     } else {
 
       test <- stats::oneway.test(
@@ -148,7 +154,7 @@ k_sample <- function(data, x, y,
         df.error = test$parameter[["denom df"]],
         p.value = test$p.value,
         method = if (var.equal) "Fisher's ANOVA" else "Welch's ANOVA",
-        alternative = as.character(NA),
+        alternative = NA_character_,
         estimate = es[[1L]],
         conf.level = es[["CI"]],
         conf.low = es[["CI_low"]],
@@ -157,7 +163,13 @@ k_sample <- function(data, x, y,
         n_obs = length(y_var)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     }
   }
   # Non-parametric statistics
@@ -183,10 +195,10 @@ k_sample <- function(data, x, y,
         "x" = x,
         statistic = test$statistic,
         df = as.double(test$parameter),
-        df.error = as.double(NA),
+        df.error = NA_real_,
         p.value = test$p.value,
         method = test$method,
-        alternative = as.character(NA),
+        alternative = NA_character_,
         estimate = es[[1L]],
         conf.level = es[["CI"]],
         conf.low = es[["CI_low"]],
@@ -195,7 +207,13 @@ k_sample <- function(data, x, y,
         n_obs = length(y_var) / length(x_lvl)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     # Kruskal-Wallis rank-sum test for independent samples
     } else {
       test <- stats::kruskal.test(
@@ -214,10 +232,10 @@ k_sample <- function(data, x, y,
         "x" = x,
         statistic = test$statistic,
         df = as.double(test$parameter),
-        df.error = as.double(NA),
+        df.error = NA_real_,
         p.value = test$p.value,
         method = test$method,
-        alternative = as.character(NA),
+        alternative = NA_character_,
         estimate = es[[1L]],
         conf.level = es[["CI"]],
         conf.low = es[["CI_low"]],
@@ -226,7 +244,13 @@ k_sample <- function(data, x, y,
         n_obs = length(y_var)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     }
   }
   # Robust statistics
@@ -258,7 +282,7 @@ k_sample <- function(data, x, y,
         df.error = as.double(test$df2),
         p.value = test$p.value,
         method = "one-way repeated measures ANOVA for trimmed means",
-        alternative = as.character(NA),
+        alternative = NA_character_,
         estimate = es[[1L]],
         conf.level = 0.95,
         conf.low = es[[2L]],
@@ -267,7 +291,13 @@ k_sample <- function(data, x, y,
         n_obs = length(y_var) / length(x_lvl)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     # one-way ANOVA for trimmed means
     } else {
       test <- WRS2::t1way(
@@ -284,7 +314,7 @@ k_sample <- function(data, x, y,
         df.error = as.double(test$df2),
         p.value = test$p.value,
         method = "one-way ANOVA for trimmed means",
-        alternative = as.character(NA),
+        alternative = NA_character_,
         estimate = test$effsize,
         conf.level = 0.95,
         conf.low = test$effsize_ci[[1L]],
@@ -293,7 +323,13 @@ k_sample <- function(data, x, y,
         n_obs = length(y_var)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     }
   }
 }

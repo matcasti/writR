@@ -86,15 +86,14 @@ is_normal <- function(x, alpha = 0.05, test = NULL) {
 #' @param x Grouping factor.
 #' @param alpha Threshold for null hipotesis (of normality) rejection.
 #' @param center A function to compute the center of each group; mean gives the original Levene's test; the default, median, provides a more robust test.
-#' @importFrom nortest lillie.test
 #' @importFrom stats complete.cases anova lm median
 #' @export
 
-is_var.equal <- function(y, x, alpha = 0.05, center = median) {
-  valid <- complete.cases(y, x)
+is_var.equal <- function(y, x, alpha = 0.05, center = stats::median) {
+  valid <- stats::complete.cases(y, x)
   meds <- tapply(y[valid], x[valid], center)
   resp <- abs(y - meds[x])
-  anova(lm(resp ~ x))[["Pr(>F)"]][[1]] > alpha
+  stats::anova(stats::lm(resp ~ x))[["Pr(>F)"]][[1]] > alpha
 }
 
 #' @title Mauchly's Test of Sphericity
@@ -197,6 +196,7 @@ HF <- function(model, gg = NULL) {
 #' @description Internal function inside `k_sample`. Return the Spherecity correction suggested based on Mauchly test in one-way repeated measures designs
 #'
 #' @param model A repeated measures ANOVA model using Afex.
+#' @export
 
 sphericity_check <- function(model) {
   .m <- model$Anova
@@ -206,3 +206,34 @@ sphericity_check <- function(model) {
     if(is_hf || is_hf_too) "HF" else "GG"
   }
 }
+
+#' @title Print method for writR objects
+#' @name print.writR
+#' @param x A writR object from any of one_sample, two_sample, k_sample, autest or contingency.
+#' @param ... Currently ignored
+#' @importFrom data.table as.data.table
+#' @export
+
+print.writR <- function(x, ...) {
+  x <- data.table::as.data.table(
+    x = x[!sapply(x, anyNA)]
+  )
+  print(x)
+}
+
+#' @title as.data.frame method for writR objects
+#' @name as.data.frame.writR
+#' @param x A writR object from any of one_sample, two_sample, k_sample, autest or contingency.
+#' @param row.names Exported from other methods.
+#' @param optional Exported from other methods.
+#' @param ... Currently ignored
+#' @export
+
+as.data.frame.writR <- function(x, row.names = NULL, optional = FALSE, ...) {
+  as.data.frame(
+    x = x[!sapply(x, anyNA)],
+    row.names = row.names,
+    optional = optional
+  )
+}
+

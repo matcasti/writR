@@ -102,7 +102,7 @@ two_sample <- function(data, x, y,
       "x" = x,
       statistic = test$statistic,
       df = as.numeric(test$parameter),
-      df.error = as.numeric(NA),
+      df.error = NA_real_,
       p.value = test$p.value,
       method = test$method,
       alternative = alternative,
@@ -114,7 +114,13 @@ two_sample <- function(data, x, y,
       n_obs = if(paired) length(y_var_1) else length(y_var)
     )
 
-    if(lbl) return(lablr(test, markdown)) else return(test)
+    if(lbl) {
+      test <- lablr(test, markdown)
+    }
+
+    class(test) <- c("writR", "list")
+
+    return(test)
   }
   # non-parametric statistics
   if (type == "np") {
@@ -139,11 +145,11 @@ two_sample <- function(data, x, y,
       "y" = y,
       "x" = x,
       statistic = log(test$statistic),
-      df = as.numeric(NA),
-      df.error = as.numeric(NA),
+      df = NA_real_,
+      df.error = NA_real_,
       p.value = test$p.value,
       method = test$method,
-      alternative = if(is.null(test$alternative)) as.character(NA) else test$alternative,
+      alternative = if(is.null(test$alternative)) NA_character_ else test$alternative,
       estimate = es[[1L]],
       conf.level = es[["CI"]],
       conf.low = es[["CI_low"]],
@@ -152,7 +158,13 @@ two_sample <- function(data, x, y,
       n_obs = if(paired) length(y_var_1) else length(y_var)
     )
 
-    if(lbl) return(lablr(test, markdown)) else return(test)
+    if(lbl) {
+      test <- lablr(test, markdown)
+    }
+
+    class(test) <- c("writR", "list")
+
+    return(test)
   }
   # Robust statistics
   if (type == "r") {
@@ -177,7 +189,7 @@ two_sample <- function(data, x, y,
         "x" = x,
         statistic = test$test,
         df = as.numeric(test$df),
-        df.error = as.numeric(NA),
+        df.error = NA_real_,
         p.value = test$p.value,
         method = "Paired Yuen's test on trimmed means",
         alternative = "two.sided",
@@ -189,7 +201,13 @@ two_sample <- function(data, x, y,
         n_obs = length(y_var_1)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     } else {
 
       # Yuen test - independent samples
@@ -209,7 +227,7 @@ two_sample <- function(data, x, y,
         "x" = x,
         statistic = test$test,
         df = as.numeric(test$df),
-        df.error = as.numeric(NA),
+        df.error = NA_real_,
         p.value = test$p.value,
         method = "Two sample Yuen's test on trimmed means",
         alternative = "two.sided",
@@ -221,7 +239,13 @@ two_sample <- function(data, x, y,
         n_obs = length(y_var)
       )
 
-      if(lbl) return(lablr(test, markdown)) else return(test)
+      if(lbl) {
+        test <- lablr(test, markdown)
+      }
+
+      class(test) <- c("writR", "list")
+
+      return(test)
     }
   }
 }

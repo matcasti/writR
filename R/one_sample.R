@@ -65,10 +65,10 @@ one_sample <- function(data, y,
 
     test <- list(
       "y" = y,
-      "x" = as.character(NA),
+      "x" = NA_character_,
       statistic = test$statistic,
       df = as.numeric(test$parameter),
-      df.error = as.numeric(NA),
+      df.error = NA_real_,
       p.value = test$p.value,
       method = test$method,
       alternative = alternative,
@@ -80,7 +80,13 @@ one_sample <- function(data, y,
       n_obs = length(y_var)
     )
 
-    if(lbl) return(lablr(test, markdown)) else return(test)
+    if(lbl) {
+      test <- lablr(test, markdown)
+    }
+
+    class(test) <- c("writR", "list")
+
+    return(test)
   }
   # Non-parametric statistics
   if(type == "np") {
@@ -99,10 +105,10 @@ one_sample <- function(data, y,
 
     test <- list(
       "y" = y,
-      "x" = as.character(NA),
+      "x" = NA_character_,
       statistic = log(test$statistic),
-      df = as.numeric(NA),
-      df.error = as.numeric(NA),
+      df = NA_real_,
+      df.error = NA_real_,
       p.value = test$p.value,
       method = test$method,
       alternative = alternative,
@@ -114,7 +120,13 @@ one_sample <- function(data, y,
       n_obs = length(y_var)
     )
 
-    if(lbl) return(lablr(test, markdown)) else return(test)
+    if(lbl) {
+      test <- lablr(test, markdown)
+    }
+
+    class(test) <- c("writR", "list")
+
+    return(test)
   }
   # Robust statistics
   if(type == "r") {
@@ -129,10 +141,10 @@ one_sample <- function(data, y,
 
     test <- list(
       "y" = y,
-      "x" = as.character(NA),
+      "x" = NA_character_,
       statistic = test$statistic,
-      df = as.numeric(NA),
-      df.error = as.numeric(NA),
+      df = NA_real_,
+      df.error = NA_real_,
       p.value = test$p.value,
       method = test$method,
       alternative = alternative,
@@ -144,6 +156,12 @@ one_sample <- function(data, y,
       n_obs = length(y_var)
     )
 
-    if(lbl) return(lablr(test, markdown)) else return(test)
+    if(lbl) {
+      test <- lablr(test, markdown)
+    }
+
+    class(test) <- c("writR", "list")
+
+    return(test)
   }
 }

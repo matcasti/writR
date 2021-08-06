@@ -126,12 +126,25 @@ citation('writR')
 | Independent | `type = 'np'`: non-parametric.                  | Dunn's test.                                                                                                                                                  | `PMCMRplus::kwAllPairsDunnTest` |
 | Independent | `type = 'r'`: robust.                           | Yuen's test for trimmed means (see [Mair and Wilcox](https://rdrr.io/rforge/WRS2/f/inst/doc/WRS2.pdf)).                                                       | `WRS2::lincon`                  |
 
+#### Available effect sizes
+
+| Nº of groups | Test            | Effect size                                             |
+|:------------:|-----------------|---------------------------------------------------------|
+|      2       | Parametric      | Cohens'd                                                |
+|      2       | Parametric      | Hedges'g                                                |
+|      2       | Non-parametric  | Rank-biserial correlation                               |
+|      2       | Robust          | Algina-Keselman-Penfield robust standardized difference |
+|     \> 2     | Parametric      | Eta-squared                                             |
+|     \> 2     | Parametric      | Omega-squared                                           |
+|     \> 2     | Non-parametric  | Epsilon-squared                                         |
+|     \> 2     | Robust          | Explanatory measure of effect size                      |
+
 # Automated testing
 
 By default, `autest()`, checks automatically the assumptions of the data based on the parameters supplied for test selection.
 
-```{r echo=TRUE}
-library(writR) # Load the writR package
+```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+library(writR) # Load the writR package 
 
 set.seed(123) # for reproducibility
 diets <- data.frame(
@@ -146,7 +159,7 @@ result <- autest(
   type = 'auto', # default
 )
 
-as.data.frame(result) # For tabular with test details, otherwise a list is returned
+print(result) # Detailed statistical results
 ```
 
 ## Inline results in APA style
@@ -170,17 +183,17 @@ It also let you perform centrality and dispersion statistics for inline results 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 data <- datasets::ToothGrowth
 
-res <- with(data, tapply(X = len, 
-                         INDEX = list(supp, dose),
-                         FUN = function(var)
-                           cent_disp(x = var,         # These are default values:
-                                     type = 'auto',   # # Automated selection based on normality test
-                                     k = 1,           # # Number of decimal places
-                                     markdown = TRUE))) # # For inline results
-as.data.frame(res)
+result <- with(data, tapply(
+  X = len, 
+  INDEX = list(supp, dose),
+  FUN = function(var) {
+    cent_disp(x = var, markdown = TRUE)
+  }))
+
+as.data.frame(result)
 ```
 
-> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`res['OJ','2']`) than vitamin C (VC) group (`res['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`res['OJ','0.5']`) than VC group (`res['VC','0.5']`).
+> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`result['OJ','2']`) than vitamin C (VC) group (`result['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`result['OJ','0.5']`) than VC group (`result['VC','0.5']`).
 
 translates into this:
 
@@ -220,7 +233,7 @@ When `type = 'auto'` the next assumptions will be checked for \> 2 paired sample
 | Assumption checked | How is tested                                                            | If met                                    | If not                                                            |
 |--------------------|--------------------------------------------------------------------------|-------------------------------------------|-------------------------------------------------------------------|
 | Normality          | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Sphericity check.                         | Friedman rank sum test                                            |
-| Sphericity         | `afex::test_sphericity(model)`                                           | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser (GG) or Huynh-Feldt (HF) correction is applied |
+| Sphericity         | `sphericity_check(model)`                                                | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser (GG) or Huynh-Feldt (HF) correction is applied |
 
 ```{r message=FALSE, warning=FALSE}
 n <- 40
@@ -276,6 +289,9 @@ result <- autest(
   , paired = TRUE
 )
 
+# Access the whole results
+print(result)
+
 # For inline results
 lablr(result)
 ```
@@ -317,11 +333,8 @@ result <- autest(
   , posthoc = TRUE
   )
 
-# See detailed statistics
-as.data.frame(x = result$test)
-
-# And corresponding pairwise comparisons
-result$pwc
+# Check results
+print(result)
 
 # For inline results
 lablr(result$test)
@@ -354,7 +367,7 @@ result <- autest(
   )
 
 # For tabular results
-as.data.frame(x = na.omit(result))
+print(result)
 
 # For inline results (e.g. manuscript)
 lablr(result)
@@ -408,10 +421,12 @@ result <- aov_r(
 )
 
 # Check results
-result
+print(result)
 
 # And inline results for reporting purposes
 inline <- result[j = lablr(.SD), keyby = x]
+
+print(inline)
 ```
 
 For inline results with previous data we would do something like this:
@@ -439,7 +454,7 @@ result <- contingency(
 )
 
 # Tabular format dropping empty columns
-as.data.frame(x = result[!sapply(result, anyNA)])
+print(result)
 
 # For inline results
 inline <- lablr(result)
@@ -465,7 +480,7 @@ result <- contingency(
 )
 
 # Statistics in tabular format
-as.data.frame(x = result[!sapply(result, anyNA)])
+print(result)
 
 # Inline results format
 lablr(result)
@@ -484,7 +499,7 @@ result <- contingency(
 )
 
 # Statistics in tabular format
-as.data.frame(x = result[!sapply(result, anyNA)])
+print(result)
 
 # Inline results format
 lablr(result)
@@ -511,6 +526,9 @@ result <- contingency(
   y = "2nd survey",
   paired = TRUE # Set TRUE for McNemar test
 )
+
+# Statistics in tabular format
+print(result)
 
 # Inline results
 lablr(result)

@@ -130,6 +130,9 @@ lablr <- function(t, markdown = FALSE) {
       ci = (.ci <- paste0(ci., format(round(t$conf.low, 2), nsmall = 2), ", ", format(round(t$conf.high, 2), nsmall = 2), "]")),
       full = paste(.p, .es, .ci, sep = ", ")
     )
+
+    class(res) <- c("writR", "list")
+
     return(res)
   }
   if(method == "Fisher's Exact Test for Count Data without OR") {
@@ -140,6 +143,9 @@ lablr <- function(t, markdown = FALSE) {
       ci = as.character(NA),
       full = .p
     )
+
+    class(res) <- c("writR", "list")
+
     return(res)
   }
 
@@ -159,6 +165,8 @@ lablr <- function(t, markdown = FALSE) {
     ci = (.ci <- paste0(ci., format(round(t$conf.low, 2), nsmall = 2), ", ", format(round(t$conf.high, 2), nsmall = 2), "]")),
     full = paste(.stats, .p, .es, .ci, sep = ", ")
   )
+
+  class(res) <- c("writR", "list")
 
   return(res)
 }

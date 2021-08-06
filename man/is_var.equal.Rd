@@ -4,7 +4,7 @@
 \alias{is_var.equal}
 \title{Levene's Test}
 \usage{
-is_var.equal(y, x, alpha = 0.05, center = median)
+is_var.equal(y, x, alpha = 0.05, center = stats::median)
 }
 \arguments{
 \item{y}{Numeric vector (response).}

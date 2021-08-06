@@ -42,7 +42,7 @@ contingency <- function(data
     .f <- stats::fisher.test(tab)
     .es <- try(expr = effectsize::oddsratio(tab, ci = conf.level), silent = TRUE)
     if("try-error" %chin% class(.es)) {
-      .es <- rep(NA, 4)
+      .es <- rep(NA_real_, 4)
       .es <- `names<-`(.es, rep(NA, 4))
       .f$method <- paste(.f$method, "without OR")
     }
@@ -53,14 +53,14 @@ contingency <- function(data
   }
 
   res <- list(
-    y = if (is.null(y)) as.character(NA) else y,
+    y = if (is.null(y)) NA_character_ else y,
     x = x,
-    statistic = if (is.null(.f$statistic)) as.numeric(NA) else .f$statistic,
-    df = if (is.null(.f$parameter)) as.numeric(NA) else .f$parameter,
-    df.error = as.numeric(NA),
+    statistic = if (is.null(.f$statistic)) NA_real_ else .f$statistic,
+    df = if (is.null(.f$parameter)) NA_real_ else .f$parameter,
+    df.error = NA_real_,
     p.value = .f$p.value,
     method = .f$method,
-    alternative = as.character(NA),
+    alternative = NA_character_,
     estimate = as.numeric(.es[[1L]]),
     conf.level = as.numeric(.es[[2L]]),
     conf.low = as.numeric(.es[[3L]]),
@@ -70,8 +70,10 @@ contingency <- function(data
   )
 
   if(lbl) {
-    res <- lablr(res, markdown = markdown)
+    res <- lablr(res, markdown)
   }
+
+  class(res) <- c("writR", "list")
 
   return(res)
 }

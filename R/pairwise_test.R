@@ -80,11 +80,12 @@ pairwise_test <- function(data, x, y,
         object = data.table::data.table(
           group1 = rep(rownames(test$p.value), each = ncol(test$p.value)),
           group2 = rep(colnames(test$p.value), times = nrow(test$p.value)),
-          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method)
+          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method),
+          method = "Student t-test",
+          p.adjust.method = p.adjust.method
         )
       )
 
-      message("\n", fifelse(paired, "Paired ", ""),"Pairwise t-test.\n", "Correction: ",p.adjust.method)
       return(test)
 
     # Games-Howell test
@@ -101,11 +102,12 @@ pairwise_test <- function(data, x, y,
           group1 = rep(rownames(test$p.value), each = ncol(test$p.value)),
           group2 = rep(colnames(test$p.value), times = nrow(test$p.value)),
           statistic = as.numeric(t(test$statistic)),
-          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method)
+          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method),
+          method = "Games-Howell Test",
+          p.adjust.method = p.adjust.method
         )
       )
 
-      message("\nGames-Howell Test.\n", "Correction: ", p.adjust.method)
       return(test)
     }
   }
@@ -127,11 +129,12 @@ pairwise_test <- function(data, x, y,
           group1 = rep(rownames(test$p.value), each = ncol(test$p.value)),
           group2 = rep(colnames(test$p.value), times = nrow(test$p.value)),
           statistic = as.numeric(t(test$statistic)),
-          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method)
+          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method),
+          method = "Durbin-Conover test",
+          p.adjust.method = p.adjust.method
         )
       )
 
-      message("\nDurbin-Conover test.\n", "Correction: ", p.adjust.method)
       return(test)
     } else {
       # Dunn test
@@ -148,11 +151,12 @@ pairwise_test <- function(data, x, y,
           group1 = rep(rownames(test$p.value), each = ncol(test$p.value)),
           group2 = rep(colnames(test$p.value), times = nrow(test$p.value)),
           statistic = as.numeric(t(test$statistic)),
-          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method)
+          p = stats::p.adjust(as.numeric(t(test$p.value)), method = p.adjust.method),
+          method = "Dunn test",
+          p.adjust.method = p.adjust.method
         )
       )
 
-      message("\nDunn test.\n", "Correction: ", p.adjust.method)
       return(test)
     }
   }
@@ -176,10 +180,11 @@ pairwise_test <- function(data, x, y,
         conf.level = 0.95,
         conf.low = test$comp[, "ci.lower"],
         conf.high = test$comp[, "ci.upper"],
-        p = stats::p.adjust(as.numeric(t(test$comp[, "p.value"])), method = p.adjust.method)
+        p = stats::p.adjust(as.numeric(t(test$comp[, "p.value"])), method = p.adjust.method),
+        method = "Yuen's test on trimmed means",
+        p.adjust.method = p.adjust.method
       )
 
-      message("\nYuen's trimmed means test - Paired groups.\n", "Correction: ", p.adjust.method)
       return(test)
     # Yuen's trimmed means test - Independent groups
     } else {
@@ -195,10 +200,11 @@ pairwise_test <- function(data, x, y,
         conf.level = 0.95,
         conf.low = test$comp[, "ci.lower"],
         conf.high = test$comp[, "ci.upper"],
-        p = stats::p.adjust(as.numeric(t(test$comp[, "p.value"])), method = p.adjust.method)
+        p = stats::p.adjust(as.numeric(t(test$comp[, "p.value"])), method = p.adjust.method),
+        method = "Yuen's test on trimmed means",
+        p.adjust.method = p.adjust.method
       )
 
-      message("\nYuen's trimmed means test - Independent groups.\n", "Correction: ", p.adjust.method)
       return(test)
     }
   }

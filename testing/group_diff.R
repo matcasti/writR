@@ -199,3 +199,4 @@ p. <- clean_data(data[Periodo %in% c("PRE1", "PRE2")], "Periodo", "FEV1") |>
   WRS2::yuen(formula = FEV1 ~ Periodo, tr = 0.2)
 
 p$p.value == p.$p.value # TRUE
+
