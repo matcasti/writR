@@ -1,14 +1,4 @@
----
-output: 
-  html_document: 
-    self_contained: yes
-    keep_md: yes
-editor_options: 
-  chunk_output_type: console
----
 
-
- 
 <img src="README_files/logo.png" width="300" style="display: block; margin-left: auto; margin-right: auto;"/>
  
 <table style="margin-left: auto; margin-right: auto;">
