@@ -1,5 +1,15 @@
+---
+output: 
+  html_document: 
+    self_contained: yes
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
 
-<img src="README_files/logo.png" width="300" style="display: block; margin-left: auto; margin-right: auto;"/>
+
+ 
+<span style="display:block;text-align:center"><img src="README_files/logo.png" width="300"/></span>
  
 <table style="margin-left: auto; margin-right: auto;">
   <tr>
