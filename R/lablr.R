@@ -124,7 +124,7 @@ lablr <- function(t, markdown = FALSE) {
 
   if(method == "Fisher's Exact Test for Count Data") {
     res <- list(
-      stats = as.character(NA),
+      stats = NA_character_,
       p = (.p <- paste0(p., style.p(t$p.value))),
       es = (.es <- paste0(out$es, format(round(t$estimate, 2), nsmall = 2))),
       ci = (.ci <- paste0(ci., format(round(t$conf.low, 2), nsmall = 2), ", ", format(round(t$conf.high, 2), nsmall = 2), "]")),
@@ -137,10 +137,10 @@ lablr <- function(t, markdown = FALSE) {
   }
   if(method == "Fisher's Exact Test for Count Data without OR") {
     res <- list(
-      stats = as.character(NA),
+      stats = NA_character_,
       p = (.p <- paste0(p., style.p(t$p.value))),
-      es = as.character(NA),
-      ci = as.character(NA),
+      es = NA_character_,
+      ci = NA_character_,
       full = .p
     )
 
