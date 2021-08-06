@@ -142,7 +142,7 @@ An example using same data as before:
 
 
 
-> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, t(98) = 2.51, p = 0.014, g = 0.50, CI95 [0.10, 0.89].
+> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, `inline$full`.
 
 translates into this:
 
@@ -276,13 +276,13 @@ lablr(result$test)
 
 However, you can specify your own parameters for the selection of the test:
 
-| Test                                       | Parameters                                           |
-|--------------------------------------------|------------------------------------------------------|
+| Test                                       | Parameters                                             |
+|--------------------------------------------|--------------------------------------------------------|
 | One-way repeated measures ANOVA (rmANOVA)  | `paired = TRUE` + `type = 'p'` + `sphericity = 'none'` |
-| rmANOVA with Greenhouse-Geisser correction | `paired = TRUE` + `type = 'p'` + `sphericity = 'GG'` |
-| rmANOVA with Huynh-Feldt correction        | `paired = TRUE` + `type = 'p'` + `sphericity = 'HF'` |
-| Heteroscedastic rmANOVA for trimmed means  | `paired = TRUE` + `type = 'r'`                       |
-| Friedman rank sum test                     | `paired = TRUE` + `type = 'np'`                      |
+| rmANOVA with Greenhouse-Geisser correction | `paired = TRUE` + `type = 'p'` + `sphericity = 'GG'`   |
+| rmANOVA with Huynh-Feldt correction        | `paired = TRUE` + `type = 'p'` + `sphericity = 'HF'`   |
+| Heteroscedastic rmANOVA for trimmed means  | `paired = TRUE` + `type = 'r'`                         |
+| Friedman rank sum test                     | `paired = TRUE` + `type = 'np'`                        |
 
 #### 2 groups
 
@@ -501,14 +501,14 @@ print(result)
 ## 1: score      gender 130.7357382  1       68 1.720992e-17
 ## 2: score        time   0.2367333  2      136 7.895263e-01
 ## 3: score gender:time  42.8799011  2      136 3.635914e-15
-##                              method alternative    estimate conf.level
-## 1:                   Fisher's ANOVA        <NA>  0.64953693       0.95
-## 2: Fisher's repeated measures ANOVA        <NA> -0.00747718       0.95
-## 3: Fisher's repeated measures ANOVA        <NA>  0.28938040       0.95
-##     conf.low conf.high     effectsize n_obs
-## 1: 0.5143310 0.7402797 Omega2_partial    70
-## 2: 0.0000000 0.0000000 Omega2_partial    70
-## 3: 0.1657381 0.4000181 Omega2_partial    70
+##                              method    estimate conf.level  conf.low conf.high
+## 1:                   Fisher's ANOVA  0.64953693       0.95 0.5143310 0.7402797
+## 2: Fisher's repeated measures ANOVA -0.00747718       0.95 0.0000000 0.0000000
+## 3: Fisher's repeated measures ANOVA  0.28938040       0.95 0.1657381 0.4000181
+##        effectsize n_obs
+## 1: Omega2_partial    70
+## 2: Omega2_partial    70
+## 3: Omega2_partial    70
 ```
 
 ```r
