@@ -1,9 +1,19 @@
+---
+output: 
+  html_document: 
+    self_contained: yes
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
 
-<img src="README_files/logo.png" width="300"/>
+
  
-<table>
+<img src="README_files/logo.png" width="300" style="display: block; margin-left: auto; margin-right: auto;"/>
+ 
+<table style="margin-left: auto; margin-right: auto;">
   <tr>
-    <th> <h1 style="text-align:left;">writR: Inferential statistics and reporting in APA style</h1> </br>
+    <th> <h1 style="text-align:left;">Inferential statistics and reporting in APA style</h1> </br>
          <p style="text-align:center;">For automated and basic inferential testing.</p> </th>
   </tr>
 </table>
@@ -36,7 +46,7 @@ citation('writR')
 ## To cite package 'writR' in publications use:
 ## 
 ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-##   reporting in APA style. R package version 0.5.0.
+##   reporting in APA style. R package version 1.0.
 ##   https://doi.org/10.5281/zenodo.4603838
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -45,12 +55,12 @@ citation('writR')
 ##     title = {writR: Inferential statistics and reporting in APA style},
 ##     author = {Matías {Castillo Aguilar}},
 ##     year = {2021},
-##     note = {R package version 0.5.0},
+##     note = {R package version 1.0},
 ##     url = {https://doi.org/10.5281/zenodo.4603838},
 ##   }
 ```
 
-## Summary of available tests using `report` function
+## Summary of available tests using `autest()` function
 
 #### For paired samples designs
 
@@ -92,60 +102,59 @@ citation('writR')
 
 # Automated testing
 
-By default, `report` function, checks automatically the assumptions of the test based on the parameters of the data entered
+By default, `autest()`, checks automatically the assumptions of the data based on the parameters supplied for test selection.
 
 
 ```r
 library(writR) # Load the writR package
+```
 
-set.seed(123)
-Diets <- data.table(
+```
+## Registered S3 methods overwritten by 'lme4':
+##   method                          from
+##   cooks.distance.influence.merMod car 
+##   influence.merMod                car 
+##   dfbeta.influence.merMod         car 
+##   dfbetas.influence.merMod        car
+```
+
+```r
+set.seed(123) # for reproducibility
+diets <- data.frame(
     weight = c(rnorm(n = 100/2, mean = 70, sd = 7)   # Treatment
              , rnorm(n = 100/2, mean = 66, sd = 7) ) # Control
   , diet = gl(n = 2, k = 100/2, labels = c('Treatment', 'Control') ) )
   
-result <- report(
-  data = Diets,
-  variable = weight, # dependent variable
-  by = diet, # independent variable
+result <- autest( 
+  data = diets, 
+  x = "diet", # independent variable
+  y = "weight", # dependent variable
   type = 'auto', # default
-  markdown = TRUE # output in Markdown format (for inline text)? otherwise plain text.
 )
 
-result
+as.data.frame(result) # For tabular with test details, otherwise a list is returned
 ```
 
 ```
-## $desc
-## $desc$Treatment
-## [1] "*M* = 70.24, *SD* = 6.48"
-## 
-## $desc$Control
-## [1] "*M* = 67.02, *SD* = 6.34"
-## 
-## 
-## $full
-## [1] "$t_{~Student}$ (98) = 2.51, *p* = 0.014, $d_{~Cohen}$ = 0.51, CI~95%~[0.1, 0.91]"
-## 
-## $stats
-## [1] "$t_{~Student}$ (98) = 2.51, *p* = 0.014"
-## 
-## $es
-## [1] "$d_{~Cohen}$ = 0.51, CI~95%~[0.1, 0.91]"
-## 
-## $method
-## [1] "Student's t-test for independent samples"
+##        y    x statistic df df.error    p.value             method alternative
+## t weight diet  2.508551 98       NA 0.01376398  Two Sample t-test   two.sided
+##    estimate conf.level conf.low conf.high effectsize n_obs
+## t 0.4978591       0.95 0.101465 0.8917915   Hedges_g   100
 ```
 
 ## Inline results in APA style
 
-The core function: `report` by default return a list of length five in Markdown format (as seen before) for inline results. An example using same data as before:
+The core function: `autest()` by default return a list of length 14 with detailed statistics, if inline results are desired, the `lablr()` function can be used. 
 
-> The analysis of the effects of the treatment shows that treatment group had greater weight (`result$desc$Treatment`) than the control group (`result$desc$Control`). Further analyses shows an statistically significant difference between the groups, `result$full`, evaluated through `result$method`.
+An example using same data as before:
+
+
+
+> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, t(98) = 2.51, p = 0.014, g = 0.50, CI95 [0.10, 0.89].
 
 translates into this:
 
-> The analysis of the effects of the treatment shows that treatment group had greater weight (*M* = 70.24, *SD* = 6.48) than the control group (*M* = 67.02, *SD* = 6.34). Further analyses shows an statistically significant difference between the groups, *t* <sub>Student</sub> (98) = 2.509, *p* = 0.014, *d* <sub>Cohen's</sub> = 0.51, CI<sub>95%</sub>[0.1, 0.91], evaluated through Student's t-test for independent samples.
+> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, t(98) = 2.51, p = 0.014, g = 0.50, CI95 [0.10, 0.89].
 
 It also let you perform centrality and dispersion statistics for inline results by using the `cent_disp()` function. The next example illustrates its usage:
 
@@ -158,25 +167,22 @@ res <- with(data, tapply(X = len,
                          FUN = function(var)
                            cent_disp(x = var,         # These are default values:
                                      type = 'auto',   # # Automated selection based on normality test
-                                     k = 2,           # # Number of decimal places
+                                     k = 1,           # # Number of decimal places
                                      markdown = TRUE))) # # For inline results
-res
+as.data.frame(res)
 ```
 
 ```
-##    0.5                        1                         
-## OJ "*M* = 13.23, *SD* = 4.46" "*M* = 22.7, *SD* = 3.91" 
-## VC "*M* = 7.98, *SD* = 2.75"  "*M* = 16.77, *SD* = 2.52"
-##    2                         
-## OJ "*M* = 26.06, *SD* = 2.66"
-## VC "*M* = 26.14, *SD* = 4.8"
+##                       0.5                      1                      2
+## OJ *M* = 13.2, *SD* = 4.5 *M* = 22.7, *SD* = 3.9 *M* = 26.1, *SD* = 2.7
+## VC    *M* = 8, *SD* = 2.7 *M* = 16.8, *SD* = 2.5 *M* = 26.1, *SD* = 4.8
 ```
 
 > The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (`res['OJ','2']`) than vitamin C (VC) group (`res['VC','2']`) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (`res['OJ','0.5']`) than VC group (`res['VC','0.5']`).
 
 translates into this:
 
-> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (*M* = 26.06, *SD* = 2.66) than vitamin C (VC) group (*M* = 26.14, *SD* = 4.8) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (*M* = 13.23, *SD* = 4.46) than VC group (*M* = 7.98, *SD* = 2.75).
+> The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (*M* = 26.1, *SD* = 2.7) than vitamin C (VC) group (*M* = 26.1, *SD* = 4.8) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (*M* = 13.2, *SD* = 4.5) than VC group (*M* = 8, *SD* = 2.7).
 
 You can also set your own custom expressions using glue syntax like this:
 
@@ -219,71 +225,114 @@ For paired designs you need to set `paired = TRUE`, and then, based on the numbe
 
 When `type = 'auto'` the next assumptions will be checked for \> 2 paired samples:
 
-| Assumption checked | How is tested                                                            | If met                                    | If not                                                  |
-|--------------------|--------------------------------------------------------------------------|-------------------------------------------|---------------------------------------------------------|
-| Normality          | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Sphericity check.                         | Friedman rank sum test                                  |
-| Sphericity         | `afex::test_sphericity(model)`                                           | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser or Huynh-Feldt correction is applied |
+| Assumption checked | How is tested                                                            | If met                                    | If not                                                            |
+|--------------------|--------------------------------------------------------------------------|-------------------------------------------|-------------------------------------------------------------------|
+| Normality          | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Sphericity check.                         | Friedman rank sum test                                            |
+| Sphericity         | `afex::test_sphericity(model)`                                           | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser (GG) or Huynh-Feldt (HF) correction is applied |
 
 
 ```r
+n <- 40
 set.seed(123)
-Cancer <- data.frame(
-    cells = round(c(rnorm(n = 150/3, mean = 100, sd = 15)   # Basal
-           , rnorm(n = 150/3, mean = 98, sd = 10)   # Time-1
-           , rnorm(n = 150/3, mean = 98, sd = 5) )) # Time-2
-  , period = gl(n = 3, k = 150/3, labels = c('Basal', 'Time-1', 'Time-2') ) )
+cancer <- data.frame(
+  id = rep(seq_len(n), 3)
+  , cells = round(c(rnorm(n = n, mean = 100, sd = 15)   # Basal
+           , rnorm(n = n, mean = 98, sd = 10)   # Time-1
+           , rnorm(n = n, mean = 96, sd = 5) )) # Time-2
+  , period = gl(n = 3, k = n, labels = c('Basal', 'Time-1', 'Time-2') ) )
 
-report(
-  data = Cancer
-  , variable = cells
-  , by = period
+result <- autest(
+  data = cancer
+  , x = "period"
+  , y = "cells"
+  , rowid = "id"
   , paired = TRUE
-  , pairwise.comp = TRUE # set to TRUE for pairwise comparisons
-  , markdown = FALSE
+  , posthoc = TRUE # set to TRUE for pairwise comparisons
   )
+
+# Access the whole results
+print(result)
 ```
 
 ```
-## $pwc.method
-## [1] "Student's t-test for dependent samples"
+## $test
+## $test$y
+## [1] "cells"
 ## 
-## $pwc.table
-## # A tibble: 3 x 3
-##   Group1 Group2      p
-##   <chr>  <chr>   <dbl>
-## 1 Time-1 Basal  0.657 
-## 2 Time-2 Basal  0.0757
-## 3 Time-2 Time-1 0.0894
+## $test$x
+## [1] "period"
 ## 
-## $desc
-## $desc$Basal
-## [1] "M = 100.56, SD = 13.83"
+## $test$statistic
+## [1] 2.231395
 ## 
-## $desc$`Time-1`
-## [1] "M = 99.5, SD = 9.01"
+## $test$df
+## [1] 1.77965
 ## 
-## $desc$`Time-2`
-## [1] "M = 96.82, SD = 4.99"
+## $test$df.error
+## [1] 69.40635
+## 
+## $test$p.value
+## [1] 0.1206689
+## 
+## $test$method
+## [1] "Repeated measures ANOVA with HF correction"
+## 
+## $test$alternative
+## [1] NA
+## 
+## $test$estimate
+## [1] 0.01998957
+## 
+## $test$conf.level
+## [1] 0.95
+## 
+## $test$conf.low
+## [1] 0
+## 
+## $test$conf.high
+## [1] 0.1011518
+## 
+## $test$effectsize
+## [1] "Omega2_partial"
+## 
+## $test$n_obs
+## [1] 40
 ## 
 ## 
-## $full
-## [1] "F(1.7, 83.5) = 1.82, p = 0.174, eta^2 = 0.04, CI95% [0, 0.12]"
-## 
+## $pwc
+##    group1 group2 statistic         p
+## 1: Time-1  Basal -1.466883 0.5560343
+## 2: Time-2  Basal -2.933847 0.1061919
+## 3: Time-2 Time-1 -1.616262 0.4922794
+```
+
+```r
+# For inline resutls or statistical reports
+lablr(result$test)
+```
+
+```
 ## $stats
-## [1] "F(1.7, 83.5) = 1.82, p = 0.174"
+## [1] "F(1.8, 69.4) = 2.23"
+## 
+## $p
+## [1] "p = 0.121"
 ## 
 ## $es
-## [1] "eta^2 = 0.04, CI95% [0, 0.12]"
+## [1] "omega2 = 0.02"
 ## 
-## $method
-## [1] "One-way repeated measures ANOVA with Huynh-Feldt correction"
+## $ci
+## [1] "CI95 [0.00, 0.10]"
+## 
+## $full
+## [1] "F(1.8, 69.4) = 2.23, p = 0.121, omega2 = 0.02, CI95 [0.00, 0.10]"
 ```
 
 However, you can specify your own parameters for the selection of the test:
 
 | Test                                       | Parameters                                           |
 |--------------------------------------------|------------------------------------------------------|
-| One-way repeated measures ANOVA (rmANOVA)  | `paired = TRUE` + `type = 'p'` + `sphericity = TRUE` |
+| One-way repeated measures ANOVA (rmANOVA)  | `paired = TRUE` + `type = 'p'` + `sphericity = 'none'` |
 | rmANOVA with Greenhouse-Geisser correction | `paired = TRUE` + `type = 'p'` + `sphericity = 'GG'` |
 | rmANOVA with Huynh-Feldt correction        | `paired = TRUE` + `type = 'p'` + `sphericity = 'HF'` |
 | Heteroscedastic rmANOVA for trimmed means  | `paired = TRUE` + `type = 'r'`                       |
@@ -299,37 +348,34 @@ Similar as before, if `type = 'auto'` assumptions will be checked for 2 paired s
 
 
 ```r
-CancerTwo <- Cancer[Cancer$period %in% c('Time-1','Time-2'),]
+cancer_two <- cancer[cancer$period %in% c('Time-1','Time-2'),]
   
-report(
-  data = CancerTwo
-  , variable = cells
-  , by = period
+result <- autest(
+  data = cancer_two
+  , x = "period"
+  , y = "cells"
   , paired = TRUE
-  , markdown = FALSE
-  )
+)
+
+# For inline results
+lablr(result)
 ```
 
 ```
-## $desc
-## $desc$`Time-1`
-## [1] "M = 99.5, SD = 9.01"
-## 
-## $desc$`Time-2`
-## [1] "M = 96.82, SD = 4.99"
-## 
-## 
-## $full
-## [1] "t(49) = 1.73, p = 0.089, d = 0.25, CI95% [-0.04, 0.53]"
-## 
 ## $stats
-## [1] "t(49) = 1.73, p = 0.089"
+## [1] "t(39) = 1.09"
+## 
+## $p
+## [1] "p = 0.281"
 ## 
 ## $es
-## [1] "d = 0.25, CI95% [-0.04, 0.53]"
+## [1] "g = 0.17"
 ## 
-## $method
-## [1] "Student's t-test for dependent samples"
+## $ci
+## [1] "CI95 [-0.14, 0.48]"
+## 
+## $full
+## [1] "t(39) = 1.09, p = 0.281, g = 0.17, CI95 [-0.14, 0.48]"
 ```
 
 Same as above, you can specify your own parameters for the selection of the test:
@@ -351,61 +397,68 @@ When `type = 'auto'` the next assumptions will be checked for \> 2 independent s
 | Assumption checked       | How is tested                                                            | If met                          | If not               |
 |--------------------------|--------------------------------------------------------------------------|---------------------------------|----------------------|
 | Normality                | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Homogeneity of variances check. | Kruskal-Wallis ANOVA |
-| Homogeneity of variances | `car::leveneTest`                                                        | Fisher's ANOVA                  | Welch's ANOVA        |
+| Homogeneity of variances | Levene's test on medians with `is_var.equal()`                           | Fisher's ANOVA                  | Welch's ANOVA        |
 
 
 ```r
 set.seed(123)
-Cancer <- data.frame(
-    cells = round(c(rnorm(n = 90/3, mean = 100, sd = 20)   # Control
-           , rnorm(n = 90/3, mean = 95, sd = 12)   # Drug A
-           , rnorm(n = 90/3, mean = 90, sd = 15) )) # Drug B
-  , group = gl(n = 3, k = 90/3, labels = c('Control', 'Drug A', 'Drug B') ) )
+cancer_unpaired <- data.frame(
+    cells = round(c(rnorm(n = n, mean = 100, sd = 20)   # Control
+           , rnorm(n = n, mean = 95, sd = 12)   # Drug A
+           , rnorm(n = n, mean = 90, sd = 15) )) # Drug B
+  , group = gl(n = 3, k = n, labels = c('Control', 'Drug A', 'Drug B') ) )
 
-report(
-  data = Cancer
-  , variable = cells
-  , by = group
+result <- autest(
+  data = cancer_unpaired
+  , x = "group"
+  , y = "cells"
   , paired = FALSE
-  , pairwise.comp = TRUE
-  , markdown = FALSE
+  , posthoc = TRUE
   )
+
+# See detailed statistics
+as.data.frame(x = result$test)
 ```
 
 ```
-## $pwc.method
-## [1] "Games Howell test"
-## 
-## $pwc.table
-## # A tibble: 3 x 3
-##   Group1 Group2       p
-##   <chr>  <chr>    <dbl>
-## 1 Drug A Control 0.881 
-## 2 Drug B Control 0.125 
-## 3 Drug B Drug A  0.0790
-## 
-## $desc
-## $desc$Control
-## [1] "M = 99, SD = 19.59"
-## 
-## $desc$`Drug A`
-## [1] "M = 97.07, SD = 10.01"
-## 
-## $desc$`Drug B`
-## [1] "M = 90.43, SD = 13.07"
-## 
-## 
-## $full
-## [1] "F(2, 54.7) = 3.04, p = 0.056, eta^2 = 0.1, CI95% [0, 0.25]"
-## 
+##       y     x statistic df df.error    p.value        method alternative
+## F cells group  4.861757  2 75.91708 0.01030964 Welch's ANOVA        <NA>
+##     estimate conf.level conf.low conf.high effectsize n_obs
+## F 0.08914428       0.95        0 0.2168079     Omega2   120
+```
+
+```r
+# And corresponding pairwise comparisons
+result$pwc
+```
+
+```
+##    group1  group2 statistic           p
+## 1: Drug A Control -2.516185 0.184417805
+## 2: Drug B Control -4.376442 0.007873682
+## 3: Drug B  Drug A -2.482696 0.191506063
+```
+
+```r
+# For inline results
+lablr(result$test)
+```
+
+```
 ## $stats
-## [1] "F(2, 54.7) = 3.04, p = 0.056"
+## [1] "F(2.0, 75.9) = 4.86"
+## 
+## $p
+## [1] "p = 0.01"
 ## 
 ## $es
-## [1] "eta^2 = 0.1, CI95% [0, 0.25]"
+## [1] "omega2 = 0.09"
 ## 
-## $method
-## [1] "Welch's ANOVA for independent samples"
+## $ci
+## [1] "CI95 [0.00, 0.22]"
+## 
+## $full
+## [1] "F(2.0, 75.9) = 4.86, p = 0.01, omega2 = 0.09, CI95 [0.00, 0.22]"
 ```
 
 However, you can specify your own parameters for the selection of the test:
@@ -424,40 +477,48 @@ Just like above, if `type = 'auto'` assumptions will be checked for 2 independen
 | Assumption checked       | How is tested                                                            | If met                          | If not                |
 |--------------------------|--------------------------------------------------------------------------|---------------------------------|-----------------------|
 | Normality                | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Homogeneity of variances check. | Mann-Whitney *U* test |
-| Homogeneity of variances | `car::leveneTest`                                                        | Student's t-test                | Welch's t-test        |
+| Homogeneity of variances | Levene's test on medians with `is_var.equal()`                           | Student's t-test                | Welch's t-test        |
 
 
 ```r
-report(
-  data = Cancer[Cancer$group %in% c('Drug A','Drug B'),]
-  , variable = cells
-  , by = group
-  , var.equal = F
-  , paired = FALSE
-  , markdown = FALSE
+result <- autest(
+  data = cancer_unpaired[cancer_unpaired$group %in% c('Drug A','Drug B'),]
+  , x = "group"
+  , y = "cells"
+  , var.equal = FALSE
   )
+
+# For tabular results
+as.data.frame(x = na.omit(result))
 ```
 
 ```
-## $desc
-## $desc$`Drug A`
-## [1] "M = 97.07, SD = 10.01"
-## 
-## $desc$`Drug B`
-## [1] "M = 90.43, SD = 13.07"
-## 
-## 
-## $full
-## [1] "t(58) = 2.21, p = 0.031, d = 0.58, CI95% [0.05, 1.1]"
-## 
+##       y     x statistic df df.error    p.value             method alternative
+## t cells group  1.755531 78       NA 0.08309445  Two Sample t-test   two.sided
+##    estimate conf.level    conf.low conf.high effectsize n_obs
+## t 0.3887601       0.95 -0.05074507 0.8258231   Hedges_g    80
+```
+
+```r
+# For inline results (e.g. manuscript)
+lablr(result)
+```
+
+```
 ## $stats
-## [1] "t(58) = 2.21, p = 0.031"
+## [1] "t(78) = 1.76"
+## 
+## $p
+## [1] "p = 0.083"
 ## 
 ## $es
-## [1] "d = 0.58, CI95% [0.05, 1.1]"
+## [1] "g = 0.39"
 ## 
-## $method
-## [1] "Student's t-test for independent samples"
+## $ci
+## [1] "CI95 [-0.05, 0.83]"
+## 
+## $full
+## [1] "t(78) = 1.76, p = 0.083, g = 0.39, CI95 [-0.05, 0.83]"
 ```
 
 You can specify your own parameters for the selection of the test as well:
@@ -478,80 +539,67 @@ By using `aov_r` function is possible to get the statistical report of between/w
 # set parameters to simulate data with a between and within subject factor
 within <- 3
 between <- 2
-n <- 400
+n <- 70
 
 set.seed(123)
-Stroop <- data.frame(
-  Subject = rep(1:n, within),
-  Gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
-  Time = gl(within, n, length = n*within),
-  Score = rnorm(n*within, mean = 150, sd = 30))
+stroop <- data.frame(
+  subject = rep(1:n, within),
+  gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
+  time = gl(within, n, length = n*within),
+  score = rnorm(n*within, mean = 150, sd = 30))
 
 # Manipulate data to generate interaction between Gender and Time
-Stroop <- within(Stroop, {
-  Score[Gender == 'Male' & Time == 1] <- Score[Gender == 'Male' & Time == 1]*1
-  Score[Gender == 'Male' & Time == 2] <- Score[Gender == 'Male' & Time == 2]*1.15
-  Score[Gender == 'Male' & Time == 3] <- Score[Gender == 'Male' & Time == 3]*1.3
-  Score[Gender == 'Female' & Time == 1] <- Score[Gender == 'Female' & Time == 1]*1
-  Score[Gender == 'Female' & Time == 2] <- Score[Gender == 'Female' & Time == 2]*0.85
-  Score[Gender == 'Female' & Time == 3] <- Score[Gender == 'Female' & Time == 3]*0.7
+stroop <- within(stroop, {
+  score[gender == 'Male' & time == 1] <- score[gender == 'Male' & time == 1]*1
+  score[gender == 'Male' & time == 2] <- score[gender == 'Male' & time == 2]*1.15
+  score[gender == 'Male' & time == 3] <- score[gender == 'Male' & time == 3]*1.3
+  score[gender == 'Female' & time == 1] <- score[gender == 'Female' & time == 1]*1
+  score[gender == 'Female' & time == 2] <- score[gender == 'Female' & time == 2]*0.85
+  score[gender == 'Female' & time == 3] <- score[gender == 'Female' & time == 3]*0.7
 })
 
 
-r <- aov_r(
-  data = Stroop
-, response = Score
-, between = Gender
-, within = Time
-, id = Subject
-, es = 'omega' # omega squared as our measure of effect size
+result <- aov_r(
+  data = stroop
+, response = "score"
+, between = "gender"
+, within = "time"
+, rowid = "subject"
+, effsize.type = 'omega' # omega squared as our measure of effect size
 , sphericity = 'auto' # check if sphericity is not being violated
 )
 
-r
+# Check results
+result
 ```
 
 ```
-## $full
-## $full$Gender
-## [1] "*F*~Fisher~ (1, 398) = 682.91, *p* < 0.001, $\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
-## 
-## $full$Time
-## [1] "*F*~Fisher~ (2, 796) = 0.11, *p* = 0.894, $\\omega^2$ = 0, CI~95%~[0, 0]"
-## 
-## $full$Gender_Time
-## [1] "*F*~Fisher~ (2, 796) = 223.68, *p* < 0.001, $\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
-## 
-## 
-## $stats
-## $stats$Gender
-## [1] "*F*~Fisher~ (1, 398) = 682.91, *p* < 0.001"
-## 
-## $stats$Time
-## [1] "*F*~Fisher~ (2, 796) = 0.11, *p* = 0.894"
-## 
-## $stats$Gender_Time
-## [1] "*F*~Fisher~ (2, 796) = 223.68, *p* < 0.001"
-## 
-## 
-## $es
-## $es$Gender
-## [1] "$\\omega^2$ = 0.63, CI~95%~[0.58, 0.67]"
-## 
-## $es$Time
-## [1] "$\\omega^2$ = 0, CI~95%~[0, 0]"
-## 
-## $es$Gender_Time
-## [1] "$\\omega^2$ = 0.27, CI~95%~[0.22, 0.32]"
+##        y           x   statistic df df.error      p.value
+## 1: score      gender 130.7357382  1       68 1.720992e-17
+## 2: score        time   0.2367333  2      136 7.895263e-01
+## 3: score gender:time  42.8799011  2      136 3.635914e-15
+##                              method alternative    estimate conf.level
+## 1:                   Fisher's ANOVA          NA  0.64953693       0.95
+## 2: Fisher's repeated measures ANOVA          NA -0.00747718       0.95
+## 3: Fisher's repeated measures ANOVA          NA  0.28938040       0.95
+##     conf.low conf.high     effectsize n_obs
+## 1: 0.5143310 0.7402797 Omega2_partial    70
+## 2: 0.0000000 0.0000000 Omega2_partial    70
+## 3: 0.1657381 0.4000181 Omega2_partial    70
+```
+
+```r
+# And inline results for reporting purposes
+inline <- result[j = lablr(.SD), keyby = x]
 ```
 
 For inline results with previous data we would do something like this:
 
-> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( `r$es$Gender` ) on scores when adjusting for each of the time periods, `r$stats$Gender`. In a similar way we find a significant interaction between evaluative time and gender ( `r$stats$Gender_Time` ), indicating unequal responses between males and females over time, `r$es$Gender_Time`, however, time alone is not able to explain statistically significantly the variance in scores, `r$full$Time`.
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( `inline["gender", paste(es, ci, sep = ", ")]` ) on scores when adjusting for each of the time periods, `inline["gender", paste(stats, p, sep = ", ")]`. In a similar way we find a significant interaction between evaluative time and gender ( `inline["gender:time", paste(stats, p, sep = ", ")]` ), indicating unequal responses between males and females over time, `inline["gender:time", paste(es, ci, sep = ", ")]`, however, time alone is not able to explain statistically significantly the variance in scores, `inline["time"]$full`.
 
 Which will translate into this after evaluation in R Markdown:
 
-> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( 𝜔<sup>2</sup> = 0.63, CI<sub>95%</sub>[0.58, 0.67] ) on scores when adjusting for each of the time periods, *F* <sub>Fisher</sub> (1, 398) = 682.91, *p* \< 0.001. In a similar way we find a significant interaction between evaluative time and gender ( *F* <sub>Fisher</sub> (2, 796) = 223.68, *p* \< 0.001 ), indicating unequal responses between males and females over time, 𝜔<sup>2</sup> = 0.27, CI<sub>95%</sub>[0.22, 0.32], however, time alone is not able to explain statistically significantly the variance in scores, *F* <sub>Fisher</sub> (2, 796) = 0.11, *p* = 0.894, 𝜔<sup>2</sup> = 0, CI<sub>95%</sub>[0, 0].
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( omega2 = 0.65, CI95 [0.51, 0.74] ) on scores when adjusting for each of the time periods, F(1, 68) = 130.74, p < 0.001. In a similar way we find a significant interaction between evaluative time and gender ( F(2, 136) = 42.88, p < 0.001 ), indicating unequal responses between males and females over time, omega2 = 0.29, CI95 [0.17, 0.40], however, time alone is not able to explain statistically significantly the variance in scores, F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 0.00].
 
 When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: `between = c('factor1', 'factor2' ...)`, and the same for `within = c('factor1', 'factor2' ...)`.
 
@@ -565,34 +613,34 @@ By only filling the `data`, and `x` argument, the Goodness-of-fit chi-squared te
 
 
 ```r
-data <- afex::stroop # Using stroop data from `afex` package
+result <- contingency(
+  data = cancer_unpaired, # 3 groups: Control, Drug A, Drug B
+  x = "group"
+)
 
-res <- contingency(data = data, 
-  x = acc)
-res
+# Tabular format dropping empty columns
+as.data.frame(x = result[!sapply(result, anyNA)])
 ```
 
 ```
-## $stats
-## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, *p* < 0.001"
-## 
-## $es
-## [1] "$V_{~Cramer}$ = 0.91, CI~95%~[0.95, 0.95]"
-## 
-## $full
-## [1] "$\\chi^2_{~gof}$ (1) = 190688.91, *p* < 0.001, $V_{~Cramer}$ = 0.91, CI~95%~[0.95, 0.95]"
-## 
-## $method
-## [1] "Chi-squared test for given probabilities"
+##               x statistic df p.value                                   method
+## X-squared group         0  2       1 Chi-squared test for given probabilities
+##           estimate conf.level conf.low conf.high effectsize n_obs
+## X-squared        0       0.95        0         0  Cramers_v   120
+```
+
+```r
+# For inline results
+inline <- lablr(result)
 ```
 
 And the inline result would look like this:
 
-> In preliminary analyses, we've seen that the proportion from people who pointed accuratedly in the stroop test was significantly higher than those who don't, `res$full`.
+> In preliminary analyses, we've seen that the proportion of pacients the same across groups, `inline$full`.
 
 translates into:
 
-> In preliminary analyses, we've seen that the proportion from people who pointed accuratedly in the stroop test was significantly higher than those who don't, χ<sup>2</sup><sub>gof</sub> (1) = 190688.91, *p* < 0.001, *V*<sub>Cramer</sub> = 0.91, CI<sub>95%</sub>[0.95, 0.95].
+> In preliminary analyses, we've seen that the proportion of pacients the same across groups, X2(2) = 0.00, p = 1, V = 0.00, CI95 [0.00, 0.00].
 
 ### Pearson's Chi-squared
 
@@ -600,29 +648,49 @@ By providing `x` and `y` arguments on `contingency()` you get Pearson's Chi-squa
 
 
 ```r
-## Using same data as before
-res <- contingency(
-  data = data,
-  x = acc,
-  y = condition,
-  markdown = FALSE # Return the output in plain text format
+result <- contingency(
+  data = mtcars, # Using mtcars data
+  x = "cyl",
+  y = "gear"
 )
+```
 
-res # Print the output
+```
+## Warning in stats::chisq.test(tab): Chi-squared approximation may be incorrect
+```
+
+```r
+# Statistics in tabular format
+as.data.frame(x = result[!sapply(result, anyNA)])
+```
+
+```
+##              y   x statistic df     p.value                     method
+## X-squared gear cyl  18.03636  4 0.001214066 Pearson's Chi-squared test
+##            estimate conf.level  conf.low conf.high effectsize n_obs
+## X-squared 0.5308655       0.95 0.2183056 0.7383151  Cramers_v    32
+```
+
+```r
+# Inline results format
+lablr(result)
 ```
 
 ```
 ## $stats
-## [1] "X^2 (1) = 31.05, p < 0.001"
+## [1] "X2(4) = 18.04"
+## 
+## $p
+## [1] "p = 0.001"
 ## 
 ## $es
-## [1] "V = 0.01, CI95% [0.01, 0.02]"
+## [1] "V = 0.53"
+## 
+## $ci
+## [1] "CI95 [0.22, 0.74]"
 ## 
 ## $full
-## [1] "X^2 (1) = 31.05, p < 0.001, V = 0.01, CI95% [0.01, 0.02]"
-## 
-## $method
-## [1] "Pearson's Chi-squared test"
+## [1] "X2(4) = 18.04, p = 0.001, V = 0.53, CI95 [0.22, 0.74]"
 ```
 
 ### Fisher's exact test
@@ -631,28 +699,42 @@ Otherwise, you could use Fisher's exact test for count data if you specify `exac
 
 
 ```r
-## Using same data as before
-contingency(
-  data = data,
-  x = acc,
-  y = condition,
-  exact = TRUE, # Set TRUE for Fisher's exact test
-  markdown = FALSE # Return the output in plain text format
+result <- contingency(
+  data = mtcars, 
+  x = "cyl",
+  y = "gear",
+  exact = TRUE 
 )
+
+# Statistics in tabular format
+as.data.frame(x = result[!sapply(result, anyNA)])
+```
+
+```
+##      y   x      p.value                                        method n_obs
+## 1 gear cyl 8.259716e-05 Fisher's Exact Test for Count Data without OR    32
+```
+
+```r
+# Inline results format
+lablr(result)
 ```
 
 ```
 ## $stats
-## [1] "FET: p < 0.001"
+## [1] NA
+## 
+## $p
+## [1] "p < 0.001"
 ## 
 ## $es
-## [1] "OR = 0.9, CI95% [0.86, 0.93]"
+## [1] NA
+## 
+## $ci
+## [1] NA
 ## 
 ## $full
-## [1] "FET: p < 0.001, OR = 0.9, CI95% [0.86, 0.93]"
-## 
-## $method
-## [1] "Fisher's Exact Test for Count Data"
+## [1] "p < 0.001"
 ```
 
 ### McNemar's Chi-squared Test
@@ -665,33 +747,38 @@ If you have a paired design and are using only categorical variables, then McNem
 ## Approval of the President's performance in office in two surveys,
 ## one month apart, for a random sample of 1600 voting-age Americans.
 
-Performance <- data.frame(
-  ID = rep(1:1600, 2),
-  `1st Survey` = c(rep("Approve", 944), rep("Disapprove", 656)),
-  `2nd Survey` = c(rep("Approve", 794), rep("Disapprove", 150),
+performance <- data.frame(
+  id = rep(1:1600, 2),
+  `1st survey` = c(rep("Approve", 944), rep("Disapprove", 656)),
+  `2nd survey` = c(rep("Approve", 794), rep("Disapprove", 150),
                    rep("Approve", 86), rep("Disapprove", 570)), check.names = F)
 
-contingency(
-  data = Performance,
-  x = `1st Survey`,
-  y = `2nd Survey`,
-  paired = TRUE, # Set TRUE for McNemar test
-  markdown = FALSE # For plain text output
+result <- contingency(
+  data = performance,
+  x = "1st survey",
+  y = "2nd survey",
+  paired = TRUE # Set TRUE for McNemar test
 )
+
+# Inline results
+lablr(result)
 ```
 
 ```
 ## $stats
-## [1] "X^2 (1) = 34.71, p < 0.001"
+## [1] "X2(1) = 34.17"
+## 
+## $p
+## [1] "p < 0.001"
 ## 
 ## $es
-## [1] "g = 0.14, CI95% [0.09, 0.18]"
+## [1] "g = 0.14"
+## 
+## $ci
+## [1] "CI95 [0.09, 0.18]"
 ## 
 ## $full
-## [1] "X^2 (1) = 34.71, p < 0.001, g = 0.14, CI95% [0.09, 0.18]"
-## 
-## $method
-## [1] "McNemar's Chi-squared test"
+## [1] "X2(1) = 34.17, p < 0.001, g = 0.14, CI95 [0.09, 0.18]"
 ```
 
 
@@ -702,6 +789,7 @@ The package writR is standing on the shoulders of giants. `writR` depends on the
 
 ```r
 library(deepdep)
+
 plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
@@ -709,11 +797,11 @@ plot_dependencies('writR', local = TRUE, depth = 3)
 
 ## Acknowledgments
 
-I would like to thank Indrajeet Patil for being an inspiration for this package, as an extension of `statsExpressions`. Naturally this package is in its first steps, but I hope that future collaborative work can expand the potential of this package.
+I would like to thank to developers of `statsExpressions` and `ggstatsplot` for being an inspiration for this package. Naturally this package is in its first steps, but I hope that future collaborative work can expand the potential of this package.
 
 ## Contact
 
-For any issues or collaborations you can send me an email at:
+For collaborations or anything else, you can send me an email at:
 
 -   matcasti\@umag.cl
 

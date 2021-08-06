@@ -2,13 +2,13 @@
 % Please edit documentation in R/cent_disp.R
 \name{cent_disp}
 \alias{cent_disp}
-\title{Inline summary descriptives}
+\title{Inline summary descriptive}
 \usage{
 cent_disp(
   x,
   type = if (is.null(str.a)) "auto" else "custom",
   str.a = NULL,
-  k = 2,
+  k = 1,
   markdown = TRUE
 )
 }

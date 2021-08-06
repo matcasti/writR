@@ -6,10 +6,13 @@
 #' @param y Factor. If `NULL`, a goodness-of-fit is carried, otherwise a two-way analysis is performed.
 #' @param paired Logical. If `TRUE` McNemar's Chi-squared test is carried on.
 #' @param exact Logical. If `TRUE` then Fisher's Exact Test is carried on, but only when `paired = FALSE` (default). If is a 2 x 2 design, Odds Ratio (OR) is returned as effect size, otherwise it will only return the formated p-value.
+#' @param conf.level Confidence/Credible Interval (CI) level. Default to 0.95 (95%).
+#' @param lbl Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.
 #' @param markdown Whether you want the output formated for inline R Markdown or as plain text.
 #' @param ... Currently not used.
 #' @keywords contingency
-#' @return A list of length 3 or 2 with statistical test and `$method` used.
+#' @importFrom stats chisq.test fisher.test mcnemar.test
+#' @importFrom effectsize cramers_v oddsratio cohens_g
 #' @export
 
 contingency <- function(data
@@ -17,184 +20,59 @@ contingency <- function(data
                    , y = NULL
                    , paired = FALSE
                    , exact = FALSE
-                   , markdown = TRUE
+                   , conf.level = 0.95
+                   , lbl = if(is.null(markdown)) FALSE else TRUE
+                   , markdown = NULL
                    , ...) {
-  .arg <- match.call()
 
-  x.var <- data[[.arg$x]]
-  if(is.null(.arg$y)) way <- "One"  else {
-    y.var <- data[[.arg$y]]
-    way <- "Two"
+  x_var <- data[[x]]
+  if(is.null(y)) {
+    tab <- table(x_var)
+  }  else {
+    y_var <- data[[y]]
+    tab <- table(x_var, y_var)
   }
 
-  result <- list()
-  test <- if(isTRUE(paired)) "Mcnemar" else
-    if(isTRUE(exact)) "Exact" else
-      "Chi"
-
-  if(test == "Chi") {
-    tab <- if(way == "One")
-      list(table(x.var),
-           "gof",
-           "Chi-squared test for given probabilities") else
-      list(table(x.var, y.var),
-           "Pearson",
-           "Pearson's Chi-squared test")
-    test <- stats::chisq.test(
-      x = tab[[1]],
-      correct = FALSE)
-    es <- effectsize::cramers_v(
-      x = tab[[1]],
-      adjust = FALSE)
-    expr <- if(isTRUE(markdown))
-      list(a = paste0("$\\chi^2_{~", tab[[2]], "}$ ("),
-           b = ", *p* ",
-           c = "$V_{~Cramer}$ = ",
-           d = ', CI~95%~[') else
-      list(a = "X^2 (",
-           b = ", p ",
-           c = "V = ",
-           d = ', CI95% [')
-    result[['full']] <- paste0(
-      result[['stats']] <- paste0(
-        expr$a,
-        test$parameter,
-        ") = ",
-        round(test$statistic,2),
-        expr$b,
-        ifelse(
-          test$p.value < 0.001,
-          '< 0.001',
-          paste(
-            '=',
-            round(test$p.value, 3)
-            )
-          )
-        ), ', ',
-      result[['es']] <- paste0(
-        expr$c,
-        round(es$Cramers_v,2),
-        expr$d,
-        round(es$CI_low,2),
-        ', ',
-        round(es$CI_high,2),
-        ']')
-      )
-    result[['method']] <- tab[[3]]
-    return(result)
-
-  } else {
-    if(test == "Exact") {
-      tab <- table(x.var, y.var)
-      test <- stats::fisher.test(
-        x = tab)
-      error <- class(
-        try(
-          expr = {
-            (es <- effectsize::oddsratio(
-              x = x.var,
-              y =  y.var) )
-            },
-          silent = TRUE)
-        ) == "try-error"
-      if(isTRUE(error)) {
-        expr <- if(isTRUE(markdown))
-          list(a = "*p*~FET~ ") else
-          list(a = "FET, p ")
-        result[['full']] <- paste0(
-          result[['stats']] <- paste0(
-            expr$a,
-            ifelse(
-              test = test$p.value < 0.001,
-              yes = '< 0.001',
-              no = paste(
-                '=',
-                round(test$p.value, 3)
-                )
-              )
-            )
-          )
-        result[['es']] <- "Not available"
-        result[['method']] <- "Fisher's Exact Test for Count Data"
-        return(result)
-      } else {
-        expr <- if(isTRUE(markdown))
-          list(a = "*p*~FET~ ",
-               b = "$OR$ = ",
-               c = ', CI~95%~[') else
-          list(a = "FET: p ",
-               b = "OR = ",
-               c = ', CI95% [')
-        result[['full']] <- paste0(
-          result[['stats']] <- paste0(
-            expr$a,
-            ifelse(
-              test = test$p.value < 0.001,
-              yes = '< 0.001',
-              no = paste(
-                '=',
-                round(test$p.value, 3)
-                )
-              )
-            )
-          , ', ',
-          result[['es']] <- paste0(
-            expr$b,
-            round(es$Odds_ratio,2),
-            expr$c,
-            round(es$CI_low,2),
-            ', ',
-            round(es$CI_high,2),
-            ']')
-          )
-        result[['method']] <- "Fisher's Exact Test for Count Data"
-        return(result)
-      }
-    } else {
-      tab <- table(x.var,y.var)
-      test <- stats::mcnemar.test(
-        x = tab,
-        correct = FALSE)
-      es <- effectsize::cohens_g(
-        x = tab)
-      expr <- if(isTRUE(markdown))
-        list(a = paste0("$\\chi^2_{~McNemar}$ ("),
-             b = ", *p* ",
-             c = "$g_{~Cohen}$ = ",
-             d = ', CI~95%~[') else
-        list(a = "X^2 (",
-             b = ", p ",
-             c = "g = ",
-             d = ', CI95% [')
-      result[['full']] <- paste0(
-        result[['stats']] <- paste0(
-          expr$a,
-          test$parameter,
-          ") = ",
-          round(test$statistic,2),
-          expr$b,
-          ifelse(
-            test = test$p.value < 0.001,
-            yes = '< 0.001',
-            no = paste(
-              '=',
-              round(test$p.value, 3)
-              )
-            )
-          ),
-        ', ',
-        result[['es']] <- paste0(
-          expr$c,
-          round(es$Cohens_g,2),
-          expr$d,
-          round(es$CI_low,2),
-          ', ',
-          round(es$CI_high,2),
-          ']')
-        )
-      result[['method']] <- "McNemar's Chi-squared test"
-      return(result)
+  if(paired) {
+    # Mcnemar test
+    .f <- stats::mcnemar.test(tab)
+    .es <- effectsize::cohens_g(tab, ci = conf.level)
+  } else if(exact) {
+    # Exact test
+    .f <- stats::fisher.test(tab)
+    .es <- try(expr = effectsize::oddsratio(tab, ci = conf.level), silent = TRUE)
+    if("try-error" %chin% class(.es)) {
+      .es <- rep(NA, 4)
+      .es <- `names<-`(.es, rep(NA, 4))
+      .f$method <- paste(.f$method, "without OR")
     }
+  } else {
+    # Chi-square
+    .f <- stats::chisq.test(tab)
+    .es <- effectsize::cramers_v(tab, ci = conf.level)
   }
+
+  res <- list(
+    y = if (is.null(y)) as.character(NA) else y,
+    x = x,
+    statistic = if (is.null(.f$statistic)) as.numeric(NA) else .f$statistic,
+    df = if (is.null(.f$parameter)) as.numeric(NA) else .f$parameter,
+    df.error = as.numeric(NA),
+    p.value = .f$p.value,
+    method = .f$method,
+    alternative = as.character(NA),
+    estimate = as.numeric(.es[[1L]]),
+    conf.level = as.numeric(.es[[2L]]),
+    conf.low = as.numeric(.es[[3L]]),
+    conf.high = as.numeric(.es[[4L]]),
+    effectsize = names(.es)[[1L]],
+    n_obs = sum(tab)
+  )
+
+  if(lbl) {
+    res <- lablr(res, markdown = markdown)
+  }
+
+  return(res)
 }
 

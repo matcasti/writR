@@ -10,7 +10,9 @@ contingency(
   y = NULL,
   paired = FALSE,
   exact = FALSE,
-  markdown = TRUE,
+  conf.level = 0.95,
+  lbl = if (is.null(markdown)) FALSE else TRUE,
+  markdown = NULL,
   ...
 )
 }
@@ -25,12 +27,13 @@ contingency(
 
 \item{exact}{Logical. If \code{TRUE} then Fisher's Exact Test is carried on, but only when \code{paired = FALSE} (default). If is a 2 x 2 design, Odds Ratio (OR) is returned as effect size, otherwise it will only return the formated p-value.}
 
+\item{conf.level}{Confidence/Credible Interval (CI) level. Default to 0.95 (95\%).}
+
+\item{lbl}{Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.}
+
 \item{markdown}{Whether you want the output formated for inline R Markdown or as plain text.}
 
 \item{...}{Currently not used.}
-}
-\value{
-A list of length 3 or 2 with statistical test and \verb{$method} used.
 }
 \description{
 Perform nominal/ordinal analysis on 1 dimensional table for goodnes-of-fit chi-squared, and two dimensional data for Pearson chi-squared, Fisher exact test or (if paired), McNemar test reporting their corresponding stats and effect sizes in APA Style.
