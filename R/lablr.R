@@ -81,6 +81,7 @@ lablr <- function(t, markdown = FALSE) {
   , "Welch Two Sample t-test" = list(d1 = "t", d2 = "$t_{~Welch}$ ",
       df = paste0("(",format(round(t$df, 1), nsmall = 1),") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = paste0(es.a, " = "), es2 = paste0("$",es.a,"_{~",es.b,"}$ = "))
+  , "Wilcoxon rank sum exact test" =
   , "Wilcoxon rank sum test with continuity correction" = list(d1 = "ln(W)", d2 = "$\\ln(W)$ ",
       df = paste0("= ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = "r = ", es2 = "$\\widehat{r}_{biserial}$ = ")
@@ -91,6 +92,7 @@ lablr <- function(t, markdown = FALSE) {
   , "Paired t-test" = list(d1 = "t", d2 = "$t_{~Student}$ ",
       df = paste0("(",t$df,") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = paste0(es.a, " = "), es2 = paste0("$",es.a,"_{~",es.b,"}$ = "))
+  , "Wilcoxon signed rank exact test" =
   , "Wilcoxon signed rank test with continuity correction" = list(d1 = "ln(V)", d2 = "$\\ln(V)$ ",
       df = paste0("= ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = "r = ", es2 = "$\\widehat{r}_{biserial}$ = ")
