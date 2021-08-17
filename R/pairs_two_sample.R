@@ -39,14 +39,14 @@ pairs_two_sample <- function(data, x, y,
   data <- clean_data(data, x = x, y = y, rowid = rowid, paired = paired, wide = FALSE)
   rowid <- if(is.null(rowid)) NULL else "rowid"
 
+  # Levels of 'x'
+  x_var <- data[[x]]
+  x_lvl <- levels(x_var)
+
   # Checking assumptions
   if (type == "auto") {
     # Create vectors of variables
     y_var <- data[[y]]
-    x_var <- data[[x]]
-
-    # Levels of 'x'
-    x_lvl <- levels(x_var)
 
     # Check normality
     normal <- vapply(x_lvl, function(i) {
