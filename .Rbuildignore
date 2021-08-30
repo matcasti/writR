@@ -1,3 +1,7 @@
-^Report\.Rproj$
+^writR\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^README\.html$
+^README\.Rmd$
+README_files
+testing
