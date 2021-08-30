@@ -13,7 +13,6 @@ URL: https://doi.org/10.5281/zenodo.4603838
 License: GPL (>= 3)
 Encoding: UTF-8
 ByteCompile: true
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: R (>= 3.5)
