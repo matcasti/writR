@@ -29,20 +29,33 @@ aov_r <- function(data,
                   effsize.type = "unbiased",
                   sphericity = "auto",
                   conf.level = 0.95,
-                  lbl = if(is.null(markdown)) FALSE else TRUE,
+                  lbl = if (is.null(markdown)) FALSE else TRUE,
                   markdown = NULL) {
 
-  if(!"data.table" %chin% class(data)) {
+  # Auxiliary functions
+  is_empty <- function(i) length(i) == 0;
+  is_not_empty <- function(i) length(i) > 0;
+  is_not_null <- function(i) !is.null(i);
+
+  # Argument checking
+  if (is.null(between) && is.null(within)) stop("between and within can't both be NULL", call. = FALSE)
+  if (is.null(response)) stop("response can't be NULL", call. = FALSE)
+  if (is_not_empty(within) && is.null(rowid)) stop("If within is provided, rowid can't be NULL", call. = FALSE)
+
+  # Transform data to data.table
+  if (!"data.table" %chin% class(data)) {
     data <- data.table::as.data.table(data)
   }
 
-  is.empty <- function(i) length(i) == 0
-
-  is.null(response) && stop("'response' can't be null", call. = FALSE)
-  is.empty(between) && is.empty(within) && stop("Need to specify one of between or within factors", call. = FALSE)
-  is.null(rowid) && stop("'rowid' can't be null", call. = FALSE)
+  # Get only variables of interest
   data <- droplevels(data[j = .SD, .SDcols = c(rowid, response, between, within)])
 
+  if (is_empty(within) && is.null(rowid) && is_not_empty(between)) {
+    rowid <- "rowid"
+    data[, rowid := seq_len(.N)]
+  }
+
+  # Run model
   model <- suppressMessages(
     suppressWarnings(
       afex::aov_ez(
@@ -56,14 +69,17 @@ aov_r <- function(data,
     )
   )
 
+  # Get number of observations
   n_obs <- nrow(model$data$wide)
 
-  if (is.empty(within)) {
+  # Get sphericity correction
+  if (is_empty(within)) {
     sphericity <- NULL
   } else {
     sphericity <- sphericity_check(model)
   }
 
+  # Get effectsize
   efs <- if (effsize.type %chin% c("eta", "biased")) {
     effectsize::eta_squared(model, ci = conf.level, verbose = FALSE)
   } else if (effsize.type %chin% c("omega", "unbiased")) {
@@ -72,16 +88,17 @@ aov_r <- function(data,
     stop('You have to choose between "eta" ("biased") or "omega" ("unbiased")', call. = FALSE)
   }
 
+  # Get ANOVA table
   model <- data.table::as.data.table(
     stats::anova(
       object = model
       , correction = sphericity
-    )
-  , keep.rownames = TRUE
+    ), keep.rownames = TRUE
   )
 
-  within_method <- NULL
-  if (!is.null(within)) {
+  # Set sphericity correction (if available)
+  within_method <- NA_character_
+  if (is_not_null(within)) {
     within_method <- data.table::fcase(
       sphericity == "none", "Fisher's repeated measures ANOVA",
       sphericity == "GG", "Repeated measures ANOVA with GG correction",
@@ -107,8 +124,10 @@ aov_r <- function(data,
     n_obs = n_obs
   )]
 
-  if(lbl) {
+  if (lbl) {
     model <- model[j = lablr(.SD, markdown = markdown), by = "x"]
   }
+
   return(model)
 }
+

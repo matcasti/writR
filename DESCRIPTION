@@ -1,6 +1,6 @@
 Package: writR
 Title: Inferential statistics and reporting in APA style
-Version: 1.0
+Version: 1.0.1
 Date: 2021-05-03
 Authors@R: 
     person(given = "Matías",
@@ -14,8 +14,8 @@ License: GPL (>= 3)
 Encoding: UTF-8
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-Depends: R (>= 3.5)
+RoxygenNote: 7.1.2
+Depends: R (>= 4.0)
 Imports:
     data.table (>= 1.14.0),
     glue (>= 1.4.2),

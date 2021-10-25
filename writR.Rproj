@@ -22,5 +22,3 @@ PackageInstallArgs: --no-multiarch --with-keep.source
 PackageBuildArgs: --no-manual
 PackageCheckArgs: --no-manual
 PackageRoxygenize: rd,collate,namespace,vignette
-
-QuitChildProcessesOnExit: Yes
