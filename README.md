@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# <img src="logo.png" width=100 align="right"/> writR
+# <img src="man/figures/logo.png" width=100 align="right"/> writR
 
 <!-- badges: start -->
 
@@ -658,12 +658,6 @@ I would like to thank to developers of `statsExpressions` and
 `ggstatsplot` for being an inspiration for this package. Naturally this
 package is in its first steps, but I hope that future collaborative work
 can expand the potential of this package.
-
-## Contact
-
-For collaborations or anything else, you can send me an email at:
-
--   matcasti@umag.cl
 
 ## Citation
 

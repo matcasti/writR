@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-<img src="logo.png" width=100 align="right"/> writR  
+<img src="man/figures/logo.png" width=100 align="right"/> writR  
 ==================================================================
 
 <!-- badges: start -->
@@ -486,7 +486,6 @@ print(result)
 lablr(result)
 ```
 
-
 ## Dependencies
 
 The package writR is standing on the shoulders of giants. `writR` depends on the following packages:
@@ -498,12 +497,6 @@ deepdep::plot_dependencies('writR', local = TRUE, depth = 3)
 ## Acknowledgments
 
 I would like to thank to developers of `statsExpressions` and `ggstatsplot` for being an inspiration for this package. Naturally this package is in its first steps, but I hope that future collaborative work can expand the potential of this package.
-
-## Contact
-
-For collaborations or anything else, you can send me an email at:
-
--   matcasti\@umag.cl
 
 ## Citation
 
