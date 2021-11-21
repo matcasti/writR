@@ -60,20 +60,11 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p><span style="display:block;text-align:center"><img src="README_files/logo.png" width="300"></span></p>
-<table class="table"><tr>
-<th>
-<div class="page-header"><h1 style="text-align:left;">
-Inferential statistics and reporting in APA style
+<div id="inferential-statistics-and-reporting-in-apa-style-" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#inferential-statistics-and-reporting-in-apa-style-" class="anchor"></a>Inferential statistics and reporting in APA style <img src="README_files/logo.png" width="150" align="right">
 </h1></div>
 
-<p style="text-align:center;">
-For automated and basic inferential testing.
-</p>
-</th>
-</tr></table>
-<p></p>
-<p><a href="https://doi.org/10.5281/zenodo.4603838"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg" alt="DOI"></a></p>
 <p><strong>writR</strong> is an R package for automated inferential testing (for group differences) and reporting based on parametric assumptions, which are tested automatically for test selection.</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
@@ -89,22 +80,22 @@ For automated and basic inferential testing.
 <p>To cite package ‘writR’ in publications run the following code in your <code>R</code> console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">'writR'</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## To cite package 'writR' in publications use:
-## 
-##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-##   reporting in APA style. R package version 1.0.
-##   https://doi.org/10.5281/zenodo.4603838
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Manual{,
-##     title = {writR: Inferential statistics and reporting in APA style},
-##     author = {Matías {Castillo Aguilar}},
-##     year = {2021},
-##     note = {R package version 1.0},
-##     url = {https://doi.org/10.5281/zenodo.4603838},
-##   }</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">## To cite package 'writR' in publications use:</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">## </span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">##   Matías Castillo Aguilar (2021). writR: Inferential statistics and</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">##   reporting in APA style. https://doi.org/10.5281/zenodo.4603838,</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">##   https://matcasti.github.io/writR.</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## </span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">## A BibTeX entry for LaTeX users is</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">## </span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">##   @Manual{,</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">##     title = {writR: Inferential statistics and reporting in APA style},</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">##     author = {Matías {Castillo Aguilar}},</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">##     year = {2021},</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">##     note = {https://doi.org/10.5281/zenodo.4603838,</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">## https://matcasti.github.io/writR},</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">##   }</span></span></code></pre></div>
 </div>
 <div id="summary-of-available-tests-using-autest-function" class="section level2">
 <h2 class="hasAnchor">
@@ -387,6 +378,7 @@ For automated and basic inferential testing.
 </table>
 </div>
 </div>
+</div>
 <div id="automated-testing" class="section level1">
 <h1 class="hasAnchor">
 <a href="#automated-testing" class="anchor"></a>Automated testing</h1>
@@ -408,10 +400,10 @@ For automated and basic inferential testing.
 <span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># Detailed statistical results</span></code></pre></div>
-<pre><code>##         y    x statistic df    p.value             method alternative  estimate
-## 1: weight diet  2.508551 98 0.01376398  Two Sample t-test   two.sided 0.4978591
-##    conf.level conf.low conf.high effectsize n_obs
-## 1:       0.95 0.101465 0.8917915   Hedges_g   100</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">##         y    x statistic df    p.value             method alternative  estimate</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">## 1: weight diet  2.508551 98 0.01376398  Two Sample t-test   two.sided 0.4978591</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">##    conf.level conf.low conf.high effectsize n_obs</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## 1:       0.95 0.101465 0.8917915   Hedges_g   100</span></span></code></pre></div>
 <div id="inline-results-in-apa-style" class="section level2">
 <h2 class="hasAnchor">
 <a href="#inline-results-in-apa-style" class="anchor"></a>Inline results in APA style</h2>
@@ -422,7 +414,7 @@ For automated and basic inferential testing.
 </blockquote>
 <p>translates into this:</p>
 <blockquote>
-<p>The analysis of the effects of the treatment, shows that experimental group had greater weight than control, t(98) = 2.51, p = 0.014, g = 0.50, CI95 [0.10, 0.89].</p>
+<p>The analysis of the effects of the treatment, shows that experimental group had greater weight than control, t(98) = 2.51, p = 0.014, g = 0.50, CI95 <br><span class="math display">0.10, 0.89</span><br>.</p>
 </blockquote>
 <p>It also let you perform centrality and dispersion statistics for inline results by using the <code><a href="reference/cent_disp.html">cent_disp()</a></code> function. The next example illustrates its usage:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -436,9 +428,9 @@ For automated and basic inferential testing.
   <span class="op">}</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##                       0.5                      1                      2
-## OJ *M* = 13.2, *SD* = 4.5 *M* = 22.7, *SD* = 3.9 *M* = 26.1, *SD* = 2.7
-## VC    *M* = 8, *SD* = 2.7 *M* = 16.8, *SD* = 2.5 *M* = 26.1, *SD* = 4.8</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">##                       0.5                      1                      2</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">## OJ *M* = 13.2, *SD* = 4.5 *M* = 22.7, *SD* = 3.9 *M* = 26.1, *SD* = 2.7</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">## VC    *M* = 8, *SD* = 2.7 *M* = 16.8, *SD* = 2.5 *M* = 26.1, *SD* = 4.8</span></span></code></pre></div>
 <blockquote>
 <p>The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (<code>result['OJ','2']</code>) than vitamin C (VC) group (<code>result['VC','2']</code>) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (<code>result['OJ','0.5']</code>) than VC group (<code>result['VC','0.5']</code>).</p>
 </blockquote>
@@ -453,7 +445,7 @@ For automated and basic inferential testing.
   str.a <span class="op">=</span> <span class="st">"The median for length was {median} mm (MAD = {mad}, IQR = {IQR})"</span>,
   k <span class="op">=</span> <span class="fl">1</span> <span class="co"># For 1 decimal places</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## The median for length was 19.2 mm (MAD = 9, IQR = 12.2)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## The median for length was 19.2 mm (MAD = 9, IQR = 12.2)</span></span></code></pre></div>
 <p>It allows you to use any function available in your global environment or in attached packages, even custom functions:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">q25</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">i</span>, <span class="fl">0.25</span><span class="op">)</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span>
@@ -464,7 +456,7 @@ For automated and basic inferential testing.
   str.a <span class="op">=</span> <span class="st">"The median for length was {median} mm (IQR = [{q25}, {q75}])"</span>,
   k <span class="op">=</span> <span class="fl">1</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## The median for length was 19.2 mm (IQR = [13.1, 25.3])</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## The median for length was 19.2 mm (IQR = [13.1, 25.3])</span></span></code></pre></div>
 </div>
 <div id="paired-samples-design" class="section level2">
 <h2 class="hasAnchor">
@@ -524,26 +516,26 @@ For automated and basic inferential testing.
 
 <span class="co"># Access the whole results</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>## $test
-##        y      x statistic      df df.error   p.value
-## 1: cells period  2.231395 1.77965 69.40635 0.1206689
-##                                        method   estimate conf.level conf.low
-## 1: Repeated measures ANOVA with HF correction 0.01998957       0.95        0
-##    conf.high     effectsize n_obs
-## 1: 0.1011518 Omega2_partial    40
-## 
-## $pwc
-##    group1 group2 statistic         p            method p.adjust.method
-## 1: Time-1  Basal -1.466883 0.5560343 Games-Howell Test            none
-## 2: Time-2  Basal -2.933847 0.1061919 Games-Howell Test            none
-## 3: Time-2 Time-1 -1.616262 0.4922794 Games-Howell Test            none</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">## $test</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">##        y      x statistic      df df.error   p.value</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">## 1: cells period  2.231395 1.77965 69.40635 0.1206689</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">##                                        method   estimate conf.level conf.low</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">## 1: Repeated measures ANOVA with HF correction 0.01998957       0.95        0</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">##    conf.high     effectsize n_obs</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">## 1:         1 Omega2_partial    40</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">## </span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">## $pwc</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">##    group1 group2 statistic         p            method p.adjust.method</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">## 1: Time-1  Basal -1.466883 0.5560343 Games-Howell Test            none</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">## 2: Time-2  Basal -2.933847 0.1061919 Games-Howell Test            none</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">## 3: Time-2 Time-1 -1.616262 0.4922794 Games-Howell Test            none</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For inline resutls or statistical reports</span>
 <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></code></pre></div>
-<pre><code>##                  stats         p            es                ci
-## 1: F(1.8, 69.4) = 2.23 p = 0.121 omega2 = 0.02 CI95 [0.00, 0.10]
-##                                                                full
-## 1: F(1.8, 69.4) = 2.23, p = 0.121, omega2 = 0.02, CI95 [0.00, 0.10]</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">##                  stats         p            es                ci</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">## 1: F(1.8, 69.4) = 2.23 p = 0.121 omega2 = 0.02 CI95 [0.00, 1.00]</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">##                                                                full</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">## 1: F(1.8, 69.4) = 2.23, p = 0.121, omega2 = 0.02, CI95 [0.00, 1.00]</span></span></code></pre></div>
 <p>However, you can specify your own parameters for the selection of the test:</p>
 <table class="table">
 <colgroup>
@@ -625,17 +617,17 @@ For automated and basic inferential testing.
 
 <span class="co"># Access the whole results</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##        y      x statistic df   p.value        method alternative  estimate
-## 1: cells period  1.093978 39 0.2806758 Paired t-test   two.sided 0.1696215
-##    conf.level   conf.low conf.high effectsize n_obs
-## 1:       0.95 -0.1394006  0.480802   Hedges_g    40</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">##        y      x statistic df   p.value        method alternative  estimate</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="co">## 1: cells period  1.093978 39 0.2806758 Paired t-test   two.sided 0.1696215</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">##    conf.level   conf.low conf.high effectsize n_obs</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co">## 1:       0.95 -0.1394006  0.480802   Hedges_g    40</span></span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For inline results</span>
 <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##           stats         p       es                 ci
-## 1: t(39) = 1.09 p = 0.281 g = 0.17 CI95 [-0.14, 0.48]
-##                                                     full
-## 1: t(39) = 1.09, p = 0.281, g = 0.17, CI95 [-0.14, 0.48]</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">##           stats         p       es                 ci</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co">## 1: t(39) = 1.09 p = 0.281 g = 0.17 CI95 [-0.14, 0.48]</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co">##                                                     full</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co">## 1: t(39) = 1.09, p = 0.281, g = 0.17, CI95 [-0.14, 0.48]</span></span></code></pre></div>
 <p>Same as above, you can specify your own parameters for the selection of the test:</p>
 <table class="table">
 <colgroup>
@@ -725,24 +717,24 @@ For automated and basic inferential testing.
 
 <span class="co"># Check results</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>## $test
-##        y     x statistic df df.error    p.value        method   estimate
-## 1: cells group  4.861757  2 75.91708 0.01030964 Welch's ANOVA 0.08914428
-##    conf.level conf.low conf.high effectsize n_obs
-## 1:       0.95        0 0.2168079     Omega2   120
-## 
-## $pwc
-##    group1  group2 statistic           p            method p.adjust.method
-## 1: Drug A Control -2.516185 0.184417805 Games-Howell Test            none
-## 2: Drug B Control -4.376442 0.007873682 Games-Howell Test            none
-## 3: Drug B  Drug A -2.482696 0.191506063 Games-Howell Test            none</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">## $test</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co">##        y     x statistic df df.error    p.value        method   estimate</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co">## 1: cells group  4.861757  2 75.91708 0.01030964 Welch's ANOVA 0.08914428</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co">##    conf.level    conf.low conf.high effectsize n_obs</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">## 1:       0.95 0.005281224         1     Omega2   120</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">## </span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co">## $pwc</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="co">##    group1  group2 statistic           p            method p.adjust.method</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="co">## 1: Drug A Control -2.516185 0.184417805 Games-Howell Test            none</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">## 2: Drug B Control -4.376442 0.007873682 Games-Howell Test            none</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="co">## 3: Drug B  Drug A -2.482696 0.191506063 Games-Howell Test            none</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For inline results</span>
 <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></code></pre></div>
-<pre><code>##                  stats        p            es                ci
-## 1: F(2.0, 75.9) = 4.86 p = 0.01 omega2 = 0.09 CI95 [0.00, 0.22]
-##                                                               full
-## 1: F(2.0, 75.9) = 4.86, p = 0.01, omega2 = 0.09, CI95 [0.00, 0.22]</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">##                  stats        p            es                ci</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co">## 1: F(2.0, 75.9) = 4.86 p = 0.01 omega2 = 0.09 CI95 [0.01, 1.00]</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">##                                                               full</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">## 1: F(2.0, 75.9) = 4.86, p = 0.01, omega2 = 0.09, CI95 [0.01, 1.00]</span></span></code></pre></div>
 <p>However, you can specify your own parameters for the selection of the test:</p>
 <table class="table">
 <colgroup>
@@ -825,17 +817,17 @@ For automated and basic inferential testing.
 
 <span class="co"># For tabular results</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##        y     x statistic df    p.value             method alternative  estimate
-## 1: cells group  1.755531 78 0.08309445  Two Sample t-test   two.sided 0.3887601
-##    conf.level    conf.low conf.high effectsize n_obs
-## 1:       0.95 -0.05074507 0.8258231   Hedges_g    80</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">##        y     x statistic df    p.value             method alternative  estimate</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="co">## 1: cells group  1.755531 78 0.08309445  Two Sample t-test   two.sided 0.3887601</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="co">##    conf.level    conf.low conf.high effectsize n_obs</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="co">## 1:       0.95 -0.05074507 0.8258231   Hedges_g    80</span></span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For inline results (e.g. manuscript)</span>
 <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##           stats         p       es                 ci
-## 1: t(78) = 1.76 p = 0.083 g = 0.39 CI95 [-0.05, 0.83]
-##                                                     full
-## 1: t(78) = 1.76, p = 0.083, g = 0.39, CI95 [-0.05, 0.83]</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co">##           stats         p       es                 ci</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="co">## 1: t(78) = 1.76 p = 0.083 g = 0.39 CI95 [-0.05, 0.83]</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="co">##                                                     full</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co">## 1: t(78) = 1.76, p = 0.083, g = 0.39, CI95 [-0.05, 0.83]</span></span></code></pre></div>
 <p>You can specify your own parameters for the selection of the test as well:</p>
 <table class="table">
 <colgroup>
@@ -915,38 +907,38 @@ For automated and basic inferential testing.
 
 <span class="co"># Check results</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##        y           x   statistic df df.error      p.value
-## 1: score      gender 130.7357382  1       68 1.720992e-17
-## 2: score        time   0.2367333  2      136 7.895263e-01
-## 3: score gender:time  42.8799011  2      136 3.635914e-15
-##                              method    estimate conf.level  conf.low conf.high
-## 1:                   Fisher's ANOVA  0.64953693       0.95 0.5143310 0.7402797
-## 2: Fisher's repeated measures ANOVA -0.00747718       0.95 0.0000000 0.0000000
-## 3: Fisher's repeated measures ANOVA  0.28938040       0.95 0.1657381 0.4000181
-##        effectsize n_obs
-## 1: Omega2_partial    70
-## 2: Omega2_partial    70
-## 3: Omega2_partial    70</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">##        y           x   statistic df df.error      p.value</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co">## 1: score      gender 130.7357382  1       68 1.720992e-17</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="co">## 2: score        time   0.2367333  2      136 7.895263e-01</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co">## 3: score gender:time  42.8799011  2      136 3.635914e-15</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="co">##                              method    estimate conf.level  conf.low conf.high</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="co">## 1:                   Fisher's ANOVA  0.64953693       0.95 0.5389314         1</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="co">## 2: Fisher's repeated measures ANOVA -0.00747718       0.95 0.0000000         1</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="co">## 3: Fisher's repeated measures ANOVA  0.28938040       0.95 0.1844234         1</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="co">##        effectsize n_obs</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="co">## 1: Omega2_partial    70</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="co">## 2: Omega2_partial    70</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a><span class="co">## 3: Omega2_partial    70</span></span></code></pre></div>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># And inline results for reporting purposes</span>
 <span class="va">inline</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[</span>j <span class="op">=</span> <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">.SD</span><span class="op">)</span>, keyby <span class="op">=</span> <span class="va">x</span><span class="op">]</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">inline</span><span class="op">)</span></code></pre></div>
-<pre><code>##              x             stats         p             es                ci
-## 1:      gender F(1, 68) = 130.74 p &lt; 0.001  omega2 = 0.65 CI95 [0.51, 0.74]
-## 2: gender:time F(2, 136) = 42.88 p &lt; 0.001  omega2 = 0.29 CI95 [0.17, 0.40]
-## 3:        time  F(2, 136) = 0.24  p = 0.79 omega2 = -0.01 CI95 [0.00, 0.00]
-##                                                              full
-## 1: F(1, 68) = 130.74, p &lt; 0.001, omega2 = 0.65, CI95 [0.51, 0.74]
-## 2: F(2, 136) = 42.88, p &lt; 0.001, omega2 = 0.29, CI95 [0.17, 0.40]
-## 3:  F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 0.00]</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co">##              x             stats         p             es                ci</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="co">## 1:      gender F(1, 68) = 130.74 p &lt; 0.001  omega2 = 0.65 CI95 [0.54, 1.00]</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="co">## 2: gender:time F(2, 136) = 42.88 p &lt; 0.001  omega2 = 0.29 CI95 [0.18, 1.00]</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="co">## 3:        time  F(2, 136) = 0.24  p = 0.79 omega2 = -0.01 CI95 [0.00, 1.00]</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="co">##                                                              full</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="co">## 1: F(1, 68) = 130.74, p &lt; 0.001, omega2 = 0.65, CI95 [0.54, 1.00]</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a><span class="co">## 2: F(2, 136) = 42.88, p &lt; 0.001, omega2 = 0.29, CI95 [0.18, 1.00]</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="co">## 3:  F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 1.00]</span></span></code></pre></div>
 <p>For inline results with previous data we would do something like this:</p>
 <blockquote>
 <p>In order to analyze the effect of gender on subjects’ scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( <code>inline["gender", paste(es, ci, sep = ", ")]</code> ) on scores when adjusting for each of the time periods, <code>inline["gender", paste(stats, p, sep = ", ")]</code>. In a similar way we find a significant interaction between evaluative time and gender ( <code>inline["gender:time", paste(stats, p, sep = ", ")]</code> ), indicating unequal responses between males and females over time, <code>inline["gender:time", paste(es, ci, sep = ", ")]</code>, however, time alone is not able to explain statistically significantly the variance in scores, <code>inline["time"]$full</code>.</p>
 </blockquote>
 <p>Which will translate into this after evaluation in R Markdown:</p>
 <blockquote>
-<p>In order to analyze the effect of gender on subjects’ scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( omega2 = 0.65, CI95 [0.51, 0.74] ) on scores when adjusting for each of the time periods, F(1, 68) = 130.74, p &lt; 0.001. In a similar way we find a significant interaction between evaluative time and gender ( F(2, 136) = 42.88, p &lt; 0.001 ), indicating unequal responses between males and females over time, omega2 = 0.29, CI95 [0.17, 0.40], however, time alone is not able to explain statistically significantly the variance in scores, F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 0.00].</p>
+<p>In order to analyze the effect of gender on subjects’ scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( omega2 = 0.65, CI95 <br><span class="math display">0.51, 0.74</span><br> ) on scores when adjusting for each of the time periods, F(1, 68) = 130.74, p &lt; 0.001. In a similar way we find a significant interaction between evaluative time and gender ( F(2, 136) = 42.88, p &lt; 0.001 ), indicating unequal responses between males and females over time, omega2 = 0.29, CI95 <br><span class="math display">0.17, 0.40</span><br>, however, time alone is not able to explain statistically significantly the variance in scores, F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 <br><span class="math display">0.00, 0.00</span><br>.</p>
 </blockquote>
 <p>When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: <code>between = c('factor1', 'factor2' ...)</code>, and the same for <code>within = c('factor1', 'factor2' ...)</code>.</p>
 </div>
@@ -960,26 +952,26 @@ For automated and basic inferential testing.
 <p>By only filling the <code>data</code>, and <code>x</code> argument, the Goodness-of-fit chi-squared test (χ<sup>2</sup><sub>gof</sub>)</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">cancer_unpaired</span>, <span class="co"># 3 groups: Control, Drug A, Drug B</span>
+  data <span class="op">=</span> <span class="va">cancer_unpaired</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,<span class="op">]</span>, <span class="co"># 3 groups: Control, Drug A, Drug B</span>
   x <span class="op">=</span> <span class="st">"group"</span>
 <span class="op">)</span>
 
 <span class="co"># Tabular format dropping empty columns</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##        x statistic df p.value                                   method estimate
-## 1: group         0  2       1 Chi-squared test for given probabilities        0
-##    conf.level conf.low conf.high effectsize n_obs
-## 1:       0.95        0         0  Cramers_v   120</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co">##        x statistic df   p.value                                   method</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="co">## 1: group  1.818182  2 0.4028903 Chi-squared test for given probabilities</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="co">##     estimate conf.level conf.low conf.high effectsize n_obs</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="co">## 1: 0.1275153       0.95        0         1 pearsons_c   110</span></span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For inline results</span>
-<span class="va">inline</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
+<span class="va">inline</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span>, markdown <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>And the inline result would look like this:</p>
 <blockquote>
 <p>In preliminary analyses, we’ve seen that the proportion of pacients the same across groups, <code>inline$full</code>.</p>
 </blockquote>
 <p>translates into:</p>
 <blockquote>
-<p>In preliminary analyses, we’ve seen that the proportion of pacients the same across groups, X2(2) = 0.00, p = 1, V = 0.00, CI95 [0.00, 0.00].</p>
+<p>In preliminary analyses, we’ve seen that the proportion of pacients the same across groups, X2(2) = 0.00, p = 1, V = 0.00, CI95 <br><span class="math display">0.00, 0.00</span><br>.</p>
 </blockquote>
 </div>
 <div id="pearsons-chi-squared" class="section level3">
@@ -992,21 +984,21 @@ For automated and basic inferential testing.
   x <span class="op">=</span> <span class="st">"cyl"</span>,
   y <span class="op">=</span> <span class="st">"gear"</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>## Warning in stats::chisq.test(tab): Chi-squared approximation may be incorrect</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">## Warning in stats::chisq.test(tab): Chi-squared approximation may be incorrect</span></span></code></pre></div>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Statistics in tabular format</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##       y   x statistic df     p.value                     method  estimate
-## 1: gear cyl  18.03636  4 0.001214066 Pearson's Chi-squared test 0.5308655
-##    conf.level  conf.low conf.high effectsize n_obs
-## 1:       0.95 0.2183056 0.7383151  Cramers_v    32</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co">##       y   x statistic df     p.value                     method  estimate</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="co">## 1: gear cyl  18.03636  4 0.001214066 Pearson's Chi-squared test 0.5308655</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="co">##    conf.level  conf.low conf.high effectsize n_obs</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="co">## 1:       0.95 0.2629954         1  Cramers_v    32</span></span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Inline results format</span>
 <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##            stats         p       es                ci
-## 1: X2(4) = 18.04 p = 0.001 V = 0.53 CI95 [0.22, 0.74]
-##                                                     full
-## 1: X2(4) = 18.04, p = 0.001, V = 0.53, CI95 [0.22, 0.74]</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co">##            stats         p       es                ci</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="co">## 1: X2(4) = 18.04 p = 0.001 V = 0.53 CI95 [0.26, 1.00]</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="co">##                                                     full</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="co">## 1: X2(4) = 18.04, p = 0.001, V = 0.53, CI95 [0.26, 1.00]</span></span></code></pre></div>
 </div>
 <div id="fishers-exact-test" class="section level3">
 <h3 class="hasAnchor">
@@ -1022,13 +1014,13 @@ For automated and basic inferential testing.
 
 <span class="co"># Statistics in tabular format</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##       y   x      p.value                                        method n_obs
-## 1: gear cyl 8.259716e-05 Fisher's Exact Test for Count Data without OR    32</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">##       y   x      p.value                                        method n_obs</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="co">## 1: gear cyl 8.259716e-05 Fisher's Exact Test for Count Data without OR    32</span></span></code></pre></div>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Inline results format</span>
 <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##            p      full
-## 1: p &lt; 0.001 p &lt; 0.001</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">##            p      full</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="co">## 1: p &lt; 0.001 p &lt; 0.001</span></span></code></pre></div>
 </div>
 <div id="mcnemars-chi-squared-test" class="section level3">
 <h3 class="hasAnchor">
@@ -1054,19 +1046,19 @@ For automated and basic inferential testing.
 
 <span class="co"># Statistics in tabular format</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##             y          x statistic df      p.value
-## 1: 2nd survey 1st survey  34.17161  1 5.045976e-09
-##                                                   method  estimate conf.level
-## 1: McNemar's Chi-squared test with continuity correction 0.1355932       0.95
-##      conf.low conf.high effectsize n_obs
-## 1: 0.09124332 0.1777538   Cohens_g  3200</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co">##             y          x statistic df      p.value</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="co">## 1: 2nd survey 1st survey  34.17161  1 5.045976e-09</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="co">##                                                   method  estimate conf.level</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a><span class="co">## 1: McNemar's Chi-squared test with continuity correction 0.1355932       0.95</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a><span class="co">##      conf.low conf.high effectsize n_obs</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a><span class="co">## 1: 0.09124332 0.1777538   Cohens_g  3200</span></span></code></pre></div>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Inline results</span>
 <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
-<pre><code>##            stats         p       es                ci
-## 1: X2(1) = 34.17 p &lt; 0.001 g = 0.14 CI95 [0.09, 0.18]
-##                                                     full
-## 1: X2(1) = 34.17, p &lt; 0.001, g = 0.14, CI95 [0.09, 0.18]</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co">##            stats         p       es                ci</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="co">## 1: X2(1) = 34.17 p &lt; 0.001 g = 0.14 CI95 [0.09, 0.18]</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a><span class="co">##                                                     full</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="co">## 1: X2(1) = 34.17, p &lt; 0.001, g = 0.14, CI95 [0.09, 0.18]</span></span></code></pre></div>
 </div>
 </div>
 <div id="dependencies" class="section level2">
@@ -1077,7 +1069,7 @@ For automated and basic inferential testing.
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dominikrafacz.github.io/deepdep/">deepdep</a></span><span class="op">)</span>
 
 <span class="fu">plot_dependencies</span><span class="op">(</span><span class="st">'writR'</span>, local <span class="op">=</span> <span class="cn">TRUE</span>, depth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
-<p><img src="README_files/figure-html/unnamed-chunk-15-1.svg"><!-- --></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-15-1.svg"><!-- --></p>
 </div>
 <div id="acknowledgments" class="section level2">
 <h2 class="hasAnchor">
@@ -1089,7 +1081,7 @@ For automated and basic inferential testing.
 <a href="#contact" class="anchor"></a>Contact</h2>
 <p>For collaborations or anything else, you can send me an email at:</p>
 <ul>
-<li>matcasti@umag.cl</li>
+<li><a href="mailto:matcasti@umag.cl" class="email">matcasti@umag.cl</a></li>
 </ul>
 </div>
 </div>
@@ -1111,7 +1103,13 @@ For automated and basic inferential testing.
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://doi.org/10.5281/zenodo.4603838"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg" alt="DOI"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
