@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# writR <img src="logo.png" width="33%" align="right"/>
+# <img src="logo.png" width=100 align="right"/> writR
 
 <!-- badges: start -->
 

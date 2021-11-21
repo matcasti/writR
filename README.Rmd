@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-writR <img src="logo.png" width="33%" align="right"/>
+<img src="logo.png" width=100 align="right"/> writR  
 ==================================================================
 
 <!-- badges: start -->
