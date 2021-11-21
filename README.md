@@ -1,46 +1,31 @@
 
-# Inferential statistics and reporting in APA style <img src="README_files/logo.png" width="150" align="right"/>
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# writR <img src="logo.png" width="33%" align="right"/>
+
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/matcasti/writR/workflows/R-CMD-check/badge.svg)](https://github.com/matcasti/writR/actions)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4603838)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/writR)](https://CRAN.R-project.org/package=writR)
+<!-- badges: end -->
 
-**writR** is an R package for automated inferential testing (for group
-differences) and reporting based on parametric assumptions, which are
-tested automatically for test selection.
+An R package for automated inferential testing (for group differences)
+and reporting based on parametric assumptions, which are tested
+automatically for test selection.
 
-### Installation
+## Installation
 
-For installation of developmental version run in your R console:
-
-``` r
-install.packages("remotes")
-remotes::install_github("matcasti/writR")
-```
-
-### Citation
-
-To cite package ‘writR’ in publications run the following code in your
-`R` console:
+You can install the development version of writR from
+[GitHub](https://github.com/) with:
 
 ``` r
-citation('writR')
+# install.packages("devtools")
+devtools::install_github("matcasti/writR")
 ```
-
-    ## 
-    ## To cite package 'writR' in publications use:
-    ## 
-    ##   Matías Castillo Aguilar (2021). writR: Inferential statistics and
-    ##   reporting in APA style. https://doi.org/10.5281/zenodo.4603838,
-    ##   https://matcasti.github.io/writR.
-    ## 
-    ## A BibTeX entry for LaTeX users is
-    ## 
-    ##   @Manual{,
-    ##     title = {writR: Inferential statistics and reporting in APA style},
-    ##     author = {Matías {Castillo Aguilar}},
-    ##     year = {2021},
-    ##     note = {https://doi.org/10.5281/zenodo.4603838,
-    ## https://matcasti.github.io/writR},
-    ##   }
 
 ## Summary of available tests using `autest()` function
 
@@ -117,12 +102,11 @@ result <- autest(
 )
 
 print(result) # Detailed statistical results
+#>         y    x statistic df    p.value             method alternative  estimate
+#> 1: weight diet  2.508551 98 0.01376398  Two Sample t-test   two.sided 0.4978591
+#>    conf.level conf.low conf.high effectsize n_obs
+#> 1:       0.95 0.101465 0.8917915   Hedges_g   100
 ```
-
-    ##         y    x statistic df    p.value             method alternative  estimate
-    ## 1: weight diet  2.508551 98 0.01376398  Two Sample t-test   two.sided 0.4978591
-    ##    conf.level conf.low conf.high effectsize n_obs
-    ## 1:       0.95 0.101465 0.8917915   Hedges_g   100
 
 ## Inline results in APA style
 
@@ -156,11 +140,10 @@ result <- with(data, tapply(
   }))
 
 as.data.frame(result)
+#>                       0.5                      1                      2
+#> OJ *M* = 13.2, *SD* = 4.5 *M* = 22.7, *SD* = 3.9 *M* = 26.1, *SD* = 2.7
+#> VC    *M* = 8, *SD* = 2.7 *M* = 16.8, *SD* = 2.5 *M* = 26.1, *SD* = 4.8
 ```
-
-    ##                       0.5                      1                      2
-    ## OJ *M* = 13.2, *SD* = 4.5 *M* = 22.7, *SD* = 3.9 *M* = 26.1, *SD* = 2.7
-    ## VC    *M* = 8, *SD* = 2.7 *M* = 16.8, *SD* = 2.5 *M* = 26.1, *SD* = 4.8
 
 > The effect of vitamin C on tooth growth was explored in Guinea Pigs,
 > were the group using orange juice (OJ) demonstrated similar values
@@ -187,9 +170,8 @@ cent_disp(
   str.a = "The median for length was {median} mm (MAD = {mad}, IQR = {IQR})",
   k = 1 # For 1 decimal places
 )
+#> The median for length was 19.2 mm (MAD = 9, IQR = 12.2)
 ```
-
-    ## The median for length was 19.2 mm (MAD = 9, IQR = 12.2)
 
 It allows you to use any function available in your global environment
 or in attached packages, even custom functions:
@@ -203,9 +185,8 @@ cent_disp(
   str.a = "The median for length was {median} mm (IQR = [{q25}, {q75}])",
   k = 1
 )
+#> The median for length was 19.2 mm (IQR = [13.1, 25.3])
 ```
-
-    ## The median for length was 19.2 mm (IQR = [13.1, 25.3])
 
 ## Paired samples design
 
@@ -244,31 +225,27 @@ result <- autest(
 
 # Access the whole results
 print(result)
-```
+#> $test
+#>        y      x statistic      df df.error   p.value
+#> 1: cells period  2.231395 1.77965 69.40635 0.1206689
+#>                                        method   estimate conf.level conf.low
+#> 1: Repeated measures ANOVA with HF correction 0.01998957       0.95        0
+#>    conf.high     effectsize n_obs
+#> 1:         1 Omega2_partial    40
+#> 
+#> $pwc
+#>    group1 group2 statistic         p            method p.adjust.method
+#> 1: Time-1  Basal -1.466883 0.5560343 Games-Howell Test            none
+#> 2: Time-2  Basal -2.933847 0.1061919 Games-Howell Test            none
+#> 3: Time-2 Time-1 -1.616262 0.4922794 Games-Howell Test            none
 
-    ## $test
-    ##        y      x statistic      df df.error   p.value
-    ## 1: cells period  2.231395 1.77965 69.40635 0.1206689
-    ##                                        method   estimate conf.level conf.low
-    ## 1: Repeated measures ANOVA with HF correction 0.01998957       0.95        0
-    ##    conf.high     effectsize n_obs
-    ## 1:         1 Omega2_partial    40
-    ## 
-    ## $pwc
-    ##    group1 group2 statistic         p            method p.adjust.method
-    ## 1: Time-1  Basal -1.466883 0.5560343 Games-Howell Test            none
-    ## 2: Time-2  Basal -2.933847 0.1061919 Games-Howell Test            none
-    ## 3: Time-2 Time-1 -1.616262 0.4922794 Games-Howell Test            none
-
-``` r
 # For inline resutls or statistical reports
 lablr(result$test)
+#>                  stats         p            es                ci
+#> 1: F(1.8, 69.4) = 2.23 p = 0.121 omega2 = 0.02 CI95 [0.00, 1.00]
+#>                                                                full
+#> 1: F(1.8, 69.4) = 2.23, p = 0.121, omega2 = 0.02, CI95 [0.00, 1.00]
 ```
-
-    ##                  stats         p            es                ci
-    ## 1: F(1.8, 69.4) = 2.23 p = 0.121 omega2 = 0.02 CI95 [0.00, 1.00]
-    ##                                                                full
-    ## 1: F(1.8, 69.4) = 2.23, p = 0.121, omega2 = 0.02, CI95 [0.00, 1.00]
 
 However, you can specify your own parameters for the selection of the
 test:
@@ -302,22 +279,18 @@ result <- autest(
 
 # Access the whole results
 print(result)
-```
+#>        y      x statistic df   p.value        method alternative  estimate
+#> 1: cells period  1.093978 39 0.2806758 Paired t-test   two.sided 0.1696215
+#>    conf.level   conf.low conf.high effectsize n_obs
+#> 1:       0.95 -0.1394006  0.480802   Hedges_g    40
 
-    ##        y      x statistic df   p.value        method alternative  estimate
-    ## 1: cells period  1.093978 39 0.2806758 Paired t-test   two.sided 0.1696215
-    ##    conf.level   conf.low conf.high effectsize n_obs
-    ## 1:       0.95 -0.1394006  0.480802   Hedges_g    40
-
-``` r
 # For inline results
 lablr(result)
+#>           stats         p       es                 ci
+#> 1: t(39) = 1.09 p = 0.281 g = 0.17 CI95 [-0.14, 0.48]
+#>                                                     full
+#> 1: t(39) = 1.09, p = 0.281, g = 0.17, CI95 [-0.14, 0.48]
 ```
-
-    ##           stats         p       es                 ci
-    ## 1: t(39) = 1.09 p = 0.281 g = 0.17 CI95 [-0.14, 0.48]
-    ##                                                     full
-    ## 1: t(39) = 1.09, p = 0.281, g = 0.17, CI95 [-0.14, 0.48]
 
 Same as above, you can specify your own parameters for the selection of
 the test:
@@ -362,29 +335,25 @@ result <- autest(
 
 # Check results
 print(result)
-```
+#> $test
+#>        y     x statistic df df.error    p.value        method   estimate
+#> 1: cells group  4.861757  2 75.91708 0.01030964 Welch's ANOVA 0.08914428
+#>    conf.level    conf.low conf.high effectsize n_obs
+#> 1:       0.95 0.005281224         1     Omega2   120
+#> 
+#> $pwc
+#>    group1  group2 statistic           p            method p.adjust.method
+#> 1: Drug A Control -2.516185 0.184417805 Games-Howell Test            none
+#> 2: Drug B Control -4.376442 0.007873682 Games-Howell Test            none
+#> 3: Drug B  Drug A -2.482696 0.191506063 Games-Howell Test            none
 
-    ## $test
-    ##        y     x statistic df df.error    p.value        method   estimate
-    ## 1: cells group  4.861757  2 75.91708 0.01030964 Welch's ANOVA 0.08914428
-    ##    conf.level    conf.low conf.high effectsize n_obs
-    ## 1:       0.95 0.005281224         1     Omega2   120
-    ## 
-    ## $pwc
-    ##    group1  group2 statistic           p            method p.adjust.method
-    ## 1: Drug A Control -2.516185 0.184417805 Games-Howell Test            none
-    ## 2: Drug B Control -4.376442 0.007873682 Games-Howell Test            none
-    ## 3: Drug B  Drug A -2.482696 0.191506063 Games-Howell Test            none
-
-``` r
 # For inline results
 lablr(result$test)
+#>                  stats        p            es                ci
+#> 1: F(2.0, 75.9) = 4.86 p = 0.01 omega2 = 0.09 CI95 [0.01, 1.00]
+#>                                                               full
+#> 1: F(2.0, 75.9) = 4.86, p = 0.01, omega2 = 0.09, CI95 [0.01, 1.00]
 ```
-
-    ##                  stats        p            es                ci
-    ## 1: F(2.0, 75.9) = 4.86 p = 0.01 omega2 = 0.09 CI95 [0.01, 1.00]
-    ##                                                               full
-    ## 1: F(2.0, 75.9) = 4.86, p = 0.01, omega2 = 0.09, CI95 [0.01, 1.00]
 
 However, you can specify your own parameters for the selection of the
 test:
@@ -416,22 +385,18 @@ result <- autest(
 
 # For tabular results
 print(result)
-```
+#>        y     x statistic df    p.value             method alternative  estimate
+#> 1: cells group  1.755531 78 0.08309445  Two Sample t-test   two.sided 0.3887601
+#>    conf.level    conf.low conf.high effectsize n_obs
+#> 1:       0.95 -0.05074507 0.8258231   Hedges_g    80
 
-    ##        y     x statistic df    p.value             method alternative  estimate
-    ## 1: cells group  1.755531 78 0.08309445  Two Sample t-test   two.sided 0.3887601
-    ##    conf.level    conf.low conf.high effectsize n_obs
-    ## 1:       0.95 -0.05074507 0.8258231   Hedges_g    80
-
-``` r
 # For inline results (e.g. manuscript)
 lablr(result)
+#>           stats         p       es                 ci
+#> 1: t(78) = 1.76 p = 0.083 g = 0.39 CI95 [-0.05, 0.83]
+#>                                                     full
+#> 1: t(78) = 1.76, p = 0.083, g = 0.39, CI95 [-0.05, 0.83]
 ```
-
-    ##           stats         p       es                 ci
-    ## 1: t(78) = 1.76 p = 0.083 g = 0.39 CI95 [-0.05, 0.83]
-    ##                                                     full
-    ## 1: t(78) = 1.76, p = 0.083, g = 0.39, CI95 [-0.05, 0.83]
 
 You can specify your own parameters for the selection of the test as
 well:
@@ -485,36 +450,32 @@ result <- aov_r(
 
 # Check results
 print(result)
-```
+#>        y           x   statistic df df.error      p.value
+#> 1: score      gender 130.7357382  1       68 1.720992e-17
+#> 2: score        time   0.2367333  2      136 7.895263e-01
+#> 3: score gender:time  42.8799011  2      136 3.635914e-15
+#>                              method    estimate conf.level  conf.low conf.high
+#> 1:                   Fisher's ANOVA  0.64953693       0.95 0.5389314         1
+#> 2: Fisher's repeated measures ANOVA -0.00747718       0.95 0.0000000         1
+#> 3: Fisher's repeated measures ANOVA  0.28938040       0.95 0.1844234         1
+#>        effectsize n_obs
+#> 1: Omega2_partial    70
+#> 2: Omega2_partial    70
+#> 3: Omega2_partial    70
 
-    ##        y           x   statistic df df.error      p.value
-    ## 1: score      gender 130.7357382  1       68 1.720992e-17
-    ## 2: score        time   0.2367333  2      136 7.895263e-01
-    ## 3: score gender:time  42.8799011  2      136 3.635914e-15
-    ##                              method    estimate conf.level  conf.low conf.high
-    ## 1:                   Fisher's ANOVA  0.64953693       0.95 0.5389314         1
-    ## 2: Fisher's repeated measures ANOVA -0.00747718       0.95 0.0000000         1
-    ## 3: Fisher's repeated measures ANOVA  0.28938040       0.95 0.1844234         1
-    ##        effectsize n_obs
-    ## 1: Omega2_partial    70
-    ## 2: Omega2_partial    70
-    ## 3: Omega2_partial    70
-
-``` r
 # And inline results for reporting purposes
 inline <- result[j = lablr(.SD), keyby = x]
 
 print(inline)
+#>              x             stats         p             es                ci
+#> 1:      gender F(1, 68) = 130.74 p < 0.001  omega2 = 0.65 CI95 [0.54, 1.00]
+#> 2: gender:time F(2, 136) = 42.88 p < 0.001  omega2 = 0.29 CI95 [0.18, 1.00]
+#> 3:        time  F(2, 136) = 0.24  p = 0.79 omega2 = -0.01 CI95 [0.00, 1.00]
+#>                                                              full
+#> 1: F(1, 68) = 130.74, p < 0.001, omega2 = 0.65, CI95 [0.54, 1.00]
+#> 2: F(2, 136) = 42.88, p < 0.001, omega2 = 0.29, CI95 [0.18, 1.00]
+#> 3:  F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 1.00]
 ```
-
-    ##              x             stats         p             es                ci
-    ## 1:      gender F(1, 68) = 130.74 p < 0.001  omega2 = 0.65 CI95 [0.54, 1.00]
-    ## 2: gender:time F(2, 136) = 42.88 p < 0.001  omega2 = 0.29 CI95 [0.18, 1.00]
-    ## 3:        time  F(2, 136) = 0.24  p = 0.79 omega2 = -0.01 CI95 [0.00, 1.00]
-    ##                                                              full
-    ## 1: F(1, 68) = 130.74, p < 0.001, omega2 = 0.65, CI95 [0.54, 1.00]
-    ## 2: F(2, 136) = 42.88, p < 0.001, omega2 = 0.29, CI95 [0.18, 1.00]
-    ## 3:  F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 1.00]
 
 For inline results with previous data we would do something like this:
 
@@ -569,14 +530,11 @@ result <- contingency(
 
 # Tabular format dropping empty columns
 print(result)
-```
+#>        x statistic df   p.value                                   method
+#> 1: group  1.818182  2 0.4028903 Chi-squared test for given probabilities
+#>     estimate conf.level conf.low conf.high effectsize n_obs
+#> 1: 0.1275153       0.95        0         1 pearsons_c   110
 
-    ##        x statistic df   p.value                                   method
-    ## 1: group  1.818182  2 0.4028903 Chi-squared test for given probabilities
-    ##     estimate conf.level conf.low conf.high effectsize n_obs
-    ## 1: 0.1275153       0.95        0         1 pearsons_c   110
-
-``` r
 # For inline results
 inline <- lablr(result, markdown = T)
 ```
@@ -603,29 +561,21 @@ result <- contingency(
   x = "cyl",
   y = "gear"
 )
-```
 
-    ## Warning in stats::chisq.test(tab): Chi-squared approximation may be incorrect
-
-``` r
 # Statistics in tabular format
 print(result)
-```
+#>       y   x statistic df     p.value                     method  estimate
+#> 1: gear cyl  18.03636  4 0.001214066 Pearson's Chi-squared test 0.5308655
+#>    conf.level  conf.low conf.high effectsize n_obs
+#> 1:       0.95 0.2629954         1  Cramers_v    32
 
-    ##       y   x statistic df     p.value                     method  estimate
-    ## 1: gear cyl  18.03636  4 0.001214066 Pearson's Chi-squared test 0.5308655
-    ##    conf.level  conf.low conf.high effectsize n_obs
-    ## 1:       0.95 0.2629954         1  Cramers_v    32
-
-``` r
 # Inline results format
 lablr(result)
+#>            stats         p       es                ci
+#> 1: X2(4) = 18.04 p = 0.001 V = 0.53 CI95 [0.26, 1.00]
+#>                                                     full
+#> 1: X2(4) = 18.04, p = 0.001, V = 0.53, CI95 [0.26, 1.00]
 ```
-
-    ##            stats         p       es                ci
-    ## 1: X2(4) = 18.04 p = 0.001 V = 0.53 CI95 [0.26, 1.00]
-    ##                                                     full
-    ## 1: X2(4) = 18.04, p = 0.001, V = 0.53, CI95 [0.26, 1.00]
 
 ### Fisher’s exact test
 
@@ -642,18 +592,14 @@ result <- contingency(
 
 # Statistics in tabular format
 print(result)
-```
+#>       y   x      p.value                                        method n_obs
+#> 1: gear cyl 8.259716e-05 Fisher's Exact Test for Count Data without OR    32
 
-    ##       y   x      p.value                                        method n_obs
-    ## 1: gear cyl 8.259716e-05 Fisher's Exact Test for Count Data without OR    32
-
-``` r
 # Inline results format
 lablr(result)
+#>            p      full
+#> 1: p < 0.001 p < 0.001
 ```
-
-    ##            p      full
-    ## 1: p < 0.001 p < 0.001
 
 ### McNemar’s Chi-squared Test
 
@@ -680,24 +626,20 @@ result <- contingency(
 
 # Statistics in tabular format
 print(result)
-```
+#>             y          x statistic df      p.value
+#> 1: 2nd survey 1st survey  34.17161  1 5.045976e-09
+#>                                                   method  estimate conf.level
+#> 1: McNemar's Chi-squared test with continuity correction 0.1355932       0.95
+#>      conf.low conf.high effectsize n_obs
+#> 1: 0.09124332 0.1777538   Cohens_g  3200
 
-    ##             y          x statistic df      p.value
-    ## 1: 2nd survey 1st survey  34.17161  1 5.045976e-09
-    ##                                                   method  estimate conf.level
-    ## 1: McNemar's Chi-squared test with continuity correction 0.1355932       0.95
-    ##      conf.low conf.high effectsize n_obs
-    ## 1: 0.09124332 0.1777538   Cohens_g  3200
-
-``` r
 # Inline results
 lablr(result)
+#>            stats         p       es                ci
+#> 1: X2(1) = 34.17 p < 0.001 g = 0.14 CI95 [0.09, 0.18]
+#>                                                     full
+#> 1: X2(1) = 34.17, p < 0.001, g = 0.14, CI95 [0.09, 0.18]
 ```
-
-    ##            stats         p       es                ci
-    ## 1: X2(1) = 34.17 p < 0.001 g = 0.14 CI95 [0.09, 0.18]
-    ##                                                     full
-    ## 1: X2(1) = 34.17, p < 0.001, g = 0.14, CI95 [0.09, 0.18]
 
 ## Dependencies
 
@@ -705,12 +647,10 @@ The package writR is standing on the shoulders of giants. `writR`
 depends on the following packages:
 
 ``` r
-library(deepdep)
-
-plot_dependencies('writR', local = TRUE, depth = 3)
+deepdep::plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-15-1.svg)<!-- -->
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 ## Acknowledgments
 
@@ -724,3 +664,28 @@ can expand the potential of this package.
 For collaborations or anything else, you can send me an email at:
 
 -   matcasti@umag.cl
+
+## Citation
+
+To cite package ‘writR’ in publications run the following code in your
+`R` console:
+
+``` r
+citation('writR')
+#> 
+#> To cite package 'writR' in publications use:
+#> 
+#>   Matías Castillo Aguilar (2021). writR: Inferential statistics and
+#>   reporting in APA style. https://doi.org/10.5281/zenodo.4603838,
+#>   https://matcasti.github.io/writR.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {writR: Inferential statistics and reporting in APA style},
+#>     author = {Matías {Castillo Aguilar}},
+#>     year = {2021},
+#>     note = {https://doi.org/10.5281/zenodo.4603838,
+#> https://matcasti.github.io/writR},
+#>   }
+```

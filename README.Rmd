@@ -1,82 +1,41 @@
 ---
 output: github_document
-editor_options: 
-  chunk_output_type: console
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
-```{r logo, message=FALSE, warning=FALSE, include=FALSE}
-library(hexSticker); library(ggplot2)
-within <- 3
-between <- 2
-n <- 80
-
-set.seed(123)
-Stroop <- data.frame(
-  Subject = rep(1:n, within),
-  Gender = gl(between, n/between, length = n*within, labels = c('Male','Female')),
-  Time = gl(within, n, length = n*within),
-  Score = rnorm(n*within, mean = 150, sd = 50))
-
-# Manipulate data to generate interaction between Gender and Time
-Stroop <- within(Stroop, {
-  Score[Gender == 'Male' & Time == 1] <- Score[Gender == 'Male' & Time == 1]
-  Score[Gender == 'Male' & Time == 2] <- Score[Gender == 'Male' & Time == 2]+90
-  Score[Gender == 'Male' & Time == 3] <- Score[Gender == 'Male' & Time == 3]+150
-  Score[Gender == 'Female' & Time == 1] <- Score[Gender == 'Female' & Time == 1]-200
-  Score[Gender == 'Female' & Time == 2] <- Score[Gender == 'Female' & Time == 2]-150
-  Score[Gender == 'Female' & Time == 3] <- Score[Gender == 'Female' & Time == 3]-80
-})
-
-p <- 
-  ggplot(aes(x = Time, y = Score, group = Gender), data = Stroop) + 
-  facet_wrap(~ Gender, ) +
-  geom_jitter(cex = 0.01, alpha = 1, col = '#D0D3D4', width = 0.3) +
-  stat_summary(geom = 'point', fun = mean, col = '#922B21', cex = 0.8) +
-  stat_summary(geom = 'errorbar', fun.data = ggpubr::mean_sd, width = 0.4, col = '#922B21', size = 0.3) +
-  stat_summary(geom = 'line', fun = mean, lty = 2, col = '#922B21', lwd = 0.3) +
-  theme_void() + theme(text = element_blank())
-
-outfile <- "README_files/logo.png"
-sticker(p, package = "writR", 
-        filename = outfile, 
-        s_y = 1,
-        s_x = 1,
-        p_y = 1,
-        p_size = 35,
-        p_color = "#F2F3F4",
-        h_fill = '#2C3E50', 
-        h_color = '#F2F3F4', 
-        u_size = 8,
-        s_width = 1.8, 
-        s_height = 1.8,
-        url = 'matcasti/writR',
-        u_color = 'white',
-        dpi = 300)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  error = FALSE,
+  dpi = 300,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
 ```
- 
-# Inferential statistics and reporting in APA style <img src="README_files/logo.png" width="150" align="right"/>
 
+writR <img src="logo.png" width="33%" align="right"/>
+==================================================================
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/matcasti/writR/workflows/R-CMD-check/badge.svg)](https://github.com/matcasti/writR/actions)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4603838)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/writR)](https://CRAN.R-project.org/package=writR)
+<!-- badges: end -->
 
-**writR** is an R package for automated inferential testing (for group differences) and reporting based on parametric assumptions, which are tested automatically for test selection.
+An R package for automated inferential testing (for group differences) and reporting based on parametric assumptions, which are tested automatically for test selection.
 
-### Installation
+## Installation
 
-For installation of developmental version run in your R console:
+You can install the development version of writR from [GitHub](https://github.com/) with:
 
 ``` r
-install.packages("remotes")
-remotes::install_github("matcasti/writR")
-```
-
-### Citation
-
-To cite package 'writR' in publications run the following code in your `R` console:
-
-```{r}
-citation('writR')
+# install.packages("devtools")
+devtools::install_github("matcasti/writR")
 ```
 
 ## Summary of available tests using `autest()` function
@@ -532,10 +491,8 @@ lablr(result)
 
 The package writR is standing on the shoulders of giants. `writR` depends on the following packages:
 
-```{r fig.height=10, fig.width=10, message=FALSE, warning=FALSE, dev='svg'}
-library(deepdep)
-
-plot_dependencies('writR', local = TRUE, depth = 3)
+```{r fig.height=10, fig.width=10}
+deepdep::plot_dependencies('writR', local = TRUE, depth = 3)
 ```
 
 ## Acknowledgments
@@ -548,3 +505,10 @@ For collaborations or anything else, you can send me an email at:
 
 -   matcasti\@umag.cl
 
+## Citation
+
+To cite package 'writR' in publications run the following code in your `R` console:
+
+```{r}
+citation('writR')
+```
