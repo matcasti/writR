@@ -39,7 +39,7 @@ autest <- function(data, x, y = NULL,
                    conf.level = 0.95,
                    ss_type = 3,
                    p.adjust.method = "none",
-                   lbl = if(is.null(markdown)) FALSE else TRUE,
+                   lbl = if (is.null(markdown)) FALSE else TRUE,
                    markdown = NULL,
                    ...) {
 

@@ -68,8 +68,8 @@ style.p <- function(p, k = 3) {
 #' @export
 
 is_normal <- function(x, alpha = 0.05, test = NULL) {
-  if(is.null(test)) {
-    if(length(x) <= 50) {
+  if (is.null(test)) {
+    if (length(x) <= 50) {
       test <- function(i) stats::shapiro.test(i)$p.value
     } else {
       test <- function(i) nortest::lillie.test(i)$p.value
@@ -127,7 +127,7 @@ mauchly <- function(model) {
     return(pval)
   }
   .m <- model$Anova
-  pval <- vapply(.m$terms, \(i) {
+  pval <- vapply(.m$terms, function(i) {
     .mauch(
       SSPE = .m$SSPE[[i]],
       P = .m$P[[i]],
@@ -153,7 +153,7 @@ GG <- function(model) {
     ((sum(lambda)/p)^2)/(sum(lambda^2)/p)
   }
   .m <- model$Anova
-  eps <- vapply(.m$terms, \(i) {
+  eps <- vapply(.m$terms, function(i) {
     .gg(
       SSPE = .m$SSPE[[i]],
       P = .m$P[[i]]
@@ -170,7 +170,7 @@ GG <- function(model) {
 #' @param gg Greenhouse-Geisser epsilon. Used for posterior calculations. If is not supplied it will be calculated.
 
 HF <- function(model, gg = NULL) {
-  if(length(gg) == 0) {
+  if (length(gg) == 0) {
     gg <- GG(model)
   }
   .hf <- function(SSPE, P, error.df, gg) {
@@ -180,7 +180,7 @@ HF <- function(model, gg = NULL) {
   }
   .m <- model$Anova
   arg <- match.call()
-  eps <- vapply(.m$terms, \(i) {
+  eps <- vapply(.m$terms, function(i) {
     .hf(
       SSPE = .m$SSPE[[i]],
       P = .m$P[[i]],
@@ -200,10 +200,10 @@ HF <- function(model, gg = NULL) {
 
 sphericity_check <- function(model) {
   .m <- model$Anova
-  if(.m$singular ||  all(mauchly(model) > 0.05)) "none" else {
+  if (.m$singular ||  all(mauchly(model) > 0.05)) "none" else {
     is_hf <- all((gg.eps <- GG(model)) > 0.75, na.rm = TRUE)
     is_hf_too <- all(HF(model, gg.eps) > 0.75, na.rm = TRUE)
-    if(is_hf || is_hf_too) "HF" else "GG"
+    if (is_hf || is_hf_too) "HF" else "GG"
   }
 }
 
