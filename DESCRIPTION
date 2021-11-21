@@ -10,12 +10,14 @@ Authors@R:
            comment = c(ORCID = "0000-0001-7291-247X"))
 Description: Perform and report basic inferential tests for group differences in APA style for articles writings in Markdown or plain text format.
 URL: https://doi.org/10.5281/zenodo.4603838
+DOI: 10.5281/zenodo.4603838
 License: GPL (>= 3)
 Encoding: UTF-8
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Depends: R (>= 4.0)
+Depends: 
+  R (>= 2.10)
 Imports:
     data.table (>= 1.14.0),
     glue (>= 1.4.2),

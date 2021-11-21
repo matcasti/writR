@@ -1,11 +1,10 @@
 ---
-output: 
-  html_document: 
-    self_contained: yes
-    keep_md: yes
+output: github_document
 editor_options: 
   chunk_output_type: console
 ---
+
+
 
 ```{r logo, message=FALSE, warning=FALSE, include=FALSE}
 library(hexSticker); library(ggplot2)
@@ -449,7 +448,7 @@ By only filling the `data`, and `x` argument, the Goodness-of-fit chi-squared te
 
 ```{r message=FALSE, error=FALSE, warning=FALSE}
 result <- contingency(
-  data = cancer_unpaired, # 3 groups: Control, Drug A, Drug B
+  data = cancer_unpaired[-(1:10),], # 3 groups: Control, Drug A, Drug B
   x = "group"
 )
 
@@ -457,7 +456,7 @@ result <- contingency(
 print(result)
 
 # For inline results
-inline <- lablr(result)
+inline <- lablr(result, markdown = T)
 ```
 
 And the inline result would look like this:

@@ -117,14 +117,15 @@ lablr <- function(t, markdown = FALSE) {
       es1 = "V = ", es2 = "$V_{~Cramer}$ = ")
   , "Chi-squared test for given probabilities" = list(d1 = "X2", d2 = "$\\chi^2_{~gof}$ ",
       df = paste0("(",t$df,") = ", format(round(t$statistic, 2), nsmall = 2)),
-      es1 = "V = ", es2 = "$V_{~Cramer}$ = ")
+      es1 = ifelse(t$effectsize == "pearsons_c", "C = ", "V = "),
+      es2 = ifelse(t$effectsize == "pearsons_c", "$C_{~Pearson}$ = ", "$V_{~Cramer}$ = "))
   # This two has their own printing methods
-  , "Fisher's Exact Test for Count Data" = list(es = if(markdown) "$OR$ = " else "OR = ")
+  , "Fisher's Exact Test for Count Data" = list(es = if (markdown) "$OR$ = " else "OR = ")
   , "Fisher's Exact Test for Count Data without OR" = list()
   , stop("Method not found")
   )
 
-  if(method == "Fisher's Exact Test for Count Data") {
+  if (method == "Fisher's Exact Test for Count Data") {
     res <- list(
       stats = NA_character_,
       p = (.p <- paste0(p., style.p(t$p.value))),

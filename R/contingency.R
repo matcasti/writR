@@ -12,44 +12,49 @@
 #' @param ... Currently not used.
 #' @keywords contingency
 #' @importFrom stats chisq.test fisher.test mcnemar.test
-#' @importFrom effectsize cramers_v oddsratio cohens_g
+#' @importFrom effectsize cramers_v oddsratio cohens_g pearsons_c
 #' @export
 
 contingency <- function(data
-                   , x
-                   , y = NULL
-                   , paired = FALSE
-                   , exact = FALSE
-                   , conf.level = 0.95
-                   , lbl = if(is.null(markdown)) FALSE else TRUE
-                   , markdown = NULL
-                   , ...) {
+                        , x
+                        , y = NULL
+                        , paired = FALSE
+                        , exact = FALSE
+                        , conf.level = 0.95
+                        , lbl = if (is.null(markdown)) FALSE else TRUE
+                        , markdown = NULL
+                        , ...) {
 
   x_var <- data[[x]]
-  if(is.null(y)) {
+  if (is.null(y)) {
     tab <- table(x_var)
   }  else {
     y_var <- data[[y]]
     tab <- table(x_var, y_var)
   }
 
-  if(paired) {
+  if (paired) {
     # Mcnemar test
     .f <- stats::mcnemar.test(tab)
     .es <- effectsize::cohens_g(tab, ci = conf.level)
-  } else if(exact) {
+  } else if (exact) {
     # Exact test
     .f <- stats::fisher.test(tab)
     .es <- try(expr = effectsize::oddsratio(tab, ci = conf.level), silent = TRUE)
-    if("try-error" %chin% class(.es)) {
+    if ("try-error" %chin% class(.es)) {
       .es <- rep(NA_real_, 4)
       .es <- `names<-`(.es, rep(NA, 4))
       .f$method <- paste(.f$method, "without OR")
     }
+
   } else {
     # Chi-square
     .f <- stats::chisq.test(tab)
-    .es <- effectsize::cramers_v(tab, ci = conf.level)
+    if (is.null(y)) {
+      .es <- effectsize::pearsons_c(tab, ci = conf.level)
+    } else {
+      .es <- effectsize::cramers_v(tab, ci = conf.level)
+    }
   }
 
   res <- list(
@@ -69,7 +74,7 @@ contingency <- function(data
     n_obs = sum(tab)
   )
 
-  if(lbl) {
+  if (lbl) {
     res <- lablr(res, markdown)
   }
 

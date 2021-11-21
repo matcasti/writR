@@ -13,7 +13,7 @@
 #' @param conf.level Confidence/Credible Interval (CI) level. Default to 0.95 (95%).
 #' @param lbl Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.
 #' @param markdown Logical (default FALSE). If `lbl` is TRUE, then this argument specify if the report-ready labels should be formated for inline code for R markdown (using mathjax and markdown syntax), or if the output should be in plain text (the default).
-#' @importFrom data.table %chin% as.data.table .SD fcase
+#' @importFrom data.table %chin% as.data.table .SD fcase .N
 #' @importFrom utils combn
 #' @importFrom stats anova
 #' @importFrom effectsize eta_squared omega_squared
@@ -31,6 +31,8 @@ aov_r <- function(data,
                   conf.level = 0.95,
                   lbl = if (is.null(markdown)) FALSE else TRUE,
                   markdown = NULL) {
+
+  `Pr(>F)` <- rn <- `num Df` <- `den Df` <- NULL
 
   # Auxiliary functions
   is_empty <- function(i) length(i) == 0;

@@ -5,3 +5,8 @@
 ^README\.Rmd$
 README_files
 testing
+docs
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
