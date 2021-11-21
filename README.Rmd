@@ -39,30 +39,24 @@ p <-
   theme_void() + theme(text = element_blank())
 
 outfile <- "README_files/logo.png"
-sticker(p, package="writR", 
-        filename=outfile, 
+sticker(p, package = "writR", 
+        filename = outfile, 
         s_y = 1,
         s_x = 1,
         p_y = 1,
+        p_size = 35,
         p_color = "#F2F3F4",
         h_fill = '#2C3E50', 
         h_color = '#F2F3F4', 
-        s_width = 1.5, 
-        s_height = 1.5,
+        u_size = 8,
+        s_width = 1.8, 
+        s_height = 1.8,
         url = 'matcasti/writR',
         u_color = 'white',
-        dpi = 600)
+        dpi = 300)
 ```
  
-<span style="display:block;text-align:center"><img src="README_files/logo.png" width="300"/></span>
- 
-<table style="margin-left: auto; margin-right: auto;">
-  <tr>
-    <th> <h1 style="text-align:left;">Inferential statistics and reporting in APA style</h1> </br>
-         <p style="text-align:center;">For automated and basic inferential testing.</p> </th>
-  </tr>
-</table>
-</br>
+# Inferential statistics and reporting in APA style <img src="README_files/logo.png" width="150" align="right"/>
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4603838)
 
