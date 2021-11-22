@@ -28,3 +28,7 @@ Imports:
     PMCMRplus (>= 1.9.0),
     WRS2 (>= 1.1-1),
     lifecycle
+Suggests: 
+    testthat (>= 3.0.0),
+    covr
+Config/testthat/edition: 3
