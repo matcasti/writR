@@ -7,3 +7,5 @@ docs
 ^docs$
 ^pkgdown$
 ^\.github$
+^codecov\.yml$
+^to-do\.txt$
