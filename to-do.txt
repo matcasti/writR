@@ -1,0 +1,28 @@
+Objetivos a largo plazo:
+
+1. Pasar todos los checks del R-CMD de tidyverse
+  1. Favorecer compatibilidad con versiones antiguas de R
+    1. Implementar estadísticos con base-r (posiblemente prescindiendo de los estadísticos robustos) o
+       favorecer el uso de paquetes que tengan esta retrocompatibilidad
+
+2. Coverage del 100% (o cercano)
+  1. Hacer unit tests
+
+3. Disminuir dependencias en lo posible
+
+4. Optimizar benchmarks en lo posible
+
+5. Mejorar documentación del paquete y del sitio web
+  1. Añadir articulos (web) y viñetas (web + paquete)
+  2. Hacer énfasis en el rol del ser tener buena retro-compatibilidad
+
+6. Diseñar otro logo
+
+7. Publicar una nueva versión del paquete
+
+Último trabajado: "2021-11-22"
+- Unit tests para clean_data
+- Falta corregir código del resto de funciones para que acepten NSE
+
+Recordatorios:
+- Dejar función `autest()` para el último
