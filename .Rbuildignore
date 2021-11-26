@@ -2,10 +2,4 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
-docs
-^_pkgdown\.yml$
-^docs$
-^pkgdown$
-^\.github$
-^codecov\.yml$
-^to-do\.txt$
+^cran-comments\.md$
