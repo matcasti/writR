@@ -11,6 +11,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/writR)](https://CRAN.R-project.org/package=writR)
+[![Codecov test
+coverage](https://codecov.io/gh/matcasti/writR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/matcasti/writR?branch=main)
 <!-- badges: end -->
 
 An R package for automated inferential testing (for group differences)

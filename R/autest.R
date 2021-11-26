@@ -41,11 +41,15 @@ autest <- function(data, x, y = NULL,
                    p.adjust.method = "none",
                    lbl = if (is.null(markdown)) FALSE else TRUE,
                    markdown = NULL,
+                   character.only = FALSE,
                    ...) {
 
   if (!is.null(y)) {
+
+
     # Data cleaning
-    data <- clean_data(data, x = x, y = y, rowid = rowid, paired = paired, wide = FALSE)
+    data <- clean_data(data, x = x, y = y, rowid = rowid, paired = paired, wide = FALSE, character.only = character.only)
+
   } else {
   # One sample test
     test <- one_sample(

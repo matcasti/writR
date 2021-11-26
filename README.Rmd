@@ -25,6 +25,7 @@ knitr::opts_chunk$set(
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4603838)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/writR)](https://CRAN.R-project.org/package=writR)
+[![Codecov test coverage](https://codecov.io/gh/matcasti/writR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/matcasti/writR?branch=main)
 <!-- badges: end -->
 
 An R package for automated inferential testing (for group differences) and reporting based on parametric assumptions, which are tested automatically for test selection.
