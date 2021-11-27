@@ -1,12 +1,19 @@
 Package: writR
-Title: What the Package Does (One Line, Title Case)
+Title: basic inferential statistics for scientific writing
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person(given = "Matías",
+           family = "Castillo Aguilar",
+           role = c("aut", "cre"),
+           email = "matcasti@umag.cl",
+           comment = c(ORCID = "0000-0001-7291-247X"))
+Description: Perform and report basic inferential tests for scientific and/or technical writing.
+URL: https://github.com/matcasti/writR
+BugReports: https://github.com/matcasti/writR/issues
+DOI: 10.5281/zenodo.4603838
 License: MIT + file LICENSE
 Suggests: 
+    covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
