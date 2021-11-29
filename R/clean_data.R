@@ -45,18 +45,20 @@ clean_data <- function(data, x, y, rowid,
 
   if (character.only) {
     x <- as.name(x); y <- as.name(y)
-    if (!missing(rowid)) {
+    if (!missing(rowid) && !is.null(rowid)) {
       rowid <- as.name(rowid)
     }
   }
 
-  expr <- if (missing(rowid) || !paired) {
-    substitute(data[, .("rowid" = factor(seq_len(.N)), y), .(x <- factor(x))])
+  if (missing(rowid) || !paired || is.null(rowid)) {
+    expr_j <- substitute(list("rowid" = factor(seq_len(.N)), y))
+    expr_by <- substitute(list(x <- factor(x)))
   } else {
-    substitute(data[, y, .(x <- factor(x), "rowid" = factor(rowid))])
+    expr_j <- substitute(y)
+    expr_by <- substitute(list(x <- factor(x), "rowid" = factor(rowid)))
   }
 
-  data <- eval(expr)
+  data <- data[, eval(expr_j), eval(expr_by)]
 
   y_label <- deparse(substitute(y)); x_label <- deparse(substitute(x))
 
