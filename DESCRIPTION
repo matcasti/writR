@@ -22,4 +22,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
     lifecycle,
-    data.table
+    data.table,
+    effectsize

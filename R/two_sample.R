@@ -5,31 +5,87 @@
 two <- function(data, x, y, rowid,
                 paired = FALSE,
                 type,
-                var.equal,
+                var.equal = FALSE,
                 effsize.type = "unbiased",
                 alternative = "two.sided",
                 conf.level = 0.95,
-                character.only = FALSE,
+                character.only,
                 ...) {
 
   # Argumet checks
   if (missing(data)) stop("`data` must be specified!", call. = FALSE)
   if (missing(x) || missing(y)) stop("`x` and `y` must be specified!", call. = FALSE)
-  if (missing(rowid)) {
-    rowid <- NULL
-  }
-  if (!character.only) {
-    x <- deparse(substitute(x)); y <- deparse(substitute(y))
-    rowid <- substitute(rowid)
-    if (!is.null(rowid)) {
-      rowid <- deparse(rowid)
-    } else {
-      rowid <- NULL
-    }
+  if (missing(rowid)) rowid <- NULL
+
+  # If character.only is missing, then check the unevaluated expression
+  if (missing(character.only)) {
+    if (is.name(x = substitute(x)))     x     <- deparse(expr = substitute(x))
+    if (is.name(x = substitute(y)))     y     <- deparse(expr = substitute(y))
+    if (is.name(x = substitute(rowid))) rowid <- deparse(expr = substitute(rowid))
+  } else if (!character.only) {
+    x <- deparse(expr = substitute(x))
+    y <- deparse(expr = substitute(y))
+    if (!is.null(x = substitute(rowid))) rowid <- deparse(expr = substitute(rowid))
   }
 
   # Get cleaned data
   data <- clean_data(data, x, y, rowid, paired, character.only = TRUE)
+  vars <- get_vars(data, x, y)
+
+  # If type is missing, is estimated
+  if (missing(type)) {
+    type <- if (is_normal(vars$y1) && is_normal(vars$y2)) "check" else "np"
+  }
+
+  # Get appropriate functions
+  if (type %in% c("p", "check")) {
+    .f <- stats::t.test
+    if (type == "check") var.equal  <- is_var.equal(vars$y, vars$x)
+    if (effsize.type %in% c("biased", "d"))   .f.es <- effectsize::cohens_d
+    if (effsize.type %in% c("unbiased", "g")) .f.es <- effectsize::hedges_g
+  } else if (type == "np") {
+    .f    <- stats::wilcox.test
+    .f.es <- effectsize::rank_biserial
+  }
+
+  # Set test arguments
+  f.args <- alist(
+    x           = vars$y1,
+    y           = vars$y2,
+    alternative = alternative,
+    paired      = paired,
+    var.equal   = var.equal,
+    conf.level  = conf.level
+  )
+
+  # Set effectsize test arguments
+  f.es.args <- alist(
+    x           = vars$y1,
+    y           = vars$y2,
+    alternative = alternative,
+    paired      = paired,
+    pooled_sd   = var.equal,
+    ci          = conf.level,
+    verbose     = FALSE
+  )
+
+  # Run test
+  .f    <- do.call(.f, f.args)
+  .f.es <- do.call(.f.es, f.es.args)
+
+  list(.f, .f.es)
+}
+
+writR:::two(
+  data = youngSwimmers::youngswimmers,
+  x = sex,
+  y = weight,
+  paired = FALSE
+)
+
+#' Utils for two()
+
+get_vars <- function(data, x, y) {
 
   # Create vectors of variables
   x_var <- data[[x]]
@@ -45,55 +101,8 @@ two <- function(data, x, y, rowid,
   y_var_1 <- y_var[x_var == x_lvl[[1L]]]
   y_var_2 <- y_var[x_var == x_lvl[[2L]]]
 
-  # If type is missing, is estimated
-  if (missing(type)) {
-    type <- if (is_normal(y_var_1) && is_normal(y_var_2)) "p" else "np"
-  } else if (!type %in% c("p", "np")) stop("`type` must be \"p\" or \"np\"")
-
-  if (paired) {
-    var.equal <- TRUE
-  }
-
-  if (type == "p" && !paired && missing(var.equal)) {
-
-  }
-
-  # Get appropriate functions
-  func <- two_func(type)
-  func.args <- list(x = y_var_1, y = y_var_2, alternative = alternative, paired = paired,
-                    var.equal = var.equal, conf.level = conf.level)
-
-  f.es <- two_f.es(type, effsize.type)
-
-  do.call(func)
-
-}
-
-#' Auxliary functions for `two()`
-
-two_func <- function(type) {
-  if (type == "p") {
-    stats::t.test
-  } else if (type == "np") {
-    stats::wilcox.test
-  }
-}
-
-two_f.es <- function(type, effsize.type) {
-  if (type == "p") {
-    if (effsize.type %in% c("unbiased", "g")) {
-      effectsize::hedges_g
-    } else if (effsize.type %in% c("biased", "d")) {
-      effectsize::cohens_d
-    }
-  } else if (type == "np") {
-    effectsize::rank_biserial
-  }
-}
-
-is_var.equal <- function(y, x, alpha = 0.05, center = stats::median) {
-  valid <- stats::complete.cases(y, x)
-  meds <- tapply(y[valid], x[valid], center)
-  resp <- abs(y - meds[x])
-  stats::anova(stats::lm(resp ~ x))[["Pr(>F)"]][[1]] > alpha
+  list(x = x_var,
+       y = y_var,
+       y1 = y_var_1,
+       y2 = y_var_2)
 }
