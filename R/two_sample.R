@@ -26,7 +26,7 @@
 
 two_sample <- function(data, x, y,
                        rowid = NULL,
-                       type = "auto",
+                       type,
                        paired = FALSE,
                        var.equal = FALSE,
                        trim = 0.2,
@@ -34,15 +34,29 @@ two_sample <- function(data, x, y,
                        effsize.type = "unbiased",
                        alternative = "two.sided",
                        conf.level = 0.95,
-                       lbl = if(is.null(markdown)) FALSE else TRUE,
+                       lbl = if (is.null(markdown)) FALSE else TRUE,
                        markdown = NULL,
                        internal = FALSE,
                        ...) {
 
-  # Avoid unnecesary computation if called internally inside another function
-  if (!internal) {
-    data <- clean_data(data, x = x, y = y, rowid = rowid, paired = paired, wide = FALSE)
+  # Argumet checks
+  if (missing(data)) stop("`data` must be specified!", call. = FALSE)
+  if (missing(x) || missing(y)) stop("`x` and `y` must be specified!", call. = FALSE)
+  if (missing(rowid)) {
+    rowid <- NULL
   }
+  if (!character.only) {
+    x <- deparse(substitute(x)); y <- deparse(substitute(y))
+    rowid <- substitute(rowid)
+    if (!is.null(rowid)) {
+      rowid <- deparse(rowid)
+    } else {
+      rowid <- NULL
+    }
+  }
+
+  # Get cleaned data
+  data <- clean_data(data, x, y, rowid, paired, character.only = TRUE)
 
   # Create vectors of variables
   y_var <- data[[y]]
@@ -59,7 +73,7 @@ two_sample <- function(data, x, y,
   y_var_2 <- y_var[x_var == x_lvl[[2L]]]
 
   # Check normality
-  if (type == "auto") {
+  if (missing(type)) {
     type <- if (is_normal(y_var_1) && is_normal(y_var_2)) "check" else "np"
   }
 
