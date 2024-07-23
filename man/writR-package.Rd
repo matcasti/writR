@@ -19,7 +19,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Matías Castillo Aguilar \email{matcasti@umag.cl} (\href{https://orcid.org/0000-0001-7291-247X}{ORCID})
+\strong{Maintainer}: Matías Castillo-Aguilar \email{matcasti@umag.cl} (\href{https://orcid.org/0000-0001-7291-247X}{ORCID})
 
 }
 \keyword{internal}
