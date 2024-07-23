@@ -1,72 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://matcasti.github.io/writR/index.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/GG.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/HF.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/aov_r.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/as.data.frame.writR.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/autest.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/cent_disp.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/clean_data.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/contingency.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/is_normal.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/is_var.equal.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/k_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/lablr.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/mauchly.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/one_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/pairs_two_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/pairwise_test.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/print.writR.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/sphericity_check.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/style.p.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/trimcibt.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/two_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://matcasti.github.io/writR/reference/writR-package.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://matcasti.github.io/writR/404.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/LICENSE.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/authors.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/index.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/GG.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/HF.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/aov_r.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/cent_disp.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/clean_data.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/contingency.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/deparser.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/index.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/is_normal.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/is_var.equal.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/k_sample.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/lablr.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/mauchly.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/one_sample.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/pairs_two_sample.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/pairwise_test.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/rm_anova.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/sphericity.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/sphericity_check.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/style.p.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/subs.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/two_sample.html</loc></url>
+<url><loc>https://matcasti.github.io/writR/reference/writR-package.html</loc></url>
 </urlset>
+

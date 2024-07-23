@@ -6,13 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inferential statistics and reporting in APA style • writR</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -26,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,27 +34,21 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">writR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/matcasti/writR/">
+  <a href="https://github.com/matcasti/writR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -69,31 +59,32 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="-writr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#-writr" class="anchor"></a><img src="reference/figures/logo.png" width="100" align="right"> writR</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="id_-writr">
+<img src="reference/figures/logo.png" width="100" align="right"> writR<a class="anchor" aria-label="anchor" href="#id_-writr"></a>
+</h1></div>
 <!-- badges: start -->
 
 <p>An R package for automated inferential testing (for group differences) and reporting based on parametric assumptions, which are tested automatically for test selection.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version of writR from <a href="https://github.com/">GitHub</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of writR from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"matcasti/writR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"matcasti/writR"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="summary-of-available-tests-using-autest-function" class="section level2">
-<h2 class="hasAnchor">
-<a href="#summary-of-available-tests-using-autest-function" class="anchor"></a>Summary of available tests using <code>autest()</code> function</h2>
-<div id="for-paired-samples-designs" class="section level4">
-<h4 class="hasAnchor">
-<a href="#for-paired-samples-designs" class="anchor"></a>For paired samples designs</h4>
+<div class="section level2">
+<h2 id="summary-of-available-tests-using-autest-function">Summary of available tests using <code>autest()</code> function<a class="anchor" aria-label="anchor" href="#summary-of-available-tests-using-autest-function"></a>
+</h2>
+<div class="section level4">
+<h4 id="for-paired-samples-designs">For paired samples designs<a class="anchor" aria-label="anchor" href="#for-paired-samples-designs"></a>
+</h4>
 <table class="table">
 <colgroup>
 <col width="12%">
@@ -114,63 +105,63 @@
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>Student’s t-test.</td>
-<td><code><a href="https://rdrr.io/r/stats/t.test.html">stats::t.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">stats::t.test</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">2</td>
 <td>
 <code>type = 'r'</code>: robust.</td>
 <td>Yuen’s test for trimmed means.</td>
-<td><code><a href="https://rdrr.io/pkg/WRS2/man/yuend.html">WRS2::yuend</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/WRS2/man/yuend.html" class="external-link">WRS2::yuend</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">2</td>
 <td>
 <code>type = 'np'</code>: non-parametric.</td>
 <td>Wilcoxon signed-rank test.</td>
-<td><code><a href="https://rdrr.io/r/stats/wilcox.test.html">stats::wilcox.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">stats::wilcox.test</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>One-way repeated measures ANOVA (rmANOVA).</td>
-<td><code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">afex::aov_ez</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/afex/man/aov_car.html" class="external-link">afex::aov_ez</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>rmANOVA with Greenhouse-Geisser correction.</td>
-<td><code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">afex::aov_ez</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/afex/man/aov_car.html" class="external-link">afex::aov_ez</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>rmANOVA with Huynh-Feldt correction.</td>
-<td><code><a href="https://rdrr.io/pkg/afex/man/aov_car.html">afex::aov_ez</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/afex/man/aov_car.html" class="external-link">afex::aov_ez</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'r'</code>: robust.</td>
 <td>Heteroscedastic rmANOVA for trimmed means.</td>
-<td><code><a href="https://rdrr.io/pkg/WRS2/man/rmanova.html">WRS2::rmanova</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/WRS2/man/rmanova.html" class="external-link">WRS2::rmanova</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'np'</code>: non-parametric.</td>
 <td>Friedman rank sum test.</td>
-<td><code><a href="https://rdrr.io/r/stats/friedman.test.html">stats::friedman.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/friedman.test.html" class="external-link">stats::friedman.test</a></code></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="for-independent-samples-design" class="section level4">
-<h4 class="hasAnchor">
-<a href="#for-independent-samples-design" class="anchor"></a>For independent samples design</h4>
+<div class="section level4">
+<h4 id="for-independent-samples-design">For independent samples design<a class="anchor" aria-label="anchor" href="#for-independent-samples-design"></a>
+</h4>
 <table class="table">
 <colgroup>
 <col width="11%">
@@ -191,63 +182,63 @@
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>Student’s t-test.</td>
-<td><code><a href="https://rdrr.io/r/stats/t.test.html">stats::t.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">stats::t.test</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">2</td>
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>Welch’s t-test.</td>
-<td><code><a href="https://rdrr.io/r/stats/t.test.html">stats::t.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">stats::t.test</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">2</td>
 <td>
 <code>type = 'r'</code>: robust.</td>
 <td>Yuen’s test for trimmed means.</td>
-<td><code><a href="https://rdrr.io/pkg/WRS2/man/yuen.html">WRS2::yuen</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/WRS2/man/yuen.html" class="external-link">WRS2::yuen</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">2</td>
 <td>
 <code>type = 'np'</code>: non-parametric.</td>
 <td>Mann-Whitney <em>U</em> test.</td>
-<td><code><a href="https://rdrr.io/r/stats/wilcox.test.html">stats::wilcox.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">stats::wilcox.test</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>Fisher’s One-way ANOVA.</td>
-<td><code><a href="https://rdrr.io/r/stats/oneway.test.html">stats::oneway.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/oneway.test.html" class="external-link">stats::oneway.test</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>Welch’s One-way ANOVA.</td>
-<td><code><a href="https://rdrr.io/r/stats/oneway.test.html">stats::oneway.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/oneway.test.html" class="external-link">stats::oneway.test</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'np'</code>: non-parametric.</td>
 <td>Kruskal-Wallis one-way ANOVA.</td>
-<td><code><a href="https://rdrr.io/r/stats/kruskal.test.html">stats::kruskal.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/kruskal.test.html" class="external-link">stats::kruskal.test</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">&gt; 2</td>
 <td>
 <code>type = 'r'</code>: robust.</td>
 <td>Heteroscedastic one-way ANOVA for trimmed means.</td>
-<td><code><a href="https://rdrr.io/pkg/WRS2/man/t1way.html">WRS2::t1way</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/WRS2/man/t1way.html" class="external-link">WRS2::t1way</a></code></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="corresponding-post-hoc-tests-for-nº-groups--2" class="section level4">
-<h4 class="hasAnchor">
-<a href="#corresponding-post-hoc-tests-for-n%C2%BA-groups--2" class="anchor"></a>Corresponding Post-Hoc tests for Nº groups &gt; 2</h4>
+<div class="section level4">
+<h4 id="corresponding-post-hoc-tests-for-nº-groups--2">Corresponding Post-Hoc tests for Nº groups &gt; 2<a class="anchor" aria-label="anchor" href="#corresponding-post-hoc-tests-for-n%C2%BA-groups--2"></a>
+</h4>
 <table class="table">
 <colgroup>
 <col width="5%">
@@ -268,57 +259,62 @@
 <td>
 <code>type = 'p'</code>: parametric.</td>
 <td>Student’s t-test.</td>
-<td><code><a href="https://rdrr.io/r/stats/pairwise.t.test.html">stats::pairwise.t.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/pairwise.t.test.html" class="external-link">stats::pairwise.t.test</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">Paired</td>
 <td>
 <code>type = 'np'</code>: non-parametric.</td>
 <td>Conover-Iman all-pairs comparison test.</td>
-<td><code><a href="https://rdrr.io/pkg/PMCMRplus/man/durbinAllPairsTest.html">PMCMRplus::durbinAllPairsTest</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/PMCMRplus/man/durbinAllPairsTest.html" class="external-link">PMCMRplus::durbinAllPairsTest</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">Paired</td>
 <td>
 <code>type = 'r'</code>: robust.</td>
-<td>Yuen’s test for trimmed means (see <a href="http://mqala.co.za/veed/Introduction%20to%20Robust%20Estimation%20and%20Hypothesis%20Testing.pdf">Wilcox, 2012</a>, p. 385).</td>
-<td><code><a href="https://rdrr.io/pkg/WRS2/man/rmanova.html">WRS2::rmmcp</a></code></td>
+<td>Yuen’s test for trimmed means (see <a href="http://mqala.co.za/veed/Introduction%20to%20Robust%20Estimation%20and%20Hypothesis%20Testing.pdf" class="external-link">Wilcox, 2012</a>, p. 385).</td>
+<td><code><a href="https://rdrr.io/pkg/WRS2/man/rmanova.html" class="external-link">WRS2::rmmcp</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">Independent</td>
 <td>
 <code>type = 'p'</code>: parametric + <code>var.equal = TRUE</code>.</td>
 <td>Student’s t-test.</td>
-<td><code><a href="https://rdrr.io/r/stats/pairwise.t.test.html">stats::pairwise.t.test</a></code></td>
+<td><code><a href="https://rdrr.io/r/stats/pairwise.t.test.html" class="external-link">stats::pairwise.t.test</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">Independent</td>
 <td>
 <code>type = 'p'</code>: parametric + <code>var.equal = FALSE</code>.</td>
 <td>Games-Howell test.</td>
-<td><code><a href="https://rdrr.io/pkg/PMCMRplus/man/gamesHowellTest.html">PMCMRplus::gamesHowellTest</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/PMCMRplus/man/gamesHowellTest.html" class="external-link">PMCMRplus::gamesHowellTest</a></code></td>
 </tr>
 <tr class="even">
 <td align="center">Independent</td>
 <td>
 <code>type = 'np'</code>: non-parametric.</td>
 <td>Dunn’s test.</td>
-<td><code><a href="https://rdrr.io/pkg/PMCMRplus/man/kwAllPairsDunnTest.html">PMCMRplus::kwAllPairsDunnTest</a></code></td>
+<td><code><a href="https://rdrr.io/pkg/PMCMRplus/man/kwAllPairsDunnTest.html" class="external-link">PMCMRplus::kwAllPairsDunnTest</a></code></td>
 </tr>
 <tr class="odd">
 <td align="center">Independent</td>
 <td>
 <code>type = 'r'</code>: robust.</td>
-<td>Yuen’s test for trimmed means (see <a href="https://rdrr.io/rforge/WRS2/f/inst/doc/WRS2.pdf">Mair and Wilcox</a>).</td>
-<td><code><a href="https://rdrr.io/pkg/WRS2/man/t1way.html">WRS2::lincon</a></code></td>
+<td>Yuen’s test for trimmed means (see <a href="https://rdrr.io/rforge/WRS2/f/inst/doc/WRS2.pdf" class="external-link">Mair and Wilcox</a>).</td>
+<td><code><a href="https://rdrr.io/pkg/WRS2/man/t1way.html" class="external-link">WRS2::lincon</a></code></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="available-effect-sizes" class="section level4">
-<h4 class="hasAnchor">
-<a href="#available-effect-sizes" class="anchor"></a>Available effect sizes</h4>
+<div class="section level4">
+<h4 id="available-effect-sizes">Available effect sizes<a class="anchor" aria-label="anchor" href="#available-effect-sizes"></a>
+</h4>
 <table class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="65%">
+</colgroup>
 <thead><tr class="header">
 <th align="center">Nº of groups</th>
 <th>Test</th>
@@ -370,58 +366,59 @@
 </div>
 </div>
 </div>
-<div id="automated-testing" class="section level1">
-<h1 class="hasAnchor">
-<a href="#automated-testing" class="anchor"></a>Automated testing</h1>
-<p>By default, <code><a href="reference/autest.html">autest()</a></code>, checks automatically the assumptions of the data based on the parameters supplied for test selection.</p>
+<div class="section level1">
+<h1 id="automated-testing">Automated testing<a class="anchor" aria-label="anchor" href="#automated-testing"></a>
+</h1>
+<p>By default, <code><a href="reference/k_sample.html">k_sample()</a></code>, checks automatically the assumptions of the data based on the parameters supplied for test selection.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/matcasti/writR">writR</a></span><span class="op">)</span> <span class="co"># Load the writR package </span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span> <span class="co"># for reproducibility</span>
-<span class="va">diets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-    weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">/</span><span class="fl">2</span>, mean <span class="op">=</span> <span class="fl">70</span>, sd <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>   <span class="co"># Treatment</span>
-             , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">/</span><span class="fl">2</span>, mean <span class="op">=</span> <span class="fl">66</span>, sd <span class="op">=</span> <span class="fl">7</span><span class="op">)</span> <span class="op">)</span> <span class="co"># Control</span>
-  , diet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html">gl</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="fl">100</span><span class="op">/</span><span class="fl">2</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Treatment'</span>, <span class="st">'Control'</span><span class="op">)</span> <span class="op">)</span> <span class="op">)</span>
-  
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/autest.html">autest</a></span><span class="op">(</span> 
-  data <span class="op">=</span> <span class="va">diets</span>, 
-  x <span class="op">=</span> <span class="st">"diet"</span>, <span class="co"># independent variable</span>
-  y <span class="op">=</span> <span class="st">"weight"</span>, <span class="co"># dependent variable</span>
-  type <span class="op">=</span> <span class="st">'auto'</span>, <span class="co"># default</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># Detailed statistical results</span>
-<span class="co">#&gt;         y    x statistic df    p.value             method alternative  estimate</span>
-<span class="co">#&gt; 1: weight diet  2.508551 98 0.01376398  Two Sample t-test   two.sided 0.4978591</span>
-<span class="co">#&gt;    conf.level conf.low conf.high effectsize n_obs</span>
-<span class="co">#&gt; 1:       0.95 0.101465 0.8917915   Hedges_g   100</span></code></pre></div>
-<div id="inline-results-in-apa-style" class="section level2">
-<h2 class="hasAnchor">
-<a href="#inline-results-in-apa-style" class="anchor"></a>Inline results in APA style</h2>
-<p>The core function: <code><a href="reference/autest.html">autest()</a></code> by default return a list of length 14 with detailed statistics, if inline results are desired, the <code><a href="reference/lablr.html">lablr()</a></code> function can be used.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/matcasti/writR" class="external-link">writR</a></span><span class="op">)</span> <span class="co"># Load the writR package </span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span> <span class="co"># for reproducibility</span></span>
+<span><span class="va">diets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>    weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">/</span><span class="fl">2</span>, mean <span class="op">=</span> <span class="fl">70</span>, sd <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>   <span class="co"># Treatment</span></span>
+<span>             , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">/</span><span class="fl">2</span>, mean <span class="op">=</span> <span class="fl">66</span>, sd <span class="op">=</span> <span class="fl">7</span><span class="op">)</span> <span class="op">)</span> <span class="co"># Control</span></span>
+<span>  , diet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="fl">100</span><span class="op">/</span><span class="fl">2</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Treatment'</span>, <span class="st">'Control'</span><span class="op">)</span> <span class="op">)</span> <span class="op">)</span></span>
+<span>  </span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/k_sample.html">k_sample</a></span><span class="op">(</span> </span>
+<span>  data <span class="op">=</span> <span class="va">diets</span>, </span>
+<span>  x <span class="op">=</span> <span class="st">"diet"</span>, <span class="co"># independent variable</span></span>
+<span>  y <span class="op">=</span> <span class="st">"weight"</span>, <span class="co"># dependent variable</span></span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>, <span class="co"># default, checks assumptions then choose appropiate test</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># Detailed statistical results</span></span>
+<span><span class="co">#&gt;         y      x statistic    df df.error    p.value         method   estimate</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;     &lt;num&gt; &lt;num&gt;    &lt;num&gt;      &lt;num&gt;         &lt;char&gt;      &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1: weight   diet  6.292829     1       98 0.01376398 Fisher's ANOVA 0.05026771</span></span>
+<span><span class="co">#&gt;    conf.level    conf.low conf.high              effectsize n_obs</span></span>
+<span><span class="co">#&gt;         &lt;num&gt;       &lt;num&gt;     &lt;num&gt;                  &lt;char&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1:       0.95 0.003432758         1 Omega-squared (partial)   100</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="inline-results-in-apa-style">Inline results in APA style<a class="anchor" aria-label="anchor" href="#inline-results-in-apa-style"></a>
+</h2>
+<p>The core function: <code><a href="reference/k_sample.html">k_sample()</a></code> by default return a list of length 13 with detailed statistics, if inline results are desired, the <code><a href="reference/lablr.html">lablr()</a></code> function can be used.</p>
 <p>An example using same data as before:</p>
 <blockquote>
 <p>The analysis of the effects of the treatment, shows that experimental group had greater weight than control, <code>inline$full</code>.</p>
 </blockquote>
 <p>translates into this:</p>
 <blockquote>
-<p>The analysis of the effects of the treatment, shows that experimental group had greater weight than control, t(98) = 2.51, p = 0.014, g = 0.50, CI95 <br><span class="math display">0.10, 0.89</span><br>.</p>
+<p>The analysis of the effects of the treatment, shows that experimental group had greater weight than control, F(1, 98) = 6.29, p 0.014, omega2 = 0.05, CI95 [0.00, 1.00].</p>
 </blockquote>
 <p>It also let you perform centrality and dispersion statistics for inline results by using the <code><a href="reference/cent_disp.html">cent_disp()</a></code> function. The next example illustrates its usage:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/ToothGrowth.html">ToothGrowth</a></span>
-
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span>
-  X <span class="op">=</span> <span class="va">len</span>, 
-  INDEX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">supp</span>, <span class="va">dose</span><span class="op">)</span>,
-  FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">var</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="reference/cent_disp.html">cent_disp</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">var</span>, markdown <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;                       0.5                      1                      2</span>
-<span class="co">#&gt; OJ *M* = 13.2, *SD* = 4.5 *M* = 22.7, *SD* = 3.9 *M* = 26.1, *SD* = 2.7</span>
-<span class="co">#&gt; VC    *M* = 8, *SD* = 2.7 *M* = 16.8, *SD* = 2.5 *M* = 26.1, *SD* = 4.8</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/ToothGrowth.html" class="external-link">ToothGrowth</a></span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/r/base/tapply.html" class="external-link">tapply</a></span><span class="op">(</span></span>
+<span>  <span class="va">len</span>,              <span class="co">## Variable to describe</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">supp</span>, <span class="va">dose</span><span class="op">)</span>, <span class="co">## Variables to aggregate on</span></span>
+<span>  <span class="va">cent_disp</span>         <span class="co">## cent_disp() function</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                       0.5                      1                      2</span></span>
+<span><span class="co">#&gt; OJ *M* = 13.2, *SD* = 4.5 *M* = 22.7, *SD* = 3.9 *M* = 26.1, *SD* = 2.7</span></span>
+<span><span class="co">#&gt; VC    *M* = 8, *SD* = 2.7 *M* = 16.8, *SD* = 2.5 *M* = 26.1, *SD* = 4.8</span></span></code></pre></div>
 <blockquote>
 <p>The effect of vitamin C on tooth growth was explored in Guinea Pigs, were the group using orange juice (OJ) demonstrated similar values (<code>result['OJ','2']</code>) than vitamin C (VC) group (<code>result['VC','2']</code>) in tooth length (TL) at 2 miligrams/day. However, at doses of 0.5 miligrams/day, the OJ group did show greater TL (<code>result['OJ','0.5']</code>) than VC group (<code>result['VC','0.5']</code>).</p>
 </blockquote>
@@ -431,38 +428,38 @@
 </blockquote>
 <p>You can also set your own custom expressions using glue syntax like this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/cent_disp.html">cent_disp</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">len</span>, 
-  str.a <span class="op">=</span> <span class="st">"The median for length was {median} mm (MAD = {mad}, IQR = {IQR})"</span>,
-  k <span class="op">=</span> <span class="fl">1</span> <span class="co"># For 1 decimal places</span>
-<span class="op">)</span>
-<span class="co">#&gt; The median for length was 19.2 mm (MAD = 9, IQR = 12.2)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cent_disp.html">cent_disp</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">len</span>, </span>
+<span>  str.a <span class="op">=</span> <span class="st">"The median for length was {median} mm (MAD = {mad}, IQR = {IQR})"</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">1</span> <span class="co"># For 1 decimal places</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; The median for length was 19.2 mm (MAD = 9, IQR = 12.2)</span></span></code></pre></div>
 <p>It allows you to use any function available in your global environment or in attached packages, even custom functions:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">q25</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">i</span>, <span class="fl">0.25</span><span class="op">)</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span>
-<span class="va">q75</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">j</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">j</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span>
-
-<span class="fu"><a href="reference/cent_disp.html">cent_disp</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">len</span>,
-  str.a <span class="op">=</span> <span class="st">"The median for length was {median} mm (IQR = [{q25}, {q75}])"</span>,
-  k <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span>
-<span class="co">#&gt; The median for length was 19.2 mm (IQR = [13.1, 25.3])</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">q25</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">i</span>, <span class="fl">0.25</span><span class="op">)</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">q75</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">j</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">j</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/cent_disp.html">cent_disp</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">len</span>,</span>
+<span>  str.a <span class="op">=</span> <span class="st">"The median for length was {median} mm (IQR = [{q25}, {q75}])"</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; The median for length was 19.2 mm (IQR = [13.1, 25.3])</span></span></code></pre></div>
 </div>
-<div id="paired-samples-design" class="section level2">
-<h2 class="hasAnchor">
-<a href="#paired-samples-design" class="anchor"></a>Paired samples design</h2>
+<div class="section level2">
+<h2 id="paired-samples-design">Paired samples design<a class="anchor" aria-label="anchor" href="#paired-samples-design"></a>
+</h2>
 <p>For paired designs you need to set <code>paired = TRUE</code>, and then, based on the numbers of groups detected after removing missing values, the test will run depending on the parameters stablished.</p>
-<div id="-2-groups" class="section level4">
-<h4 class="hasAnchor">
-<a href="#-2-groups" class="anchor"></a>&gt; 2 groups</h4>
+<div class="section level4">
+<h4 id="id_-2-groups">&gt; 2 groups<a class="anchor" aria-label="anchor" href="#id_-2-groups"></a>
+</h4>
 <p>When <code>type = 'auto'</code> the next assumptions will be checked for &gt; 2 paired samples:</p>
 <table class="table">
 <colgroup>
-<col width="9%">
-<col width="36%">
-<col width="21%">
-<col width="32%">
+<col width="12%">
+<col width="17%">
+<col width="27%">
+<col width="42%">
 </colgroup>
 <thead><tr class="header">
 <th>Assumption checked</th>
@@ -473,8 +470,7 @@
 <tbody>
 <tr class="odd">
 <td>Normality</td>
-<td>
-<code><a href="https://rdrr.io/r/stats/shapiro.test.html">stats::shapiro.test</a></code> for n &lt; 50 or <code><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">nortest::lillie.test</a></code> for n &gt;= 50</td>
+<td><code><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">stats::shapiro.test</a></code></td>
 <td>Sphericity check.</td>
 <td>Friedman rank sum test</td>
 </tr>
@@ -487,46 +483,40 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">40</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-<span class="va">cancer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>
-  , cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">100</span>, sd <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>   <span class="co"># Basal</span>
-           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">98</span>, sd <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>   <span class="co"># Time-1</span>
-           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">96</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span> <span class="co"># Time-2</span>
-  , period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html">gl</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="va">n</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Basal'</span>, <span class="st">'Time-1'</span>, <span class="st">'Time-2'</span><span class="op">)</span> <span class="op">)</span> <span class="op">)</span>
-
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/autest.html">autest</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">cancer</span>
-  , x <span class="op">=</span> <span class="st">"period"</span>
-  , y <span class="op">=</span> <span class="st">"cells"</span>
-  , rowid <span class="op">=</span> <span class="st">"id"</span>
-  , paired <span class="op">=</span> <span class="cn">TRUE</span>
-  , posthoc <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># set to TRUE for pairwise comparisons</span>
-  <span class="op">)</span>
-
-<span class="co"># Access the whole results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt; $test</span>
-<span class="co">#&gt;        y      x statistic      df df.error   p.value</span>
-<span class="co">#&gt; 1: cells period  2.231395 1.77965 69.40635 0.1206689</span>
-<span class="co">#&gt;                                        method   estimate conf.level conf.low</span>
-<span class="co">#&gt; 1: Repeated measures ANOVA with HF correction 0.01998957       0.95        0</span>
-<span class="co">#&gt;    conf.high     effectsize n_obs</span>
-<span class="co">#&gt; 1:         1 Omega2_partial    40</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $pwc</span>
-<span class="co">#&gt;    group1 group2 statistic         p            method p.adjust.method</span>
-<span class="co">#&gt; 1: Time-1  Basal -1.466883 0.5560343 Games-Howell Test            none</span>
-<span class="co">#&gt; 2: Time-2  Basal -2.933847 0.1061919 Games-Howell Test            none</span>
-<span class="co">#&gt; 3: Time-2 Time-1 -1.616262 0.4922794 Games-Howell Test            none</span>
-
-<span class="co"># For inline resutls or statistical reports</span>
-<span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">test</span><span class="op">)</span>
-<span class="co">#&gt;                  stats         p            es                ci</span>
-<span class="co">#&gt; 1: F(1.8, 69.4) = 2.23 p = 0.121 omega2 = 0.02 CI95 [0.00, 1.00]</span>
-<span class="co">#&gt;                                                                full</span>
-<span class="co">#&gt; 1: F(1.8, 69.4) = 2.23, p = 0.121, omega2 = 0.02, CI95 [0.00, 1.00]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">cancer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  , cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">100</span>, sd <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>   <span class="co"># Basal</span></span>
+<span>           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">98</span>, sd <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>   <span class="co"># Time-1</span></span>
+<span>           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">96</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span> <span class="co"># Time-2</span></span>
+<span>  , period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="va">n</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Basal'</span>, <span class="st">'Time-1'</span>, <span class="st">'Time-2'</span><span class="op">)</span> <span class="op">)</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/k_sample.html">k_sample</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">cancer</span></span>
+<span>  , x <span class="op">=</span> <span class="st">"period"</span></span>
+<span>  , y <span class="op">=</span> <span class="st">"cells"</span></span>
+<span>  , rowid <span class="op">=</span> <span class="st">"id"</span></span>
+<span>  , paired <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Access the whole results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         y      x statistic      df df.error   p.value                method</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;     &lt;num&gt;   &lt;num&gt;    &lt;num&gt;     &lt;num&gt;                &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:  cells period  2.231395 1.77965 69.40635 0.1206689 Huynh-Feldt's rmANOVA</span></span>
+<span><span class="co">#&gt;      estimate conf.level conf.low conf.high              effectsize n_obs</span></span>
+<span><span class="co">#&gt;         &lt;num&gt;      &lt;num&gt;    &lt;num&gt;     &lt;num&gt;                  &lt;char&gt; &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1: 0.01998957       0.95        0         1 Omega-squared (partial)    40</span></span>
+<span></span>
+<span><span class="co"># For inline resutls or statistical reports</span></span>
+<span><span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                  stats       p            es                ci</span></span>
+<span><span class="co">#&gt;                 &lt;char&gt;  &lt;char&gt;        &lt;char&gt;            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(1.8, 69.4) = 2.23 p 0.121 omega2 = 0.02 CI95 [0.00, 1.00]</span></span>
+<span><span class="co">#&gt;                                                              full</span></span>
+<span><span class="co">#&gt;                                                            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(1.8, 69.4) = 2.23, p 0.121, omega2 = 0.02, CI95 [0.00, 1.00]</span></span></code></pre></div>
 <p>However, you can specify your own parameters for the selection of the test:</p>
 <table class="table">
 <colgroup>
@@ -571,16 +561,16 @@
 </tbody>
 </table>
 </div>
-<div id="2-groups" class="section level4">
-<h4 class="hasAnchor">
-<a href="#2-groups" class="anchor"></a>2 groups</h4>
+<div class="section level4">
+<h4 id="id_2-groups">2 groups<a class="anchor" aria-label="anchor" href="#id_2-groups"></a>
+</h4>
 <p>Similar as before, if <code>type = 'auto'</code> assumptions will be checked for 2 paired samples:</p>
 <table class="table">
 <colgroup>
-<col width="14%">
-<col width="53%">
-<col width="12%">
-<col width="19%">
+<col width="22%">
+<col width="26%">
+<col width="20%">
+<col width="30%">
 </colgroup>
 <thead><tr class="header">
 <th>Assumption checked</th>
@@ -590,35 +580,38 @@
 </tr></thead>
 <tbody><tr class="odd">
 <td>Normality</td>
-<td>
-<code><a href="https://rdrr.io/r/stats/shapiro.test.html">stats::shapiro.test</a></code> for n &lt; 50 or <code><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">nortest::lillie.test</a></code> for n &gt;= 50</td>
+<td><code><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">stats::shapiro.test</a></code></td>
 <td>Student’s t-test</td>
 <td>Wilcoxon signed-rank test</td>
 </tr></tbody>
 </table>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cancer_two</span> <span class="op">&lt;-</span> <span class="va">cancer</span><span class="op">[</span><span class="va">cancer</span><span class="op">$</span><span class="va">period</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Time-1'</span>,<span class="st">'Time-2'</span><span class="op">)</span>,<span class="op">]</span>
-  
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/autest.html">autest</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">cancer_two</span>
-  , x <span class="op">=</span> <span class="st">"period"</span>
-  , y <span class="op">=</span> <span class="st">"cells"</span>
-  , paired <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="co"># Access the whole results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;        y      x statistic df   p.value        method alternative  estimate</span>
-<span class="co">#&gt; 1: cells period  1.093978 39 0.2806758 Paired t-test   two.sided 0.1696215</span>
-<span class="co">#&gt;    conf.level   conf.low conf.high effectsize n_obs</span>
-<span class="co">#&gt; 1:       0.95 -0.1394006  0.480802   Hedges_g    40</span>
-
-<span class="co"># For inline results</span>
-<span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;           stats         p       es                 ci</span>
-<span class="co">#&gt; 1: t(39) = 1.09 p = 0.281 g = 0.17 CI95 [-0.14, 0.48]</span>
-<span class="co">#&gt;                                                     full</span>
-<span class="co">#&gt; 1: t(39) = 1.09, p = 0.281, g = 0.17, CI95 [-0.14, 0.48]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cancer_two</span> <span class="op">&lt;-</span> <span class="va">cancer</span><span class="op">[</span><span class="va">cancer</span><span class="op">$</span><span class="va">period</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Time-1'</span>,<span class="st">'Time-2'</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  </span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/k_sample.html">k_sample</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">cancer_two</span></span>
+<span>  , x <span class="op">=</span> <span class="st">"period"</span></span>
+<span>  , y <span class="op">=</span> <span class="st">"cells"</span></span>
+<span>  , paired <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Access the whole results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         y      x statistic    df df.error   p.value           method   estimate</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;     &lt;num&gt; &lt;num&gt;    &lt;num&gt;     &lt;num&gt;           &lt;char&gt;      &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:  cells period  1.196787     1       39 0.2806758 Fisher's rmANOVA 0.00267743</span></span>
+<span><span class="co">#&gt;    conf.level conf.low conf.high              effectsize n_obs</span></span>
+<span><span class="co">#&gt;         &lt;num&gt;    &lt;num&gt;     &lt;num&gt;                  &lt;char&gt; &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:       0.95        0         1 Omega-squared (partial)    40</span></span>
+<span></span>
+<span><span class="co"># For inline results</span></span>
+<span><span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              stats       p            es                ci</span></span>
+<span><span class="co">#&gt;             &lt;char&gt;  &lt;char&gt;        &lt;char&gt;            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(1, 39) = 1.20 p 0.281 omega2 = 0.00 CI95 [0.00, 1.00]</span></span>
+<span><span class="co">#&gt;                                                          full</span></span>
+<span><span class="co">#&gt;                                                        &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(1, 39) = 1.20, p 0.281, omega2 = 0.00, CI95 [0.00, 1.00]</span></span></code></pre></div>
 <p>Same as above, you can specify your own parameters for the selection of the test:</p>
 <table class="table">
 <colgroup>
@@ -652,20 +645,20 @@
 </table>
 </div>
 </div>
-<div id="independent-samples-design" class="section level2">
-<h2 class="hasAnchor">
-<a href="#independent-samples-design" class="anchor"></a>Independent samples design</h2>
+<div class="section level2">
+<h2 id="independent-samples-design">Independent samples design<a class="anchor" aria-label="anchor" href="#independent-samples-design"></a>
+</h2>
 <p>For independent samples you need to set <code>paired = FALSE</code>, and then, based on the numbers of groups detected, the test will run depending on the parameters stablished.</p>
-<div id="-2-groups-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#-2-groups-1" class="anchor"></a>&gt; 2 groups</h4>
+<div class="section level4">
+<h4 id="id_-2-groups-1">&gt; 2 groups<a class="anchor" aria-label="anchor" href="#id_-2-groups-1"></a>
+</h4>
 <p>When <code>type = 'auto'</code> the next assumptions will be checked for &gt; 2 independent samples:</p>
 <table class="table">
 <colgroup>
-<col width="16%">
-<col width="47%">
-<col width="21%">
-<col width="14%">
+<col width="20%">
+<col width="37%">
+<col width="25%">
+<col width="17%">
 </colgroup>
 <thead><tr class="header">
 <th>Assumption checked</th>
@@ -676,8 +669,7 @@
 <tbody>
 <tr class="odd">
 <td>Normality</td>
-<td>
-<code><a href="https://rdrr.io/r/stats/shapiro.test.html">stats::shapiro.test</a></code> for n &lt; 50 or <code><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">nortest::lillie.test</a></code> for n &gt;= 50</td>
+<td><code><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">stats::shapiro.test</a></code></td>
 <td>Homogeneity of variances check.</td>
 <td>Kruskal-Wallis ANOVA</td>
 </tr>
@@ -691,41 +683,38 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-<span class="va">cancer_unpaired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-    cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">100</span>, sd <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>   <span class="co"># Control</span>
-           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">95</span>, sd <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>   <span class="co"># Drug A</span>
-           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">90</span>, sd <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span> <span class="co"># Drug B</span>
-  , group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html">gl</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="va">n</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Control'</span>, <span class="st">'Drug A'</span>, <span class="st">'Drug B'</span><span class="op">)</span> <span class="op">)</span> <span class="op">)</span>
-
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/autest.html">autest</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">cancer_unpaired</span>
-  , x <span class="op">=</span> <span class="st">"group"</span>
-  , y <span class="op">=</span> <span class="st">"cells"</span>
-  , paired <span class="op">=</span> <span class="cn">FALSE</span>
-  , posthoc <span class="op">=</span> <span class="cn">TRUE</span>
-  <span class="op">)</span>
-
-<span class="co"># Check results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt; $test</span>
-<span class="co">#&gt;        y     x statistic df df.error    p.value        method   estimate</span>
-<span class="co">#&gt; 1: cells group  4.861757  2 75.91708 0.01030964 Welch's ANOVA 0.08914428</span>
-<span class="co">#&gt;    conf.level    conf.low conf.high effectsize n_obs</span>
-<span class="co">#&gt; 1:       0.95 0.005281224         1     Omega2   120</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $pwc</span>
-<span class="co">#&gt;    group1  group2 statistic           p            method p.adjust.method</span>
-<span class="co">#&gt; 1: Drug A Control -2.516185 0.184417805 Games-Howell Test            none</span>
-<span class="co">#&gt; 2: Drug B Control -4.376442 0.007873682 Games-Howell Test            none</span>
-<span class="co">#&gt; 3: Drug B  Drug A -2.482696 0.191506063 Games-Howell Test            none</span>
-
-<span class="co"># For inline results</span>
-<span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">test</span><span class="op">)</span>
-<span class="co">#&gt;                  stats        p            es                ci</span>
-<span class="co">#&gt; 1: F(2.0, 75.9) = 4.86 p = 0.01 omega2 = 0.09 CI95 [0.01, 1.00]</span>
-<span class="co">#&gt;                                                               full</span>
-<span class="co">#&gt; 1: F(2.0, 75.9) = 4.86, p = 0.01, omega2 = 0.09, CI95 [0.01, 1.00]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">cancer_unpaired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>    cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">100</span>, sd <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>   <span class="co"># Control</span></span>
+<span>           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">95</span>, sd <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>   <span class="co"># Drug A</span></span>
+<span>           , <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="fl">90</span>, sd <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span> <span class="co"># Drug B</span></span>
+<span>  , group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="va">n</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Control'</span>, <span class="st">'Drug A'</span>, <span class="st">'Drug B'</span><span class="op">)</span> <span class="op">)</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/k_sample.html">k_sample</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">cancer_unpaired</span></span>
+<span>  , x <span class="op">=</span> <span class="st">"group"</span></span>
+<span>  , y <span class="op">=</span> <span class="st">"cells"</span></span>
+<span>  , paired <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  , posthoc <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         y      x statistic    df df.error    p.value        method   estimate</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;     &lt;num&gt; &lt;num&gt;    &lt;num&gt;      &lt;num&gt;        &lt;char&gt;      &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:  cells  group  4.861757     2 75.91708 0.01030964 Welch's ANOVA 0.08914428</span></span>
+<span><span class="co">#&gt;    conf.level    conf.low conf.high              effectsize n_obs</span></span>
+<span><span class="co">#&gt;         &lt;num&gt;       &lt;num&gt;     &lt;num&gt;                  &lt;char&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1:       0.95 0.005281224         1 Omega-squared (partial)   120</span></span>
+<span></span>
+<span><span class="co"># For inline results</span></span>
+<span><span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                  stats       p            es                ci</span></span>
+<span><span class="co">#&gt;                 &lt;char&gt;  &lt;char&gt;        &lt;char&gt;            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(2.0, 75.9) = 4.86 p 0.010 omega2 = 0.09 CI95 [0.01, 1.00]</span></span>
+<span><span class="co">#&gt;                                                              full</span></span>
+<span><span class="co">#&gt;                                                            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(2.0, 75.9) = 4.86, p 0.010, omega2 = 0.09, CI95 [0.01, 1.00]</span></span></code></pre></div>
 <p>However, you can specify your own parameters for the selection of the test:</p>
 <table class="table">
 <colgroup>
@@ -764,16 +753,16 @@
 </tbody>
 </table>
 </div>
-<div id="2-groups-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#2-groups-1" class="anchor"></a>2 groups</h4>
+<div class="section level4">
+<h4 id="id_2-groups-1">2 groups<a class="anchor" aria-label="anchor" href="#id_2-groups-1"></a>
+</h4>
 <p>Just like above, if <code>type = 'auto'</code> assumptions will be checked for 2 independent samples:</p>
 <table class="table">
 <colgroup>
-<col width="16%">
-<col width="47%">
-<col width="21%">
-<col width="14%">
+<col width="20%">
+<col width="36%">
+<col width="25%">
+<col width="17%">
 </colgroup>
 <thead><tr class="header">
 <th>Assumption checked</th>
@@ -784,8 +773,7 @@
 <tbody>
 <tr class="odd">
 <td>Normality</td>
-<td>
-<code><a href="https://rdrr.io/r/stats/shapiro.test.html">stats::shapiro.test</a></code> for n &lt; 50 or <code><a href="https://rdrr.io/pkg/nortest/man/lillie.test.html">nortest::lillie.test</a></code> for n &gt;= 50</td>
+<td><code><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">stats::shapiro.test</a></code></td>
 <td>Homogeneity of variances check.</td>
 <td>Mann-Whitney <em>U</em> test</td>
 </tr>
@@ -799,26 +787,30 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/autest.html">autest</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">cancer_unpaired</span><span class="op">[</span><span class="va">cancer_unpaired</span><span class="op">$</span><span class="va">group</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Drug A'</span>,<span class="st">'Drug B'</span><span class="op">)</span>,<span class="op">]</span>
-  , x <span class="op">=</span> <span class="st">"group"</span>
-  , y <span class="op">=</span> <span class="st">"cells"</span>
-  , var.equal <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span>
-
-<span class="co"># For tabular results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;        y     x statistic df    p.value             method alternative  estimate</span>
-<span class="co">#&gt; 1: cells group  1.755531 78 0.08309445  Two Sample t-test   two.sided 0.3887601</span>
-<span class="co">#&gt;    conf.level    conf.low conf.high effectsize n_obs</span>
-<span class="co">#&gt; 1:       0.95 -0.05074507 0.8258231   Hedges_g    80</span>
-
-<span class="co"># For inline results (e.g. manuscript)</span>
-<span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;           stats         p       es                 ci</span>
-<span class="co">#&gt; 1: t(78) = 1.76 p = 0.083 g = 0.39 CI95 [-0.05, 0.83]</span>
-<span class="co">#&gt;                                                     full</span>
-<span class="co">#&gt; 1: t(78) = 1.76, p = 0.083, g = 0.39, CI95 [-0.05, 0.83]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/k_sample.html">k_sample</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">cancer_unpaired</span><span class="op">[</span><span class="va">cancer_unpaired</span><span class="op">$</span><span class="va">group</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Drug A'</span>,<span class="st">'Drug B'</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  , x <span class="op">=</span> <span class="st">"group"</span></span>
+<span>  , y <span class="op">=</span> <span class="st">"cells"</span></span>
+<span>  , var.equal <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># For tabular results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         y      x statistic    df df.error    p.value         method   estimate</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;     &lt;num&gt; &lt;num&gt;    &lt;num&gt;      &lt;num&gt;         &lt;char&gt;      &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:  cells  group   3.08189     1       78 0.08309445 Fisher's ANOVA 0.02536358</span></span>
+<span><span class="co">#&gt;    conf.level conf.low conf.high              effectsize n_obs</span></span>
+<span><span class="co">#&gt;         &lt;num&gt;    &lt;num&gt;     &lt;num&gt;                  &lt;char&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1:       0.95        0         1 Omega-squared (partial)    80</span></span>
+<span></span>
+<span><span class="co"># For inline results (e.g. manuscript)</span></span>
+<span><span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              stats       p            es                ci</span></span>
+<span><span class="co">#&gt;             &lt;char&gt;  &lt;char&gt;        &lt;char&gt;            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(1, 78) = 3.08 p 0.083 omega2 = 0.03 CI95 [0.00, 1.00]</span></span>
+<span><span class="co">#&gt;                                                          full</span></span>
+<span><span class="co">#&gt;                                                        &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: F(1, 78) = 3.08, p 0.083, omega2 = 0.03, CI95 [0.00, 1.00]</span></span></code></pre></div>
 <p>You can specify your own parameters for the selection of the test as well:</p>
 <table class="table">
 <colgroup>
@@ -858,234 +850,248 @@
 </table>
 </div>
 </div>
-<div id="mixed-effects-anova" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mixed-effects-anova" class="anchor"></a>Mixed effects ANOVA</h2>
+<div class="section level2">
+<h2 id="mixed-effects-anova">Mixed effects ANOVA<a class="anchor" aria-label="anchor" href="#mixed-effects-anova"></a>
+</h2>
 <p>By using <code>aov_r</code> function is possible to get the statistical report of between/within-subject(s) factor(s) for factorial designs using <code>afex</code> package under the hood for statistical reporting. Let’s see an example</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># set parameters to simulate data with a between and within subject factor</span>
-<span class="va">within</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="va">between</span> <span class="op">&lt;-</span> <span class="fl">2</span>
-<span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">70</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-<span class="va">stroop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  subject <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>, <span class="va">within</span><span class="op">)</span>,
-  gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html">gl</a></span><span class="op">(</span><span class="va">between</span>, <span class="va">n</span><span class="op">/</span><span class="va">between</span>, length <span class="op">=</span> <span class="va">n</span><span class="op">*</span><span class="va">within</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Male'</span>,<span class="st">'Female'</span><span class="op">)</span><span class="op">)</span>,
-  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html">gl</a></span><span class="op">(</span><span class="va">within</span>, <span class="va">n</span>, length <span class="op">=</span> <span class="va">n</span><span class="op">*</span><span class="va">within</span><span class="op">)</span>,
-  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="va">within</span>, mean <span class="op">=</span> <span class="fl">150</span>, sd <span class="op">=</span> <span class="fl">30</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Manipulate data to generate interaction between Gender and Time</span>
-<span class="va">stroop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span><span class="op">(</span><span class="va">stroop</span>, <span class="op">{</span>
-  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">1</span>
-  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">1.15</span>
-  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span><span class="op">*</span><span class="fl">1.3</span>
-  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">1</span>
-  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">0.85</span>
-  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span><span class="op">*</span><span class="fl">0.7</span>
-<span class="op">}</span><span class="op">)</span>
-
-
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/aov_r.html">aov_r</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">stroop</span>
-, response <span class="op">=</span> <span class="st">"score"</span>
-, between <span class="op">=</span> <span class="st">"gender"</span>
-, within <span class="op">=</span> <span class="st">"time"</span>
-, rowid <span class="op">=</span> <span class="st">"subject"</span>
-, effsize.type <span class="op">=</span> <span class="st">'omega'</span> <span class="co"># omega squared as our measure of effect size</span>
-, sphericity <span class="op">=</span> <span class="st">'auto'</span> <span class="co"># check if sphericity is not being violated</span>
-<span class="op">)</span>
-
-<span class="co"># Check results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;        y           x   statistic df df.error      p.value</span>
-<span class="co">#&gt; 1: score      gender 130.7357382  1       68 1.720992e-17</span>
-<span class="co">#&gt; 2: score        time   0.2367333  2      136 7.895263e-01</span>
-<span class="co">#&gt; 3: score gender:time  42.8799011  2      136 3.635914e-15</span>
-<span class="co">#&gt;                              method    estimate conf.level  conf.low conf.high</span>
-<span class="co">#&gt; 1:                   Fisher's ANOVA  0.64953693       0.95 0.5389314         1</span>
-<span class="co">#&gt; 2: Fisher's repeated measures ANOVA -0.00747718       0.95 0.0000000         1</span>
-<span class="co">#&gt; 3: Fisher's repeated measures ANOVA  0.28938040       0.95 0.1844234         1</span>
-<span class="co">#&gt;        effectsize n_obs</span>
-<span class="co">#&gt; 1: Omega2_partial    70</span>
-<span class="co">#&gt; 2: Omega2_partial    70</span>
-<span class="co">#&gt; 3: Omega2_partial    70</span>
-
-<span class="co"># And inline results for reporting purposes</span>
-<span class="va">inline</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[</span>j <span class="op">=</span> <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">.SD</span><span class="op">)</span>, keyby <span class="op">=</span> <span class="va">x</span><span class="op">]</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">inline</span><span class="op">)</span>
-<span class="co">#&gt;              x             stats         p             es                ci</span>
-<span class="co">#&gt; 1:      gender F(1, 68) = 130.74 p &lt; 0.001  omega2 = 0.65 CI95 [0.54, 1.00]</span>
-<span class="co">#&gt; 2: gender:time F(2, 136) = 42.88 p &lt; 0.001  omega2 = 0.29 CI95 [0.18, 1.00]</span>
-<span class="co">#&gt; 3:        time  F(2, 136) = 0.24  p = 0.79 omega2 = -0.01 CI95 [0.00, 1.00]</span>
-<span class="co">#&gt;                                                              full</span>
-<span class="co">#&gt; 1: F(1, 68) = 130.74, p &lt; 0.001, omega2 = 0.65, CI95 [0.54, 1.00]</span>
-<span class="co">#&gt; 2: F(2, 136) = 42.88, p &lt; 0.001, omega2 = 0.29, CI95 [0.18, 1.00]</span>
-<span class="co">#&gt; 3:  F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 1.00]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># set parameters to simulate data with a between and within subject factor</span></span>
+<span><span class="va">within</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="va">between</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">70</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="va">stroop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  subject <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>, <span class="va">within</span><span class="op">)</span>,</span>
+<span>  gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span><span class="va">between</span>, <span class="va">n</span><span class="op">/</span><span class="va">between</span>, length <span class="op">=</span> <span class="va">n</span><span class="op">*</span><span class="va">within</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Male'</span>,<span class="st">'Female'</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span><span class="va">within</span>, <span class="va">n</span>, length <span class="op">=</span> <span class="va">n</span><span class="op">*</span><span class="va">within</span><span class="op">)</span>,</span>
+<span>  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="va">within</span>, mean <span class="op">=</span> <span class="fl">150</span>, sd <span class="op">=</span> <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Manipulate data to generate interaction between Gender and Time</span></span>
+<span><span class="va">stroop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">within</a></span><span class="op">(</span><span class="va">stroop</span>, <span class="op">{</span></span>
+<span>  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">1</span></span>
+<span>  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">1.15</span></span>
+<span>  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Male'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span><span class="op">*</span><span class="fl">1.3</span></span>
+<span>  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">1</span></span>
+<span>  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">0.85</span></span>
+<span>  <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">score</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">'Female'</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span><span class="op">*</span><span class="fl">0.7</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/aov_r.html">aov_r</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">stroop</span></span>
+<span>, response <span class="op">=</span> <span class="st">"score"</span></span>
+<span>, between <span class="op">=</span> <span class="st">"gender"</span></span>
+<span>, within <span class="op">=</span> <span class="st">"time"</span></span>
+<span>, rowid <span class="op">=</span> <span class="st">"subject"</span></span>
+<span>, effsize.type <span class="op">=</span> <span class="st">'omega'</span> <span class="co"># omega squared as our measure of effect size</span></span>
+<span>, sphericity <span class="op">=</span> <span class="st">'auto'</span> <span class="co"># check if sphericity is not being violated</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         y           x   statistic    df df.error      p.value           method</span></span>
+<span><span class="co">#&gt;    &lt;char&gt;      &lt;char&gt;       &lt;num&gt; &lt;num&gt;    &lt;num&gt;        &lt;num&gt;           &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:  score      gender 130.7357382     1       68 1.720992e-17   Fisher's ANOVA</span></span>
+<span><span class="co">#&gt; 2:  score        time   0.2367333     2      136 7.895263e-01 Fisher's rmANOVA</span></span>
+<span><span class="co">#&gt; 3:  score gender:time  42.8799011     2      136 3.635914e-15 Fisher's rmANOVA</span></span>
+<span><span class="co">#&gt;     estimate conf.level  conf.low conf.high     effectsize n_obs</span></span>
+<span><span class="co">#&gt;        &lt;num&gt;      &lt;num&gt;     &lt;num&gt;     &lt;num&gt;         &lt;char&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1: 0.6495369       0.95 0.5389314         1 Omega2_partial    70</span></span>
+<span><span class="co">#&gt; 2: 0.0000000       0.95 0.0000000         1 Omega2_partial    70</span></span>
+<span><span class="co">#&gt; 3: 0.2893804       0.95 0.1844234         1 Omega2_partial    70</span></span>
+<span></span>
+<span><span class="co"># And inline results for reporting purposes</span></span>
+<span><span class="va">inline</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[</span>j <span class="op">=</span> <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">.SD</span><span class="op">)</span>, keyby <span class="op">=</span> <span class="va">x</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">inline</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"full"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Key: &lt;x&gt;</span></span>
+<span><span class="co">#&gt;              x                                                         full</span></span>
+<span><span class="co">#&gt;         &lt;char&gt;                                                       &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:      gender F(1, 68) = 130.74, p 2e-17, omega2 = 0.65, CI95 [0.54, 1.00]</span></span>
+<span><span class="co">#&gt; 2: gender:time F(2, 136) = 42.88, p 4e-15, omega2 = 0.29, CI95 [0.18, 1.00]</span></span>
+<span><span class="co">#&gt; 3:        time  F(2, 136) = 0.24, p 0.790, omega2 = 0.00, CI95 [0.00, 1.00]</span></span></code></pre></div>
 <p>For inline results with previous data we would do something like this:</p>
 <blockquote>
 <p>In order to analyze the effect of gender on subjects’ scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( <code>inline["gender", paste(es, ci, sep = ", ")]</code> ) on scores when adjusting for each of the time periods, <code>inline["gender", paste(stats, p, sep = ", ")]</code>. In a similar way we find a significant interaction between evaluative time and gender ( <code>inline["gender:time", paste(stats, p, sep = ", ")]</code> ), indicating unequal responses between males and females over time, <code>inline["gender:time", paste(es, ci, sep = ", ")]</code>, however, time alone is not able to explain statistically significantly the variance in scores, <code>inline["time"]$full</code>.</p>
 </blockquote>
 <p>Which will translate into this after evaluation in R Markdown:</p>
 <blockquote>
-<p>In order to analyze the effect of gender on subjects’ scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( omega2 = 0.65, CI95 <br><span class="math display">0.51, 0.74</span><br> ) on scores when adjusting for each of the time periods, F(1, 68) = 130.74, p &lt; 0.001. In a similar way we find a significant interaction between evaluative time and gender ( F(2, 136) = 42.88, p &lt; 0.001 ), indicating unequal responses between males and females over time, omega2 = 0.29, CI95 <br><span class="math display">0.17, 0.40</span><br>, however, time alone is not able to explain statistically significantly the variance in scores, F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 <br><span class="math display">0.00, 0.00</span><br>.</p>
+<p>In order to analyze the effect of gender on subjects’ scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect (omega2 = 0.65, CI95 [0.54, 1.00]) on scores when adjusting for each of the time periods, F(1, 68) = 130.74, p &lt; 0.001. In a similar way we find a significant interaction between evaluative time and gender ( F(2, 136) = 42.88, p &lt; 0.001 ), indicating unequal responses between males and females over time, omega2 = 0.29, CI95 [0.17, 0.40], however, time alone is not able to explain statistically significantly the variance in scores, F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 0.00].</p>
 </blockquote>
 <p>When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: <code>between = c('factor1', 'factor2' ...)</code>, and the same for <code>within = c('factor1', 'factor2' ...)</code>.</p>
 </div>
-<div id="testing-categorical-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#testing-categorical-data" class="anchor"></a>Testing categorical data</h2>
+<div class="section level2">
+<h2 id="testing-categorical-data">Testing categorical data<a class="anchor" aria-label="anchor" href="#testing-categorical-data"></a>
+</h2>
 <p>To test purely categorical data, <code><a href="reference/contingency.html">contingency()</a></code> function is your guy.</p>
-<div id="goodness-of-fit-chi-squared" class="section level3">
-<h3 class="hasAnchor">
-<a href="#goodness-of-fit-chi-squared" class="anchor"></a>Goodness-of-fit Chi-squared</h3>
+<div class="section level3">
+<h3 id="goodness-of-fit-chi-squared">Goodness-of-fit Chi-squared<a class="anchor" aria-label="anchor" href="#goodness-of-fit-chi-squared"></a>
+</h3>
 <p>By only filling the <code>data</code>, and <code>x</code> argument, the Goodness-of-fit chi-squared test (χ<sup>2</sup><sub>gof</sub>)</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">cancer_unpaired</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,<span class="op">]</span>, <span class="co"># 3 groups: Control, Drug A, Drug B</span>
-  x <span class="op">=</span> <span class="st">"group"</span>
-<span class="op">)</span>
-
-<span class="co"># Tabular format dropping empty columns</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;        x statistic df   p.value                                   method</span>
-<span class="co">#&gt; 1: group  1.818182  2 0.4028903 Chi-squared test for given probabilities</span>
-<span class="co">#&gt;     estimate conf.level conf.low conf.high effectsize n_obs</span>
-<span class="co">#&gt; 1: 0.1275153       0.95        0         1 pearsons_c   110</span>
-
-<span class="co"># For inline results</span>
-<span class="va">inline</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span>, markdown <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">cancer_unpaired</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,<span class="op">]</span>, <span class="co"># 3 groups: Control, Drug A, Drug B</span></span>
+<span>  x <span class="op">=</span> <span class="st">"group"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Tabular format dropping empty columns</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         x statistic    df   p.value                                   method</span></span>
+<span><span class="co">#&gt;    &lt;char&gt;     &lt;num&gt; &lt;num&gt;     &lt;num&gt;                                   &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:  group  1.818182     2 0.4028903 Chi-squared test for given probabilities</span></span>
+<span><span class="co">#&gt;     estimate conf.level conf.low conf.high  effectsize</span></span>
+<span><span class="co">#&gt;        &lt;num&gt;      &lt;num&gt;    &lt;num&gt;     &lt;num&gt;      &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: 0.1275153       0.95        0         1 Pearson's C</span></span>
+<span></span>
+<span><span class="co"># For inline results</span></span>
+<span><span class="va">inline</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span>, markdown <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p>And the inline result would look like this:</p>
 <blockquote>
 <p>In preliminary analyses, we’ve seen that the proportion of pacients the same across groups, <code>inline$full</code>.</p>
 </blockquote>
 <p>translates into:</p>
 <blockquote>
-<p>In preliminary analyses, we’ve seen that the proportion of pacients the same across groups, X2(2) = 0.00, p = 1, V = 0.00, CI95 <br><span class="math display">0.00, 0.00</span><br>.</p>
+<p>In preliminary analyses, we’ve seen that the proportion of pacients the same across groups, X2(2) = 0.00, p = 1, V = 0.00, CI95 [0.00, 0.00].</p>
 </blockquote>
 </div>
-<div id="pearsons-chi-squared" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pearsons-chi-squared" class="anchor"></a>Pearson’s Chi-squared</h3>
+<div class="section level3">
+<h3 id="pearsons-chi-squared">Pearson’s Chi-squared<a class="anchor" aria-label="anchor" href="#pearsons-chi-squared"></a>
+</h3>
 <p>By providing <code>x</code> and <code>y</code> arguments on <code><a href="reference/contingency.html">contingency()</a></code> you get Pearson’s Chi-squared test.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">mtcars</span>, <span class="co"># Using mtcars data</span>
-  x <span class="op">=</span> <span class="st">"cyl"</span>,
-  y <span class="op">=</span> <span class="st">"gear"</span>
-<span class="op">)</span>
-
-<span class="co"># Statistics in tabular format</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;       y   x statistic df     p.value                     method  estimate</span>
-<span class="co">#&gt; 1: gear cyl  18.03636  4 0.001214066 Pearson's Chi-squared test 0.5308655</span>
-<span class="co">#&gt;    conf.level  conf.low conf.high effectsize n_obs</span>
-<span class="co">#&gt; 1:       0.95 0.2629954         1  Cramers_v    32</span>
-
-<span class="co"># Inline results format</span>
-<span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;            stats         p       es                ci</span>
-<span class="co">#&gt; 1: X2(4) = 18.04 p = 0.001 V = 0.53 CI95 [0.26, 1.00]</span>
-<span class="co">#&gt;                                                     full</span>
-<span class="co">#&gt; 1: X2(4) = 18.04, p = 0.001, V = 0.53, CI95 [0.26, 1.00]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>, <span class="co"># Using mtcars data</span></span>
+<span>  x <span class="op">=</span> <span class="st">"cyl"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"gear"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Statistics in tabular format</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         y      x statistic    df     p.value                     method</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;     &lt;num&gt; &lt;int&gt;       &lt;num&gt;                     &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:   gear    cyl  18.03636     4 0.001214066 Pearson's Chi-squared test</span></span>
+<span><span class="co">#&gt;     estimate conf.level   conf.low conf.high effectsize</span></span>
+<span><span class="co">#&gt;        &lt;num&gt;      &lt;num&gt;      &lt;num&gt;     &lt;num&gt;     &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: 0.4819631       0.95 0.07050663         1 Cramer's V</span></span>
+<span></span>
+<span><span class="co"># Inline results format</span></span>
+<span><span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            stats       p       es                ci</span></span>
+<span><span class="co">#&gt;           &lt;char&gt;  &lt;char&gt;   &lt;char&gt;            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: X2(4) = 18.04 p 0.001 V = 0.48 CI95 [0.07, 1.00]</span></span>
+<span><span class="co">#&gt;                                                   full</span></span>
+<span><span class="co">#&gt;                                                 &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: X2(4) = 18.04, p 0.001, V = 0.48, CI95 [0.07, 1.00]</span></span></code></pre></div>
 </div>
-<div id="fishers-exact-test" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fishers-exact-test" class="anchor"></a>Fisher’s exact test</h3>
+<div class="section level3">
+<h3 id="fishers-exact-test">Fisher’s exact test<a class="anchor" aria-label="anchor" href="#fishers-exact-test"></a>
+</h3>
 <p>Otherwise, you could use Fisher’s exact test for count data if you specify <code>exact = TRUE</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">mtcars</span>, 
-  x <span class="op">=</span> <span class="st">"cyl"</span>,
-  y <span class="op">=</span> <span class="st">"gear"</span>,
-  exact <span class="op">=</span> <span class="cn">TRUE</span> 
-<span class="op">)</span>
-
-<span class="co"># Statistics in tabular format</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;       y   x      p.value                                        method n_obs</span>
-<span class="co">#&gt; 1: gear cyl 8.259716e-05 Fisher's Exact Test for Count Data without OR    32</span>
-
-<span class="co"># Inline results format</span>
-<span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;            p      full</span>
-<span class="co">#&gt; 1: p &lt; 0.001 p &lt; 0.001</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>, </span>
+<span>  x <span class="op">=</span> <span class="st">"cyl"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"gear"</span>,</span>
+<span>  exact <span class="op">=</span> <span class="cn">TRUE</span> </span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Statistics in tabular format</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         y      x statistic    df     p.value                     method</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;char&gt;     &lt;num&gt; &lt;int&gt;       &lt;num&gt;                     &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:   gear    cyl  18.03636     4 0.001214066 Pearson's Chi-squared test</span></span>
+<span><span class="co">#&gt;     estimate conf.level   conf.low conf.high effectsize</span></span>
+<span><span class="co">#&gt;        &lt;num&gt;      &lt;num&gt;      &lt;num&gt;     &lt;num&gt;     &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: 0.4819631       0.95 0.07050663         1 Cramer's V</span></span>
+<span></span>
+<span><span class="co"># Inline results format</span></span>
+<span><span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            stats       p       es                ci</span></span>
+<span><span class="co">#&gt;           &lt;char&gt;  &lt;char&gt;   &lt;char&gt;            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: X2(4) = 18.04 p 0.001 V = 0.48 CI95 [0.07, 1.00]</span></span>
+<span><span class="co">#&gt;                                                   full</span></span>
+<span><span class="co">#&gt;                                                 &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: X2(4) = 18.04, p 0.001, V = 0.48, CI95 [0.07, 1.00]</span></span></code></pre></div>
 </div>
-<div id="mcnemars-chi-squared-test" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mcnemars-chi-squared-test" class="anchor"></a>McNemar’s Chi-squared Test</h3>
+<div class="section level3">
+<h3 id="mcnemars-chi-squared-test">McNemar’s Chi-squared Test<a class="anchor" aria-label="anchor" href="#mcnemars-chi-squared-test"></a>
+</h3>
 <p>If you have a paired design and are using only categorical variables, then McNemar’s Chi-squared Test for Count data is your test to go.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Presidential Approval Ratings.</span>
-<span class="co">## Approval of the President's performance in office in two surveys,</span>
-<span class="co">## one month apart, for a random sample of 1600 voting-age Americans.</span>
-
-<span class="va">performance</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1600</span>, <span class="fl">2</span><span class="op">)</span>,
-  `1st survey` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Approve"</span>, <span class="fl">944</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Disapprove"</span>, <span class="fl">656</span><span class="op">)</span><span class="op">)</span>,
-  `2nd survey` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Approve"</span>, <span class="fl">794</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Disapprove"</span>, <span class="fl">150</span><span class="op">)</span>,
-                   <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Approve"</span>, <span class="fl">86</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Disapprove"</span>, <span class="fl">570</span><span class="op">)</span><span class="op">)</span>, check.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
-
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">performance</span>,
-  x <span class="op">=</span> <span class="st">"1st survey"</span>,
-  y <span class="op">=</span> <span class="st">"2nd survey"</span>,
-  paired <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Set TRUE for McNemar test</span>
-<span class="op">)</span>
-
-<span class="co"># Statistics in tabular format</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;             y          x statistic df      p.value</span>
-<span class="co">#&gt; 1: 2nd survey 1st survey  34.17161  1 5.045976e-09</span>
-<span class="co">#&gt;                                                   method  estimate conf.level</span>
-<span class="co">#&gt; 1: McNemar's Chi-squared test with continuity correction 0.1355932       0.95</span>
-<span class="co">#&gt;      conf.low conf.high effectsize n_obs</span>
-<span class="co">#&gt; 1: 0.09124332 0.1777538   Cohens_g  3200</span>
-
-<span class="co"># Inline results</span>
-<span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt;            stats         p       es                ci</span>
-<span class="co">#&gt; 1: X2(1) = 34.17 p &lt; 0.001 g = 0.14 CI95 [0.09, 0.18]</span>
-<span class="co">#&gt;                                                     full</span>
-<span class="co">#&gt; 1: X2(1) = 34.17, p &lt; 0.001, g = 0.14, CI95 [0.09, 0.18]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Presidential Approval Ratings.</span></span>
+<span><span class="co">## Approval of the President's performance in office in two surveys,</span></span>
+<span><span class="co">## one month apart, for a random sample of 1600 voting-age Americans.</span></span>
+<span></span>
+<span><span class="va">performance</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1600</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  `1st survey` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Approve"</span>, <span class="fl">944</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Disapprove"</span>, <span class="fl">656</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  `2nd survey` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Approve"</span>, <span class="fl">794</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Disapprove"</span>, <span class="fl">150</span><span class="op">)</span>,</span>
+<span>                   <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Approve"</span>, <span class="fl">86</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Disapprove"</span>, <span class="fl">570</span><span class="op">)</span><span class="op">)</span>, check.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/contingency.html">contingency</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">performance</span>,</span>
+<span>  x <span class="op">=</span> <span class="st">"1st survey"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"2nd survey"</span>,</span>
+<span>  paired <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Set TRUE for McNemar test</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Statistics in tabular format</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             y          x statistic    df      p.value</span></span>
+<span><span class="co">#&gt;        &lt;char&gt;     &lt;char&gt;     &lt;num&gt; &lt;num&gt;        &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1: 2nd survey 1st survey  34.71186     1 3.822946e-09</span></span>
+<span><span class="co">#&gt;                        method  estimate conf.level   conf.low conf.high</span></span>
+<span><span class="co">#&gt;                        &lt;char&gt;     &lt;num&gt;      &lt;num&gt;      &lt;num&gt;     &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1: McNemar's Chi-squared test 0.1355932       0.95 0.09124332 0.1777538</span></span>
+<span><span class="co">#&gt;    effectsize</span></span>
+<span><span class="co">#&gt;        &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:  Cohen's g</span></span>
+<span></span>
+<span><span class="co"># Inline results</span></span>
+<span><span class="fu"><a href="reference/lablr.html">lablr</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            stats       p       es                ci</span></span>
+<span><span class="co">#&gt;           &lt;char&gt;  &lt;char&gt;   &lt;char&gt;            &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: X2(1) = 34.71 p 4e-09 g = 0.14 CI95 [0.09, 0.18]</span></span>
+<span><span class="co">#&gt;                                                   full</span></span>
+<span><span class="co">#&gt;                                                 &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1: X2(1) = 34.71, p 4e-09, g = 0.14, CI95 [0.09, 0.18]</span></span></code></pre></div>
 </div>
 </div>
-<div id="dependencies" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dependencies" class="anchor"></a>Dependencies</h2>
+<div class="section level2">
+<h2 id="dependencies">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies"></a>
+</h2>
 <p>The package writR is standing on the shoulders of giants. <code>writR</code> depends on the following packages:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">deepdep</span><span class="fu">::</span><span class="fu">plot_dependencies</span><span class="op">(</span><span class="st">'writR'</span>, local <span class="op">=</span> <span class="cn">TRUE</span>, depth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">deepdep</span><span class="fu">::</span><span class="fu">plot_dependencies</span><span class="op">(</span><span class="st">'writR'</span>, local <span class="op">=</span> <span class="cn">TRUE</span>, depth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-15-1.png" width="100%"></p>
 </div>
-<div id="acknowledgments" class="section level2">
-<h2 class="hasAnchor">
-<a href="#acknowledgments" class="anchor"></a>Acknowledgments</h2>
+<div class="section level2">
+<h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
+</h2>
 <p>I would like to thank to developers of <code>statsExpressions</code> and <code>ggstatsplot</code> for being an inspiration for this package. Naturally this package is in its first steps, but I hope that future collaborative work can expand the potential of this package.</p>
 </div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>To cite package ‘writR’ in publications run the following code in your <code>R</code> console:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">'writR'</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; To cite package 'writR' in publications use:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   Matías Castillo Aguilar (2021). writR: Inferential statistics and</span>
-<span class="co">#&gt;   reporting in APA style. https://doi.org/10.5281/zenodo.4603838,</span>
-<span class="co">#&gt;   https://matcasti.github.io/writR.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   @Manual{,</span>
-<span class="co">#&gt;     title = {writR: Inferential statistics and reporting in APA style},</span>
-<span class="co">#&gt;     author = {Matías {Castillo Aguilar}},</span>
-<span class="co">#&gt;     year = {2021},</span>
-<span class="co">#&gt;     note = {https://doi.org/10.5281/zenodo.4603838,</span>
-<span class="co">#&gt; https://matcasti.github.io/writR},</span>
-<span class="co">#&gt;   }</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">'writR'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; To cite package 'writR' in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Castillo Aguilar M (2021). _writR: Inferential statistics and</span></span>
+<span><span class="co">#&gt;   reporting in APA style_. R package version 1.0.1,</span></span>
+<span><span class="co">#&gt;   &lt;https://github.com/matcasti/writR&gt;.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Manual{,</span></span>
+<span><span class="co">#&gt;     title = {writR: Inferential statistics and reporting in APA style},</span></span>
+<span><span class="co">#&gt;     author = {Matías {Castillo Aguilar}},</span></span>
+<span><span class="co">#&gt;     year = {2021},</span></span>
+<span><span class="co">#&gt;     note = {R package version 1.0.1},</span></span>
+<span><span class="co">#&gt;     url = {https://github.com/matcasti/writR},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 </div>
 
@@ -1093,53 +1099,66 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/matcasti/writR/">https://​github.com/​matcasti/​writR/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/matcasti/writR/issues">https://​github.com/​matcasti/​writR/​issues</a>
-</li>
+<li><a href="https://github.com/matcasti/writR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/matcasti/writR/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Matías Castillo Aguilar <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7291-247X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing writR</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/matcasti/writR/actions"><img src="https://github.com/matcasti/writR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://doi.org/10.5281/zenodo.4603838"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg" alt="DOI"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=writR"><img src="https://www.r-pkg.org/badges/version/writR" alt="CRAN status"></a></li>
+<li>Matías Castillo Aguilar <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-7291-247X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://doi.org/10.5281/zenodo.4603838" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg" alt="DOI"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://CRAN.R-project.org/package=writR" class="external-link"><img src="https://www.r-pkg.org/badges/version/writR" alt="CRAN status"></a></li>
+<li><a href="https://github.com/matcasti/writR/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/matcasti/writR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Matías Castillo Aguilar.</p>
+  <p></p>
+<p>Developed by Matías Castillo Aguilar.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer>
 </div>
 
-  
+
+
+
 
 
   </body>
