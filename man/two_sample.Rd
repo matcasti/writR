@@ -9,17 +9,13 @@ two_sample(
   x,
   y,
   rowid = NULL,
-  type = "auto",
+  type,
   paired = FALSE,
   var.equal = FALSE,
-  trim = 0.2,
-  nboot = 100L,
   effsize.type = "unbiased",
   alternative = "two.sided",
   conf.level = 0.95,
-  lbl = if (is.null(markdown)) FALSE else TRUE,
-  markdown = NULL,
-  internal = FALSE,
+  character.only = FALSE,
   ...
 )
 }
@@ -38,21 +34,13 @@ two_sample(
 
 \item{var.equal}{Logical variable indicating whether to treat the two variances as being equal. If TRUE then the pooled variance is used to estimate the variance otherwise the Welch (or Satterthwaite) approximation to the degrees of freedom is used.}
 
-\item{trim}{Trim level for the mean when carrying out robust tests. In case of an error, try reducing the value of tr, which is by default set to 0.2. Lowering the value might help.}
-
-\item{nboot}{Number of bootstrap samples for computing confidence interval for the effect size (Default: 100L).}
-
 \item{effsize.type}{Options are \code{"unbiased"} or \code{"g"} for Hedges g and \code{"biased"} or \code{"d"} for Cohen's d as a measure of effect size. rank-biserial correlation is used for non-parametric analysis.}
 
 \item{alternative}{A character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".}
 
 \item{conf.level}{Confidence/Credible Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{lbl}{Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.}
-
-\item{markdown}{Logical (default FALSE). If \code{lbl} is TRUE, then this argument specify if the report-ready labels should be formated for inline code for R markdown (using mathjax and markdown syntax), or if the output should be in plain text (the default).}
-
-\item{internal}{Logical to whether this function is being used inside of internal functions.}
+\item{character.only}{whether to treat \code{x} as a character. Default is FALSE.}
 
 \item{...}{Currently ignored.}
 }

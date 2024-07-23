@@ -11,17 +11,15 @@
 #' @param effsize.type The effect size used to estimate the effects of the factors on the response variable. Possible values are "eta" ("biased") or "omega" ("unbiased", the default).
 #' @param sphericity If "none", then sphericity assumption is assumed to be met for within-subject(s) factor(s). "GG": applies Greenhouse-Geisser correction. "HF": applies Hyunh-Feldt correction. 'auto' (Default) choose the appropiate correction based on Mauchly test of sphericity (p-value > 0.05)
 #' @param conf.level Confidence/Credible Interval (CI) level. Default to 0.95 (95%).
-#' @param lbl Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.
 #' @param markdown Logical (default FALSE). If `lbl` is TRUE, then this argument specify if the report-ready labels should be formated for inline code for R markdown (using mathjax and markdown syntax), or if the output should be in plain text (the default).
-#' @importFrom data.table %chin% as.data.table .SD fcase .N
-#' @importFrom utils combn
-#' @importFrom stats anova
-#' @importFrom effectsize eta_squared omega_squared
+#' @param character.only Logical. checks whether to use the unevaluated expression or its
+#' content (when TRUE), asumming is a character vector. Defaults to `FALSE`.
 #' @return A list with statistical results.
+#'
 #' @export
 
 aov_r <- function(data,
-                  response = NULL,
+                  response,
                   between = NULL,
                   within = NULL,
                   rowid = NULL,
@@ -29,30 +27,31 @@ aov_r <- function(data,
                   effsize.type = "unbiased",
                   sphericity = "auto",
                   conf.level = 0.95,
-                  lbl = if (is.null(markdown)) FALSE else TRUE,
-                  markdown = NULL) {
+                  character.only = FALSE,
+                  markdown) {
 
   `Pr(>F)` <- rn <- `num Df` <- `den Df` <- NULL
 
-  # Auxiliary functions
-  is_empty <- function(i) length(i) == 0;
-  is_not_empty <- function(i) length(i) > 0;
-  is_not_null <- function(i) !is.null(i);
-
-  # Argument checking
-  if (is.null(between) && is.null(within)) stop("between and within can't both be NULL", call. = FALSE)
-  if (is.null(response)) stop("response can't be NULL", call. = FALSE)
-  if (is_not_empty(within) && is.null(rowid)) stop("If within is provided, rowid can't be NULL", call. = FALSE)
+  # Argument checking - Response
+  if (missing(response)) stop("response can't be NULL", call. = FALSE)
 
   # Transform data to data.table
-  if (!"data.table" %chin% class(data)) {
-    data <- data.table::as.data.table(data)
-  }
+  if (!"data.table" %chin% class(data)) data <- data.table::as.data.table(data)
+
+  # Transform arguments to character
+  response <- deparser(response, character.only)
+  between  <- deparser(between, character.only)
+  within   <- deparser(within, character.only)
+  rowid    <- deparser(rowid, character.only)
+
+  # Argument checking - arguments
+  if (is.null(between) && is.null(within)) stop("between and within can't both be NULL", call. = FALSE)
+  if (!is.null(within) && is.null(rowid)) stop("if within is provided, rowid can't be NULL", call. = FALSE)
 
   # Get only variables of interest
-  data <- droplevels(data[j = .SD, .SDcols = c(rowid, response, between, within)])
+  data <- droplevels(data[, .SD, .SDcols = c(rowid, response, between, within)])
 
-  if (is_empty(within) && is.null(rowid) && is_not_empty(between)) {
+  if (length(within) == 0 && is.null(rowid) && length(between) > 0) {
     rowid <- "rowid"
     data[, rowid := seq_len(.N)]
   }
@@ -75,7 +74,7 @@ aov_r <- function(data,
   n_obs <- nrow(model$data$wide)
 
   # Get sphericity correction
-  if (is_empty(within)) {
+  if (length(within) == 0) {
     sphericity <- NULL
   } else {
     sphericity <- sphericity_check(model)
@@ -100,11 +99,11 @@ aov_r <- function(data,
 
   # Set sphericity correction (if available)
   within_method <- NA_character_
-  if (is_not_null(within)) {
+  if (!is.null(within)) {
     within_method <- data.table::fcase(
-      sphericity == "none", "Fisher's repeated measures ANOVA",
-      sphericity == "GG", "Repeated measures ANOVA with GG correction",
-      sphericity == "HF", "Repeated measures ANOVA with HG correction"
+      sphericity == "none", "Fisher's rmANOVA",
+      sphericity == "GG", "Greenhouse-Geisser's rmANOVA",
+      sphericity == "HF", "Huynh-Feldt's rmANOVA"
     )
   }
 
@@ -116,8 +115,8 @@ aov_r <- function(data,
     df.error = `den Df`,
     p.value = `Pr(>F)`,
     method = data.table::fcase(rn %chin% between, "Fisher's ANOVA",
-                   rn %chin% within, within_method,
-                   utils::combn(within, 1, grepl, T, rn), within_method),
+                               rn %chin% within, within_method,
+                               utils::combn(within, 1, grepl, T, rn), within_method),
     estimate = efs[[2L]],
     conf.level = efs$CI,
     conf.low = efs$CI_low,
@@ -126,7 +125,7 @@ aov_r <- function(data,
     n_obs = n_obs
   )]
 
-  if (lbl) {
+  if (!missing(markdown) && isTRUE(markdown)) {
     model <- model[j = lablr(.SD, markdown = markdown), by = "x"]
   }
 

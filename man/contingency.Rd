@@ -9,10 +9,9 @@ contingency(
   x,
   y = NULL,
   paired = FALSE,
-  exact = FALSE,
+  ratio = NULL,
   conf.level = 0.95,
-  lbl = if (is.null(markdown)) FALSE else TRUE,
-  markdown = NULL,
+  character.only = FALSE,
   ...
 )
 }
@@ -25,13 +24,12 @@ contingency(
 
 \item{paired}{Logical. If \code{TRUE} McNemar's Chi-squared test is carried on.}
 
-\item{exact}{Logical. If \code{TRUE} then Fisher's Exact Test is carried on, but only when \code{paired = FALSE} (default). If is a 2 x 2 design, Odds Ratio (OR) is returned as effect size, otherwise it will only return the formated p-value.}
+\item{ratio}{A vector of probabilities of the same length of x. An error is given if any entry of p is negative.}
 
 \item{conf.level}{Confidence/Credible Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{lbl}{Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.}
-
-\item{markdown}{Whether you want the output formated for inline R Markdown or as plain text.}
+\item{character.only}{Logical. checks whether to use the unevaluated expression or its
+content (when TRUE), asumming is a character vector. Defaults to \code{FALSE}.}
 
 \item{...}{Currently not used.}
 }

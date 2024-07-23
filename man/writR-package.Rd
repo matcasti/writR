@@ -6,13 +6,14 @@
 \alias{writR-package}
 \title{writR: Inferential statistics and reporting in APA style}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Perform and report basic inferential tests for group differences in APA style for articles writings in Markdown or plain text format.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/matcasti/writR}
-  \item \url{https://doi.org/10.5281/zenodo.4603838}
   \item Report bugs at \url{https://github.com/matcasti/writR/issues}
 }
 

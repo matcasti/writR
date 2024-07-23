@@ -2,7 +2,7 @@
 #' @name lablr
 #' @description A list containing stats, p value, effectsize, confidence/credible interval and a concatenated string named 'full'.
 #'
-#' @param t Output from any of the functions autest, k_sample, two_sample or one_sample.
+#' @param t Output from any of the functions, k_sample, two_sample or one_sample.
 #' @param markdown Logical (default FALSE), indicating if the report-ready labels should be formated for inline code for R markdown (using mathjax and markdown syntax), or if the output should be in plain text (the default).
 #' @importFrom data.table fcase rbindlist
 #' @export
@@ -14,7 +14,7 @@ lablr <- function(t, markdown = FALSE) {
   t$conf.level <- t$conf.level*100
 
   # Set some common labels
-  if(markdown) {
+  if (markdown) {
     ci. <- paste0("CI~",t$conf.level,"~[")
     p. <- "*p* "
   } else {
@@ -23,21 +23,21 @@ lablr <- function(t, markdown = FALSE) {
   }
 
   # Check specific effectsizes for ANOVA...
-  if(grepl("ANOVA", method)) {
-    if(grepl("Eta", t$effectsize)) {
+  if (grepl("ANOVA", method)) {
+    if (grepl("Eta", t$effectsize)) {
       es <- "eta"
     }
-    if(grepl("Omega", t$effectsize)) {
+    if (grepl("Omega", t$effectsize)) {
       es <- "omega"
     }
   }
   # Or t-test's
-  if(grepl("t-test", method)) {
-    if(grepl("Cohens", t$effectsize)) {
+  if (grepl("t-test", method)) {
+    if (grepl("Cohens", t$effectsize)) {
       es.a <- "d"
       es.b <- "Cohen"
     }
-    if(grepl("Hedges", t$effectsize)) {
+    if (grepl("Hedges", t$effectsize)) {
       es.a <- "g"
       es.b <- "Hedges"
     }
@@ -46,21 +46,18 @@ lablr <- function(t, markdown = FALSE) {
   out <- switch(
     EXPR = method
   # k_sample - paired samples
-  , "Fisher's repeated measures ANOVA" = list(d1 = "F", d2 = "$F_{~Fisher}$ ",
+  , "Fisher's rmANOVA" = list(d1 = "F", d2 = "$F_{~Fisher}$ ",
       df = paste0("(",t$df, ", ", t$df.error,") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = paste0(es, "2 = "), es2 = paste0("$\\widehat{\\",es,"}_p^2$ = "))
-  , "Repeated measures ANOVA with GG correction" = list(d1 = "F", d2 = "$F_{~GG}$ ",
+  , "Greenhouse-Geisser's rmANOVA" = list(d1 = "F", d2 = "$F_{~GG}$ ",
       df = paste0("(", format(round(t$df, 1), nsmall = 1), ", ", format(round(t$df.error, 1), nsmall = 1),") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = paste0(es, "2 = "), es2 = paste0("$\\widehat{\\",es,"}_p^2$ = "))
-  , "Repeated measures ANOVA with HF correction" = list(d1 = "F", d2 = "$F_{~HF}$ ",
+  , "Huynh-Feldt's rmANOVA" = list(d1 = "F", d2 = "$F_{~HF}$ ",
       df = paste0("(", format(round(t$df, 1), nsmall = 1), ", ", format(round(t$df.error, 1), nsmall = 1),") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = paste0(es, "2 = "), es2 = paste0("$\\widehat{\\",es,"}_p^2$ = "))
   , "Friedman rank sum test" = list(d1 = "X2", d2 = "$\\chi^2_{~Friedman}$ ",
       df = paste0("(",t$df,") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = "W = ", es2 = "$W_{~Kendall}$ = ")
-  , "one-way repeated measures ANOVA for trimmed means" = list(d1 = "F", d2 = "$F_{~trimmed-means}$ ",
-      df = paste0("(",format(round(t$df, 1), nsmall = 1), ", ", format(round(t$df.error, 1), nsmall = 1),") = ", format(round(t$statistic, 2), nsmall = 2)),
-      es1 = "xi = ", es2 = "$\\widehat{\\xi}$ = ")
   # k_sample - independent samples
   , "Fisher's ANOVA" = list(d1 = "F", d2 = "$F_{~Fisher}$ ",
       df = paste0("(",t$df, ", ", t$df.error,") = ", format(round(t$statistic, 2), nsmall = 2)),
@@ -71,9 +68,6 @@ lablr <- function(t, markdown = FALSE) {
   , "Kruskal-Wallis rank sum test" = list(d1 = "X2", d2 = "$\\chi^2_{~Kruskal-Wallis}$ ",
       df = paste0("(",t$df,") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = "epsilon2 = ", es2 = "$\\widehat{\\epsilon}^2$ = ")
-  , "one-way ANOVA for trimmed means" = list(d1 = "F", d2 = "$F_{~trimmed-means}$ ",
-      df = paste0("(",format(round(t$df, 1), nsmall = 1), ", ", format(round(t$df.error, 1), nsmall = 1),") = ", format(round(t$statistic, 2), nsmall = 2)),
-      es1 = "xi = ", es2 = "$\\widehat{\\xi}$ = ")
   # two_sample - independent sample
   , " Two Sample t-test" = list(d1 = "t", d2 = "$t_{~Student}$ ",
       df = paste0("(",t$df,") = ", format(round(t$statistic, 2), nsmall = 2)),
@@ -85,9 +79,6 @@ lablr <- function(t, markdown = FALSE) {
   , "Wilcoxon rank sum test with continuity correction" = list(d1 = "ln(W)", d2 = "$\\ln(W)$ ",
       df = paste0("= ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = "r = ", es2 = "$\\widehat{r}_{biserial}$ = ")
-  , "Two sample Yuen's test on trimmed means" = list(d1 = "t", d2 = "$t_{~Yuen}$ ",
-      df = paste0("(",format(round(t$df, 1), nsmall = 1), ") = ", format(round(t$statistic, 2), nsmall = 2)),
-      es1 = "xi = ", es2 = "$\\widehat{\\xi}$ = ")
   # two_sample - paired samples
   , "Paired t-test" = list(d1 = "t", d2 = "$t_{~Student}$ ",
       df = paste0("(",t$df,") = ", format(round(t$statistic, 2), nsmall = 2)),
@@ -96,16 +87,10 @@ lablr <- function(t, markdown = FALSE) {
   , "Wilcoxon signed rank test with continuity correction" = list(d1 = "ln(V)", d2 = "$\\ln(V)$ ",
       df = paste0("= ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = "r = ", es2 = "$\\widehat{r}_{biserial}$ = ")
-  , "Paired Yuen's test on trimmed means" = list(d1 = "t", d2 = "$t_{~Yuen}$ ",
-      df = paste0("(",format(round(t$df, 1), nsmall = 1), ") = ", format(round(t$statistic, 2), nsmall = 2)),
-      es1 = "xi = ", es2 = "$\\widehat{\\xi}$ = ")
   # one_sample
   , "One Sample t-test" = list(d1 = "t", d2 = "$t_{~Student}$ ",
       df = paste0("(",t$df,") = ", format(round(t$statistic, 2), nsmall = 2)),
       es1 = paste0(es.a, " = "), es2 = paste0("$",es.a,"_{~",es.b,"}$ = "))
-  , "Bootstrap-t method for one-sample test" = list(d1 = "t ", d2 = "$t_{~Bootstrap}$ ",
-      df = paste0("= ", format(round(t$statistic, 2), nsmall = 2)),
-      es1 = "M = ", es2 = "$\\widehat{\\mu}_{~Trimmed}$ = ")
   # contingency
   , "McNemar's Chi-squared test" =
   , "McNemar's Chi-squared test with continuity correction" = list(d1 = "X2", d2 = "$\\chi^2_{~McNemar}$ ",
@@ -121,7 +106,6 @@ lablr <- function(t, markdown = FALSE) {
       es2 = ifelse(t$effectsize == "pearsons_c", "$C_{~Pearson}$ = ", "$V_{~Cramer}$ = "))
   # This two has their own printing methods
   , "Fisher's Exact Test for Count Data" = list(es = if (markdown) "$OR$ = " else "OR = ")
-  , "Fisher's Exact Test for Count Data without OR" = list()
   , stop("Method not found")
   )
 
@@ -138,7 +122,7 @@ lablr <- function(t, markdown = FALSE) {
 
     return(res)
   }
-  if(method == "Fisher's Exact Test for Count Data without OR") {
+  if (method == "Fisher's Exact Test for Count Data without OR") {
     res <- list(
       stats = NA_character_,
       p = (.p <- paste0(p., style.p(t$p.value))),
@@ -153,7 +137,7 @@ lablr <- function(t, markdown = FALSE) {
   }
 
   # Select and set tags for later use
-  if(markdown) {
+  if (markdown) {
     d. <- out$d2
     es. <- out$es2
   } else {

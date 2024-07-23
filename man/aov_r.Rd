@@ -6,7 +6,7 @@
 \usage{
 aov_r(
   data,
-  response = NULL,
+  response,
   between = NULL,
   within = NULL,
   rowid = NULL,
@@ -14,8 +14,8 @@ aov_r(
   effsize.type = "unbiased",
   sphericity = "auto",
   conf.level = 0.95,
-  lbl = if (is.null(markdown)) FALSE else TRUE,
-  markdown = NULL
+  character.only = FALSE,
+  markdown
 )
 }
 \arguments{
@@ -37,7 +37,8 @@ aov_r(
 
 \item{conf.level}{Confidence/Credible Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{lbl}{Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.}
+\item{character.only}{Logical. checks whether to use the unevaluated expression or its
+content (when TRUE), asumming is a character vector. Defaults to \code{FALSE}.}
 
 \item{markdown}{Logical (default FALSE). If \code{lbl} is TRUE, then this argument specify if the report-ready labels should be formated for inline code for R markdown (using mathjax and markdown syntax), or if the output should be in plain text (the default).}
 }

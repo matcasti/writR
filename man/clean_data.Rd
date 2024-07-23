@@ -2,25 +2,47 @@
 % Please edit documentation in R/clean_data.R
 \name{clean_data}
 \alias{clean_data}
-\title{Data table without NA's and with rowid (paired designs only).}
+\title{Remove NA's from long to wide/long data.table}
 \usage{
-clean_data(data, x, y, rowid = NULL, paired = FALSE, wide = FALSE, ...)
+clean_data(
+  data,
+  x,
+  y,
+  rowid = NULL,
+  paired = FALSE,
+  wide = FALSE,
+  character.only = FALSE,
+  ...
+)
 }
 \arguments{
-\item{data}{Data frame from which \code{x} and \code{y} (and possibly \code{rowid} if provided) will be searched.}
+\item{data}{Data from which \code{x} and \code{y} (and possibly \code{rowid} if provided) will
+be searched.}
 
-\item{x}{Unquoted name for the grouping factor. Must be present in data}
+\item{x}{Name for the grouping factor. Must be present in data}
 
-\item{y}{Unquoted name for the response variable. Must be present in data.}
+\item{y}{Name for the response variable. Must be present in data.}
 
-\item{rowid}{Unquoted name for the subject-id column. If null, then is assumed that data is sorted for paired designs, creating one. So if your data is not sorted and you leave this argument unspecified, the results can be inaccurate when there are more than two levels in x and there are NAs present.}
+\item{rowid}{Name for the subject-id column. If null, then is assumed that
+data is sorted for paired designs, creating one. So if your data is not sorted and you
+leave this argument unspecified, the results can be inaccurate when there are more than
+two levels in x and there are NAs present. Ignored if \code{paired} is \code{FALSE}.}
 
-\item{paired}{Logical that decides whether the experimental design is repeated measures/within-subjects or between-subjects. The default is \code{FALSE.}}
+\item{paired}{Logical that decides whether the experimental design is repeated
+measures/within-subjects or between-subjects. The default is \code{FALSE.}}
 
-\item{wide}{Logical to whether return a data.frame in wide format (\code{TRUE}, i.e. one columns per group/time) or in long format (\code{FALSE}).}
+\item{wide}{Logical to whether return a data.frame in wide format (\code{TRUE}, i.e. one
+columns per group/time) or in long format (\code{FALSE}).}
+
+\item{character.only}{Logical. checks whether to use the unevaluated expression or its
+content (when TRUE), asumming is a character vector. Defaults to \code{FALSE}.}
 
 \item{...}{Currently ignored.}
 }
 \description{
-Data table without NA's and with rowid (paired designs only).
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+This function allows removing NA's from long format data into wide (or long) format
+data, even suporting repeated measures designs (i.e., with more than one subject per
+factor level).
 }

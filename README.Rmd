@@ -21,10 +21,10 @@ knitr::opts_chunk$set(
 ==================================================================
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/matcasti/writR/workflows/R-CMD-check/badge.svg)](https://github.com/matcasti/writR/actions)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4641761.svg)](https://doi.org/10.5281/zenodo.4603838)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/writR)](https://CRAN.R-project.org/package=writR)
+[![R-CMD-check](https://github.com/matcasti/writR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/matcasti/writR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 An R package for automated inferential testing (for group differences) and reporting based on parametric assumptions, which are tested automatically for test selection.
@@ -93,7 +93,7 @@ devtools::install_github("matcasti/writR")
 
 # Automated testing
 
-By default, `autest()`, checks automatically the assumptions of the data based on the parameters supplied for test selection.
+By default, `k_sample()`, checks automatically the assumptions of the data based on the parameters supplied for test selection.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
 library(writR) # Load the writR package 
@@ -104,11 +104,11 @@ diets <- data.frame(
              , rnorm(n = 100/2, mean = 66, sd = 7) ) # Control
   , diet = gl(n = 2, k = 100/2, labels = c('Treatment', 'Control') ) )
   
-result <- autest( 
+result <- k_sample( 
   data = diets, 
   x = "diet", # independent variable
   y = "weight", # dependent variable
-  type = 'auto', # default
+  type = NULL, # default, checks assumptions then choose appropiate test
 )
 
 print(result) # Detailed statistical results
@@ -116,7 +116,7 @@ print(result) # Detailed statistical results
 
 ## Inline results in APA style
 
-The core function: `autest()` by default return a list of length 14 with detailed statistics, if inline results are desired, the `lablr()` function can be used. 
+The core function: `k_sample()` by default return a list of length 13 with detailed statistics, if inline results are desired, the `lablr()` function can be used. 
 
 An example using same data as before:
 
@@ -128,7 +128,7 @@ inline <- lablr(result)
 
 translates into this:
 
-> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, t(98) = 2.51, p = 0.014, g = 0.50, CI95 [0.10, 0.89].
+> The analysis of the effects of the treatment, shows that experimental group had greater weight than control, F(1, 98) = 6.29, p 0.014, omega2 = 0.05, CI95 [0.00, 1.00].
 
 It also let you perform centrality and dispersion statistics for inline results by using the `cent_disp()` function. The next example illustrates its usage:
 
@@ -136,11 +136,10 @@ It also let you perform centrality and dispersion statistics for inline results 
 data <- datasets::ToothGrowth
 
 result <- with(data, tapply(
-  X = len, 
-  INDEX = list(supp, dose),
-  FUN = function(var) {
-    cent_disp(x = var, markdown = TRUE)
-  }))
+  len,              ## Variable to describe
+  list(supp, dose), ## Variables to aggregate on
+  cent_disp         ## cent_disp() function
+  ))
 
 as.data.frame(result)
 ```
@@ -182,10 +181,10 @@ For paired designs you need to set `paired = TRUE`, and then, based on the numbe
 
 When `type = 'auto'` the next assumptions will be checked for \> 2 paired samples:
 
-| Assumption checked | How is tested                                                            | If met                                    | If not                                                            |
-|--------------------|--------------------------------------------------------------------------|-------------------------------------------|-------------------------------------------------------------------|
-| Normality          | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Sphericity check.                         | Friedman rank sum test                                            |
-| Sphericity         | `sphericity_check(model)`                                                | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser (GG) or Huynh-Feldt (HF) correction is applied |
+| Assumption checked | How is tested              | If met                                    | If not                                                            |
+|--------------------|----------------------------|-------------------------------------------|-------------------------------------------------------------------|
+| Normality          | `stats::shapiro.test`      | Sphericity check.                         | Friedman rank sum test                                            |
+| Sphericity         | `sphericity_check(model)`  | One-way repeated measures ANOVA (rmANOVA) | Greenhouse-Geisser (GG) or Huynh-Feldt (HF) correction is applied |
 
 ```{r message=FALSE, warning=FALSE}
 n <- 40
@@ -197,20 +196,19 @@ cancer <- data.frame(
            , rnorm(n = n, mean = 96, sd = 5) )) # Time-2
   , period = gl(n = 3, k = n, labels = c('Basal', 'Time-1', 'Time-2') ) )
 
-result <- autest(
+result <- k_sample(
   data = cancer
   , x = "period"
   , y = "cells"
   , rowid = "id"
   , paired = TRUE
-  , posthoc = TRUE # set to TRUE for pairwise comparisons
   )
 
 # Access the whole results
 print(result)
 
 # For inline resutls or statistical reports
-lablr(result$test)
+lablr(result)
 ```
 
 However, you can specify your own parameters for the selection of the test:
@@ -227,14 +225,14 @@ However, you can specify your own parameters for the selection of the test:
 
 Similar as before, if `type = 'auto'` assumptions will be checked for 2 paired samples:
 
-| Assumption checked | How is tested                                                            | If met           | If not                    |
-|--------------------|--------------------------------------------------------------------------|------------------|---------------------------|
-| Normality          | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Student's t-test | Wilcoxon signed-rank test |
+| Assumption checked | How is tested         | If met           | If not                    |
+|--------------------|-----------------------|------------------|---------------------------|
+| Normality          | `stats::shapiro.test` | Student's t-test | Wilcoxon signed-rank test |
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 cancer_two <- cancer[cancer$period %in% c('Time-1','Time-2'),]
   
-result <- autest(
+result <- k_sample(
   data = cancer_two
   , x = "period"
   , y = "cells"
@@ -264,10 +262,10 @@ For independent samples you need to set `paired = FALSE`, and then, based on the
 
 When `type = 'auto'` the next assumptions will be checked for \> 2 independent samples:
 
-| Assumption checked       | How is tested                                                            | If met                          | If not               |
-|--------------------------|--------------------------------------------------------------------------|---------------------------------|----------------------|
-| Normality                | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Homogeneity of variances check. | Kruskal-Wallis ANOVA |
-| Homogeneity of variances | Levene's test on medians with `is_var.equal()`                           | Fisher's ANOVA                  | Welch's ANOVA        |
+| Assumption checked       | How is tested                                  | If met                          | If not               |
+|--------------------------|------------------------------------------------|---------------------------------|----------------------|
+| Normality                | `stats::shapiro.test`                          | Homogeneity of variances check. | Kruskal-Wallis ANOVA |
+| Homogeneity of variances | Levene's test on medians with `is_var.equal()` | Fisher's ANOVA                  | Welch's ANOVA        |
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 set.seed(123)
@@ -277,7 +275,7 @@ cancer_unpaired <- data.frame(
            , rnorm(n = n, mean = 90, sd = 15) )) # Drug B
   , group = gl(n = 3, k = n, labels = c('Control', 'Drug A', 'Drug B') ) )
 
-result <- autest(
+result <- k_sample(
   data = cancer_unpaired
   , x = "group"
   , y = "cells"
@@ -289,7 +287,7 @@ result <- autest(
 print(result)
 
 # For inline results
-lablr(result$test)
+lablr(result)
 ```
 
 However, you can specify your own parameters for the selection of the test:
@@ -305,13 +303,13 @@ However, you can specify your own parameters for the selection of the test:
 
 Just like above, if `type = 'auto'` assumptions will be checked for 2 independent samples:
 
-| Assumption checked       | How is tested                                                            | If met                          | If not                |
-|--------------------------|--------------------------------------------------------------------------|---------------------------------|-----------------------|
-| Normality                | `stats::shapiro.test` for n \< 50 or `nortest::lillie.test` for n \>= 50 | Homogeneity of variances check. | Mann-Whitney *U* test |
-| Homogeneity of variances | Levene's test on medians with `is_var.equal()`                           | Student's t-test                | Welch's t-test        |
+| Assumption checked       | How is tested                                  | If met                          | If not                |
+|--------------------------|------------------------------------------------|---------------------------------|-----------------------|
+| Normality                | `stats::shapiro.test`                          | Homogeneity of variances check. | Mann-Whitney *U* test |
+| Homogeneity of variances | Levene's test on medians with `is_var.equal()` | Student's t-test                | Welch's t-test        |
 
 ```{r message=FALSE, warning=FALSE}
-result <- autest(
+result <- k_sample(
   data = cancer_unpaired[cancer_unpaired$group %in% c('Drug A','Drug B'),]
   , x = "group"
   , y = "cells"
@@ -378,7 +376,7 @@ print(result)
 # And inline results for reporting purposes
 inline <- result[j = lablr(.SD), keyby = x]
 
-print(inline)
+print(inline[,c("x", "full")])
 ```
 
 For inline results with previous data we would do something like this:
@@ -387,7 +385,7 @@ For inline results with previous data we would do something like this:
 
 Which will translate into this after evaluation in R Markdown:
 
-> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect ( omega2 = 0.65, CI95 [0.51, 0.74] ) on scores when adjusting for each of the time periods, F(1, 68) = 130.74, p < 0.001. In a similar way we find a significant interaction between evaluative time and gender ( F(2, 136) = 42.88, p < 0.001 ), indicating unequal responses between males and females over time, omega2 = 0.29, CI95 [0.17, 0.40], however, time alone is not able to explain statistically significantly the variance in scores, F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 0.00].
+> In order to analyze the effect of gender on subjects' scores in each of the evaluation periods, we performed an analysis of variance (ANOVA) with between- and within-subjects factors. From the analyses, we find that gender has a large effect (omega2 = 0.65, CI95 [0.54, 1.00]) on scores when adjusting for each of the time periods, F(1, 68) = 130.74, p < 0.001. In a similar way we find a significant interaction between evaluative time and gender ( F(2, 136) = 42.88, p < 0.001 ), indicating unequal responses between males and females over time, omega2 = 0.29, CI95 [0.17, 0.40], however, time alone is not able to explain statistically significantly the variance in scores, F(2, 136) = 0.24, p = 0.79, omega2 = -0.01, CI95 [0.00, 0.00].
 
 When you have more than 1 factor (between or within subjects) you have to specify them as a character vector: `between = c('factor1', 'factor2' ...)`, and the same for `within = c('factor1', 'factor2' ...)`.
 

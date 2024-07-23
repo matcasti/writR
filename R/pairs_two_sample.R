@@ -9,13 +9,12 @@
 #' @param type Set `"auto"` (default) for checking the normality and homogeneity of variances for test selection. Other options are `"p"` for parametric, `"np"` for non-parametric and `"r"` for robust tests.
 #' @param paired Logical that decides whether the experimental design is repeated measures/within-subjects or between-subjects. The default is `FALSE.`
 #' @param var.equal Logical variable indicating whether to treat the two variances as being equal. If TRUE then the pooled variance is used to estimate the variance otherwise the Welch (or Satterthwaite) approximation to the degrees of freedom is used.
-#' @param trim Trim level for the mean when carrying out robust tests. In case of an error, try reducing the value of tr, which is by default set to 0.2. Lowering the value might help.
-#' @param nboot Number of bootstrap samples for computing confidence interval for the effect size (Default: 100L).
 #' @param effsize.type Options are `"unbiased"` or `"g"` for Hedges g and `"biased"` or `"d"` for Cohen's d as a measure of effect size for parametric test. The rank-biserial correlation is used for non-parametric analysis.
 #' @param alternative A character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".
 #' @param conf.level Confidence/Credible Interval (CI) level. Default to 0.95 (95%).
-#' @param lbl Logical (default FALSE) indicating if a report ready output is desired. This will change the output to a list with characters rather than numeric vectors.
 #' @param markdown Logical (default FALSE). If `lbl` is TRUE, then this argument specify if the report-ready labels should be formated for inline code for R markdown (using mathjax and markdown syntax), or if the output should be in plain text (the default).
+#' @param character.only Logical. checks whether to use the unevaluated expression or its
+#' content (when TRUE), asumming is a character vector. Defaults to `FALSE`.
 #' @param ... Currently ignored.
 #' @importFrom data.table rbindlist
 #' @importFrom utils combn
@@ -23,44 +22,41 @@
 
 pairs_two_sample <- function(data, x, y,
                              rowid = NULL,
-                             type = "auto",
+                             type,
                              paired = FALSE,
                              var.equal = FALSE,
-                             trim = 0.2,
-                             nboot = 100L,
                              effsize.type = "unbiased",
                              alternative = "two.sided",
                              conf.level = 0.95,
-                             lbl = if(is.null(markdown)) FALSE else TRUE,
-                             markdown = NULL,
+                             markdown,
+                             character.only = FALSE,
                              ...) {
 
   # Data cleaning
-  data <- clean_data(data, x = x, y = y, rowid = rowid, paired = paired, wide = FALSE)
-  rowid <- if(is.null(rowid)) NULL else "rowid"
+  x <- deparser(x, character.only)
+  y <- deparser(y, character.only)
+  rowid <- deparser(rowid, character.only)
+
+  data <- clean_data(data, x, y, rowid, paired, character.only = TRUE)
 
   # Levels of 'x'
   x_var <- data[[x]]
   x_lvl <- levels(x_var)
 
   # Checking assumptions
-  if (type == "auto") {
+  if (missing(type) || is.null(type)) {
     # Create vectors of variables
     y_var <- data[[y]]
 
     # Check normality
-    normal <- vapply(x_lvl, function(i) {
-      is_normal(y_var[x_var == i])
-    }, NA, USE.NAMES = FALSE)
+    normal <- vapply(x_lvl, function(i) is_normal(y_var[x_var == i]), NA)
     type <- if (all(normal)) "check" else "np"
 
     # Check homogeneity ov variances
-    if (!paired && type == "check") {
-      var.equal <- is_var.equal(y_var, x_var)
-    }
+    if (!paired && type == "check") var.equal <- is_var.equal(y_var, x_var)
   }
 
-  .lab <- if(lbl) function(i) lablr(i, markdown = markdown) else `(`
+  .lab <- if (!missing(markdown) && isTRUE(markdown)) function(i) lablr(i, markdown = markdown) else `(`
   # Rowbind list-wise every item of...
   test <- data.table::rbindlist(
     # lists of ...
@@ -83,16 +79,14 @@ pairs_two_sample <- function(data, x, y,
               data = data[x_var %in% i],
               x = x,
               y = y,
-              rowid = rowid,
+              rowid = "rowid",
               type = type,
               paired = paired,
               var.equal = var.equal,
-              trim = trim,
-              nboot = nboot,
               effsize.type = effsize.type,
               alternative = alternative,
               conf.level = conf.level,
-              internal = FALSE
+              character.only = TRUE
             )
           )
         )

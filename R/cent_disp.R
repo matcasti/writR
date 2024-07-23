@@ -8,8 +8,6 @@
 #' @param markdown Whether you want the output formated for inline R markdown (TRUE) or as plain text (FALSE).
 #' @keywords cent_disp
 #' @return A character vector of length one.
-#' @importFrom stats sd median IQR
-#' @importFrom glue glue
 #' @export
 
 cent_disp <- function(x,
@@ -19,17 +17,15 @@ cent_disp <- function(x,
                       markdown = TRUE) {
 
   if (!is.numeric(x)) stop(deparse(substitute(x)), " is not numeric.")
+
   x <- x[!is.na(x)]
   if (type != "custom") {
     if (type == "auto") {
       type <- if (is_normal(x)) "p" else "np"
     }
-    if (type == "p") {
-      .f <- list(cent = mean, disp = sd, m = "M", i = "SD")
-    }
-    if (type == "np") {
-      .f <- list(cent = median, disp = IQR, m = "Mdn", i = "IQR")
-    }
+    if (type == "p")  .f <- list(cent = base::mean,   disp = stats::sd,  m = "M",   i = "SD")
+    if (type == "np") .f <- list(cent = stats::median, disp = stats::IQR, m = "Mdn", i = "IQR")
+
     m <- round(.f$cent(x), k)
     i <- round(.f$disp(x), k)
     if (markdown) {
@@ -38,35 +34,17 @@ cent_disp <- function(x,
       paste0(.f$m, " = ", m, ", ", .f$i, " = ", i)
     }
   } else {
-    str.b <- gsub(
-      pattern = "\\{|\\}",
-      replacement = "",
-      x = regmatches(
-        x = str.a,
-        m = gregexpr(
-          pattern = "\\{(.*?)\\}",
-          text = str.a
-        )
-      )[[1]]
-    )
-    res <- data.frame(
-      rbind(
-        sapply(
-          X = str.b,
-          FUN = function(i) {
-            .f <- eval(
-              expr = as.name(
-                x = i
-              )
-            )
-            round(
-              x = .f(x),
-              digits = k
-            )
-          }
-        )
-      )
-    )
-    glue(str.a, .envir = res)
+    m <- gregexpr(pattern = "\\{(.*?)\\}", text = str.a)
+    m <- regmatches(str.a, m)[[1]]
+
+    str.b <- gsub("\\{|\\}", "", m)
+    str_eval <- function(i) {
+      .f <- eval(expr = as.name(x = i))
+      round(x = .f(x), digits = k)
+    }
+
+    res <- vapply(str.b, str_eval, FUN.VALUE = NA_real_)
+
+    glue::glue(str.a, .envir = as.list(res))
   }
 }

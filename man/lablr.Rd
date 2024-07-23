@@ -7,7 +7,7 @@
 lablr(t, markdown = FALSE)
 }
 \arguments{
-\item{t}{Output from any of the functions autest, k_sample, two_sample or one_sample.}
+\item{t}{Output from any of the functions, k_sample, two_sample or one_sample.}
 
 \item{markdown}{Logical (default FALSE), indicating if the report-ready labels should be formated for inline code for R markdown (using mathjax and markdown syntax), or if the output should be in plain text (the default).}
 }
