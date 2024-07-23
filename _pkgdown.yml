@@ -1,2 +1,3 @@
 url: https://matcasti.github.io/writR
-
+template:
+  bootstrap: 5
